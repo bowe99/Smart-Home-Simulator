@@ -1,23 +1,21 @@
 package com.simulator;
 
-import java.awt.EventQueue;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
 
-import java.io.FileReader;
-
-import com.simulator.gui.MainWindow; 
-
-public class SmartHomeSimulator {
+public class SmartHomeSimulator extends Application{
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindow window = new MainWindow();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-        
+       launch(args);
+	}
+	
+	@Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 }
