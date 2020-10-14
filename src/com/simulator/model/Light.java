@@ -8,4 +8,8 @@ public class Light {
         this.name = newName;
         this.on = false;
     }
+
+    public String getName() {
+        return name;
+    }
 }

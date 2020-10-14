@@ -9,4 +9,8 @@ public abstract class Sensor {
     }
 
     public abstract int pollSensor();
+
+    public String getName() {
+        return name;
+    }
 }

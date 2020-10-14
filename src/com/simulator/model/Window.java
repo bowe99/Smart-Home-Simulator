@@ -1,16 +1,9 @@
 package com.simulator.model;
 
-public class Window {
-    private String name;
-    private boolean open;
-    private EntrywaySensor entrywaySensor;
+public class Window extends Entryway{
 
     public Window(String newName){
-        this.name = newName;
-        this.open = false;
+        super(newName);
     }
 
-    public int addEntrywaySensor(String newName) {
-        return 0;
-    }
 }

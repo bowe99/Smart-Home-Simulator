@@ -1,17 +1,10 @@
 package com.simulator.model;
 
-public class Door {
-    private String name;
+public class Door extends Entryway{
     private boolean locked;
-    private boolean open;
-    private EntrywaySensor entrywaySensor;
 
     public Door(String newName){
-        this.name = newName;
-        this.open = false;
+        super(newName);
         this.locked = false;
-    }
-    public int addEntrywaySensor(String newName) {
-        return 0;
     }
 }
