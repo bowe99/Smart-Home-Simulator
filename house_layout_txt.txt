@@ -1,0 +1,108 @@
+House Layout {
+
+    Address: "325 Lakeview, Pointe-Claire"
+    Rooms: {
+        "Room":{
+            "Name": "room1fornow"
+            "Window": {
+                "Name": "room1window1"
+                "Status": "Open"
+            },
+            "Window": {
+                "Name": "room1window2"
+                "Status": "Closed"
+            }
+            "Door":{
+                "Name": "room1door1"
+                "EntryWaySensor": {
+                    "Name": "room1door1entrywaysensor1"
+                }
+                "Status": "Open"
+            }
+            "Door":{
+                "Name": "room1door2"
+                "EntryWaySensor":{
+                    "Name": "room1door2entrywaysensor1"
+                }
+                "Status": "Open"
+            }
+            "Light":{
+                "Name": "room1light1"
+            }
+            "Light":{
+                "Name": "room1light2"
+            }
+            "Light":{
+                "Name": "room1light2"
+            }
+        }   
+        "Room":{
+            "Name": "room2fornow"
+            "Window": {
+                "Name": "room2window1"
+                "Status": "Open"
+            },
+            "Window": {
+                "Name": "room2window2"
+                "Status": "Closed"
+            }
+            "Door":{
+                "Name": "room2door1"
+                "EntryWaySensor": {
+                    "Name": "room2door1entrywaysensor1"
+                }
+                "Status": "Open"
+            }
+            "Door":{
+                "Name": "room2door2"
+                "EntryWaySensor":{
+                    "Name": "room2door1entrywaysensor1"
+                }
+                "Status": "Closed"
+            }
+            "Light":{
+                "Name": "room2light1"
+            }
+            "Light":{
+                "Name": "room2light2"
+            }
+            "Light":{
+                "Name": "room2light2"
+            }
+        } 
+        "Room":{
+            "Name": "room3fornow"
+            "Window": {
+                "Name": "room3window1"
+                "Status": "Open"
+            }
+            "Window": {
+                "Name": "room3window2"
+                "Status": "Closed"
+            }
+            "Door":{
+                "Name": "room3door1"
+                "EntryWaySensor": {
+                    "Name": "room3door1entrywaysensor1"
+                }
+                "Status": "Open"
+            }
+            "Door":{
+                "Name": "room3door2"
+                "EntryWaySensor":{
+                    "Name": "room3door1entrywaysensor1"
+                }
+                "Status": "Closed"
+            }
+            "Light":{
+                "Name": "room3light1"
+            }
+            "Light":{
+                "Name": "room3light2"
+            }
+            "Light":{
+                "Name": "room3light2"
+            }
+        } 
+    }
+}
