@@ -1,5 +1,7 @@
 package com.simulator.gui;
 
+import com.simulator.model.House;
+import com.simulator.model.HouseLayoutParser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,7 +10,7 @@ import javafx.scene.Parent;
 
 public class SmartHomeSimulator extends Application{
     public static void main(String[] args) {
-       launch(args);
+        launch(args);
 	}
 	
 	@Override
@@ -18,5 +20,8 @@ public class SmartHomeSimulator extends Application{
         primaryStage.setScene(rootScene);
         primaryStage.setTitle("Smart Home Simulator");
         primaryStage.show();
+
+        House house = HouseLayoutParser.loadFile("house_layout_txt.txt");
+        System.out.println(house.toString());
     }
 }
