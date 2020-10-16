@@ -1,4 +1,4 @@
-package com.simulator.model;
+package src.com.simulator.model;
 
 import java.io.*;
 
@@ -86,7 +86,6 @@ public class HouseLayoutParser {
     private static String getAttribute(String line){
         String attribute = "";
         attribute = line.substring(line.indexOf("\"") + 1);
-        System.out.println(attribute.substring(0, attribute.indexOf("\"")));
         return attribute.substring(0, attribute.indexOf("\""));
     }
 }

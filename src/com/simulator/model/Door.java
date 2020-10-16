@@ -1,4 +1,4 @@
-package com.simulator.model;
+package src.com.simulator.model;
 
 /**
  * Represents a door within the simulation

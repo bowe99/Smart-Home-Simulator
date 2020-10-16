@@ -148,14 +148,18 @@ public class House {
         return null;
     }
 
+    /**
+     * Print out information detailing the House layout file
+     * @return blank string to satisfy toString() requirements
+     */
     public String toString(){
         System.out.println("This house's address is at "+address+".");
         System.out.println("This house has "+rooms.size()+" rooms:");
-        for(int i=0; (rooms.size()<i); ++i){
+        for(int i=0; rooms.size()>i; ++i){
             System.out.println("Room "+i+": \n\tName: "+rooms.get(i).getName());
-            System.out.println("\tDoors: "+rooms.get(i).getDoorsList().size()+" doors, ");
-            System.out.println("\tWindows: "+rooms.get(i).getWindowsList().size()+" windows, ");
-            System.out.println("\tLights: "+rooms.get(i).getLightsList().size()+" lights, ");
+            System.out.println("\tDoors: "+rooms.get(i).getDoorsAmount()+" doors, ");
+            System.out.println("\tWindows: "+rooms.get(i).getWindowsAmount()+" windows, ");
+            System.out.println("\tLights: "+rooms.get(i).getLightsAmount()+" lights, ");
         }
         return "";
     }

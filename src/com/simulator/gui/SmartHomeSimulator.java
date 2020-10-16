@@ -1,7 +1,7 @@
-package com.simulator.gui;
+package src.com.simulator.gui;
 
-import com.simulator.model.House;
-import com.simulator.model.HouseLayoutParser;
+import src.com.simulator.model.House;
+import src.com.simulator.model.HouseLayoutParser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +15,7 @@ public class SmartHomeSimulator extends Application{
 	
 	@Override
     public void start(Stage primaryStage) throws Exception {
+
         Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
         Scene rootScene = new Scene(root);
         primaryStage.setScene(rootScene);
@@ -23,5 +24,6 @@ public class SmartHomeSimulator extends Application{
 
         House house = HouseLayoutParser.loadFile("house_layout_txt.txt");
         System.out.println(house.toString());
+    
     }
 }

@@ -1,4 +1,4 @@
-package com.simulator.model;
+package src.com.simulator.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,14 +51,14 @@ public class Room {
     public String getName() {
         return name;
     }
-    public List<Door> getDoorsList(){
-        return doors;
+    public int getDoorsAmount(){
+        return doors.size();
     }
-    public List<Window> getWindowsList(){
-        return windows;
+    public int getWindowsAmount(){
+        return windows.size();
     }
-    public List<Light> getLightsList(){
-        return lights;
+    public int getLightsAmount(){
+        return lights.size();
     }
 
 }

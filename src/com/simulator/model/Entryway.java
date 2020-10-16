@@ -1,4 +1,4 @@
-package com.simulator.model;
+package src.com.simulator.model;
 
 /**
  * Abstraction representing an entryway to the home within the simulation (windows, doors)
