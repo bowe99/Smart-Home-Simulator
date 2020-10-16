@@ -1,4 +1,4 @@
-package com.simulator.model;
+package src.com.simulator.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,4 +147,17 @@ public class House {
         }
         return null;
     }
+
+    public String toString(){
+        System.out.println("This house's address is at "+address+".");
+        System.out.println("This house has "+rooms.size()+" rooms:");
+        for(int i=0; (rooms.size()<i); ++i){
+            System.out.println("Room "+i+": \n\tName: "+rooms.get(i).getName());
+            System.out.println("\tDoors: "+rooms.get(i).getDoorsList().size()+" doors, ");
+            System.out.println("\tWindows: "+rooms.get(i).getWindowsList().size()+" windows, ");
+            System.out.println("\tLights: "+rooms.get(i).getLightsList().size()+" lights, ");
+        }
+        return "";
+    }
+    
 }

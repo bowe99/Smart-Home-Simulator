@@ -51,5 +51,14 @@ public class Room {
     public String getName() {
         return name;
     }
+    public List<Door> getDoorsList(){
+        return doors;
+    }
+    public List<Window> getWindowsList(){
+        return windows;
+    }
+    public List<Light> getLightsList(){
+        return lights;
+    }
 
 }
