@@ -18,6 +18,7 @@ public class SmartHomeSimulatorController {
     @FXML private ToggleButton simulationToggle;
     @FXML private Button editButton;
     @FXML private Label displayTemp;
+    @FXML private Label displayDate;
 
 
     @FXML
@@ -35,9 +36,15 @@ public class SmartHomeSimulatorController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ParameterEditor.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
+            stage.initOwner(simulationToggle.getScene().getWindow());
             stage.setTitle("Edit Parameters");
             stage.setScene(new Scene(root1));  
-            stage.show();
+
+            stage.showAndWait();
+
+            SystemParameterController controllerValues = fxmlLoader.getController();
+            this.setTemperature(controllerValues.getTemperature());
+            this.setDate(controllerValues.getDate());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -47,6 +54,11 @@ public class SmartHomeSimulatorController {
 
     @FXML
     void setTemperature(String temperature) {
-        displayTemp.setText(temperature);
+        this.displayTemp.setText(temperature);
+    }
+
+    @FXML
+    void setDate(String date) {
+        this.displayDate.setText(date);
     }
 }
