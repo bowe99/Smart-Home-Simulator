@@ -1,17 +1,24 @@
 package com.simulator.gui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+
 public class SmartHomeSimulatorController {
+
     @FXML private ToggleButton simulationToggle;
     @FXML private Button editButton;
+    @FXML private Label displayTemp;
+
 
     @FXML
     void changeSimulationStatus(MouseEvent event) {
@@ -35,6 +42,16 @@ public class SmartHomeSimulatorController {
         catch (Exception e){
             e.printStackTrace();
         }
+    
     }
 
+    @FXML
+    void setTemperature(String temperature) {
+        displayTemp.setText(temperature);
+    }
+
+    @FXML
+    Button getEditButton() {
+        return editButton ;
+    }
 }
