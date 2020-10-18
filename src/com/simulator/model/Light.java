@@ -1,4 +1,4 @@
-package src.com.simulator.model;
+package com.simulator.model;
 
 /**
  * Represents a light (or group of lights operated by a common switch) within the simulation

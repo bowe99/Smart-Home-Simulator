@@ -1,7 +1,7 @@
-package src.com.simulator.gui;
+package com.simulator.gui;
 
-import src.com.simulator.model.House;
-import src.com.simulator.model.HouseLayoutParser;
+import com.simulator.model.House;
+import com.simulator.model.HouseLayoutParser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

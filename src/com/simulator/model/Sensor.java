@@ -1,4 +1,4 @@
-package src.com.simulator.model;
+package com.simulator.model;
 
 /**
  * Abstraction representing a sensor in the home within the simulation (motion, entryway)

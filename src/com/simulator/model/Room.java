@@ -1,4 +1,4 @@
-package src.com.simulator.model;
+package com.simulator.model;
 
 import java.util.ArrayList;
 import java.util.List;

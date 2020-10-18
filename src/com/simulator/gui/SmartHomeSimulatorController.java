@@ -1,4 +1,4 @@
-package src.com.simulator.gui;
+package com.simulator.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
