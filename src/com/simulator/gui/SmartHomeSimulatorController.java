@@ -49,9 +49,4 @@ public class SmartHomeSimulatorController {
     void setTemperature(String temperature) {
         displayTemp.setText(temperature);
     }
-
-    @FXML
-    Button getEditButton() {
-        return editButton ;
-    }
 }

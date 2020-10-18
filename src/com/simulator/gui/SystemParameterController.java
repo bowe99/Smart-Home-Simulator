@@ -25,7 +25,7 @@ public class SystemParameterController {
             Parent root = loader.load();
             SmartHomeSimulatorController SHSController = loader.getController();
             SHSController.setTemperature(temperatureValue.getText()+"°C");
-            SHSController.getEditButton().getScene().setRoot(root);
+            temperatureValue.getScene().setRoot(root);
            }
 
         catch (Exception e){
