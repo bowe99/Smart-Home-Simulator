@@ -1,15 +1,21 @@
 package com.simulator.gui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class SystemParameterController {
@@ -17,9 +23,15 @@ public class SystemParameterController {
     @FXML private TextField temperatureValue;
     @FXML private Button confirmValue;
     @FXML private DatePicker dateValue;
-    
+    @FXML private ChoiceBox UserProfileChoice;
+    @FXML private ChoiceBox UserLocationChoice;
+    ObservableList<String> profiles = FXCollections.observableArrayList();
+    ObservableList<String> locations = FXCollections.observableArrayList();
+
     private String temperature;
     private String date;
+    private String profile;
+    private String location;
 
     @FXML
     void returnData (MouseEvent event){
@@ -28,6 +40,9 @@ public class SystemParameterController {
             formatDate(this.dateValue.getEditor().getText());
             Stage stage = (Stage) temperatureValue.getScene().getWindow();
             stage.close();
+            //this.profile = (UserProfileChoice.getText());
+            //this.location =(UserLocationChoice.getText());
+
            }
 
         catch (Exception e){
@@ -35,14 +50,25 @@ public class SystemParameterController {
         }
     }
 
+    @FXML
     String getTemperature(){
         return this.temperature;
     }
-
+     @FXML
     String getDate(){
         return this.date;
     }
+    @FXML
+    String getProfile(){
+        return this.profile;
+    }
+    @FXML
+    String getlocation(){
+        return this.location;
+    }
 
+
+    @FXML
     void formatDate(String date){
         System.out.println(date);
 
@@ -53,16 +79,21 @@ public class SystemParameterController {
             long dateTime = dateString.getTime();
             Date finalDate = new Date(dateTime);
             String finalDateString = finalFormat.format(finalDate); 
-          
             this.date = finalDateString;
 
         }
         catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-         
     }
-    
+    @FXML
+    public void loadProfileData()
+    {
+       profiles.removeAll(profiles);
+       String a = "Parent";
+       String b ="Owner";
+       String c = "Child";
+       profiles.addAll(a, b, c);
+       UserProfileChoice.getItems().addAll(profiles);
+    }
 }

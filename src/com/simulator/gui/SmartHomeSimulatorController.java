@@ -19,6 +19,8 @@ public class SmartHomeSimulatorController {
     @FXML private Button editButton;
     @FXML private Label displayTemp;
     @FXML private Label displayDate;
+    @FXML private Label UserProfile;
+    @FXML private Label UserLocation;
 
 
     @FXML
@@ -43,8 +45,11 @@ public class SmartHomeSimulatorController {
             stage.showAndWait();
 
             SystemParameterController controllerValues = fxmlLoader.getController();
+            controllerValues.loadProfileData();
             this.setTemperature(controllerValues.getTemperature());
             this.setDate(controllerValues.getDate());
+            this.setLocation(controllerValues.getlocation());
+            this.setProfile(controllerValues.getProfile());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -60,5 +65,15 @@ public class SmartHomeSimulatorController {
     @FXML
     void setDate(String date) {
         this.displayDate.setText(date);
+    }
+
+    @FXML
+    void setLocation(String location) {
+        this.UserProfile.setText(location);
+    }
+
+    @FXML
+    void setProfile(String profile) {
+        this.UserProfile.setText(profile);
     }
 }

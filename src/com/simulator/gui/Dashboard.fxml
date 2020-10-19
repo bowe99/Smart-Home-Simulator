@@ -44,9 +44,9 @@
                      </image>
                   </ImageView>
                   <Button fx:id="editButton" layoutX="55.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#openEditor" text="Edit" />
-                  <Label layoutX="60.0" layoutY="191.0" text="Child" />
+                  <Label fx:id="UserProfile" layoutX="60.0" layoutY="191.0" text="Child" />
                   <Label layoutX="50.0" layoutY="236.0" text="Location:" />
-                  <Label layoutX="54.0" layoutY="253.0" text="Kitchen" />
+                  <Label fx:id="UserLocation" layoutX="54.0" layoutY="253.0" text="Kitchen" />
                   <Label layoutX="35.0" layoutY="289.0" text="Outside Temp:" />
                   <Label fx:id="displayTemp" layoutX="58.0" layoutY="305.0" text="15 °C" />
                   <Label fx:id="displayDate" layoutX="34.0" layoutY="345.0" text="Fri Sep 18, 2020" />
