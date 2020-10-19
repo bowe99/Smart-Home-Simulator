@@ -3,6 +3,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="266.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.SystemParameterController">
    <children>
@@ -21,8 +22,26 @@
          <children>
             <Label text="Profile" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Label text="Location" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <ChoiceBox fx:id="UserProfileLocation" prefHeight="31.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ChoiceBox fx:id="UserProfileChoice" prefHeight="15.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="UserProfileChoice" prefHeight="31.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="1" >
+            <items>
+            <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Parent"/>
+            <String fx:value="Child"/>
+            <String fx:value="Owner"/>
+            </FXCollections>
+            </items>
+            </ChoiceBox>
+            <ChoiceBox fx:id="UserLocationChoice" prefHeight="15.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="3" >
+            <items>
+            <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Bathroom"/>
+            <String fx:value="Bedroom 1"/>
+            <String fx:value="Kitchen"/>
+            <String fx:value="Living Room"/>
+            <String fx:value="Bedroom 2"/>
+            </FXCollections>
+            </items>
+            </ChoiceBox>
          </children>
       </GridPane>
       <Label layoutX="23.0" layoutY="163.0" text="Date &amp; Time" />

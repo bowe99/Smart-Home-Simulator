@@ -45,7 +45,6 @@ public class SmartHomeSimulatorController {
             stage.showAndWait();
 
             SystemParameterController controllerValues = fxmlLoader.getController();
-            controllerValues.loadProfileData();
             this.setTemperature(controllerValues.getTemperature());
             this.setDate(controllerValues.getDate());
             this.setLocation(controllerValues.getlocation());
@@ -69,7 +68,7 @@ public class SmartHomeSimulatorController {
 
     @FXML
     void setLocation(String location) {
-        this.UserProfile.setText(location);
+        this.UserLocation.setText(location);
     }
 
     @FXML

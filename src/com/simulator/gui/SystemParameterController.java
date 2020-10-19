@@ -25,8 +25,6 @@ public class SystemParameterController {
     @FXML private DatePicker dateValue;
     @FXML private ChoiceBox UserProfileChoice;
     @FXML private ChoiceBox UserLocationChoice;
-    ObservableList<String> profiles = FXCollections.observableArrayList();
-    ObservableList<String> locations = FXCollections.observableArrayList();
 
     private String temperature;
     private String date;
@@ -40,8 +38,8 @@ public class SystemParameterController {
             formatDate(this.dateValue.getEditor().getText());
             Stage stage = (Stage) temperatureValue.getScene().getWindow();
             stage.close();
-            //this.profile = (UserProfileChoice.getText());
-            //this.location =(UserLocationChoice.getText());
+            this.profile = (String)(UserProfileChoice.getValue());
+            this.location = (String)(UserLocationChoice.getValue());
 
            }
 
@@ -85,15 +83,5 @@ public class SystemParameterController {
         catch (ParseException e) {
             e.printStackTrace();
         }
-    }
-    @FXML
-    public void loadProfileData()
-    {
-       profiles.removeAll(profiles);
-       String a = "Parent";
-       String b ="Owner";
-       String c = "Child";
-       profiles.addAll(a, b, c);
-       UserProfileChoice.getItems().addAll(profiles);
     }
 }
