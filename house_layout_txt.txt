@@ -1,0 +1,56 @@
+$House: "325 Lakeview, Pointe-Claire"{
+    $Room:"room1"{
+        $Window: "room1window1" {
+        }
+        $Window: "windowX"{
+        }
+        $Door:"room1door1"{
+            $EntryWaySensor:"room1door1entrywaysensor1"{
+            }
+        }
+        $Door:"room1door2"{
+            $EntryWaySensor: "room1door2entrywaysensor1"{
+            }
+        }
+        $Light: "room1light1"{
+        }
+        $Light: "room1light2"{
+        }
+        $Light: "room1light2"{
+        }
+    }
+    $Room: "room2fornow"{
+        $Window: "room2window1"{
+        }
+        $Window: "room2window2"{
+        }
+        $Door: "room2door1"{
+            $EntryWaySensor: "room2door1entrywaysensor1"{
+            }
+        }
+        $Light: "room2light1"{
+        }
+        $MotionSensor: "room2motionSensor1"{
+        }
+    }
+    $Room: "room3fornow"{
+        $Window: "room3window1"{
+        }
+        $Window: "room3window2"{
+        }
+        $Door: "room3door1"{
+            $EntryWaySensor: "room3door1entrywaysensor1"{
+            }
+        }
+        $Door: "room3door2"{
+            $EntryWaySensor: "room3door1entrywaysensor1"{
+            }
+        }
+        $Light: "room3light1"{
+        }
+        $Light: "room3light2"{
+        }
+        $Light: "room3light3"{
+        }
+    }
+}
