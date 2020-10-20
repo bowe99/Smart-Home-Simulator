@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.collections.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="266.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.SystemParameterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="304.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.SystemParameterController">
    <children>
       <GridPane layoutY="27.0" prefHeight="108.0" prefWidth="290.0">
         <columnConstraints>
@@ -22,34 +30,62 @@
          <children>
             <Label text="Profile" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Label text="Location" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <ChoiceBox fx:id="userProfileChoice" prefHeight="31.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="1" >
+            <ChoiceBox fx:id="userProfileChoice" prefHeight="31.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <items>
             <FXCollections fx:factory="observableArrayList">
-            <String fx:value="Parent"/>
-            <String fx:value="Child"/>
-            <String fx:value="Owner"/>
+            <String fx:value="Parent" />
+            <String fx:value="Child" />
+            <String fx:value="Owner" />
             </FXCollections>
             </items>
             </ChoiceBox>
-            <ChoiceBox fx:id="userLocationChoice" prefHeight="15.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="3" >
+            <ChoiceBox fx:id="userLocationChoice" prefHeight="15.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <items>
             <FXCollections fx:factory="observableArrayList">
-            <String fx:value="Bathroom"/>
-            <String fx:value="Bedroom 1"/>
-            <String fx:value="Kitchen"/>
-            <String fx:value="Living Room"/>
-            <String fx:value="Bedroom 2"/>
+            <String fx:value="Bathroom" />
+            <String fx:value="Bedroom 1" />
+            <String fx:value="Kitchen" />
+            <String fx:value="Living Room" />
+            <String fx:value="Bedroom 2" />
             </FXCollections>
             </items>
             </ChoiceBox>
          </children>
       </GridPane>
-      <Label layoutX="23.0" layoutY="163.0" text="Date &amp; Time" />
+      <Label layoutX="45.0" layoutY="173.0" text="Date" />
       <Label layoutX="23.0" layoutY="135.0" text="Temperature" />
       <TextField fx:id="temperatureValue" layoutX="116.0" layoutY="130.0" />
       <DatePicker fx:id="dateValue" layoutX="116.0" layoutY="169.0" />
-      <Button fx:id="confirmValue" layoutX="197.0" layoutY="213.0" mnemonicParsing="false" onMouseClicked="#returnData" text="OK" />
-      <Button layoutX="253.0" layoutY="213.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="confirmValue" layoutX="348.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#returnData" text="OK" />
+      <Button layoutX="283.0" layoutY="267.0" mnemonicParsing="false" text="Cancel" />
+      <ChoiceBox fx:id="movedEntity" layoutX="116.0" layoutY="233.0" prefHeight="25.0" prefWidth="104.0" >
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Item" />
+               <String fx:value="Owner" />
+               <String fx:value="Parent" />
+               <String fx:value="Child" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <ChoiceBox fx:id="whereTo" layoutX="277.0" layoutY="233.0" prefHeight="25.0" prefWidth="104.0" >
+      <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Bathroom" />
+               <String fx:value="Bedroom 1" />
+               <String fx:value="Kitchen" />
+               <String fx:value="Living Room" />
+               <String fx:value="Bedroom 2" />
+               <String fx:value="Outside" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <TextField fx:id="theTime" layoutX="117.0" layoutY="201.0" />
+      <Label layoutX="44.0" layoutY="205.0" text="Time" />
+      <Label text="Simulation Parameters" />
+      <Label layoutX="20.0" layoutY="237.0" text="Want to place" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="228.0" layoutY="237.0" text="Where?" />
     
    </children>
 </AnchorPane>
