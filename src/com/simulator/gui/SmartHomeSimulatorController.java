@@ -23,6 +23,7 @@ public class SmartHomeSimulatorController {
     @FXML private Label displayDate;
     @FXML private Label UserProfile;
     @FXML private Label UserLocation;
+    @FXML private Label displayTime;
 
     /**
      * Changes the simulation status to on or off
@@ -59,6 +60,7 @@ public class SmartHomeSimulatorController {
             this.setDate(controllerValues.getDate());
             this.setLocation(controllerValues.getLocation());
             this.setProfile(controllerValues.getProfile());
+            this.setTime(controllerValues.getTime());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -84,5 +86,10 @@ public class SmartHomeSimulatorController {
     @FXML
     private void setProfile(String profile) {
         this.UserProfile.setText(profile);
+    }
+    
+    @FXML
+    private void setTime(String time){
+        this.displayTime.setText(time);
     }
 }

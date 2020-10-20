@@ -27,11 +27,13 @@ public class SystemParameterController {
     @FXML private DatePicker dateValue;
     @FXML private ChoiceBox userProfileChoice;
     @FXML private ChoiceBox userLocationChoice;
+    @FXML private TextField theTime;
 
     private String temperature;
     private String date;
     private String profile;
     private String location;
+    private String time;
 
     /**
      * Returns data to the SmartHomeSimulator controller.
@@ -47,7 +49,7 @@ public class SystemParameterController {
             stage.close();
             this.profile = (String)(userProfileChoice.getValue());
             this.location = (String)(userLocationChoice.getValue());
-
+            this.time= (String)(theTime.getText());
            }
 
         catch (Exception e){
@@ -82,7 +84,13 @@ public class SystemParameterController {
     String getLocation(){
         return this.location;
     }
-
+    /**
+     * Getter for the System parameter: time
+     */
+    @FXML
+    String getTime(){
+        return this.time;
+    }
 
     @FXML
     private void formatDate(String date){
