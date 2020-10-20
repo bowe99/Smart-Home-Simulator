@@ -24,11 +24,7 @@ public class SystemParameterController {
 
     @FXML private TextField temperatureValue;
     @FXML private Button confirmValue;
-/**
-     * Returns data to the SmartHomeSimulator controller.
-     * @param event Referring to a mouse activity by the user
-     * Sets the system parameters to the demanded value.
-     */    @FXML private DatePicker dateValue;
+    @FXML private DatePicker dateValue;
     @FXML private ChoiceBox userProfileChoice;
     @FXML private ChoiceBox userLocationChoice;
 
@@ -37,7 +33,11 @@ public class SystemParameterController {
     private String profile;
     private String location;
 
-    
+    /**
+     * Returns data to the SmartHomeSimulator controller.
+     * @param event Referring to a mouse activity by the user
+     * Sets the system parameters to the demanded value.
+     */
     @FXML
     void returnData (MouseEvent event){
         try{
