@@ -90,7 +90,7 @@
          </children>
       </GridPane>
       <Button fx:id="confirmValue" layoutX="247.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#returnData" text="OK" />
-      <Button fx:id="cancelBtn" layoutX="187.0" layoutY="286.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="cancelBtn" layoutX="187.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#closeWindow" text="Cancel" />
       <Label layoutX="3.0" layoutY="1.0" prefHeight="17.0" prefWidth="116.0" text="System Parameters" />
     
    </children>

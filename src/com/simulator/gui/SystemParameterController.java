@@ -28,6 +28,7 @@ public class SystemParameterController {
     @FXML private ChoiceBox userProfileChoice;
     @FXML private ChoiceBox userLocationChoice;
     @FXML private TextField theTime;
+    @FXML private Button cancelBtn;
 
     private String temperature;
     private String date;
@@ -52,6 +53,20 @@ public class SystemParameterController {
             this.time= (String)(theTime.getText());
            }
 
+        catch (Exception e){
+        e.printStackTrace();
+        }
+    }
+        /**
+     * Closes the parameters edit window pop-up.
+     * @param event Referring to a mouse activity by the user
+     */
+    @FXML
+    void closeWindow (MouseEvent event){
+        try{
+            Stage stage = (Stage) cancelBtn.getScene().getWindow();
+            stage.close();
+           }
         catch (Exception e){
         e.printStackTrace();
         }
