@@ -1,5 +1,7 @@
 package com.simulator.gui;
-
+/**
+  * This is the controller class for the Dashboard.fxml file
+  */
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +24,10 @@ public class SmartHomeSimulatorController {
     @FXML private Label UserProfile;
     @FXML private Label UserLocation;
 
-
+    /**
+     * Changes the simulation status to on or off
+     * @param event Referring to a mouse activity by the user
+     */
     @FXML
     void changeSimulationStatus(MouseEvent event) {
         if(simulationToggle.isSelected()){
@@ -31,7 +36,12 @@ public class SmartHomeSimulatorController {
             this.simulationToggle.setText("Off");
         }
     }
-
+    /**
+     * Opens the Edit Button from the dashboard.
+     * @param event Referring to a mouse activity by the user
+     * Calls in the SystemParameter controller to get the user desired values,
+     * and changes the values on the dashboard.
+     */
     @FXML
     void openEditor(MouseEvent event) {
         try {
@@ -47,7 +57,7 @@ public class SmartHomeSimulatorController {
             SystemParameterController controllerValues = fxmlLoader.getController();
             this.setTemperature(controllerValues.getTemperature());
             this.setDate(controllerValues.getDate());
-            this.setLocation(controllerValues.getlocation());
+            this.setLocation(controllerValues.getLocation());
             this.setProfile(controllerValues.getProfile());
         }
         catch (Exception e){
@@ -57,22 +67,22 @@ public class SmartHomeSimulatorController {
     }
 
     @FXML
-    void setTemperature(String temperature) {
+    private void setTemperature(String temperature) {
         this.displayTemp.setText(temperature);
     }
 
     @FXML
-    void setDate(String date) {
+    private void setDate(String date) {
         this.displayDate.setText(date);
     }
 
     @FXML
-    void setLocation(String location) {
+    private void setLocation(String location) {
         this.UserLocation.setText(location);
     }
 
     @FXML
-    void setProfile(String profile) {
+    private void setProfile(String profile) {
         this.UserProfile.setText(profile);
     }
 }

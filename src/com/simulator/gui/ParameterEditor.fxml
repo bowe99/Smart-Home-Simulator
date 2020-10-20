@@ -22,7 +22,7 @@
          <children>
             <Label text="Profile" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Label text="Location" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <ChoiceBox fx:id="UserProfileChoice" prefHeight="31.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="1" >
+            <ChoiceBox fx:id="userProfileChoice" prefHeight="31.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="1" >
             <items>
             <FXCollections fx:factory="observableArrayList">
             <String fx:value="Parent"/>
@@ -31,7 +31,7 @@
             </FXCollections>
             </items>
             </ChoiceBox>
-            <ChoiceBox fx:id="UserLocationChoice" prefHeight="15.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="3" >
+            <ChoiceBox fx:id="userLocationChoice" prefHeight="15.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="3" >
             <items>
             <FXCollections fx:factory="observableArrayList">
             <String fx:value="Bathroom"/>

@@ -1,5 +1,7 @@
 package com.simulator.gui;
-
+ /**
+  * This is the controller class for the ParametorEditor.fxml file
+  */
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,15 +24,20 @@ public class SystemParameterController {
 
     @FXML private TextField temperatureValue;
     @FXML private Button confirmValue;
-    @FXML private DatePicker dateValue;
-    @FXML private ChoiceBox UserProfileChoice;
-    @FXML private ChoiceBox UserLocationChoice;
+/**
+     * Returns data to the SmartHomeSimulator controller.
+     * @param event Referring to a mouse activity by the user
+     * Sets the system parameters to the demanded value.
+     */    @FXML private DatePicker dateValue;
+    @FXML private ChoiceBox userProfileChoice;
+    @FXML private ChoiceBox userLocationChoice;
 
     private String temperature;
     private String date;
     private String profile;
     private String location;
 
+    
     @FXML
     void returnData (MouseEvent event){
         try{
@@ -38,8 +45,8 @@ public class SystemParameterController {
             formatDate(this.dateValue.getEditor().getText());
             Stage stage = (Stage) temperatureValue.getScene().getWindow();
             stage.close();
-            this.profile = (String)(UserProfileChoice.getValue());
-            this.location = (String)(UserLocationChoice.getValue());
+            this.profile = (String)(userProfileChoice.getValue());
+            this.location = (String)(userLocationChoice.getValue());
 
            }
 
@@ -47,27 +54,38 @@ public class SystemParameterController {
         e.printStackTrace();
         }
     }
-
+    /**
+     * Getter for the System parameter: temperature
+     */
     @FXML
     String getTemperature(){
         return this.temperature;
     }
+    /**
+     * Getter for the System parameter: date
+     */
      @FXML
     String getDate(){
         return this.date;
     }
+    /**
+     * Getter for the System parameter: profile
+     */
     @FXML
     String getProfile(){
         return this.profile;
     }
+    /**
+     * Getter for the System parameter: location
+     */
     @FXML
-    String getlocation(){
+    String getLocation(){
         return this.location;
     }
 
 
     @FXML
-    void formatDate(String date){
+    private void formatDate(String date){
         System.out.println(date);
 
         SimpleDateFormat initialFormat = new SimpleDateFormat("yyyy-MM-dd");
