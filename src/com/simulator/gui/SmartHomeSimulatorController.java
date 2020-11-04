@@ -19,6 +19,7 @@ public class SmartHomeSimulatorController {
 
     @FXML private ToggleButton simulationToggle;
     @FXML private Button editButton;
+    @FXML private Button roomsControlPanelButton;
     @FXML private Label displayTemp;
     @FXML private Label displayDate;
     @FXML private Label UserProfile;
@@ -66,6 +67,35 @@ public class SmartHomeSimulatorController {
             e.printStackTrace();
         }
     
+    }
+
+    //Open the RoomControlPanel window
+    @FXML
+    void openRoomControlPanel(MouseEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RoomControls.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initOwner(simulationToggle.getScene().getWindow());
+            stage.setTitle("Rooms Control Panel");
+            stage.setScene(new Scene(root1));  
+
+            stage.showAndWait();
+            RoomControlsController roomsControl = fxmlLoader.getController();
+
+            /*
+            SystemParameterController controllerValues = fxmlLoader.getController();
+            this.setTemperature(controllerValues.getTemperature());
+            this.setDate(controllerValues.getDate());
+            this.setLocation(controllerValues.getLocation());
+            this.setProfile(controllerValues.getProfile());
+            this.setTime(controllerValues.getTime());
+            */
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
