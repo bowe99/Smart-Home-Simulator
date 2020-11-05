@@ -29,8 +29,22 @@ public class SmartHomeSimulator extends Application{
         primaryStage.setTitle("Smart Home Simulator");
         primaryStage.show();
 
-        House house = HouseLayoutParser.loadFile("house_layout_txt.txt");
+        House house = House.getInstance();
+        //House house2 = HouseLayoutParser.loadFile("house_layout_txt.txt");
+
         System.out.println(house.toString());
+
+        House house2 = House.getInstance();
+        House house3 = House.getInstance();
+        House house4 = House.getInstance();
+        House house5 = House.getInstance();
+
+
+        House.getInstance().addRoom("new room");
+        House.getInstance().addRoom("new room 2");
+
+        System.out.println(House.getInstance().toString());
+
     
     }
 }

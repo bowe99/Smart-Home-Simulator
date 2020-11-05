@@ -1,4 +1,5 @@
 package com.simulator.gui;
+import javafx.application.Platform;
 /**
   * This is the controller class for the Dashboard.fxml file
   */
@@ -65,11 +66,9 @@ public class SmartHomeSimulatorController {
         }
         catch (Exception e){
             e.printStackTrace();
-        }
-    
+        }  
     }
 
-    //Open the RoomControlPanel window
     @FXML
     void openRoomControlPanel(MouseEvent event){
         try {
@@ -79,12 +78,14 @@ public class SmartHomeSimulatorController {
             stage.initOwner(simulationToggle.getScene().getWindow());
             stage.setTitle("Rooms Control Panel");
             stage.setScene(new Scene(root1));  
-
             stage.showAndWait();
+
             RoomControlsController roomsControl = fxmlLoader.getController();
+            roomsControl.loadHouse();
+
+            //root1.getId("roomChoices");
 
             /*
-            SystemParameterController controllerValues = fxmlLoader.getController();
             this.setTemperature(controllerValues.getTemperature());
             this.setDate(controllerValues.getDate());
             this.setLocation(controllerValues.getLocation());
@@ -94,8 +95,8 @@ public class SmartHomeSimulatorController {
         }
         catch (Exception e){
             e.printStackTrace();
+            Platform.exit();
         }
-
     }
 
     @FXML

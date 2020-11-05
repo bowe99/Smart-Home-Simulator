@@ -7,14 +7,24 @@ import java.util.List;
  * Represents the house within the simulation
  */
 public class House {
+    private static volatile House instance = null;
+    private House(){}
     private String address;
     private List<Room> rooms;
+
+    public static House getInstance() throws Exception {
+        if(instance == null){
+            instance = HouseLayoutParser.loadFile("house_layout_txt.txt");
+            System.out.println("ok, created a new instance");
+        }
+        return instance;
+     }
 
     /**
      * Constructor for a new house object
      * @param newAddress the address of which the house is associated
      */
-    public House(String newAddress) {
+    protected House(String newAddress) {
         this.address = newAddress;
         this.rooms = new ArrayList<>();
     }
@@ -139,7 +149,7 @@ public class House {
      * @return object of type Room with the given name
      * returns null if there is no room matching the requested name
      */
-    private Room getRoomByName(String targetName) {
+    public Room getRoomByName(String targetName) {
         for (Room r : rooms) {
             if (r.getName().equals(targetName)) {
                 return r;
