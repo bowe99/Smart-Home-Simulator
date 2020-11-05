@@ -2,6 +2,7 @@ package com.simulator.gui;
  /**
   * This is the controller class for the ParametorEditor.fxml file
   */
+import com.simulator.model.House;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class SystemParameterController {
+public class SimulationParameterController {
 
     @FXML private TextField temperatureValue;
     @FXML private Button confirmValue;
@@ -35,7 +36,11 @@ public class SystemParameterController {
     private String profile;
     private String location;
     private String time;
+    private House house;
 
+    public SimulationParameterController() throws Exception{
+        house = House.getInstance();
+    }
     /**
      * Returns data to the SmartHomeSimulator controller.
      * @param event Referring to a mouse activity by the user
