@@ -57,7 +57,7 @@ public class SmartHomeSimulatorController {
 
             stage.showAndWait();
 
-            SystemParameterController controllerValues = fxmlLoader.getController();
+            SimulationParameterController controllerValues = fxmlLoader.getController();
             this.setTemperature(controllerValues.getTemperature());
             this.setDate(controllerValues.getDate());
             this.setLocation(controllerValues.getLocation());
