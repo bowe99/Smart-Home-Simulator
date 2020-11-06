@@ -1,7 +1,6 @@
 package com.simulator.gui;
 
 import com.simulator.model.House;
-import com.simulator.model.HouseLayoutParser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -40,10 +39,9 @@ public class SmartHomeSimulator extends Application{
         House house5 = House.getInstance();
 
 
-        House.getInstance().addRoom("new room");
-        House.getInstance().addRoom("new room 2");
 
-        System.out.println(House.getInstance().toString());
+
+        //System.out.println(House.getInstance().toString());
 
     
     }
