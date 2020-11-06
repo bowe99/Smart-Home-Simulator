@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="287.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.SystemParameterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.RoomControlsController">
    <children>
-      <GridPane layoutY="29.0" prefHeight="247.0" prefWidth="290.0">
+      <GridPane layoutY="29.0" prefHeight="381.0" prefWidth="483.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="130.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="160.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" prefWidth="214.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="126.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -33,57 +34,67 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ChoiceBox id="roomList" fx:id="roomList" prefHeight="31.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Parent" />
-                     <String fx:value="Child" />
-                     <String fx:value="Owner" />
-                  </FXCollections>
-               </items>
-            </ChoiceBox>
-            <Label text="Light" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Label text="Door" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
-            <ChoiceBox id="lightList" fx:id="lightList" prefHeight="31.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-            <items>
-            <FXCollections fx:factory="observableArrayList">
-            <String fx:value="Parent" />
-            <String fx:value="Child" />
-            <String fx:value="Owner" />
-            </FXCollections>
-            </items>
-            </ChoiceBox>
-            <ChoiceBox id="doorList" fx:id="doorList" prefHeight="15.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-            <items>
-            <FXCollections fx:factory="observableArrayList">
-            <String fx:value="Bathroom" />
-            <String fx:value="Bedroom 1" />
-            <String fx:value="Kitchen" />
-            <String fx:value="Living Room" />
-            <String fx:value="Bedroom 2" />
-            </FXCollections>
-            </items>
-            </ChoiceBox>
-            <ChoiceBox id="windowList" fx:id="windowList" prefHeight="15.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Bathroom" />
-                     <String fx:value="Bedroom 1" />
-                     <String fx:value="Kitchen" />
-                     <String fx:value="Living Room" />
-                     <String fx:value="Bedroom 2" />
-                  </FXCollections>
-               </items>
-            </ChoiceBox>
-            <Label text="Window" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
-            <Label text="Room" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label text="Light Selection" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Door Selection" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Window Selection" GridPane.halignment="CENTER" GridPane.rowIndex="13" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Room" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <ComboBox fx:id="roomList" onMouseClicked="#selectingRoom" prefHeight="25.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="lightList" onMouseClicked="#modifyLight" prefHeight="25.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="doorList" onMouseClicked="#modifyDoor" prefHeight="25.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <ComboBox fx:id="windowList" onMouseClicked="#modifyWindow" prefHeight="25.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+            <Button fx:id="lightOn" mnemonicParsing="false" onMouseClicked="#lightON" prefHeight="24.0" prefWidth="53.0" text="ON" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
+            <Button fx:id="lightOff" mnemonicParsing="false" onMouseClicked="#lightOff" prefHeight="24.0" prefWidth="53.0" text="OFF" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="doorUnlock" mnemonicParsing="false" onMouseClicked="#doorUnlock" prefHeight="25.0" prefWidth="65.0" text="UNLOCK" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="11" />
+            <Button fx:id="doorLock" mnemonicParsing="false" onMouseClicked="#doorLock" text="LOCK" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="windowOpen" mnemonicParsing="false" onMouseClicked="#windowOpen" text="Open" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="15" />
+            <Button fx:id="windowClose" mnemonicParsing="false" onMouseClicked="#windowClose" text="Close" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="15">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </Button>
+            <Label text="Auto Mode" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="lightAutoOn" mnemonicParsing="false" onMouseClicked="#lightAutoOn" prefHeight="24.0" prefWidth="53.0" text="ON" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button fx:id="lightAutoOff" mnemonicParsing="false" onMouseClicked="#lightAutoOff" prefHeight="24.0" prefWidth="53.0" text="OFF" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
-      <Button fx:id="confirmValue" layoutX="247.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#returnData" text="OK" />
-      <Button fx:id="cancelBtn" layoutX="187.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#closeWindow" text="Cancel" />
       <Label layoutX="3.0" layoutY="1.0" prefHeight="17.0" prefWidth="116.0" text="Room Controls" />
+      <Button fx:id="finished" layoutX="275.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#returnData" prefHeight="25.0" prefWidth="138.0" text="Finished Changes" />
     
    </children>
 </AnchorPane>

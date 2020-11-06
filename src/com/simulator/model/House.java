@@ -1,10 +1,14 @@
 package com.simulator.model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents the house within the simulation
+ * Represents the house within the simulation, uses Singleton pattern (creational pattern)
  */
 public class House {
     private static volatile House instance = null;
@@ -12,19 +16,24 @@ public class House {
     private String address;
     private List<Room> rooms;
 
-    public static House getInstance() throws Exception {
+    public static House getInstance() {
+        try {
         if(instance == null){
-            instance = HouseLayoutParser.loadFile("house_layout_txt.txt");
+            instance = loadFile("house_layout_txt.txt");
             System.out.println("ok, created a new instance");
         }
         return instance;
-     }
+        } catch(Exception e){
+            System.out.print("something went wrong");
+            return null;   
+        }
+    }
 
     /**
      * Constructor for a new house object
      * @param newAddress the address of which the house is associated
      */
-    protected House(String newAddress) {
+    private House(String newAddress) {
         this.address = newAddress;
         this.rooms = new ArrayList<>();
     }
@@ -157,6 +166,16 @@ public class House {
         }
         return null;
     }
+    public List<Room> getRoomsList(){
+        return rooms;
+    }
+    public List<String> getRoomsListString(){
+        List<String> roomsListString = new ArrayList<String>();
+        for(int i=0; i<rooms.size(); ++i){
+            roomsListString.add(rooms.get(i).getName());
+        }
+        return roomsListString;
+    }
 
     /**
      * Print out information detailing the House layout file
@@ -172,6 +191,94 @@ public class House {
             System.out.println("\tLights: "+rooms.get(i).getLightsAmount()+" lights, ");
         }
         return "";
+    }
+    /**
+     * Parse the HouseLayout file into the 
+     * @return blank string to satisfy toString() requirements
+     */
+    public static House loadFile(String fileName) throws Exception{
+        House loadedHouse;
+        String[] elementStack = new String[4];
+        int depth = -1;
+        String attribute = "";
+        File layoutFile = new File(fileName);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(layoutFile))){
+            int linenumber = 1;
+            String line = reader.readLine();
+            //remove whitespace
+            line = line.trim();
+
+            //first line should be a house and address
+            if(line.toLowerCase().contains("$house")){
+                attribute = getAttribute(line);
+                loadedHouse = new House(attribute);
+                elementStack[++depth] = attribute;
+            }
+            else{
+                System.out.println("Unable to find address field for house at line: " + linenumber);
+                return null;
+            }
+            line = reader.readLine();
+
+            //To scan through the lines of information
+            while(line !=null){
+                ++linenumber;
+
+                //remove whitespace
+                line = line.trim();
+                String lowerCaseLine = line.toLowerCase();
+
+                if (lowerCaseLine.charAt(0) == '}') {
+                    depth--;
+                }
+                else if (lowerCaseLine.contains("$room")) {
+                    attribute = getAttribute(line);
+                    loadedHouse.addRoom(attribute);
+                    elementStack[++depth] = attribute;
+                } else if (lowerCaseLine.contains("$window")) {
+                    attribute = getAttribute(line);
+                    loadedHouse.addWindow(attribute, elementStack[depth]);
+                    elementStack[++depth] = attribute;
+                }
+                else if (lowerCaseLine.contains("$door")) {
+                    attribute = getAttribute(line);
+                    loadedHouse.addDoor(attribute, elementStack[depth]);
+                    elementStack[++depth] = attribute;
+                }
+                else if (lowerCaseLine.contains("$light")) {
+                    attribute = getAttribute(line);
+                    loadedHouse.addLight(attribute, elementStack[depth]);
+                    elementStack[++depth] = attribute;
+                }
+                else if (lowerCaseLine.contains("$motionsensor")) {
+                    attribute = getAttribute(line);
+                    loadedHouse.addMotionSensor(attribute, elementStack[depth]);
+                    elementStack[++depth] = attribute;
+                }
+                else if (lowerCaseLine.contains("$entrywaysensor")) {
+                    attribute = getAttribute(line);
+                    loadedHouse.addEntrywaySensor(attribute, elementStack[depth - 1], elementStack[depth]);
+                    elementStack[++depth] = attribute;
+                }
+
+                //moving onto the next line of information
+                line = reader.readLine();
+            }
+            reader.close();
+            return loadedHouse;
+        }
+        catch(IOException e){
+            System.out.println("Something went wrong loading the txt file");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static String getAttribute(String line){
+        String attribute = "";
+        attribute = line.substring(line.indexOf("\"") + 1);
+        return attribute.substring(0, attribute.indexOf("\""));
     }
     
 }

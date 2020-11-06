@@ -51,6 +51,35 @@ public class Room {
     public String getName() {
         return name;
     }
+
+    public Door getDoorByName(String targetName) {
+        for (Door d : doors) {
+            if (d.getName().equals(targetName)) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    public Light getLightByName(String targetName) {
+        for (Light l : lights) {
+            if (l.getName().equals(targetName)) {
+                return l;
+            }
+        }
+        return null;
+    }
+
+    public Window getWindowByName(String targetName) {
+        for (Window w : windows) {
+            if (w.getName().equals(targetName)) {
+                return w;
+            }
+        }
+        return null;
+    }
+
+
     public int getDoorsAmount(){
         return doors.size();
     }
@@ -59,6 +88,41 @@ public class Room {
     }
     public int getLightsAmount(){
         return lights.size();
+    }
+
+    public List<Door> getDoorsList(){
+        return doors;
+    }
+    public List<Light> getLightsList(){
+        return lights;
+    }
+    public List<Window> getWindowsList(){
+        return windows;
+    }
+
+    //get a the list of names of doors
+    public List<String> getDoorsListString(){
+        List<String> doorsListString = new ArrayList<String>();
+        for(int i=0; i<doors.size(); ++i){
+            doorsListString.add(doors.get(i).getName());
+        }
+        return doorsListString;
+    }
+    //get a the list of names of lights
+    public List<String> getLightsListString(){
+        List<String> lightsListString = new ArrayList<String>();
+        for(int i=0; i<lights.size(); ++i){
+            lightsListString.add(lights.get(i).getName());
+        }
+        return lightsListString;
+    }    
+    //get a the list of names of windows
+    public List<String> getWindowsListString(){
+        List<String> windowsListString = new ArrayList<String>();
+        for(int i=0; i<windows.size(); ++i){
+            windowsListString.add(windows.get(i).getName());
+        }
+        return windowsListString;
     }
 
 }

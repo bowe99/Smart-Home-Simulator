@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -68,30 +69,21 @@ public class SmartHomeSimulatorController {
             e.printStackTrace();
         }  
     }
-
     @FXML
-    void openRoomControlPanel(MouseEvent event){
+    void openRoomControls(MouseEvent event){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RoomControls.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root2 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initOwner(simulationToggle.getScene().getWindow());
             stage.setTitle("Rooms Control Panel");
-            stage.setScene(new Scene(root1));  
+            stage.setScene(new Scene(root2));  
             stage.showAndWait();
 
-            RoomControlsController roomsControl = fxmlLoader.getController();
-            roomsControl.loadHouse();
-
-            //root1.getId("roomChoices");
-
-            /*
-            this.setTemperature(controllerValues.getTemperature());
-            this.setDate(controllerValues.getDate());
-            this.setLocation(controllerValues.getLocation());
-            this.setProfile(controllerValues.getProfile());
-            this.setTime(controllerValues.getTime());
-            */
+            //RoomControlsController roomsControl = fxmlLoader.getController();
+            //useRoomController(roomsControl)
+            
+            
         }
         catch (Exception e){
             e.printStackTrace();
@@ -122,5 +114,9 @@ public class SmartHomeSimulatorController {
     @FXML
     private void setTime(String time){
         this.displayTime.setText(time);
+    }
+    @FXML
+    protected ToggleButton getSimToggle(){
+        return simulationToggle;
     }
 }
