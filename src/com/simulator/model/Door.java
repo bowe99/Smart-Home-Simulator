@@ -14,4 +14,16 @@ public class Door extends Entryway{
         super(newName);
         this.locked = false;
     }
+
+    public void setLocked(){
+        this.locked = true;
+    }
+    
+    public void setUnlocked(){
+        this.locked = false;
+    }
+
+    public boolean getUnlockedOrLocked(){
+        return locked;
+    }
 }

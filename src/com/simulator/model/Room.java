@@ -101,7 +101,7 @@ public class Room {
     }
 
     //get a the list of names of doors
-    public List<String> getDoorsListString(){
+    public List<String> getDoorsNameList(){
         List<String> doorsListString = new ArrayList<String>();
         for(int i=0; i<doors.size(); ++i){
             doorsListString.add(doors.get(i).getName());
@@ -109,7 +109,7 @@ public class Room {
         return doorsListString;
     }
     //get a the list of names of lights
-    public List<String> getLightsListString(){
+    public List<String> getLightsNameList(){
         List<String> lightsListString = new ArrayList<String>();
         for(int i=0; i<lights.size(); ++i){
             lightsListString.add(lights.get(i).getName());
@@ -117,7 +117,7 @@ public class Room {
         return lightsListString;
     }    
     //get a the list of names of windows
-    public List<String> getWindowsListString(){
+    public List<String> getWindowsNameList(){
         List<String> windowsListString = new ArrayList<String>();
         for(int i=0; i<windows.size(); ++i){
             windowsListString.add(windows.get(i).getName());

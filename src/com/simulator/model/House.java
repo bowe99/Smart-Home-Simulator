@@ -11,7 +11,7 @@ import java.util.List;
  * Represents the house within the simulation, uses Singleton pattern (creational pattern)
  */
 public class House {
-    private static volatile House instance = null;
+    private static House instance = null;
     private House(){}
     private String address;
     private List<Room> rooms;

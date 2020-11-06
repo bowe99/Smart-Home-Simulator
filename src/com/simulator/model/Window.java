@@ -4,6 +4,7 @@ package com.simulator.model;
  * Represents a window within the simulation
  */
 public class Window extends Entryway{
+    private boolean open;
 
     /**
      * Constructor for a new window object
@@ -11,6 +12,19 @@ public class Window extends Entryway{
      */
     public Window(String newName){
         super(newName);
+        this.open = false;
+    }
+
+    public void setOpen(){
+        this.open = true;
+    }
+
+    public void setClosed(){
+        this.open = false;
+    }
+
+    public boolean getUnlockedOrLocked(){
+        return open;
     }
 
 }

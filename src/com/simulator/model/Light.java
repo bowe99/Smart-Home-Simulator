@@ -6,6 +6,7 @@ package com.simulator.model;
 public class Light {
     private String name;
     private boolean on;
+    private boolean auto;
 
     /**
      * Contructor for a new light object
@@ -14,6 +15,7 @@ public class Light {
     public Light(String newName){
         this.name = newName;
         this.on = false;
+        this.auto = false;
     }
 
     /**
@@ -23,4 +25,27 @@ public class Light {
     public String getName() {
         return name;
     }
+
+    public boolean getOnOff(){
+        return on;
+    }
+
+    public boolean getAuto(){
+        return auto;
+    }
+
+    public void setToOn(){
+        this.on = true;
+    }
+    public void setToOff(){
+        this.on = false;
+    }
+    public void setAutoOn(){
+        this.auto = true;
+    }
+    public void setAutoOff(){
+        this.auto = false;
+    }
+
+
 }

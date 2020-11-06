@@ -74,9 +74,9 @@ public class RoomControlsController {
                     System.out.println(currentRoom+" HERE HERE HERE");
 
                     //Populate the Selecting Lights, doors and windows field from the corresponding room
-                    lightList.setItems(FXCollections.observableList(currentRoom.getLightsListString()));
-                    doorList.setItems(FXCollections.observableList(currentRoom.getDoorsListString()));
-                    windowList.setItems(FXCollections.observableList(currentRoom.getWindowsListString()));
+                    lightList.setItems(FXCollections.observableList(currentRoom.getLightsNameList()));
+                    doorList.setItems(FXCollections.observableList(currentRoom.getDoorsNameList()));
+                    windowList.setItems(FXCollections.observableList(currentRoom.getWindowsNameList()));
                 }
             });
             return cell ;
@@ -176,47 +176,48 @@ public class RoomControlsController {
     @FXML 
     void lightON (MouseEvent event){
         System.out.println("lightON");
+        currentLight.setToOn();
 
     }
     @FXML
     void lightOff(MouseEvent event){
         System.out.println("lightOFF");
-
-
+        currentLight.setToOff();
     }
     @FXML
     void lightAutoOn(MouseEvent event){
         System.out.println("lightAutoOn");
-
-
+        currentLight.setAutoOn();
+        
     }
     @FXML
     void lightAutoOff(MouseEvent event){
         System.out.println("lightAutoOFF");
-
+        currentLight.setAutoOff();
 
     }
     @FXML
     void doorUnlock(MouseEvent event){
         System.out.println("doorUnlock");
-
-
+        currentDoor.setUnlocked();
     }
     @FXML
     void doorLock(MouseEvent event){
         System.out.println("doorLock");
-
+        currentDoor.setLocked();
 
     }
     @FXML
     void windowOpen(MouseEvent event){
         System.out.println("windowOpen");
-
+        //insert if statement here to check for obstructions
+        currentWindow.setOpen();
     }
     @FXML
     void windowClose(MouseEvent event){
         System.out.println("windowClose");
-
+        //insert if statement here to check for obstructions
+        currentWindow.setClosed();
 
     }
 
