@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -103,19 +105,19 @@ public class SmartHomeSimulatorController {
             e.printStackTrace();
         }  
     }
-
     @FXML
-    void openRoomControlPanel(MouseEvent event){
+    void openRoomControls(MouseEvent event){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RoomControls.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root2 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initOwner(simulationToggle.getScene().getWindow());
             stage.setTitle("Rooms Control Panel");
-            stage.setScene(new Scene(root1));  
+            stage.setScene(new Scene(root2));  
             stage.showAndWait();
 
             //todo update changes following closure of the RoomControlPanel
+
         }
         catch (Exception e){
             e.printStackTrace();
@@ -154,5 +156,9 @@ public class SmartHomeSimulatorController {
     //todo increment time over certain interval, return new time in minutes, remember to increment date if time rollsover 1440 minutes
     private int updateTime(){
         return 0;
+    }
+    @FXML
+    protected ToggleButton getSimToggle(){
+        return simulationToggle;
     }
 }

@@ -8,27 +8,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents the house within the simulation
+ * Represents the house within the simulation, uses Singleton pattern (creational pattern)
  */
 public class House {
-    private static volatile House instance = null;
+    private static House instance = null;
     private House(){}
     private String address;
     private List<Room> rooms;
 
-    public static House getInstance() throws Exception {
+    public static House getInstance() {
+        try {
         if(instance == null){
             instance = loadFile("house_layout_txt.txt");
             System.out.println("ok, created a new instance");
         }
         return instance;
-     }
+        } catch(Exception e){
+            System.out.print("something went wrong");
+            return null;   
+        }
+    }
 
     /**
      * Constructor for a new house object
      * @param newAddress the address of which the house is associated
      */
-    protected House(String newAddress) {
+    private House(String newAddress) {
         this.address = newAddress;
         this.rooms = new ArrayList<>();
     }
@@ -160,6 +165,14 @@ public class House {
             }
         }
         return null;
+    }
+   
+    public List<String> getRoomsNameList(){
+        List<String> roomsListString = new ArrayList<String>();
+        for(int i=0; i<rooms.size(); ++i){
+            roomsListString.add(rooms.get(i).getName());
+        }
+        return roomsListString;
     }
 
     /**
