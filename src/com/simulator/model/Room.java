@@ -90,15 +90,6 @@ public class Room {
         return lights.size();
     }
 
-    public List<Door> getDoorsList(){
-        return doors;
-    }
-    public List<Light> getLightsList(){
-        return lights;
-    }
-    public List<Window> getWindowsList(){
-        return windows;
-    }
 
     //get a the list of names of doors
     public List<String> getDoorsNameList(){

@@ -166,9 +166,7 @@ public class House {
         }
         return null;
     }
-    public List<Room> getRoomsList(){
-        return rooms;
-    }
+   
     public List<String> getRoomsNameList(){
         List<String> roomsListString = new ArrayList<String>();
         for(int i=0; i<rooms.size(); ++i){
