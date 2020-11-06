@@ -5,13 +5,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class SimulationParameters
 {
-    private static volatile SimulationParameters instance = null;
+    private static SimulationParameters instance = null;
 
     private Date date;
     private int time; //represents minutes of the day (0-1440)
@@ -20,12 +21,17 @@ public class SimulationParameters
     private List<Profile> allUsers;
     private boolean simulationStatus = true;
 
-    public static SimulationParameters getInstance() throws Exception {
-        if(instance == null){
-            instance = loadFile("simulation_parameters.txt", "users.txt");
-            System.out.println("ok, created a new instance");
+    public static SimulationParameters getInstance(){
+        try {
+            if(instance == null){
+                instance = loadFile("simulation_parameters.txt", "users.txt");
+                System.out.println("ok, created a new instance");
+            }
+            return instance;
+        } catch(Exception e){
+            System.out.print("something went wrong");
+            return null;
         }
-        return instance;
     }
 
     private SimulationParameters(){
@@ -88,7 +94,14 @@ public class SimulationParameters
         currentUser.setCurrentRoom(destination);
     }
 
-    //todo
+    public List<String> getAllUserNames(){
+        List<String> userNames = new ArrayList<>();
+        for (Profile p: allUsers) {
+            userNames.add(p.getName());
+        }
+        return userNames;
+    }
+
     private static SimulationParameters loadFile(String simulationFile, String usersFile){
         SimulationParameters loadedSimulation = new SimulationParameters();
         File layoutFile = new File(simulationFile);

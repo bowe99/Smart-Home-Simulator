@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
@@ -12,7 +16,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="287.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.SimulationParameterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="287.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.SimulationParameterController">
    <children>
       <GridPane layoutY="29.0" prefHeight="247.0" prefWidth="290.0">
         <columnConstraints>
@@ -37,60 +41,18 @@
          <children>
             <Label text="Profile" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label text="Location" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <ChoiceBox fx:id="userProfileChoice" prefHeight="31.0" prefWidth="148.0" GridPane.columnIndex="1">
-            <items>
-            <FXCollections fx:factory="observableArrayList">
-            <String fx:value="Parent" />
-            <String fx:value="Child" />
-            <String fx:value="Owner" />
-            </FXCollections>
-            </items>
-            </ChoiceBox>
-            <ChoiceBox fx:id="userLocationChoice" prefHeight="15.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-            <items>
-            <FXCollections fx:factory="observableArrayList">
-            <String fx:value="Bathroom" />
-            <String fx:value="Bedroom 1" />
-            <String fx:value="Kitchen" />
-            <String fx:value="Living Room" />
-            <String fx:value="Bedroom 2" />
-            </FXCollections>
-            </items>
-            </ChoiceBox>
             <Label text="Date" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="BASELINE" />
             <Label text="Temperature" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <TextField fx:id="temperatureValue" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <DatePicker fx:id="dateValue" maxWidth="-Infinity" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ChoiceBox fx:id="movedEntity" prefHeight="25.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Item" />
-                     <String fx:value="Owner" />
-                     <String fx:value="Parent" />
-                     <String fx:value="Child" />
-                  </FXCollections>
-               </items>
-            </ChoiceBox>
-            <ChoiceBox fx:id="whereTo" prefHeight="25.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
-            <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Bathroom" />
-                     <String fx:value="Bedroom 1" />
-                     <String fx:value="Kitchen" />
-                     <String fx:value="Living Room" />
-                     <String fx:value="Bedroom 2" />
-                     <String fx:value="Outside" />
-                  </FXCollections>
-               </items>
-            </ChoiceBox>
             <TextField fx:id="theTime" maxWidth="-Infinity" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <Label text="Time" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
-            <Label prefHeight="22.0" prefWidth="74.0" text="Want to place" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
-            <Label text="Where?" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="CENTER" />
+            <ComboBox fx:id="userProfileChoice" prefWidth="150.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="userLocationChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="confirmValue" layoutX="247.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#returnData" text="OK" />
-      <Button fx:id="cancelBtn" layoutX="187.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#closeWindow" text="Cancel" />
+      <Button fx:id="confirmValue" layoutX="215.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#returnData" text="OK" />
+      <Button fx:id="cancelBtn" layoutX="119.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#closeWindow" text="Cancel" />
       <Label layoutX="3.0" layoutY="1.0" prefHeight="17.0" prefWidth="116.0" text="System Parameters" />
     
    </children>

@@ -7,10 +7,7 @@ import com.simulator.model.SimulationParameters;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -21,8 +18,8 @@ public class SimulationParameterController {
     @FXML private TextField temperatureValue;
     @FXML private Button confirmValue;
     @FXML private DatePicker dateValue;
-    @FXML private ChoiceBox userProfileChoice;
-    @FXML private ChoiceBox userLocationChoice;
+    @FXML private ComboBox<String> userProfileChoice = new ComboBox<String>();
+    @FXML private ComboBox<String> userLocationChoice = new ComboBox<String>();
     @FXML private TextField theTime;
     @FXML private Button cancelBtn;
 
@@ -33,6 +30,13 @@ public class SimulationParameterController {
         house = House.getInstance();
         simulation = SimulationParameters.getInstance();
     }
+
+    @FXML
+    public void initialize(){
+        userLocationChoice.setItems(FXCollections.observableList(House.getInstance().getRoomsNameList()));
+        userProfileChoice.setItems(FXCollections.observableList(SimulationParameters.getInstance().getAllUserNames()));
+    }
+
     /**
      * Populate data of the simulation parameters instance.
      * @param event Referring to a mouse activity by the user
@@ -46,7 +50,7 @@ public class SimulationParameterController {
             simulation.setDate(initialFormat.parse(dateValue.getEditor().getText()));
             simulation.setCurrentUser(simulation.getUserByName((String)(userProfileChoice.getValue())));
             simulation.setCurrentUserLocation(house.getRoomByName((String)(userLocationChoice.getValue())));
-            simulation.setTime(Integer.parseInt((String)(theTime.getText())));
+            simulation.setTime(Integer.parseInt(theTime.getText()));
             closeWindow(event);
         }
         catch (Exception e){
