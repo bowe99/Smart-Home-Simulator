@@ -132,6 +132,7 @@ public class SimulationParameters
                 Room room = House.getInstance().getRoomByName(reader.readLine());
                 userToAdd = new Profile(name, user_type, room);
                 loadedSimulation.addUser(userToAdd);
+                reader.readLine();
                 line = reader.readLine();
             }
             loadedSimulation.setCurrentUser(userToAdd);

@@ -40,7 +40,7 @@ public class SmartHomeSimulatorController {
     //todo implement/fix to string methods for classes to the saved
 
 
-    public SmartHomeSimulatorController() throws Exception
+    public SmartHomeSimulatorController()
     {
         house = House.getInstance();
         simulation = SimulationParameters.getInstance();
