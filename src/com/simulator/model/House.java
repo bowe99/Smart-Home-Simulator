@@ -169,7 +169,7 @@ public class House {
     public List<Room> getRoomsList(){
         return rooms;
     }
-    public List<String> getRoomsListString(){
+    public List<String> getRoomsNameList(){
         List<String> roomsListString = new ArrayList<String>();
         for(int i=0; i<rooms.size(); ++i){
             roomsListString.add(rooms.get(i).getName());

@@ -49,7 +49,7 @@ public class RoomControlsController {
     @FXML
     void selectingRoom(MouseEvent event){
         System.out.println("arrived displayRoomList");
-        roomList.setItems(FXCollections.observableList(House.getInstance().getRoomsListString()));
+        roomList.setItems(FXCollections.observableList(House.getInstance().getRoomsNameList()));
         selectedRoom = roomList.getValue();
 
         //Detecting when the option is selected
