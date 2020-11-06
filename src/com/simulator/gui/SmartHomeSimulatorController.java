@@ -79,10 +79,6 @@ public class SmartHomeSimulatorController {
             stage.setTitle("Rooms Control Panel");
             stage.setScene(new Scene(root2));  
             stage.showAndWait();
-
-            //RoomControlsController roomsControl = fxmlLoader.getController();
-            //useRoomController(roomsControl)
-            
             
         }
         catch (Exception e){
