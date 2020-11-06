@@ -1,4 +1,5 @@
 package com.simulator.gui;
+import javafx.application.Platform;
 /**
   * This is the controller class for the Dashboard.fxml file
   */
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -19,6 +21,7 @@ public class SmartHomeSimulatorController {
 
     @FXML private ToggleButton simulationToggle;
     @FXML private Button editButton;
+    @FXML private Button roomsControlPanelButton;
     @FXML private Label displayTemp;
     @FXML private Label displayDate;
     @FXML private Label UserProfile;
@@ -64,8 +67,23 @@ public class SmartHomeSimulatorController {
         }
         catch (Exception e){
             e.printStackTrace();
+        }  
+    }
+    @FXML
+    void openRoomControls(MouseEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RoomControls.fxml"));
+            Parent root2 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initOwner(simulationToggle.getScene().getWindow());
+            stage.setTitle("Rooms Control Panel");
+            stage.setScene(new Scene(root2));  
+            stage.showAndWait();
         }
-    
+        catch (Exception e){
+            e.printStackTrace();
+            Platform.exit();
+        }
     }
 
     @FXML
@@ -91,5 +109,9 @@ public class SmartHomeSimulatorController {
     @FXML
     private void setTime(String time){
         this.displayTime.setText(time);
+    }
+    @FXML
+    protected ToggleButton getSimToggle(){
+        return simulationToggle;
     }
 }
