@@ -190,11 +190,8 @@ public class House {
         }
         return "";
     }
-    /**
-     * Parse the HouseLayout file into the 
-     * @return blank string to satisfy toString() requirements
-     */
-    public static House loadFile(String fileName) throws Exception{
+
+    private static House loadFile(String fileName) throws Exception{
         House loadedHouse;
         String[] elementStack = new String[4];
         int depth = -1;
