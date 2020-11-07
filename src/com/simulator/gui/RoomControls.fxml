@@ -97,7 +97,6 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Button fx:id="finished" layoutX="275.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#returnData" prefHeight="25.0" prefWidth="138.0" text="Finished Changes" />
     
    </children>
 </AnchorPane>

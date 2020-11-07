@@ -57,6 +57,7 @@ public class RoomControlsController implements Initializable{
 
     @FXML
     void selectingRoom(MouseEvent event){
+        if(SimulationParameters.getInstance().getSimulationStatus()==true){
         System.out.println("arrived displayRoomList");
         roomList.setItems(FXCollections.observableList(House.getInstance().getRoomsNameList()));
         selectedRoom = roomList.getValue();
@@ -93,9 +94,12 @@ public class RoomControlsController implements Initializable{
             return cell ;
         });
     }
+        else return;
+    }
 
     @FXML
     void modifyLight(MouseEvent event){
+        if(SimulationParameters.getInstance().getSimulationStatus()==true){
         System.out.println("arrived displayLightList");
 
         //Listen for when an option is selected
@@ -121,10 +125,12 @@ public class RoomControlsController implements Initializable{
             });
             return cell ;
         });
+        }else return;
     }
 
     @FXML
     void modifyDoor(MouseEvent event){
+        if(SimulationParameters.getInstance().getSimulationStatus()==true){
         System.out.println("arrived displayDoorList");
         //Listen for when an option is selected
         doorList.setCellFactory(lv -> {
@@ -148,11 +154,12 @@ public class RoomControlsController implements Initializable{
             });
             return cell ;
         });
-        
+        }else return;
     }
 
     @FXML
     void modifyWindow(MouseEvent event){
+        if(SimulationParameters.getInstance().getSimulationStatus()==true){
         System.out.println("arrived displayWindowList");
         //Listen for when an option is selected
         windowList.setCellFactory(lv -> {
@@ -176,11 +183,12 @@ public class RoomControlsController implements Initializable{
             });
             return cell ;
         });
+        }else return;
     }
 
     @FXML 
     void lightON (MouseEvent event){
-        if(currentLight==null){
+        if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
         else{
@@ -192,7 +200,7 @@ public class RoomControlsController implements Initializable{
     }
     @FXML
     void lightOff(MouseEvent event){
-        if(currentLight==null){
+        if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
         else{
@@ -203,7 +211,7 @@ public class RoomControlsController implements Initializable{
     }
     @FXML
     void lightAutoOn(MouseEvent event){
-        if(currentLight==null){
+        if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
         else{
@@ -215,7 +223,7 @@ public class RoomControlsController implements Initializable{
     }
     @FXML
     void lightAutoOff(MouseEvent event){
-        if(currentLight==null){
+        if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
         else{
@@ -227,7 +235,7 @@ public class RoomControlsController implements Initializable{
     }
     @FXML
     void doorUnlock(MouseEvent event){
-        if(currentDoor==null){
+        if(currentDoor==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
         else{
@@ -238,7 +246,7 @@ public class RoomControlsController implements Initializable{
     }
     @FXML
     void doorLock(MouseEvent event){
-        if(currentDoor==null){
+        if(currentDoor==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
         else{
@@ -250,7 +258,7 @@ public class RoomControlsController implements Initializable{
     }
     @FXML
     void windowOpen(MouseEvent event){
-        if(currentWindow==null){
+        if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
         else{
@@ -262,7 +270,7 @@ public class RoomControlsController implements Initializable{
     }
     @FXML
     void windowClose(MouseEvent event){
-        if(currentWindow==null){
+        if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
         else{
@@ -333,19 +341,7 @@ public class RoomControlsController implements Initializable{
         windowOpen.setStyle("-fx-all: initial");
         windowClose.setStyle("-fx-all: initial");
     }
-
-
-    @FXML
-    void returnData (MouseEvent event){    
-        try{
-
-           }
-
-        catch (Exception e){
-        e.printStackTrace();
-        }
-        
-    }
+    
     /**
      * Closes the Room Control Panel window pop-up.
      * @param event Referring to a mouse activity by the user
