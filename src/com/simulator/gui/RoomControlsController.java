@@ -300,13 +300,13 @@ public class RoomControlsController implements Initializable{
 
     @FXML 
     void changeDoorButtonsColours(){
-        if(currentDoor.getUnlockedOrLocked()==true){
+        if(currentDoor.getUnlockedOrLocked()==false){
             doorUnlock.setStyle("-fx-background-color: #7FFF00");
             doorLock.setStyle("-fx-all: initial");
         }
-        if(currentDoor.getUnlockedOrLocked()==false){
+        if(currentDoor.getUnlockedOrLocked()==true){
             doorUnlock.setStyle("-fx-all: initial");
-            doorUnlock.setStyle("-fx-background-color: #FF0000");
+            doorLock.setStyle("-fx-background-color: #FF0000");
         }
     }
 

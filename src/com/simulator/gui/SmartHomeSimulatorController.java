@@ -1,4 +1,5 @@
 package com.simulator.gui;
+
 import com.simulator.model.Profile;
 import com.simulator.model.Room;
 import javafx.application.Platform;
@@ -13,6 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
@@ -33,6 +36,10 @@ public class SmartHomeSimulatorController {
     @FXML private Label userProfile;
     @FXML private Label userLocation;
     @FXML private Label displayTime;
+    @FXML private TabPane tabPane;
+    @FXML private Tab SHCTab;
+    @FXML private RoomControlsController sHCTabPageController;
+    
     private House house;
     private SimulationParameters simulation;
 
