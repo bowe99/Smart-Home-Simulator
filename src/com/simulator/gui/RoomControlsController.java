@@ -44,7 +44,6 @@ public class RoomControlsController {
     private String selectedLight;
     private String selectedDoor;
     private String selectedWindow;
-    private SmartHomeSimulatorController mainController = new SmartHomeSimulatorController();
 
     @FXML
     void selectingRoom(MouseEvent event){

@@ -1,0 +1,7 @@
+Bob
+PARENT
+room1
+
+Mary
+CHILD
+room1

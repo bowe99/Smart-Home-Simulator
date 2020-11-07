@@ -29,5 +29,6 @@ public class SmartHomeSimulator extends Application{
         primaryStage.setTitle("Smart Home Simulator");
         primaryStage.show();
 
+
     }
 }
