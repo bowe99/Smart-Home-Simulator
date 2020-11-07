@@ -1,56 +1,158 @@
 $House: "325 Lakeview, Pointe-Claire"{
-    $Room:"room1"{
-        $Window: "room1window1" {
+    $Room: "BuildingEntrance"{
+        $Window: "FrontDoorWindow1"{
         }
-        $Window: "windowX"{
+        $Window: "FrontDoorWindow2"{
         }
-        $Door:"room1door1"{
-            $EntryWaySensor:"room1door1entrywaysensor1"{
+        $Door: "FrontDoor1"{
+            $EntryWaySensor: "FrontDoor1Sensor"{
             }
         }
-        $Door:"room1door2"{
-            $EntryWaySensor: "room1door2entrywaysensor1"{
+        $Door: "FrontDoor2"{
+            $EntryWaySensor: "FrontDoor2Sensor"{
             }
         }
-        $Light: "room1light1"{
+        $Light: "FrontDoorLight1"{
         }
-        $Light: "room1light2"{
+        $Light: "FrontDoorLight2"{
         }
-        $Light: "room1light2"{
+        $MotionSensor: "EntranceMotionSensor"{
         }
     }
-    $Room: "room2fornow"{
-        $Window: "room2window1"{
+    $Room: "Kitchen"{
+        $Window: "NorthWindow" {
         }
-        $Window: "room2window2"{
+        $Window: "EastWindow"{
         }
-        $Door: "room2door1"{
-            $EntryWaySensor: "room2door1entrywaysensor1"{
+        $Door: "DoorToBackyard"{
+            $EntryWaySensor: "BackyardDoorSensor"{
             }
         }
-        $Light: "room2light1"{
+        $Door: "OfficeDoor"{
+            $EntryWaySensor: "OfficeDoorSensor"{
+            }
         }
-        $MotionSensor: "room2motionSensor1"{
+        $Light: "IslandLight1"{
+        }
+        $Light: "IslandLight2"{
+        }
+        $Light: "IslandLight3"{
+        }
+        $MotionSensor: "KitchenMotionSensor"{
         }
     }
-    $Room: "room3fornow"{
-        $Window: "room3window1"{
+    $Room: "LivingRoom"{
+        $Window: "NorthWindow1"{
         }
-        $Window: "room3window2"{
+        $Window: "NorthWindow2"{
         }
-        $Door: "room3door1"{
-            $EntryWaySensor: "room3door1entrywaysensor1"{
+        $Light: "TVLight1"{
+        }
+        $Light: "TVLight2"{
+        }
+        $MotionSensor: "LivingRoomMotionSensor"{
+        }
+    }
+    $Room: "FamilyRoom"{
+        $Window: "SouthWindow1"{
+        }
+        $Window: "SouthWindow2"{
+        }
+        $Window: "EastWindow1"{
+        }
+        $Window: "EastWindow2"{
+        }
+        $Door: "SideDoor"{
+            $EntryWaySensor: "SideDoorSensor"{
             }
         }
-        $Door: "room3door2"{
-            $EntryWaySensor: "room3door1entrywaysensor1"{
+        $Door: "DoorToFrontEntrance"{
+            $EntryWaySensor: "DoorToFrontEntranceSensor"{
             }
         }
-        $Light: "room3light1"{
+        $Door: "DoorToGarage"{
+            $EntryWaySensor: "DoorToGarageSensor"{
+            }
         }
-        $Light: "room3light2"{
+        $Light: "SouthWindow1Light"{
         }
-        $Light: "room3light3"{
+        $Light: "SouthWindow2Light"{
         }
+        $Light: "EastWindow1Light"{
+        }
+        $Light: "EastWindow2Light"{
+        }
+        $Light: "SideDoorLight1"{
+        }
+        $Light: "DoorToBuildingEntranceLight1"{
+        }
+        $Light: "DoorToGarageLight2"{
+        }
+        $MotionSensor: "FamilyRoomMotionSensor"{
+        }
+    }
+    $Room: "Office"{
+        $Window: "NorthWindow1"{
+        }
+        $Window: "NorthWindow2"{
+        }
+        $Door: "DoorToKitchen"{
+            $EntryWaySensor: "DoorToKitchenSensor1"{
+            }
+        }
+        $Light: "DeskLight1"{
+        }
+        $Light: "CeilingLight1"{
+        }
+        $Light: "CeilingLight2"{
+        }
+        $MotionSensor: "OfficeMotionSensor"{
+        }
+    }
+    $Room: "Garage"{
+        $Window: "EastWindow"{
+        }
+        $Window: "WestWindow"{
+        }
+        $Door: "GarageDoor1"{
+            $EntryWaySensor: "GarageDoor1Sensor"{
+            }
+        }
+        $Door: "GarageDoor2"{
+            $EntryWaySensor: "GarageDoor2Sensor"{
+            }
+        }
+        $Door: "DoorToFamilyRoom"{
+            $EntryWaySensor: "DoorToFamilyRoomSensor"{
+            }
+        }
+        $Light: "OverheadLight1"{
+        }
+        $Light: "OverheadLight2"{
+        }
+        $Light: "DoorToFamilyRoomLight"{
+        }
+        $MotionSensor: "GarageMotionSensor"{
+        }
+    }
+    $Room: "Backyard"{
+        $Door: "DoorToKitchen1"{
+            $EntryWaySensor: "DoorToKitchenSensor1"{
+            }
+        }
+        $Door: "DoorToKitchen2"{
+            $EntryWaySensor: "DoorToKitchenSensor2"{
+            }
+        }
+        $Light: "BackyardLight1"{
+        }
+        $Light: "BackyardLight2"{
+        }
+        $Light: "BackyardLight3"{
+        }
+        $MotionSensor: "BackyardMotionSensor"{
+        }
+    }
+    $Room: "Away"{
     }
 }
