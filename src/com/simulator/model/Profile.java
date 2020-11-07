@@ -1,7 +1,11 @@
 package com.simulator.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Profile
 {
+    private List<Observer> observers = new ArrayList<Observer>();
     private String name;
     private USER_TYPE user_type;
     private Room currentRoom;
@@ -35,9 +39,20 @@ public class Profile
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
+        notifyAllObservers();
     }
+
+    public void attach(Observer observer){
+        observers.add(observer);		
+     }
 
     public String toString(){
         return name + "\n" + user_type.toString() + "\n" + currentRoom.getName();
     }
+
+    public void notifyAllObservers(){
+        for (Observer observer : observers) {
+           observer.updateLocation();
+        }
+     } 
 }
