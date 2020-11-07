@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -15,15 +10,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.SmartHomeSimulatorController">
+<VBox prefHeight="583.0" prefWidth="1290.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.SmartHomeSimulatorController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="615.0" prefWidth="1266.0" VBox.vgrow="ALWAYS">
       <children>
-            <TabPane layoutX="158.0" layoutY="2.0" prefHeight="259.0" prefWidth="478.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" layoutX="158.0" layoutY="2.0" prefHeight="428.0" prefWidth="492.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Untitled Tab 1">
                   <content>
@@ -35,24 +28,14 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>
                 </Tab>
-                  <Tab text="SHC">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Label layoutY="4.0" prefHeight="17.0" prefWidth="69.0" text="Rooms">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="roomsControlPanelButton" layoutX="324.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#openRoomControls" prefHeight="25.0" prefWidth="151.0" text="Rooms Control Panel" />
-                              <Region layoutY="27.0" prefHeight="188.0" prefWidth="472.0" />
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
+               <Tab fx:id="shcTab" text="SHC">
+                  <content>
+                     <fx:include fx:id="shcTabPage" source="RoomControls.fxml" />
+                  </content>
+               </Tab>
               </tabs>
             </TabPane>
-            <Pane layoutY="2.0" prefHeight="415.0" prefWidth="151.0" style="-fx-border-color: black;">
+            <Pane layoutY="2.0" prefHeight="581.0" prefWidth="160.0" style="-fx-border-color: black;">
                <children>
                   <ToggleButton id="simulationToggle" fx:id="simulationToggle" layoutX="56.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#changeSimulationStatus" text="Off" />
                   <Label layoutX="14.0" layoutY="6.0" text="Simulation" />
@@ -71,11 +54,7 @@
                   <Label fx:id="displayTime" layoutX="51.0" layoutY="362.0" text="10:38:20" />
                </children>
             </Pane>
-            <Pane layoutX="151.0" layoutY="273.0" prefHeight="142.0" prefWidth="491.0">
-               <children>
-                  <TextArea prefHeight="142.0" prefWidth="491.0" promptText="This is the console" />
-               </children>
-            </Pane>
+            <TextArea layoutX="160.0" layoutY="430.0" prefHeight="151.0" prefWidth="492.0" promptText="This is the console" />
       </children>
     </AnchorPane>
   </children>
