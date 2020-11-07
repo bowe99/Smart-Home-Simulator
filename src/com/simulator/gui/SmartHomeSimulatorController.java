@@ -1,11 +1,15 @@
 package com.simulator.gui;
+
 import com.simulator.model.Profile;
 import com.simulator.model.Room;
+import com.simulator.model.SecurityModule;
+
 import javafx.application.Platform;
 /**
   * This is the controller class for the Dashboard.fxml file
   */
 import com.simulator.model.House;
+import com.simulator.model.Light;
 import com.simulator.model.SimulationParameters;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
@@ -20,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -33,8 +40,12 @@ public class SmartHomeSimulatorController {
     @FXML private Label userProfile;
     @FXML private Label userLocation;
     @FXML private Label displayTime;
+    @FXML private ListView allLightsListView;
+    @FXML private ListView selectedLightsListView;
+
     private House house;
     private SimulationParameters simulation;
+    private SecurityModule securityModule;
 
     //todo save simulation context (profiles, variables, etc.) in text file
     //todo implement/fix to string methods for classes to the saved
@@ -42,8 +53,9 @@ public class SmartHomeSimulatorController {
 
     public SmartHomeSimulatorController()
     {
-        house = House.getInstance();
-        simulation = SimulationParameters.getInstance();
+        this.house = House.getInstance();
+        this.simulation = SimulationParameters.getInstance();
+        this.securityModule = new SecurityModule(simulation.getCurrentUser());
 
         //load permissions?
         try {
@@ -61,6 +73,7 @@ public class SmartHomeSimulatorController {
         setLocation(simulation.getCurrentUser().getCurrentRoom());
         setProfile(simulation.getCurrentUser());
         setTime(simulation.getTime());
+        setLights(house);
     }
 
     /**
@@ -105,6 +118,7 @@ public class SmartHomeSimulatorController {
             e.printStackTrace();
         }  
     }
+
     @FXML
     void openRoomControls(MouseEvent event){
         try {
@@ -153,10 +167,22 @@ public class SmartHomeSimulatorController {
         this.displayTime.setText(hours + ":" + mins);
     }
 
+    @FXML
+    private void setLights(House house){
+        ArrayList<String> lightNameList = new ArrayList<String>();
+
+        lightNameList = this.house.getLightsNameList();
+
+        for (String light: lightNameList){
+            allLightsListView.getItems().add(light);
+        }
+    }
+
     //todo increment time over certain interval, return new time in minutes, remember to increment date if time rollsover 1440 minutes
     private int updateTime(){
         return 0;
     }
+
     @FXML
     protected ToggleButton getSimToggle(){
         return simulationToggle;
