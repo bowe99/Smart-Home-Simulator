@@ -23,7 +23,7 @@ public class Window extends Entryway{
         this.open = false;
     }
 
-    public boolean getUnlockedOrLocked(){
+    public boolean getOpenOrClosed(){
         return open;
     }
 

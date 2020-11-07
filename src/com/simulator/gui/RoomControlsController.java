@@ -28,22 +28,32 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class RoomControlsController {
+public class RoomControlsController implements Initializable{
 
     @FXML private ComboBox<String> roomList = new ComboBox<String>();
     @FXML private ComboBox<String> lightList = new ComboBox<String>();
     @FXML private ComboBox<String> doorList = new ComboBox<String>();
     @FXML private ComboBox<String> windowList = new ComboBox<String>();
+    @FXML private Button lightOn;
+    @FXML private Button lightOff;
+    @FXML private Button lightAutoOn;
+    @FXML private Button lightAutoOff;
+    @FXML private Button doorUnlock;
+    @FXML private Button doorLock;
+    @FXML private Button windowOpen;
+    @FXML private Button windowClose;
     @FXML private Button finished;
 
-    private Room currentRoom;
-    private Light currentLight;
-    private Door currentDoor;
-    private Window currentWindow;
+    private Room currentRoom=null;
+    private Light currentLight=null;
+    private Door currentDoor=null;
+    private Window currentWindow=null;
     private String selectedRoom;
     private String selectedLight;
     private String selectedDoor;
     private String selectedWindow;
+
+
 
     @FXML
     void selectingRoom(MouseEvent event){
@@ -76,6 +86,8 @@ public class RoomControlsController {
                     lightList.setItems(FXCollections.observableList(currentRoom.getLightsNameList()));
                     doorList.setItems(FXCollections.observableList(currentRoom.getDoorsNameList()));
                     windowList.setItems(FXCollections.observableList(currentRoom.getWindowsNameList()));
+                    resetAllButtonColours();
+
                 }
             });
             return cell ;
@@ -98,14 +110,13 @@ public class RoomControlsController {
             //Upon Mouse press on the option
             cell.setOnMousePressed(e -> {
                 if (! cell.isEmpty()) {
-                    System.out.println("Click on "+cell.getItem());
 
                     //room is selected and the string is stored in selected room
                     selectedLight = cell.getItem();
                     //Selected room now as an object in currentRoom
                     currentLight = currentRoom.getLightByName(selectedLight);
-
-                    System.out.println("Current Light that I'm holding: "+currentLight.getName());
+                    changeLightButtonsColours();
+                    changeLightAutoButtonsColours();
                 }
             });
             return cell ;
@@ -127,14 +138,12 @@ public class RoomControlsController {
             //Upon Mouse press on the option
             cell.setOnMousePressed(e -> {
                 if (! cell.isEmpty()) {
-                    System.out.println("Click on "+cell.getItem());
 
                     //room is selected and the string is stored in selected room
                     selectedDoor = cell.getItem();
                     //Selected room now as an object in currentRoom
                     currentDoor = currentRoom.getDoorByName(selectedDoor);
-
-                    System.out.println("Current door object that I'm holding: "+currentDoor.getName());
+                    changeDoorButtonsColours();
                 }
             });
             return cell ;
@@ -157,15 +166,12 @@ public class RoomControlsController {
             //Upon Mouse press on the option
             cell.setOnMousePressed(e -> {
                 if (! cell.isEmpty()) {
-                    System.out.println("Click on "+cell.getItem());
 
                     //room is selected and the string is stored in selected room
                     selectedWindow = cell.getItem();
                     //Selected room now as an object in currentRoom
                     currentWindow = currentRoom.getWindowByName(selectedWindow);
-
-                    System.out.println("Current window object that I'm holding: "+currentWindow.getName());
-
+                    changeWindowButtonsColours();
                 }
             });
             return cell ;
@@ -174,50 +180,158 @@ public class RoomControlsController {
 
     @FXML 
     void lightON (MouseEvent event){
+        if(currentLight==null){
+            return;
+        }
+        else{
         System.out.println("lightON");
         currentLight.setToOn();
+        changeLightButtonsColours();
+        }
 
     }
     @FXML
     void lightOff(MouseEvent event){
+        if(currentLight==null){
+            return;
+        }
+        else{
         System.out.println("lightOFF");
         currentLight.setToOff();
+        changeLightButtonsColours();
+        }
     }
     @FXML
     void lightAutoOn(MouseEvent event){
+        if(currentLight==null){
+            return;
+        }
+        else{
         System.out.println("lightAutoOn");
         currentLight.setAutoOn();
+        changeLightAutoButtonsColours();
+        }
         
     }
     @FXML
     void lightAutoOff(MouseEvent event){
+        if(currentLight==null){
+            return;
+        }
+        else{
         System.out.println("lightAutoOFF");
         currentLight.setAutoOff();
+        changeLightAutoButtonsColours();
+        }
 
     }
     @FXML
     void doorUnlock(MouseEvent event){
+        if(currentDoor==null){
+            return;
+        }
+        else{
         System.out.println("doorUnlock");
         currentDoor.setUnlocked();
+        changeDoorButtonsColours();
+        }
     }
     @FXML
     void doorLock(MouseEvent event){
+        if(currentDoor==null){
+            return;
+        }
+        else{
         System.out.println("doorLock");
         currentDoor.setLocked();
+        changeDoorButtonsColours();
+        }
 
     }
     @FXML
     void windowOpen(MouseEvent event){
+        if(currentWindow==null){
+            return;
+        }
+        else{
         System.out.println("windowOpen");
         //insert if statement here to check for obstructions
         currentWindow.setOpen();
+        changeWindowButtonsColours();
+        }
     }
     @FXML
     void windowClose(MouseEvent event){
+        if(currentWindow==null){
+            return;
+        }
+        else{
         System.out.println("windowClose");
         //insert if statement here to check for obstructions
         currentWindow.setClosed();
+        changeWindowButtonsColours();
+        }
 
+    }
+
+    @FXML 
+    void changeLightButtonsColours(){
+        if(currentLight.getOnOff()==true){
+            lightOn.setStyle("-fx-background-color: #7FFF00");
+            lightOff.setStyle("-fx-all: initial");
+        }
+        if(currentLight.getOnOff()==false){
+            lightOn.setStyle("-fx-all: initial");
+            lightOff.setStyle("-fx-background-color: #FF0000");
+        }
+    }
+
+    @FXML 
+    void changeLightAutoButtonsColours(){
+        if(currentLight.getAuto()==true){
+            lightAutoOn.setStyle("-fx-background-color: #7FFF00");
+            lightAutoOff.setStyle("-fx-all: initial");
+        }
+        if(currentLight.getAuto()==false){
+            lightAutoOn.setStyle("-fx-all: initial");
+            lightAutoOff.setStyle("-fx-background-color: #FF0000");
+        }
+    }
+
+    @FXML 
+    void changeDoorButtonsColours(){
+        if(currentDoor.getUnlockedOrLocked()==true){
+            doorUnlock.setStyle("-fx-background-color: #7FFF00");
+            doorLock.setStyle("-fx-all: initial");
+        }
+        if(currentDoor.getUnlockedOrLocked()==false){
+            doorUnlock.setStyle("-fx-all: initial");
+            doorUnlock.setStyle("-fx-background-color: #FF0000");
+        }
+    }
+
+    @FXML 
+    void changeWindowButtonsColours(){
+        if(currentWindow.getOpenOrClosed()==true){
+            windowOpen.setStyle("-fx-background-color: #7FFF00");
+            windowClose.setStyle("-fx-all: initial");
+        }
+        if(currentWindow.getOpenOrClosed()==false){
+            windowOpen.setStyle("-fx-all: initial");
+            windowClose.setStyle("-fx-background-color: #FF0000");
+        }
+    }
+
+    @FXML 
+    void resetAllButtonColours(){
+        lightOn.setStyle("-fx-all: initial");
+        lightOff.setStyle("-fx-all: initial");
+        lightAutoOff.setStyle("-fx-all: initial");
+        lightAutoOn.setStyle("-fx-all: initial");
+        doorUnlock.setStyle("-fx-all: initial");
+        doorLock.setStyle("-fx-all: initial");
+        windowOpen.setStyle("-fx-all: initial");
+        windowClose.setStyle("-fx-all: initial");
     }
 
 
@@ -245,6 +359,13 @@ public class RoomControlsController {
         catch (Exception e){
         e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("Initializing !!!!!!");
+        
+
     }
 
 }

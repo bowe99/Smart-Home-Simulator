@@ -1,7 +1,7 @@
 Bob
 PARENT
-room1
+Kitchen
 
 Mary
 CHILD
-room1
+LivingRoom
