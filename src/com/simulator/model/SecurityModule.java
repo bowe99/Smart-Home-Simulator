@@ -17,10 +17,10 @@ public class SecurityModule extends Observer{
     private int motionDetectedTime;
 
 
-    public SecurityModule(Profile profile){
-        this.profile = profile;
-        this.profile.attach(this);
-
+    public SecurityModule(List<Profile> profiles){
+        for(Profile profile : profiles){
+            profile.attach(this);
+        }
         this.isAwayMode = false;
         this.detectionMonitored = false;
         this.lightsOnWhenAway = new ArrayList<Light>();
@@ -37,6 +37,10 @@ public class SecurityModule extends Observer{
         this.lightsOnWhenAway.remove(light);
     }
 
+    public void toggleAwayMode(){
+        this.isAwayMode = !this.isAwayMode;
+    }
+
     public void saveSettings(int startTime, int endTime, int detectionTime){
         this.motionDetectedTime = detectionTime;
         this.lightOnTime = startTime;
@@ -44,10 +48,13 @@ public class SecurityModule extends Observer{
     }
 
     @Override
-    public void updateLocation() {
+    public void updateLocation(Profile profile) {
         // Checks if current room is in the House
-        if (House.getInstance().getRoomByName(this.profile.getCurrentRoom().getName()).getName() == "Away"){
+        if (!profile.getCurrentRoom().getName().equals("Away") && profile.getUserType() != USER_TYPE.STRANGER){
             this.isAwayMode = false;
+        }
+        else if(!profile.getCurrentRoom().getName().equals("Away") && profile.getUserType() == USER_TYPE.STRANGER){
+            
         }
     }
 

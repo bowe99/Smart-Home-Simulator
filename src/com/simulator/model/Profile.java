@@ -52,7 +52,7 @@ public class Profile
 
     public void notifyAllObservers(){
         for (Observer observer : observers) {
-           observer.updateLocation();
+           observer.updateLocation(this);
         }
      } 
 }

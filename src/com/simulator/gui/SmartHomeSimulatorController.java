@@ -69,7 +69,7 @@ public class SmartHomeSimulatorController {
     {
         this.house = House.getInstance();
         this.simulation = SimulationParameters.getInstance();
-        this.securityModule = new SecurityModule(simulation.getCurrentUser());
+        this.securityModule = new SecurityModule(simulation.getAllUsers());
 
         //load permissions?
         try {
@@ -163,27 +163,6 @@ public class SmartHomeSimulatorController {
         Light selectedLight = this.house.getLightByName((String) selectedItem);
         this.securityModule.removeLight(selectedLight);
     }
-
-    @FXML
-    void openRoomControls(MouseEvent event){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RoomControls.fxml"));
-            Parent root2 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initOwner(simulationToggle.getScene().getWindow());
-            stage.setTitle("Rooms Control Panel");
-            stage.setScene(new Scene(root2));  
-            stage.showAndWait();
-
-            //todo update changes following closure of the RoomControlPanel
-
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            Platform.exit();
-        }
-    }
-
 
     @FXML
     private void setTemperature(int temperature) {
