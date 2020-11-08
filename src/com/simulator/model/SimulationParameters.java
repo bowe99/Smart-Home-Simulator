@@ -108,6 +108,10 @@ public class SimulationParameters
         }
         return userNames;
     }
+    
+    public List<Profile> getAllUsers(){
+        return allUsers;
+    }
 
     private static SimulationParameters loadFile(){
         SimulationParameters loadedSimulation = new SimulationParameters();
