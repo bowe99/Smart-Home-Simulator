@@ -94,6 +94,13 @@ public class SimulationParameters
         currentUser.setCurrentRoom(destination);
     }
 
+    public void setUserLocation(String userName, Room destination){
+        for (Profile p : allUsers) {
+            if(p.getName().equals(userName))
+                p.setCurrentRoom(destination);
+        }
+    }
+
     public List<String> getAllUserNames(){
         List<String> userNames = new ArrayList<>();
         for (Profile p: allUsers) {

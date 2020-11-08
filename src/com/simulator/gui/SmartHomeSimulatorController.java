@@ -76,14 +76,15 @@ public class SmartHomeSimulatorController {
      */
     @FXML
     void changeSimulationStatus(MouseEvent event) {
-        if(simulationToggle.isSelected()){
+        if(simulation.getSimulationStatus()){
             this.simulationToggle.setText("On");
-            simulation.setSimulationStatus(true);
+            simulation.setSimulationStatus(false);
         } else {
             this.simulationToggle.setText("Off");
-            simulation.setSimulationStatus(false);
+            simulation.setSimulationStatus(true);
         }
     }
+    
     /**
      * Opens the Edit Button from the dashboard.
      * @param event Referring to a mouse activity by the user
