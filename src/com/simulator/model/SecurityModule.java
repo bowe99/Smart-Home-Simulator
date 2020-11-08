@@ -12,7 +12,9 @@ public class SecurityModule extends Observer{
     private boolean isAwayMode;
     private boolean detectionMonitored;
     private List<Light> lightsOnWhenAway;
-    private Map<String, Integer> mappedLightsOnTimes;
+    private int lightOnTime;
+    private int lightOffTime;
+    private int motionDetectedTime;
 
 
     public SecurityModule(Profile profile){
@@ -22,12 +24,23 @@ public class SecurityModule extends Observer{
         this.isAwayMode = false;
         this.detectionMonitored = false;
         this.lightsOnWhenAway = new ArrayList<Light>();
-        this.mappedLightsOnTimes = new HashMap<String, Integer>();
-
+        this.motionDetectedTime = 0;
+        this.lightOnTime = 1080;
+        this.lightOffTime = 360;
     }
 
     public void addLight(Light light){
         this.lightsOnWhenAway.add(light);
+    }
+    
+    public void removeLight(Light light){
+        this.lightsOnWhenAway.remove(light);
+    }
+
+    public void saveSettings(int startTime, int endTime, int detectionTime){
+        this.motionDetectedTime = detectionTime;
+        this.lightOnTime = startTime;
+        this.lightOffTime = endTime;
     }
 
     @Override
