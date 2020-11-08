@@ -168,14 +168,13 @@ public class House {
     }
 
     public Light getLightByName(String target){
-        Light targetLight = null;
         for (Room r : this.rooms) {
-            targetLight = r.getLightByName(target);
+            Light targetLight = r.getLightByName(target);
             if(targetLight != null){
                 return targetLight;
             }
         }
-        return targetLight;
+        return null;
     }
    
     public List<String> getRoomsNameList(){
