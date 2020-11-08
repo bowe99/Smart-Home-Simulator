@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.RoomControlsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="383.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.RoomControlsController">
    <children>
       <GridPane layoutY="29.0" prefHeight="381.0" prefWidth="483.0">
         <columnConstraints>
@@ -93,8 +93,10 @@
             </Button>
          </children>
       </GridPane>
-      <Label layoutX="3.0" layoutY="1.0" prefHeight="17.0" prefWidth="116.0" text="Room Controls" />
-      <Button fx:id="finished" layoutX="275.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#returnData" prefHeight="25.0" prefWidth="138.0" text="Finished Changes" />
+      <Label layoutX="3.0" layoutY="1.0" prefHeight="17.0" prefWidth="116.0" text="Room Controls">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
     
    </children>
 </AnchorPane>

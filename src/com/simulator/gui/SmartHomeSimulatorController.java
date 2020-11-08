@@ -20,6 +20,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
@@ -43,11 +46,16 @@ public class SmartHomeSimulatorController {
     @FXML private Label userProfile;
     @FXML private Label userLocation;
     @FXML private Label displayTime;
+
     @FXML private ListView allLightsListView;
     @FXML private ListView selectedLightsListView;
     @FXML private TextField startTimeSecurity;
     @FXML private TextField endTimeSecurity;
     @FXML private TextField motionDetectedTimeSecurity;
+    @FXML private TabPane tabPane;
+    @FXML private Tab SHCTab;
+    @FXML private RoomControlsController sHCTabPageController;
+    
 
     private House house;
     private SimulationParameters simulation;
@@ -125,6 +133,7 @@ public class SmartHomeSimulatorController {
         }  
     }
 
+
     @FXML
     void addSecurityLight(){
 
@@ -170,6 +179,7 @@ public class SmartHomeSimulatorController {
             Platform.exit();
         }
     }
+
 
     @FXML
     private void setTemperature(int temperature) {
