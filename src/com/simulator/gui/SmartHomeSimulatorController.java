@@ -22,7 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
@@ -39,7 +39,7 @@ import java.util.TimerTask;
 public class SmartHomeSimulatorController {
 
     @FXML private ToggleButton simulationToggle;
-    @FXML private ToggleButton awayMode;
+    @FXML private ToggleButton awayModeToggle;
     @FXML private Button editButton;
     @FXML private Button roomsControlPanelButton;
     @FXML private Button saveSecurity;
@@ -49,6 +49,7 @@ public class SmartHomeSimulatorController {
     @FXML private Label userProfile;
     @FXML private Label userLocation;
     @FXML private Label displayTime;
+    @FXML private TextArea outputConsole;
 
     @FXML private ListView allLightsListView;
     @FXML private ListView selectedLightsListView;
@@ -71,8 +72,6 @@ public class SmartHomeSimulatorController {
     {
         this.house = House.getInstance();
         this.simulation = SimulationParameters.getInstance();
-        this.securityModule = new SecurityModule(simulation.getAllUsers());
-
         //load permissions?
         try {
 
@@ -94,6 +93,10 @@ public class SmartHomeSimulatorController {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastSaved.setText(format.format(currentDateTime));
         startTimer();
+        //creating a new instance of the logger with the output console so that other classes can use it
+        Logger.newInstance(outputConsole);
+        Logger.getInstance().resetLogFile();
+        this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle);
     }
 
     /**
@@ -148,6 +151,10 @@ public class SmartHomeSimulatorController {
         }  
     }
 
+    @FXML
+    public void changeAwayStatus() {
+        securityModule.toggleAwayMode();
+    }
 
     @FXML
     void addSecurityLight(){
