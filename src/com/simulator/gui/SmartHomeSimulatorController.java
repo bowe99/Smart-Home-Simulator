@@ -37,7 +37,7 @@ import java.util.Date;
 public class SmartHomeSimulatorController {
 
     @FXML private ToggleButton simulationToggle;
-    @FXML private ToggleButton awayMode;
+    @FXML private ToggleButton awayModeToggle;
     @FXML private Button editButton;
     @FXML private Button roomsControlPanelButton;
     @FXML private Button saveSecurity;
@@ -70,8 +70,6 @@ public class SmartHomeSimulatorController {
     {
         this.house = House.getInstance();
         this.simulation = SimulationParameters.getInstance();
-        this.securityModule = new SecurityModule(simulation.getAllUsers());
-
         //load permissions?
         try {
 
@@ -95,6 +93,7 @@ public class SmartHomeSimulatorController {
         //creating a new instance of the logger with the output console so that other classes can use it
         Logger.newInstance(outputConsole);
         Logger.getInstance().resetLogFile();
+        this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle);
     }
 
     /**
@@ -141,6 +140,10 @@ public class SmartHomeSimulatorController {
         }  
     }
 
+    @FXML
+    public void changeAwayStatus() {
+        securityModule.toggleAwayMode();
+    }
 
     @FXML
     void addSecurityLight(){
