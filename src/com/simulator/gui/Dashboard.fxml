@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -18,12 +19,7 @@
       <children>
             <TabPane fx:id="tabPane" layoutX="158.0" layoutY="2.0" prefHeight="428.0" prefWidth="492.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Untitled Tab 1">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                  </content>
-                </Tab>
-                <Tab text="Untitled Tab 2">
+                <Tab text="SHS">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>
@@ -33,6 +29,21 @@
                      <fx:include fx:id="shcTabPage" source="RoomControls.fxml" />
                   </content>
                </Tab>
+                <Tab text="SHP">
+                  <content>
+                      <fx:include fx:id="shpTabPage" source="SHPDisplay.fxml" />
+                  </content>
+                </Tab>
+                  <Tab text="SHH">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab closable="false" disable="true" text="  +  ">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
               </tabs>
             </TabPane>
             <Pane layoutY="2.0" prefHeight="581.0" prefWidth="160.0" style="-fx-border-color: black;">
@@ -45,13 +56,13 @@
                      </image>
                   </ImageView>
                   <Button fx:id="editButton" layoutX="55.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#openEditor" text="Edit" />
-                  <Label fx:id="userProfile" layoutX="60.0" layoutY="191.0" text="Child" />
-                  <Label layoutX="50.0" layoutY="236.0" text="Location:" />
                   <Label fx:id="userLocation" layoutX="54.0" layoutY="253.0" text="Kitchen" />
-                  <Label layoutX="35.0" layoutY="289.0" text="Outside Temp:" />
                   <Label fx:id="displayTemp" layoutX="58.0" layoutY="305.0" text="15 °C" />
-                  <Label fx:id="displayDate" layoutX="34.0" layoutY="345.0" text="Fri Sep 18, 2020" />
-                  <Label fx:id="displayTime" layoutX="51.0" layoutY="362.0" text="10:38:20" />
+                  <Hyperlink fx:id="userProfile" layoutX="56.0" layoutY="188.0" onMouseClicked="#openEditor" text="Child" />
+                  <Hyperlink fx:id="theLocation" layoutX="46.0" layoutY="233.0" onMouseClicked="#openEditor" text="Location:" />
+                  <Hyperlink fx:id="outsideTemp" layoutX="31.0" layoutY="286.0" onMouseClicked="#openEditor" text="Outside Temp:" />
+                  <Hyperlink fx:id="displayDate" layoutX="30.0" layoutY="342.0" onMouseClicked="#openEditor" text="Fri Sep 18, 2020" />
+                  <Hyperlink fx:id="displayTime" layoutX="47.0" layoutY="359.0" onMouseClicked="#openEditor" text="10:38:20" />
                </children>
             </Pane>
             <TextArea layoutX="160.0" layoutY="430.0" prefHeight="151.0" prefWidth="492.0" promptText="This is the console" />

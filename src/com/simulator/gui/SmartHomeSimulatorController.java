@@ -2,7 +2,6 @@ package com.simulator.gui;
 
 import com.simulator.model.Profile;
 import com.simulator.model.Room;
-import javafx.application.Platform;
 /**
   * This is the controller class for the Dashboard.fxml file
   */
@@ -14,10 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -32,13 +30,14 @@ public class SmartHomeSimulatorController {
     @FXML private Button editButton;
     @FXML private Button roomsControlPanelButton;
     @FXML private Label displayTemp;
-    @FXML private Label displayDate;
-    @FXML private Label userProfile;
+    @FXML private Hyperlink displayDate;
+    @FXML private Hyperlink userProfile;
     @FXML private Label userLocation;
-    @FXML private Label displayTime;
+    @FXML private Hyperlink displayTime;
     @FXML private TabPane tabPane;
     @FXML private Tab SHCTab;
     @FXML private RoomControlsController sHCTabPageController;
+    @FXML private Tab SHPTab;
     
     private House house;
     private SimulationParameters simulation;
