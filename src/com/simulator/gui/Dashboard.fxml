@@ -105,7 +105,7 @@
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutY="456.0" prefHeight="17.0" prefWidth="160.0" text="Last saved:" />
                </children>
             </Pane>
-            <TextArea layoutX="160.0" layoutY="430.0" prefHeight="151.0" prefWidth="1070.0" promptText="This is the console" />
+            <TextArea fx:id="outputConsole" layoutX="160.0" layoutY="430.0" prefHeight="151.0" prefWidth="1070.0" promptText="This is the console" />
       </children>
     </AnchorPane>
   </children>
