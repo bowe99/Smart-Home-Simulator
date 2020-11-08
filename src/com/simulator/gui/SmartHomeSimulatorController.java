@@ -32,6 +32,8 @@ import javafx.stage.Stage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SmartHomeSimulatorController {
@@ -63,7 +65,7 @@ public class SmartHomeSimulatorController {
     private House house;
     private SimulationParameters simulation;
     private SecurityModule securityModule;
-
+    private Timer timer = new Timer();
 
     public SmartHomeSimulatorController()
     {
@@ -102,9 +104,20 @@ public class SmartHomeSimulatorController {
         if(simulation.getSimulationStatus()){
             this.simulationToggle.setText("On");
             simulation.setSimulationStatus(false);
+            timer.cancel();
         } else {
             this.simulationToggle.setText("Off");
             simulation.setSimulationStatus(true);
+            timer = new Timer();
+            
+            timer.schedule(new TimerTask() {
+                 @Override
+                 public void run() {
+                    simulation.updateTime();
+                    setTime(simulation.getTime());
+                    setDate(simulation.getDate());
+                 }
+              }, 0 ,simulation.getTimeInterval());
         }
     }
 

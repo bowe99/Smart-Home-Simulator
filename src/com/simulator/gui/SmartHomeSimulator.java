@@ -1,6 +1,7 @@
 package com.simulator.gui;
 
 import com.simulator.model.House;
+import com.simulator.model.Time;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
   */
 public class SmartHomeSimulator extends Application{
     public static void main(String[] args) {
-        launch(args);
+            launch(args);
 	}
 	/**
      * Launch the dashboard of the simulator.

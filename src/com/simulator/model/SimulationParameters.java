@@ -10,9 +10,7 @@ import java.util.List;
 public class SimulationParameters
 {
     private static SimulationParameters instance = null;
-
-    private Date date;
-    private int time; //represents minutes of the day (0-1440)
+    private Time time; //represents minutes of the day (0-1440)
     private int temperature;
     private Profile currentUser;
     private List<Profile> allUsers;
@@ -47,18 +45,21 @@ public class SimulationParameters
     }
 
     public Date getDate() {
-        return date;
+        return time.getDate();
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.time.setDate(date);
     }
 
     public int getTime() {
-        return time;
+        return time.getTime();
     }
 
     public void setTime(int time) {
+        this.time.setTime(time);
+    }
+    public void setTimeObject(Time time){
         this.time = time;
     }
 
@@ -116,7 +117,7 @@ public class SimulationParameters
     private static SimulationParameters loadFile(){
         SimulationParameters loadedSimulation = new SimulationParameters();
         File file = new File(simulationFile);
-
+        loadedSimulation.setTimeObject(new Time());
         try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line = reader.readLine();
             SimpleDateFormat initialFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -161,7 +162,7 @@ public class SimulationParameters
         File file = new File(simulationFile);
         try (Writer writer = new FileWriter(file)){
             SimpleDateFormat initialFormat = new SimpleDateFormat("yyyy-MM-dd");
-            writer.write(initialFormat.format(date));
+            writer.write(initialFormat.format(time.getDate()));
             writer.write("\n");
             writer.write(String.valueOf(time));
             writer.write("\n");
@@ -188,5 +189,13 @@ public class SimulationParameters
             System.out.println("Something went writing the txt file " + usersFile);
             e.printStackTrace();
         }
+    }
+
+    public void updateTime(){
+        time.update();
+    }
+
+    public int getTimeInterval(){
+       return  time.getInterval();
     }
 }
