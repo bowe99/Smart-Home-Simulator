@@ -261,6 +261,10 @@ public class RoomControlsController implements Initializable{
         if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
+        else if(currentWindow.getBlockedBoolean()){
+            //print to console that the window is block and that we cannot open it
+            return;
+        }
         else{
         System.out.println("windowOpen");
         //insert if statement here to check for obstructions
@@ -271,6 +275,10 @@ public class RoomControlsController implements Initializable{
     @FXML
     void windowClose(MouseEvent event){
         if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
+            return;
+        }
+        else if(currentWindow.getBlockedBoolean()){
+            //print to console that the window is block and that we cannot open it
             return;
         }
         else{
