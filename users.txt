@@ -6,3 +6,6 @@ Mary
 CHILD
 BuildingEntrance
 
+Stranger
+STRANGER
+Away
