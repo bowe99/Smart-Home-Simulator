@@ -93,6 +93,7 @@ public class SmartHomeSimulatorController {
         Date currentDateTime = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastSaved.setText(format.format(currentDateTime));
+        startTimer();
     }
 
     /**
@@ -108,17 +109,7 @@ public class SmartHomeSimulatorController {
         } else {
             this.simulationToggle.setText("Off");
             simulation.setSimulationStatus(true);
-            timer = new Timer();
-            timer.schedule(new TimerTask() {
-                 @Override
-                 public void run() {
-                     Platform.runLater(() -> {
-                         simulation.updateTime();
-                         setTime(simulation.getTime());
-                         setDate(simulation.getDate());
-                     });
-                 }
-              }, 0 ,simulation.getTimeInterval());
+            startTimer();
         }
     }
 
@@ -138,7 +129,13 @@ public class SmartHomeSimulatorController {
             stage.setTitle("Edit Parameters");
             stage.setScene(new Scene(root1));  
 
+            if(simulation.getSimulationStatus())
+                timer.cancel();
+
             stage.showAndWait();
+            
+            if(simulation.getSimulationStatus())
+                startTimer();
 
             setTemperature(simulation.getTemperature());
             setDate(simulation.getDate());
@@ -241,9 +238,18 @@ public class SmartHomeSimulatorController {
         }
     }
 
-    //todo increment time over certain interval, return new time in minutes, remember to increment date if time rollsover 1440 minutes
-    private int updateTime(){
-        return 0;
+    private void startTimer(){
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    simulation.updateTime();
+                    setTime(simulation.getTime());
+                    setDate(simulation.getDate());
+                });
+            }
+        }, 0 ,simulation.getTimeInterval());
     }
 
     @FXML

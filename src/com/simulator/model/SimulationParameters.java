@@ -164,7 +164,7 @@ public class SimulationParameters
             SimpleDateFormat initialFormat = new SimpleDateFormat("yyyy-MM-dd");
             writer.write(initialFormat.format(time.getDate()));
             writer.write("\n");
-            writer.write(String.valueOf(time));
+            writer.write(String.valueOf(time.getTime()));
             writer.write("\n");
             writer.write(String.valueOf(temperature));
         }
