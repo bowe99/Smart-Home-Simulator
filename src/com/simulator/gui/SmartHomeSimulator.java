@@ -1,12 +1,10 @@
 package com.simulator.gui;
 
-import com.simulator.model.House;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 
 /**
   * This is the launch class of the simulator.
@@ -28,7 +26,6 @@ public class SmartHomeSimulator extends Application{
         primaryStage.setScene(rootScene);
         primaryStage.setTitle("Smart Home Simulator");
         primaryStage.show();
-
-
+    
     }
 }

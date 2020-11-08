@@ -16,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -23,6 +25,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -43,6 +46,8 @@ public class RoomControlsController implements Initializable{
     @FXML private Button windowOpen;
     @FXML private Button windowClose;
     @FXML private Button finished;
+    @FXML private ImageView a1light;
+    @FXML private SmartHomeSimulatorController SHSController;
 
     private Room currentRoom=null;
     private Light currentLight=null;
@@ -53,6 +58,7 @@ public class RoomControlsController implements Initializable{
     private String selectedDoor;
     private String selectedWindow;
 
+    private Image image = new Image(new File("LightOn.jpg").toURI().toString());
 
 
     @FXML
@@ -196,7 +202,6 @@ public class RoomControlsController implements Initializable{
         currentLight.setToOn();
         changeLightButtonsColours();
         }
-
     }
     @FXML
     void lightOff(MouseEvent event){
@@ -357,11 +362,14 @@ public class RoomControlsController implements Initializable{
         }
     }
 
+    @FXML
+    private void setLightIcon() {
+        System.out.println("Lights switched");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("Initializing !!!!!!");
-        
-
     }
-
+    
 }
