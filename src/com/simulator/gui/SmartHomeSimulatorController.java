@@ -22,7 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
@@ -47,6 +47,7 @@ public class SmartHomeSimulatorController {
     @FXML private Label userProfile;
     @FXML private Label userLocation;
     @FXML private Label displayTime;
+    @FXML private TextArea outputConsole;
 
     @FXML private ListView allLightsListView;
     @FXML private ListView selectedLightsListView;
@@ -91,6 +92,9 @@ public class SmartHomeSimulatorController {
         Date currentDateTime = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastSaved.setText(format.format(currentDateTime));
+        //creating a new instance of the logger with the output console so that other classes can use it
+        Logger.newInstance(outputConsole);
+        Logger.getInstance().resetLogFile();
     }
 
     /**

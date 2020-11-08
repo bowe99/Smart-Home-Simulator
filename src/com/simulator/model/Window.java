@@ -5,6 +5,7 @@ package com.simulator.model;
  */
 public class Window extends Entryway{
     private boolean open;
+    private boolean blocked;
 
     /**
      * Constructor for a new window object
@@ -22,7 +23,15 @@ public class Window extends Entryway{
     public void setClosed(){
         this.open = false;
     }
-
+    public void setBlockedTrue(){
+        this.blocked = true;
+    }
+    public void setBlockedFalse(){
+        this.blocked=false;
+    }
+    public boolean getBlockedBoolean(){
+        return blocked;
+    }
     public boolean getOpenOrClosed(){
         return open;
     }

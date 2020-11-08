@@ -48,7 +48,7 @@ public class SimulationParameterController {
         temperatureValue.setText(String.valueOf(simulation.getTemperature()));
         dateValue.getEditor().setText(dateFormat.format(simulation.getDate()));
         hourValue.setText(String.valueOf(simulation.getTime()/60));
-        minuteValue.setText(String.valueOf(simulation.getTime()%60));
+        minuteValue.setText(String.valueOf(simulation.getTime()%60)); 
     }
 
     /**
