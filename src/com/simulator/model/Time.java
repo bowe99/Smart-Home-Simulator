@@ -1,14 +1,11 @@
 package com.simulator.model;
 
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Time {
 
-    private int time; //represents minutes of the day (0-1440)
-    private Timer timer; 
-    private int interval = 1000; //in milliseconds
+    private int time; //represents minutes of the day (0-1440) 
+    private int interval = 60000; //in milliseconds
     private Date date = new Date(); //current date
     final private long MILLISECOND_IN_A_DAY = 86400000;
 

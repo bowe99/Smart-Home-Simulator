@@ -26,6 +26,7 @@ public class SimulationParameterController {
     @FXML private ComboBox<String> userLocationChoice = new ComboBox<String>();
     @FXML private TextField hourValue;
     @FXML private TextField minuteValue;
+    @FXML private TextField timeSpeed;
     @FXML private Button cancelBtn;
 
     private House house;
@@ -49,6 +50,7 @@ public class SimulationParameterController {
         dateValue.getEditor().setText(dateFormat.format(simulation.getDate()));
         hourValue.setText(String.valueOf(simulation.getTime()/60));
         minuteValue.setText(String.valueOf(simulation.getTime()%60));
+        timeSpeed.setText(String.valueOf(60000/simulation.getTimeInterval()));
     }
 
     /**
@@ -98,6 +100,14 @@ public class SimulationParameterController {
         catch (Exception e){
             System.out.println("Error parsing time");
         }
+        try{
+            int speedFactor = Integer.parseInt(timeSpeed.getText());
+            simulation.setTimeInterval(speedFactor);
+        }
+        catch (Exception e){
+            System.out.println("Error setting time speed");
+        }
+
         closeWindow(event);
     }
         /**

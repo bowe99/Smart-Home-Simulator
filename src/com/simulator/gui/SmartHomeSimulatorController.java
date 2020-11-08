@@ -249,7 +249,7 @@ public class SmartHomeSimulatorController {
                     setDate(simulation.getDate());
                 });
             }
-        }, 0 ,simulation.getTimeInterval());
+        }, simulation.getTimeInterval() ,simulation.getTimeInterval());
     }
 
     @FXML

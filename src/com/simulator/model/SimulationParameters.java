@@ -79,6 +79,11 @@ public class SimulationParameters
         this.simulationStatus = simulationStatus;
     }
 
+    public void setTimeInterval (int speed)
+    {
+        this.time.changeInterval(speed);
+    }
+
     public void addUser(Profile newUser){
         allUsers.add(newUser);
     }
