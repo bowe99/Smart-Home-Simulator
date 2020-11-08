@@ -3,6 +3,7 @@ package com.simulator.gui;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -38,9 +39,23 @@ public class Logger {
     public void ouputToConsole(String output) {
         outputConsole.appendText("\n" + output);
     }
+    public void resetLogFile(){
+        try{
+        Files.write(Paths.get("./log.txt"), "".getBytes());
+        }
+        catch(Exception e){
+            System.out.print("could not erase log file");
+        }
+    }
 
     public void outputToLogFile(String outputToLog) throws IOException {
-        Files.write(Paths.get("./log.txt"), outputToLog.getBytes());
+        outputToLog = outputToLog+"\n";
+        try{
+        Files.write(Paths.get("./log.txt"), outputToLog.getBytes(), StandardOpenOption.APPEND);
+        }
+        catch(IOException e){
+            System.out.println("Could not write to log.txt");
+        }
     }
 }
 

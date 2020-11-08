@@ -1,1 +1,0 @@
-NorthWindow is now set to Closed

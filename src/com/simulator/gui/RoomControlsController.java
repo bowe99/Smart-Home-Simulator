@@ -274,7 +274,7 @@ public class RoomControlsController implements Initializable {
     }
 
     @FXML
-    void windowClose(MouseEvent event) throws IOException {
+    void windowClose(MouseEvent event) {
         if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
@@ -286,7 +286,12 @@ public class RoomControlsController implements Initializable {
         currentWindow.setClosed();
         changeWindowButtonsColours();
         Logger.getInstance().ouputToConsole(currentWindow.getName()+" is now set to Closed");
+        try{
         Logger.getInstance().outputToLogFile(currentWindow.getName()+" is now set to Closed");
+        }
+        catch(Exception e){
+            System.out.println("Could not write to txt file");
+        }
         }
 
     }
