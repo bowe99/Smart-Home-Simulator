@@ -41,6 +41,7 @@ public class SmartHomeSimulatorController {
     @FXML private Button editButton;
     @FXML private Button roomsControlPanelButton;
     @FXML private Button saveSecurity;
+    @FXML private Button saveButton;
     @FXML private Label displayTemp;
     @FXML private Label displayDate;
     @FXML private Label userProfile;
@@ -52,6 +53,8 @@ public class SmartHomeSimulatorController {
     @FXML private TextField startTimeSecurity;
     @FXML private TextField endTimeSecurity;
     @FXML private TextField motionDetectedTimeSecurity;
+
+    @FXML private Label lastSaved;
     @FXML private TabPane tabPane;
     @FXML private Tab SHCTab;
     @FXML private RoomControlsController sHCTabPageController;
@@ -60,9 +63,6 @@ public class SmartHomeSimulatorController {
     private House house;
     private SimulationParameters simulation;
     private SecurityModule securityModule;
-
-    //todo save simulation context (profiles, variables, etc.) in text file
-    //todo implement/fix to string methods for classes to the saved
 
 
     public SmartHomeSimulatorController()
@@ -88,6 +88,9 @@ public class SmartHomeSimulatorController {
         setProfile(simulation.getCurrentUser());
         setTime(simulation.getTime());
         setLights(house);
+        Date currentDateTime = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        lastSaved.setText(format.format(currentDateTime));
     }
 
     /**
@@ -96,14 +99,15 @@ public class SmartHomeSimulatorController {
      */
     @FXML
     void changeSimulationStatus(MouseEvent event) {
-        if(simulationToggle.isSelected()){
+        if(simulation.getSimulationStatus()){
             this.simulationToggle.setText("On");
-            simulation.setSimulationStatus(true);
+            simulation.setSimulationStatus(false);
         } else {
             this.simulationToggle.setText("Off");
-            simulation.setSimulationStatus(false);
+            simulation.setSimulationStatus(true);
         }
     }
+
     /**
      * Opens the Edit Button from the dashboard.
      * @param event Referring to a mouse activity by the user
@@ -247,6 +251,14 @@ public class SmartHomeSimulatorController {
     //todo increment time over certain interval, return new time in minutes, remember to increment date if time rollsover 1440 minutes
     private int updateTime(){
         return 0;
+    }
+
+    @FXML
+    private void save(MouseEvent event){
+        simulation.printToTxtFile();
+        Date currentDateTime = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        lastSaved.setText(format.format(currentDateTime));
     }
 
     @FXML
