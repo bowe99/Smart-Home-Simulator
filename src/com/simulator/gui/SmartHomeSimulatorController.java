@@ -109,13 +109,14 @@ public class SmartHomeSimulatorController {
             this.simulationToggle.setText("Off");
             simulation.setSimulationStatus(true);
             timer = new Timer();
-            
             timer.schedule(new TimerTask() {
                  @Override
                  public void run() {
-                    simulation.updateTime();
-                    setTime(simulation.getTime());
-                    setDate(simulation.getDate());
+                     Platform.runLater(() -> {
+                         simulation.updateTime();
+                         setTime(simulation.getTime());
+                         setDate(simulation.getDate());
+                     });
                  }
               }, 0 ,simulation.getTimeInterval());
         }
