@@ -23,7 +23,7 @@ public class Door extends Entryway{
         this.locked = false;
     }
 
-    public boolean getUnlockedOrLocked(){
+    public boolean getLockedStatus(){
         return locked;
     }
 }

@@ -193,9 +193,20 @@ public class RoomControlsController implements Initializable {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("lightON");
-            currentLight.setToOn();
-            changeLightButtonsColours();
+            if(currentLight.getOnOff()){
+                return;
+            }
+            else {
+                    currentLight.setToOn();
+                    changeLightButtonsColours();
+                    Logger.getInstance().ouputToConsole(currentLight.getName()+" is now set to On");
+                    try{
+                        Logger.getInstance().outputToLogFile(currentLight.getName()+" is now set to On");
+                    }
+                    catch(Exception e){
+                        System.out.println("Could not write to txt file");
+                    }
+             }
         }
 
     }
@@ -205,9 +216,20 @@ public class RoomControlsController implements Initializable {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("lightOFF");
-            currentLight.setToOff();
-            changeLightButtonsColours();
+            if(currentLight.getOnOff()==false){
+                return;
+            }
+            else {
+                    currentLight.setToOff();
+                    changeLightButtonsColours();
+                    Logger.getInstance().ouputToConsole(currentLight.getName()+" is now set to Off");
+                    try{
+                        Logger.getInstance().outputToLogFile(currentLight.getName()+" is now set to Off");
+                    }
+                    catch(Exception e){
+                        System.out.println("Could not write to txt file");
+                    }
+             }
         }
     }
 
@@ -216,11 +238,21 @@ public class RoomControlsController implements Initializable {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("lightAutoOn");
-            currentLight.setAutoOn();
-            changeLightAutoButtonsColours();
+            if(currentLight.getAuto()){
+                return;
+            }
+            else {
+                    currentLight.setAutoOn();
+                    changeLightAutoButtonsColours();
+                    Logger.getInstance().ouputToConsole(currentLight.getName()+" Auto is now set to On");
+                    try{
+                        Logger.getInstance().outputToLogFile(currentLight.getName()+" Auto is now set to On");
+                    }
+                    catch(Exception e){
+                        System.out.println("Could not write to txt file");
+                    }
+             }
         }
-
     }
 
     @FXML
@@ -228,11 +260,21 @@ public class RoomControlsController implements Initializable {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("lightAutoOFF");
-            currentLight.setAutoOff();
-            changeLightAutoButtonsColours();
+            if(currentLight.getAuto()==false){
+                return;
+            }
+            else {
+                    currentLight.setAutoOff();
+                    changeLightAutoButtonsColours();
+                    Logger.getInstance().ouputToConsole(currentLight.getName()+" Auto is now set to Off");
+                    try{
+                        Logger.getInstance().outputToLogFile(currentLight.getName()+" Auto is now set to Off");
+                    }
+                    catch(Exception e){
+                        System.out.println("Could not write to txt file");
+                    }
+             }
         }
-
     }
 
     @FXML
@@ -240,9 +282,20 @@ public class RoomControlsController implements Initializable {
         if (currentDoor == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("doorUnlock");
-            currentDoor.setUnlocked();
-            changeDoorButtonsColours();
+            if(currentDoor.getLockedStatus()==false){
+                return;
+            }
+            else {
+                    currentDoor.setUnlocked();
+                    changeDoorButtonsColours();
+                    Logger.getInstance().ouputToConsole(currentDoor.getName()+" is now set to Unlocked");
+                    try{
+                        Logger.getInstance().outputToLogFile(currentDoor.getName()+" is now set to Unlocked");
+                    }
+                    catch(Exception e){
+                        System.out.println("Could not write to txt file");
+                    }
+             }
         }
     }
 
@@ -251,9 +304,20 @@ public class RoomControlsController implements Initializable {
         if (currentDoor == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("doorLock");
-            currentDoor.setLocked();
-            changeDoorButtonsColours();
+            if(currentDoor.getLockedStatus()){
+                return;
+            }
+            else {
+                    currentDoor.setLocked();
+                    changeDoorButtonsColours();
+                    Logger.getInstance().ouputToConsole(currentDoor.getName()+" is now set to Locked");
+                    try{
+                        Logger.getInstance().outputToLogFile(currentDoor.getName()+" is now set to Locked");
+                    }
+                    catch(Exception e){
+                        System.out.println("Could not write to txt file");
+                    }
+             }
         }
 
     }
@@ -262,15 +326,33 @@ public class RoomControlsController implements Initializable {
     void windowOpen(MouseEvent event) {
         if (currentWindow == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
-        } else if (currentWindow.getBlockedBoolean()) {
-            // print to console that the window is block and that we cannot open it
-            return;
-        } else {
-            System.out.println("windowOpen");
-            // insert if statement here to check for obstructions
-            currentWindow.setOpen();
-            changeWindowButtonsColours();
         }
+            else if(currentWindow.getBlockedBoolean()){
+                Logger.getInstance().ouputToConsole(currentWindow.getName()+" is blocked, could not open");
+                try{
+                    Logger.getInstance().outputToLogFile(currentWindow.getName()+" is blocked, could not open");
+                }
+                catch(Exception e){
+                    System.out.println("Could not write to txt file");
+                }
+                return;
+            }
+            else{
+                if(currentWindow.getOpenOrClosed()==true){
+                    return;
+                }
+                else {
+                        currentWindow.setOpen();
+                        changeWindowButtonsColours();
+                        Logger.getInstance().ouputToConsole(currentWindow.getName()+" is now set to Open");
+                        try{
+                            Logger.getInstance().outputToLogFile(currentWindow.getName()+" is now set to Open");
+                        }
+                        catch(Exception e){
+                            System.out.println("Could not write to txt file");
+                        }
+                 }
+            }
     }
 
     @FXML
@@ -279,21 +361,31 @@ public class RoomControlsController implements Initializable {
             return;
         }
         else if(currentWindow.getBlockedBoolean()){
-            //print to console that the window is block and that we cannot open it
+            Logger.getInstance().ouputToConsole(currentWindow.getName()+" is blocked, could not close");
+            try{
+                Logger.getInstance().outputToLogFile(currentWindow.getName()+" is blocked, could not close");
+            }
+            catch(Exception e){
+                System.out.println("Could not write to txt file");
+            }
             return;
         }
         else{
-        currentWindow.setClosed();
-        changeWindowButtonsColours();
-        Logger.getInstance().ouputToConsole(currentWindow.getName()+" is now set to Closed");
-        try{
-        Logger.getInstance().outputToLogFile(currentWindow.getName()+" is now set to Closed");
+            if(currentWindow.getOpenOrClosed()==false){
+                return;
+            }
+            else {
+                    currentWindow.setClosed();
+                    changeWindowButtonsColours();
+                    Logger.getInstance().ouputToConsole(currentWindow.getName()+" is now set to Closed");
+                    try{
+                        Logger.getInstance().outputToLogFile(currentWindow.getName()+" is now set to Closed");
+                    }
+                    catch(Exception e){
+                        System.out.println("Could not write to txt file");
+                    }
+                }
         }
-        catch(Exception e){
-            System.out.println("Could not write to txt file");
-        }
-        }
-
     }
 
     @FXML 
@@ -322,11 +414,11 @@ public class RoomControlsController implements Initializable {
 
     @FXML 
     void changeDoorButtonsColours(){
-        if(currentDoor.getUnlockedOrLocked()==false){
+        if(currentDoor.getLockedStatus()==false){
             doorUnlock.setStyle("-fx-background-color: #7FFF00");
             doorLock.setStyle("-fx-all: initial");
         }
-        if(currentDoor.getUnlockedOrLocked()==true){
+        if(currentDoor.getLockedStatus()==true){
             doorUnlock.setStyle("-fx-all: initial");
             doorLock.setStyle("-fx-background-color: #FF0000");
         }
