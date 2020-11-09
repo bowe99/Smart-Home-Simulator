@@ -65,6 +65,10 @@ public class SimulationParameters
         this.time = time;
     }
 
+    public Time getTimeObject(){
+        return this.time;
+    }
+
     public Profile getCurrentUser() {
         return currentUser;
     }

@@ -20,22 +20,25 @@ public class SecurityModule extends Observer{
     private int lightOnTime;
     private int lightOffTime;
     private int motionDetectedTime;
+    private int timeOfDetection;
     private List<Profile> profiles;
     Permission awayModePermission = new Permission(PERMISSION_TYPE.AWAY, PERMISSION_TYPE.AWAY, PERMISSION_TYPE.NONE, PERMISSION_TYPE.NONE);
 
 
-    public SecurityModule(List<Profile> profiles, ToggleButton awayToggle){
+    public SecurityModule(List<Profile> profiles, ToggleButton awayToggle, Time time){
         this.awayToggle = awayToggle;
         this.profiles = profiles;
         for(Profile profile : profiles){
             profile.attach(this);
         }
+        time.attach(this);
         this.isAwayMode = false;
         this.detectionMonitored = false;
         this.lightsOnWhenAway = new ArrayList<Light>();
         this.motionDetectedTime = 0;
         this.lightOnTime = 1080;
         this.lightOffTime = 360;
+        this.timeOfDetection = -1;
     }
 
     public void addLight(Light light){
@@ -104,11 +107,23 @@ public class SecurityModule extends Observer{
             if(time == lightOnTime){
                 for(Light light : lightsOnWhenAway){
                     light.setToOn();
+                    Logger.getInstance().ouputToConsole(String.format("%s was turned on", light.getName()));
                 }
             }
             else if(time == lightOffTime){
                 for(Light light : lightsOnWhenAway){
                     light.setToOff();
+                    Logger.getInstance().ouputToConsole(String.format("%s was turned off", light.getName()));
+
+                }
+            }
+            else if(this.detectionMonitored){
+                if(this.timeOfDetection == -1){
+                    this.timeOfDetection = time + motionDetectedTime;
+                }
+                else if(time == this.timeOfDetection){
+                    Logger.getInstance().ouputToConsole("ALERT: Authorities have been notified due to unrecognized individual while in away mode");
+                    this.timeOfDetection = -1;
                 }
             }
         }

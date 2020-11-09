@@ -249,7 +249,7 @@ public class SmartHomeSimulatorController {
         //creating a new instance of the logger with the output console so that other classes can use it
         Logger.newInstance(outputConsole);
         Logger.getInstance().resetLogFile();
-        this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle);
+        this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
     }
 
     /**
