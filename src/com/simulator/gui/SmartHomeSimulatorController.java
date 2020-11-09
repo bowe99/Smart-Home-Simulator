@@ -309,7 +309,7 @@ public class SmartHomeSimulatorController {
      * Change status to away
      */
     @FXML
-    public void setHouseView() {
+    private void setHouseView() {
         for (int Counter = 0; Counter < house.getRooms().size(); Counter++) {
             System.out.println(house.getRooms().get(Counter).getId());
             if (house.getRooms().get(Counter).getId().equals("area1")) {
