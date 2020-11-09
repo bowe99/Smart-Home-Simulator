@@ -26,23 +26,44 @@ public class Light {
         return name;
     }
 
+    
+    /** 
+     * return the on boolean
+     * @return boolean
+     */
     public boolean getOnOff(){
         return on;
     }
 
+    
+    /** 
+     * return the auto boolean
+     * @return boolean
+     */
     public boolean getAuto(){
         return auto;
     }
-
+    /** 
+     * set on boolean to true
+     */
     public void setToOn(){
         this.on = true;
     }
+    /** 
+     * set on boolean to false
+     */
     public void setToOff(){
         this.on = false;
     }
+    /** 
+     * set auto boolean to false
+     */
     public void setAutoOn(){
         this.auto = true;
     }
+    /** 
+     * set auto boolean to false
+     */
     public void setAutoOff(){
         this.auto = false;
     }

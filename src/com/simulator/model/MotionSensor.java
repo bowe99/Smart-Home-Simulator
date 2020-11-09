@@ -13,6 +13,11 @@ public class MotionSensor extends Sensor {
         super(newName);
     }
 
+    
+    /** 
+     * return 0
+     * @return int
+     */
     @Override
     public int pollSensor() {
         return 0;

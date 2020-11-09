@@ -19,25 +19,56 @@ public class Room {
         this.lights = new ArrayList<>();
     }
 
+    
+    /** 
+     * Add a new door with the name of the door included
+     * @param newName
+     * @return int
+     */
     public int addDoor(String newName){
         this.doors.add(new Door(newName));
         return 0;
     }
 
+    
+    /** 
+     * Add a new window with the name of the window included
+     * @param newName
+     * @return int
+     */
     public int addWindow(String newName){
         this.windows.add(new Window(newName));
         return 0;
     }
 
+    
+    /** 
+     * Add a new light with the name of the light included
+     * @param newName
+     * @return int
+     */
     public int addLight(String newName){
         this.lights.add(new Light(newName));
         return 0;
     }
 
+    
+    /** 
+     * Add new motion sensors
+     * @param newName
+     * @return int
+     */
     public int addMotionSensor(String newName){
         this.motionSensors = new MotionSensor(newName);
         return 0;
     }
+    
+    /** 
+     * Add new entryway sensors
+     * @param newName
+     * @param targetName
+     * @return int
+     */
     public int addEntrywaySensor(String newName, String targetName){
         List<Entryway> doorsAndWindows = new ArrayList<Entryway>(doors);
         doorsAndWindows.addAll(windows);
@@ -50,14 +81,25 @@ public class Room {
         return 1;
     }
 
+    
+    /** 
+     * Get the name of the room
+     * @return String
+     */
     public String getName() {
         return name;
     }
+
 
     public String getId() {
         return id;
     }
 
+  /** 
+     * Get a door by providing the name of the door
+     * @param targetName
+     * @return Door
+     */
     public Door getDoorByName(String targetName) {
         for (Door d : doors) {
             if (d.getName().equals(targetName)) {
@@ -67,6 +109,12 @@ public class Room {
         return null;
     }
 
+    
+    /** 
+     * Get a light by providing the name of the door
+     * @param targetName
+     * @return Light
+     */
     public Light getLightByName(String targetName) {
         for (Light l : lights) {
             if (l.getName().equals(targetName)) {
@@ -76,6 +124,12 @@ public class Room {
         return null;
     }
 
+    
+    /** 
+     * Get a window by providing the name of the window
+     * @param targetName
+     * @return Window
+     */
     public Window getWindowByName(String targetName) {
         for (Window w : windows) {
             if (w.getName().equals(targetName)) {
@@ -86,18 +140,37 @@ public class Room {
     }
 
 
+    
+    /** 
+     * Get the number of doors in the room
+     * @return int
+     */
     public int getDoorsAmount(){
         return doors.size();
     }
+    
+    /** 
+     * Get the number of windows in the room
+     * @return int
+     */
     public int getWindowsAmount(){
         return windows.size();
     }
+    
+    /** 
+     * Get the number of Lights in the room
+     * @return int
+     */
     public int getLightsAmount(){
         return lights.size();
     }
 
 
-    //get a the list of names of doors
+    
+    /** 
+     * Get a list of the names of the doors
+     * @return List<String>
+     */
     public List<String> getDoorsNameList(){
         List<String> doorsListString = new ArrayList<String>();
         for(int i=0; i<doors.size(); ++i){
@@ -105,7 +178,11 @@ public class Room {
         }
         return doorsListString;
     }
-    //get a the list of names of lights
+    
+    /** 
+     * get a list of the names of the lights
+     * @return List<String>
+     */
     public List<String> getLightsNameList(){
         List<String> lightsListString = new ArrayList<String>();
         for(int i=0; i<lights.size(); ++i){
@@ -113,7 +190,11 @@ public class Room {
         }
         return lightsListString;
     }    
-    //get a the list of names of windows
+    
+    /** 
+     * Get a list of the names of the windows
+     * @return List<String>
+     */
     public List<String> getWindowsNameList(){
         List<String> windowsListString = new ArrayList<String>();
         for(int i=0; i<windows.size(); ++i){

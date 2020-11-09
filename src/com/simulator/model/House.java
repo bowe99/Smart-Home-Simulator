@@ -16,6 +16,11 @@ public class House {
     private String address;
     private List<Room> rooms;
 
+    
+    /** 
+     * Get instance of the house object that is saved in this singleton class, creates new instance if one does not exist
+     * @return House
+     */
     public static House getInstance() {
         try {
         if(instance == null){
@@ -171,6 +176,12 @@ public class House {
         return null;
     }
 
+    
+    /** 
+     * Get the Light instance that is refered to from the string that is passed in
+     * @param target
+     * @return Light
+     */
     public Light getLightByName(String target){
         for (Room r : this.rooms) {
             Light targetLight = r.getLightByName(target);
@@ -181,6 +192,11 @@ public class House {
         return null;
     }
    
+    
+    /** 
+     * return a list of all the names of the rooms
+     * @return List<String>
+     */
     public List<String> getRoomsNameList(){
         List<String> roomsListString = new ArrayList<String>();
         for(int i=0; i<rooms.size(); ++i){
@@ -189,6 +205,11 @@ public class House {
         return roomsListString;
     }
 
+    
+    /** 
+     * return a list of the names of all of the lights
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getLightsNameList(){
         ArrayList<String> lightsListString = new ArrayList<String>();
         for(Room room : this.rooms){
@@ -215,6 +236,13 @@ public class House {
         return "";
     }
 
+    
+    /** 
+     * Reads the house_layout_txt.txt file containing the specifications of the house layout and converts it to objects
+     * @param fileName
+     * @return House
+     * @throws Exception
+     */
     private static House loadFile(String fileName) throws Exception{
         House loadedHouse;
         String[] elementStack = new String[5];
@@ -300,6 +328,12 @@ public class House {
         }
     }
 
+    
+    /** 
+     * get the attribute
+     * @param line
+     * @return String
+     */
     private static String getAttribute(String line){
         String attribute = "";
         attribute = line.substring(line.indexOf("\"") + 1);

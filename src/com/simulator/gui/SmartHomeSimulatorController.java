@@ -232,7 +232,9 @@ public class SmartHomeSimulatorController {
         this.simulation = SimulationParameters.getInstance();
         securityPermission = new Permission(PERMISSION_TYPE.ALL, PERMISSION_TYPE.ALL, PERMISSION_TYPE.NONE, PERMISSION_TYPE.NONE);
     }
-
+    /**
+     * Initializes the SmartHomeSimulator Dashboard
+     */
     @FXML
     public void initialize(){
         setTemperature(simulation.getTemperature());
@@ -303,7 +305,9 @@ public class SmartHomeSimulatorController {
             e.printStackTrace();
         }  
     }
-
+    /**
+     * Change status to away
+     */
     @FXML
     private void setHouseView() {
         for (int Counter = 0; Counter < house.getRooms().size(); Counter++) {
@@ -414,7 +418,9 @@ public class SmartHomeSimulatorController {
     public void changeAwayStatus() {
         securityModule.toggleAwayMode();
     }
-
+    /**
+     * Add security Light
+     */
     @FXML
     void addSecurityLight(){
         Object selectedItem = this.allLightsListView.getSelectionModel().getSelectedItem();
@@ -426,7 +432,9 @@ public class SmartHomeSimulatorController {
         Light selectedLight = this.house.getLightByName((String) selectedItem);
         this.securityModule.addLight(selectedLight);
     }
-    
+    /**
+     * remove security light
+     */
     @FXML
     void removeSecurityLight(){
 
@@ -440,34 +448,61 @@ public class SmartHomeSimulatorController {
         this.securityModule.removeLight(selectedLight);
     }
 
+    
+    /** 
+     * set temperature
+     * @param temperature
+     */
     @FXML
     private void setTemperature(int temperature) {
         this.displayTemp.setText(Integer.toString(temperature) + "°C");
     }
 
+    
+    /** 
+     * set date
+     * @param date
+     */
     @FXML
     private void setDate(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd, YYYY");
         this.displayDate.setText(format.format(date));
     }
 
+    
+    /** 
+     * set location
+     * @param location
+     */
     @FXML
     private void setLocation(Room location) {
         this.userLocation.setText(location.getName());
     }
 
+    
+    /** 
+     * Set profile
+     * @param profile
+     */
     @FXML
     private void setProfile(Profile profile) {
         this.userProfile.setText(profile.getName());
     }
     
+    
+    /** 
+     * set time
+     * @param time
+     */
     @FXML
     private void setTime(int time){
         String hours = String.format("%02d", time/60);
         String mins = String.format("%02d", time%60);
         this.displayTime.setText(hours + ":" + mins);
     }
-
+    /**
+     * Save Security Settings
+     */
     @FXML
     private void saveSecuritySettings(){
         if(securityPermission.checkPermission(simulation.getCurrentUser(), simulation.getCurrentUser().getCurrentRoom())) {
@@ -495,6 +530,11 @@ public class SmartHomeSimulatorController {
         }
     }
 
+    
+    /** 
+     * set the lights
+     * @param house
+     */
     @FXML
     private void setLights(House house){
         ArrayList<String> lightNameList = new ArrayList<String>();
@@ -505,7 +545,9 @@ public class SmartHomeSimulatorController {
             allLightsListView.getItems().add(light);
         }
     }
-
+    /**
+     * Initializes the SmartHomeSimulator Dashboard
+     */
     private void startTimer(){
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -520,6 +562,11 @@ public class SmartHomeSimulatorController {
         }, simulation.getTimeInterval() ,simulation.getTimeInterval());
     }
 
+    
+    /** 
+     * save contents that were entered
+     * @param event
+     */
     @FXML
     private void save(MouseEvent event){
         simulation.printToTxtFile();
@@ -528,6 +575,11 @@ public class SmartHomeSimulatorController {
         lastSaved.setText(format.format(currentDateTime));
     }
 
+    
+    /** 
+     * return the toggle button
+     * @return ToggleButton
+     */
     @FXML
     protected ToggleButton getSimToggle(){
         return simulationToggle;

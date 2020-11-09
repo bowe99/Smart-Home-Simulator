@@ -20,7 +20,10 @@ public class Time {
         this.date = new Date();
         this.time = 0;
     }
-
+    
+    /**
+     * Update the time
+     */
     public void update (){
         time++;
         if (time == 1440){
@@ -30,30 +33,57 @@ public class Time {
         }     
     }
 
+    
+    /** 
+     * Change the interval by a factor that is provided
+     * @param factor
+     */
     public void changeInterval(int factor){
         interval = 60000/factor;
     }
 
+    
+    /** 
+     * Get time
+     * @return int
+     */
     public int getTime(){
         // notifyObservers in here instead of update since the update method is running on a separate thread and 
         // was not updating the lights when it was calling notifyObservers
         notifyAllObservers();
         return time;
     }
-
+    
+    /** 
+     * Get interval
+     * @return int
+     */
     public int getInterval(){
         return interval;
     }
+    
+    /** 
+     * Set the time
+     * @param time
+     */
+    public void setTime(int time){
 
-    public void setTime(int time)
-    {
         this.time = time;
     }
+    
+    /** 
+     * Get the date
+     * @return Date
+     */
     public Date getDate(){
         return date;
     }
-    public void setDate(Date date)
-    {
+    
+    /** 
+     * Set the date
+     * @param date
+     */
+    public void setDate(Date date){
         this.date = date;
     }
 

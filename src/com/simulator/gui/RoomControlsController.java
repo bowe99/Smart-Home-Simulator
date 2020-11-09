@@ -63,6 +63,11 @@ public class RoomControlsController implements Initializable {
     private Permission windowPermission = new Permission(PERMISSION_TYPE.ALL, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.NONE);
     private Permission lightPermission = new Permission(PERMISSION_TYPE.ALL, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.NONE);
 
+    
+    /** 
+     * Populates the drop down menu with a list of rooms, then populates the Lights, Doors and Windows ComboBox based on room selection
+     * @param event
+     */
     @FXML
     void selectingRoom(MouseEvent event) {
         if (SimulationParameters.getInstance().getSimulationStatus() == true) {
@@ -106,6 +111,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
+    
+    /** 
+     * Waits to see selected light and then refreshes colours of the buttons to show whether they are on or off
+     * @param event
+     */
     @FXML
     void modifyLight(MouseEvent event) {
         if (SimulationParameters.getInstance().getSimulationStatus() == true) {
@@ -138,6 +148,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
+    
+    /** 
+     * Waits to see selected door and then refreshes colours of the buttons to show whether they are on or off
+     * @param event
+     */
     @FXML
     void modifyDoor(MouseEvent event) {
         if (SimulationParameters.getInstance().getSimulationStatus() == true) {
@@ -168,6 +183,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
+    
+    /** 
+     * Waits to see selected window and then refreshes colours of the buttons to show whether they are on or off
+     * @param event
+     */
     @FXML
     void modifyWindow(MouseEvent event) {
         if (SimulationParameters.getInstance().getSimulationStatus() == true) {
@@ -198,12 +218,21 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
+    
+    /** 
+     * turns the selected light on and then refreshes the light buttons colours to reflect whether they are on or off
+     * @param event
+     */
     @FXML
     void lightON(MouseEvent event) {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+            if(currentLight.getOnOff()){
+                return;
+            }
+            else {
+                    if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
                 System.out.println("lightON");
                 currentLight.setToOn();
                 changeLightButtonsColours();
@@ -215,15 +244,25 @@ public class RoomControlsController implements Initializable {
             catch(Exception e){
                 System.out.println("Could not write to txt file");
             }
+             }
         }
     }
 
+    
+    /** 
+     * turns the selected light off and then refreshes the light buttons colours to reflect whether they are on or off
+     * @param event
+     */
     @FXML
     void lightOff(MouseEvent event) {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+            if(currentLight.getOnOff()==false){
+                return;
+            }
+            else {
+                    if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
                 System.out.println("lightOFF");
                 currentLight.setToOff();
                 changeLightButtonsColours();
@@ -235,15 +274,25 @@ public class RoomControlsController implements Initializable {
             catch(Exception e){
                 System.out.println("Could not write to txt file");
             }
+             }
         }
     }
 
+    
+    /** 
+     * turns the selected light Auto on and then refreshes the light buttons colours to reflect whether they are on or off
+     * @param event
+     */
     @FXML
     void lightAutoOn(MouseEvent event) {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+            if(currentLight.getAuto()){
+                return;
+            }
+            else {
+                    if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
                 System.out.println("lightAutoOn");
                 currentLight.setAutoOn();
                 changeLightAutoButtonsColours();
@@ -255,16 +304,25 @@ public class RoomControlsController implements Initializable {
             catch(Exception e){
                 System.out.println("Could not write to txt file");
             }
+             }
         }
-
     }
 
+    
+    /** 
+     * turns the selected light Auto off and then refreshes the light buttons colours to reflect whether they are on or off
+     * @param event
+     */
     @FXML
     void lightAutoOff(MouseEvent event) {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+            if(currentLight.getAuto()==false){
+                return;
+            }
+            else {
+                    if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
                 System.out.println("lightAutoOFF");
                 currentLight.setAutoOff();
                 changeLightAutoButtonsColours();
@@ -276,16 +334,24 @@ public class RoomControlsController implements Initializable {
             catch(Exception e){
                 System.out.println("Could not write to txt file");
             }
+             }
         }
-
     }
 
+    
+    /** 
+     * Unlocks the selected door and then refreshes the door buttons colours to reflect whether they are unlocked or locked
+     */
     @FXML
     void doorUnlock(MouseEvent event) {
         if (currentDoor == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            if(doorPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+            if(currentDoor.getLockedStatus()==false){
+                return;
+            }
+            else {
+                    if(doorPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
                 System.out.println("doorUnlock");
                 currentDoor.setUnlocked();
                 changeDoorButtonsColours();
@@ -297,15 +363,25 @@ public class RoomControlsController implements Initializable {
             catch(Exception e){
                 System.out.println("Could not write to txt file");
             }
+             }
         }
     }
 
+    
+    /** 
+     * locks the selected door and then refreshes the door buttons colours to reflect whether they are unlocked or locked
+     * @param event
+     */
     @FXML
     void doorLock(MouseEvent event) {
         if (currentDoor == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            if(doorPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+            if(currentDoor.getLockedStatus()){
+                return;
+            }
+            else {
+                    if(doorPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
                 System.out.println("doorLock");
                 currentDoor.setLocked();
                 changeDoorButtonsColours();
@@ -317,19 +393,37 @@ public class RoomControlsController implements Initializable {
             catch(Exception e){
                 System.out.println("Could not write to txt file");
             }
+             }
         }
 
     }
 
+    
+    /** 
+     * opens the selected window and then refreshes the window buttons colours to reflect whether they are opened or closed
+     * @param event
+     */
     @FXML
     void windowOpen(MouseEvent event) {
         if (currentWindow == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
-        } else if (currentWindow.getBlockedBoolean()) {
-            // print to console that the window is block and that we cannot open it
-            return;
-        } else {
-            if(windowPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+        }
+            else if(currentWindow.getBlockedBoolean()){
+                Logger.getInstance().ouputToConsole(currentWindow.getName()+" is blocked, could not open");
+                try{
+                    Logger.getInstance().outputToLogFile(currentWindow.getName()+" is blocked, could not open");
+                }
+                catch(Exception e){
+                    System.out.println("Could not write to txt file");
+                }
+                return;
+            }
+            else{
+                if(currentWindow.getOpenOrClosed()==true){
+                    return;
+                }
+                else {
+                        if(windowPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
                 System.out.println("windowOpen");
                 // insert if statement here to check for obstructions
                 currentWindow.setOpen();
@@ -341,21 +435,36 @@ public class RoomControlsController implements Initializable {
             }
             catch(Exception e){
                 System.out.println("Could not write to txt file");
+                 }
             }
-        }
     }
 
+    
+     /** 
+     * closes the selected window and then refreshes the window buttons colours to reflect whether they are opened or closed
+     * @param event
+     */
     @FXML
     void windowClose(MouseEvent event) {
         if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
         else if(currentWindow.getBlockedBoolean()){
-            //print to console that the window is block and that we cannot open it
+            Logger.getInstance().ouputToConsole(currentWindow.getName()+" is blocked, could not close");
+            try{
+                Logger.getInstance().outputToLogFile(currentWindow.getName()+" is blocked, could not close");
+            }
+            catch(Exception e){
+                System.out.println("Could not write to txt file");
+            }
             return;
         }
         else{
-            if(windowPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+            if(currentWindow.getOpenOrClosed()==false){
+                return;
+            }
+            else {
+                    if(windowPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
                 currentWindow.setClosed();
                 changeWindowButtonsColours();
                 Logger.getInstance().ouputToConsole(currentWindow.getName() + " is now set to Closed");
@@ -366,10 +475,13 @@ public class RoomControlsController implements Initializable {
             catch(Exception e){
                 System.out.println("Could not write to txt file");
             }
+                }
         }
-
     }
 
+    /** 
+     * changes the background colour of button based on the status of their boolean
+     */
     @FXML 
     void changeLightButtonsColours(){
         if(currentLight.getOnOff()==true){
@@ -381,7 +493,9 @@ public class RoomControlsController implements Initializable {
             lightOff.setStyle("-fx-background-color: #FF0000");
         }
     }
-
+    /** 
+     * changes the background colour of button based on the status of their boolean
+     */
     @FXML 
     void changeLightAutoButtonsColours(){
         if(currentLight.getAuto()==true){
@@ -393,19 +507,23 @@ public class RoomControlsController implements Initializable {
             lightAutoOff.setStyle("-fx-background-color: #FF0000");
         }
     }
-
+    /** 
+     * changes the background colour of button based on the status of their boolean
+     */
     @FXML 
     void changeDoorButtonsColours(){
-        if(currentDoor.getUnlockedOrLocked()==false){
+        if(currentDoor.getLockedStatus()==false){
             doorUnlock.setStyle("-fx-background-color: #7FFF00");
             doorLock.setStyle("-fx-all: initial");
         }
-        if(currentDoor.getUnlockedOrLocked()==true){
+        if(currentDoor.getLockedStatus()==true){
             doorUnlock.setStyle("-fx-all: initial");
             doorLock.setStyle("-fx-background-color: #FF0000");
         }
     }
-
+    /** 
+     * changes the background colour of button based on the status of their boolean
+     */
     @FXML 
     void changeWindowButtonsColours(){
         if(currentWindow.getOpenOrClosed()==true){
@@ -417,7 +535,9 @@ public class RoomControlsController implements Initializable {
             windowClose.setStyle("-fx-background-color: #FF0000");
         }
     }
-
+    /** 
+     * resets the colours of all buttons to their initial state
+     */
     @FXML 
     void resetAllButtonColours(){
         lightOn.setStyle("-fx-all: initial");
@@ -428,12 +548,15 @@ public class RoomControlsController implements Initializable {
         doorLock.setStyle("-fx-all: initial");
         windowOpen.setStyle("-fx-all: initial");
         windowClose.setStyle("-fx-all: initial");
-    }
-    
-    /**
-     * Closes the Room Control Panel window pop-up.
-     * @param event Referring to a mouse activity by the user
+    } 
+    /** 
+     * @param location
+     * @param resources
      */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("Initializing RoomControls");
+  }
     @FXML
     void closeWindow (MouseEvent event){
         try{
@@ -449,10 +572,6 @@ public class RoomControlsController implements Initializable {
     private void setLightIcon() {
         System.out.println("Lights switched");
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Initializing !!!!!!");
     }
     
 }

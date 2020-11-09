@@ -18,6 +18,12 @@ public class Logger {
     private Logger() {
     }
 
+    
+    /** 
+     * creates a new instance of the Logger object to be contained within the instance Logger object
+     * @param outputConsole2
+     * @return Logger
+     */
     public static Logger newInstance(TextArea outputConsole2) {
         try {
             if (instance == null) {
@@ -32,13 +38,27 @@ public class Logger {
         }
     }
 
+    
+    /** 
+     * returns the instance that is held
+     * @return Logger
+     */
     public static Logger getInstance() {
         return instance;
     }
 
+    
+    /** 
+     * outputs a given string to the Output Console on the Smart home dashboard
+     * @param output
+     */
     public void ouputToConsole(String output) {
         outputConsole.appendText("\n" + output);
     }
+
+    /** 
+     * resets the contents of the log.txt file
+     */
     public void resetLogFile(){
         try{
         Files.write(Paths.get("./log.txt"), "".getBytes());
@@ -48,6 +68,12 @@ public class Logger {
         }
     }
 
+    
+    /** 
+     * Outputs to log.txt file
+     * @param outputToLog
+     * @throws IOException
+     */
     public void outputToLogFile(String outputToLog) throws IOException {
         outputToLog = outputToLog+"\n";
         try{
