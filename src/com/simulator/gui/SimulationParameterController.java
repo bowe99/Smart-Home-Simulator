@@ -107,11 +107,13 @@ public class SimulationParameterController {
                     simulation.setTime(hour * 60 + min);
                     log.ouputToConsole("Time has been updated successfully");
                 }
-                else
+                else{
                    log.ouputToConsole("Minute entry does not fall within an acceptable range");
+                }
             }
-            else
+            else{
                 log.ouputToConsole("Hour entry does not fall within an acceptable range");
+            }
         }
         catch (Exception e){
             log.ouputToConsole("Error updating time, please try again");
@@ -124,10 +126,10 @@ public class SimulationParameterController {
         catch (Exception e){
             log.ouputToConsole("Error updating time speed, please try again");
         }
-
         closeWindow(event);
     }
-        /**
+
+    /**
      * Closes the parameters edit window pop-up.
      * @param event Referring to a mouse activity by the user
      */

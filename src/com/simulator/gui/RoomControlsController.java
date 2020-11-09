@@ -437,6 +437,7 @@ public class RoomControlsController implements Initializable {
                 System.out.println("Could not write to txt file");
                  }
             }
+        }
     }
 
     
@@ -572,6 +573,6 @@ public class RoomControlsController implements Initializable {
     private void setLightIcon() {
         System.out.println("Lights switched");
     }
-    }
+    
     
 }
