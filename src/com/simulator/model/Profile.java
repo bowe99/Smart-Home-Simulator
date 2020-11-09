@@ -3,6 +3,9 @@ package com.simulator.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class type profile used to create user profiles
+ */
 public class Profile
 {
     private List<Observer> observers = new ArrayList<Observer>();

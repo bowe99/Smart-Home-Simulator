@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The time class used to keep time and update the time
+ */
 public class Time {
     private List<Observer> observers = new ArrayList<Observer>();
     private int time; //represents minutes of the day (0-1440) 
