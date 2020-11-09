@@ -32,6 +32,8 @@ import javafx.stage.Stage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SmartHomeSimulatorController {
@@ -64,7 +66,7 @@ public class SmartHomeSimulatorController {
     private House house;
     private SimulationParameters simulation;
     private SecurityModule securityModule;
-
+    private Timer timer = new Timer();
 
     public SmartHomeSimulatorController()
     {
@@ -90,6 +92,7 @@ public class SmartHomeSimulatorController {
         Date currentDateTime = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastSaved.setText(format.format(currentDateTime));
+        startTimer();
         //creating a new instance of the logger with the output console so that other classes can use it
         Logger.newInstance(outputConsole);
         Logger.getInstance().resetLogFile();
@@ -105,9 +108,11 @@ public class SmartHomeSimulatorController {
         if(simulation.getSimulationStatus()){
             this.simulationToggle.setText("On");
             simulation.setSimulationStatus(false);
+            timer.cancel();
         } else {
             this.simulationToggle.setText("Off");
             simulation.setSimulationStatus(true);
+            startTimer();
         }
     }
 
@@ -127,7 +132,13 @@ public class SmartHomeSimulatorController {
             stage.setTitle("Edit Parameters");
             stage.setScene(new Scene(root1));  
 
+            if(simulation.getSimulationStatus())
+                timer.cancel();
+
             stage.showAndWait();
+            
+            if(simulation.getSimulationStatus())
+                startTimer();
 
             setTemperature(simulation.getTemperature());
             setDate(simulation.getDate());
@@ -234,9 +245,18 @@ public class SmartHomeSimulatorController {
         }
     }
 
-    //todo increment time over certain interval, return new time in minutes, remember to increment date if time rollsover 1440 minutes
-    private int updateTime(){
-        return 0;
+    private void startTimer(){
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    simulation.updateTime();
+                    setTime(simulation.getTime());
+                    setDate(simulation.getDate());
+                });
+            }
+        }, simulation.getTimeInterval() ,simulation.getTimeInterval());
     }
 
     @FXML
