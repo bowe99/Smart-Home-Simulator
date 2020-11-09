@@ -38,6 +38,9 @@ public class SimulationParameterController {
         simulation = SimulationParameters.getInstance();
     }
 
+    /**
+     * Initializes the SimulationsParamterController popout window
+     */
     @FXML
     public void initialize(){
         currentUserChoice.setItems(FXCollections.observableList(SimulationParameters.getInstance().getAllUserNames()));

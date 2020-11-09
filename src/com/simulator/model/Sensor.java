@@ -17,7 +17,9 @@ public abstract class Sensor {
 
     /**
      * Have sensor test the entryway for obstructions
-     * @return an integer representing the triggering of the sensor
+     * @param getName(
+     * @return int 
+     * an integer representing the triggering of the sensor
      * a return value of 0 means the sensor is not triggered
      * a return value of 1 means the sensor is triggered
      */
