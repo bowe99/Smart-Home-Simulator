@@ -295,13 +295,11 @@ public class SmartHomeSimulatorController {
     void changeSimulationStatus(MouseEvent event) {
         if(simulation.getSimulationStatus()){
             this.simulationToggle.setText("On");
-            System.out.println("turning off");
             disableHouseView();
             simulation.setSimulationStatus(false);
             timer.cancel();
         } else {
             this.simulationToggle.setText("Off");
-            System.out.println("turning on");
             setHouseView();
             simulation.setSimulationStatus(true);
             startTimer();
@@ -592,7 +590,6 @@ public class SmartHomeSimulatorController {
         layoutViewText.setOpacity(1);
         for (int loop=0; loop< simulation.getAllUsers().size(); loop++)
         {
-            System.out.println(simulation.getAllUsers().get(loop).getCurrentRoom().getId());
             switch (simulation.getAllUsers().get(loop).getCurrentRoom().getId())
             {
                 case "area1":a1person.setVisible(true);
