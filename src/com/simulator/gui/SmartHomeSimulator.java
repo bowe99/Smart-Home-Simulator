@@ -11,7 +11,7 @@ import javafx.scene.Parent;
   */
 public class SmartHomeSimulator extends Application{
     public static void main(String[] args) {
-        launch(args);
+            launch(args);
 	}
 	/**
      * Launch the dashboard of the simulator.

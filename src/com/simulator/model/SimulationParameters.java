@@ -1,9 +1,6 @@
 package com.simulator.model;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,18 +10,19 @@ import java.util.List;
 public class SimulationParameters
 {
     private static SimulationParameters instance = null;
-
-    private Date date;
-    private int time; //represents minutes of the day (0-1440)
+    private Time time; //represents minutes of the day (0-1440)
     private int temperature;
     private Profile currentUser;
     private List<Profile> allUsers;
     private boolean simulationStatus = true;
 
+    private final static String simulationFile = "simulation_parameters.txt";
+    private final static String usersFile = "users.txt";
+
     public static SimulationParameters getInstance(){
         try {
             if(instance == null){
-                instance = loadFile("simulation_parameters.txt", "users.txt");
+                instance = loadFile();
                 System.out.println("ok, created a new instance");
             }
             return instance;
@@ -47,18 +45,21 @@ public class SimulationParameters
     }
 
     public Date getDate() {
-        return date;
+        return time.getDate();
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.time.setDate(date);
     }
 
     public int getTime() {
-        return time;
+        return time.getTime();
     }
 
     public void setTime(int time) {
+        this.time.setTime(time);
+    }
+    public void setTimeObject(Time time){
         this.time = time;
     }
 
@@ -78,6 +79,11 @@ public class SimulationParameters
         this.simulationStatus = simulationStatus;
     }
 
+    public void setTimeInterval (int speed)
+    {
+        this.time.changeInterval(speed);
+    }
+
     public void addUser(Profile newUser){
         allUsers.add(newUser);
     }
@@ -94,6 +100,13 @@ public class SimulationParameters
         currentUser.setCurrentRoom(destination);
     }
 
+    public void setUserLocation(String userName, Room destination){
+        for (Profile p : allUsers) {
+            if(p.getName().equals(userName))
+                p.setCurrentRoom(destination);
+        }
+    }
+
     public List<String> getAllUserNames(){
         List<String> userNames = new ArrayList<>();
         for (Profile p: allUsers) {
@@ -101,12 +114,16 @@ public class SimulationParameters
         }
         return userNames;
     }
+    
+    public List<Profile> getAllUsers(){
+        return allUsers;
+    }
 
-    private static SimulationParameters loadFile(String simulationFile, String usersFile){
+    private static SimulationParameters loadFile(){
         SimulationParameters loadedSimulation = new SimulationParameters();
-        File layoutFile = new File(simulationFile);
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(layoutFile))){
+        File file = new File(simulationFile);
+        loadedSimulation.setTimeObject(new Time());
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line = reader.readLine();
             SimpleDateFormat initialFormat = new SimpleDateFormat("yyyy-MM-dd");
             loadedSimulation.setDate(initialFormat.parse(line));
@@ -121,11 +138,11 @@ public class SimulationParameters
             return null;
         }
 
-        layoutFile = new File(usersFile);
-        try (BufferedReader reader = new BufferedReader(new FileReader(layoutFile))){
+        file = new File(usersFile);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             Profile userToAdd = null;
             String line = reader.readLine();
-            while(line != null)
+            while(line != null && line != "")
             {
                 String name = line;
                 USER_TYPE user_type = USER_TYPE.valueOf(reader.readLine());
@@ -146,11 +163,44 @@ public class SimulationParameters
         return loadedSimulation;
     }
 
-    //todo
     public void printToTxtFile(){
+        File file = new File(simulationFile);
+        try (Writer writer = new FileWriter(file)){
+            SimpleDateFormat initialFormat = new SimpleDateFormat("yyyy-MM-dd");
+            writer.write(initialFormat.format(time.getDate()));
+            writer.write("\n");
+            writer.write(String.valueOf(time.getTime()));
+            writer.write("\n");
+            writer.write(String.valueOf(temperature));
+        }
+        catch(Exception e){
+            System.out.println("Something went writing the txt file " + simulationFile);
+            e.printStackTrace();
+        }
 
+        file = new File(usersFile);
+        try (Writer writer = new FileWriter(file)) {
+            for (Profile p : allUsers) {
+                writer.write(p.getName());
+                writer.write("\n");
+                writer.write(p.getUserType().name());
+                writer.write("\n");
+                writer.write(p.getCurrentRoom().getName());
+                writer.write("\n");
+                writer.write("\n");
+            }
+        }
+        catch (Exception e){
+            System.out.println("Something went writing the txt file " + usersFile);
+            e.printStackTrace();
+        }
     }
 
+    public void updateTime(){
+        time.update();
+    }
 
-
+    public int getTimeInterval(){
+       return  time.getInterval();
+    }
 }

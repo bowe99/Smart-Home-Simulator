@@ -170,6 +170,16 @@ public class House {
         }
         return null;
     }
+
+    public Light getLightByName(String target){
+        for (Room r : this.rooms) {
+            Light targetLight = r.getLightByName(target);
+            if(targetLight != null){
+                return targetLight;
+            }
+        }
+        return null;
+    }
    
     public List<String> getRoomsNameList(){
         List<String> roomsListString = new ArrayList<String>();
@@ -177,6 +187,15 @@ public class House {
             roomsListString.add(rooms.get(i).getName());
         }
         return roomsListString;
+    }
+
+    public ArrayList<String> getLightsNameList(){
+        ArrayList<String> lightsListString = new ArrayList<String>();
+        for(Room room : this.rooms){
+            lightsListString.addAll(room.getLightsNameList());
+        }
+
+        return lightsListString;
     }
 
     /**

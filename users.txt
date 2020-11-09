@@ -4,4 +4,9 @@ Kitchen
 
 Mary
 CHILD
-LivingRoom
+BuildingEntrance
+
+Stranger
+STRANGER
+Away
+

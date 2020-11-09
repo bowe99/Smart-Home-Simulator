@@ -26,12 +26,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
-public class RoomControlsController implements Initializable{
+public class RoomControlsController implements Initializable {
 
     @FXML private ComboBox<String> roomList = new ComboBox<String>();
     @FXML private ComboBox<String> lightList = new ComboBox<String>();
@@ -49,240 +49,254 @@ public class RoomControlsController implements Initializable{
     @FXML private ImageView a1light;
     @FXML private SmartHomeSimulatorController SHSController;
 
-    private Room currentRoom=null;
-    private Light currentLight=null;
-    private Door currentDoor=null;
-    private Window currentWindow=null;
+    private Room currentRoom = null;
+    private Light currentLight = null;
+    private Door currentDoor = null;
+    private Window currentWindow = null;
     private String selectedRoom;
     private String selectedLight;
     private String selectedDoor;
     private String selectedWindow;
-
     private Image image = new Image(new File("LightOn.jpg").toURI().toString());
 
-
     @FXML
-    void selectingRoom(MouseEvent event){
-        if(SimulationParameters.getInstance().getSimulationStatus()==true){
-        System.out.println("arrived displayRoomList");
-        roomList.setItems(FXCollections.observableList(House.getInstance().getRoomsNameList()));
-        selectedRoom = roomList.getValue();
+    void selectingRoom(MouseEvent event) {
+        if (SimulationParameters.getInstance().getSimulationStatus() == true) {
+            System.out.println("arrived displayRoomList");
+            roomList.setItems(FXCollections.observableList(House.getInstance().getRoomsNameList()));
+            selectedRoom = roomList.getValue();
 
-        //Detecting when the option is selected
-        roomList.setCellFactory(lv -> {
-            ListCell<String> cell = new ListCell<String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty ? null : item);
-                }
-            };
-            //Upon Mouse press on the option
-            cell.setOnMousePressed(e -> {
-                if (! cell.isEmpty()) {
-                    System.out.println("Click on "+cell.getItem());
+            // Detecting when the option is selected
+            roomList.setCellFactory(lv -> {
+                ListCell<String> cell = new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        setText(empty ? null : item);
+                    }
+                };
+                // Upon Mouse press on the option
+                cell.setOnMousePressed(e -> {
+                    if (!cell.isEmpty()) {
+                        System.out.println("Click on " + cell.getItem());
 
-                    //room is selected and the string is stored in selected room
-                    selectedRoom = cell.getItem();
+                        // room is selected and the string is stored in selected room
+                        selectedRoom = cell.getItem();
 
-                    //Selected room now as an object in currentRoom
-                    currentRoom = House.getInstance().getRoomByName(selectedRoom);
-                    System.out.println(currentRoom+" HERE HERE HERE");
+                        // Selected room now as an object in currentRoom
+                        currentRoom = House.getInstance().getRoomByName(selectedRoom);
+                        System.out.println(currentRoom + " HERE HERE HERE");
 
-                    //Populate the Selecting Lights, doors and windows field from the corresponding room
-                    lightList.setItems(FXCollections.observableList(currentRoom.getLightsNameList()));
-                    doorList.setItems(FXCollections.observableList(currentRoom.getDoorsNameList()));
-                    windowList.setItems(FXCollections.observableList(currentRoom.getWindowsNameList()));
-                    resetAllButtonColours();
+                        // Populate the Selecting Lights, doors and windows field from the corresponding
+                        // room
+                        lightList.setItems(FXCollections.observableList(currentRoom.getLightsNameList()));
+                        doorList.setItems(FXCollections.observableList(currentRoom.getDoorsNameList()));
+                        windowList.setItems(FXCollections.observableList(currentRoom.getWindowsNameList()));
+                        resetAllButtonColours();
 
-                }
+                    }
+                });
+                return cell;
             });
-            return cell ;
-        });
-    }
-        else return;
+        } else
+            return;
     }
 
     @FXML
-    void modifyLight(MouseEvent event){
-        if(SimulationParameters.getInstance().getSimulationStatus()==true){
-        System.out.println("arrived displayLightList");
+    void modifyLight(MouseEvent event) {
+        if (SimulationParameters.getInstance().getSimulationStatus() == true) {
+            System.out.println("arrived displayLightList");
 
-        //Listen for when an option is selected
-        lightList.setCellFactory(lv -> {
-            ListCell<String> cell = new ListCell<String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty ? null : item);
-                }
-            };
-            //Upon Mouse press on the option
-            cell.setOnMousePressed(e -> {
-                if (! cell.isEmpty()) {
+            // Listen for when an option is selected
+            lightList.setCellFactory(lv -> {
+                ListCell<String> cell = new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        setText(empty ? null : item);
+                    }
+                };
+                // Upon Mouse press on the option
+                cell.setOnMousePressed(e -> {
+                    if (!cell.isEmpty()) {
 
-                    //room is selected and the string is stored in selected room
-                    selectedLight = cell.getItem();
-                    //Selected room now as an object in currentRoom
-                    currentLight = currentRoom.getLightByName(selectedLight);
-                    changeLightButtonsColours();
-                    changeLightAutoButtonsColours();
-                }
+                        // room is selected and the string is stored in selected room
+                        selectedLight = cell.getItem();
+                        // Selected room now as an object in currentRoom
+                        currentLight = currentRoom.getLightByName(selectedLight);
+                        changeLightButtonsColours();
+                        changeLightAutoButtonsColours();
+                    }
+                });
+                return cell;
             });
-            return cell ;
-        });
-        }else return;
+        } else
+            return;
     }
 
     @FXML
-    void modifyDoor(MouseEvent event){
-        if(SimulationParameters.getInstance().getSimulationStatus()==true){
-        System.out.println("arrived displayDoorList");
-        //Listen for when an option is selected
-        doorList.setCellFactory(lv -> {
-            ListCell<String> cell = new ListCell<String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty ? null : item);
-                }
-            };
-            //Upon Mouse press on the option
-            cell.setOnMousePressed(e -> {
-                if (! cell.isEmpty()) {
+    void modifyDoor(MouseEvent event) {
+        if (SimulationParameters.getInstance().getSimulationStatus() == true) {
+            System.out.println("arrived displayDoorList");
+            // Listen for when an option is selected
+            doorList.setCellFactory(lv -> {
+                ListCell<String> cell = new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        setText(empty ? null : item);
+                    }
+                };
+                // Upon Mouse press on the option
+                cell.setOnMousePressed(e -> {
+                    if (!cell.isEmpty()) {
 
-                    //room is selected and the string is stored in selected room
-                    selectedDoor = cell.getItem();
-                    //Selected room now as an object in currentRoom
-                    currentDoor = currentRoom.getDoorByName(selectedDoor);
-                    changeDoorButtonsColours();
-                }
+                        // room is selected and the string is stored in selected room
+                        selectedDoor = cell.getItem();
+                        // Selected room now as an object in currentRoom
+                        currentDoor = currentRoom.getDoorByName(selectedDoor);
+                        changeDoorButtonsColours();
+                    }
+                });
+                return cell;
             });
-            return cell ;
-        });
-        }else return;
+        } else
+            return;
     }
 
     @FXML
-    void modifyWindow(MouseEvent event){
-        if(SimulationParameters.getInstance().getSimulationStatus()==true){
-        System.out.println("arrived displayWindowList");
-        //Listen for when an option is selected
-        windowList.setCellFactory(lv -> {
-            ListCell<String> cell = new ListCell<String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty ? null : item);
-                }
-            };
-            //Upon Mouse press on the option
-            cell.setOnMousePressed(e -> {
-                if (! cell.isEmpty()) {
+    void modifyWindow(MouseEvent event) {
+        if (SimulationParameters.getInstance().getSimulationStatus() == true) {
+            System.out.println("arrived displayWindowList");
+            // Listen for when an option is selected
+            windowList.setCellFactory(lv -> {
+                ListCell<String> cell = new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        setText(empty ? null : item);
+                    }
+                };
+                // Upon Mouse press on the option
+                cell.setOnMousePressed(e -> {
+                    if (!cell.isEmpty()) {
 
-                    //room is selected and the string is stored in selected room
-                    selectedWindow = cell.getItem();
-                    //Selected room now as an object in currentRoom
-                    currentWindow = currentRoom.getWindowByName(selectedWindow);
-                    changeWindowButtonsColours();
-                }
+                        // room is selected and the string is stored in selected room
+                        selectedWindow = cell.getItem();
+                        // Selected room now as an object in currentRoom
+                        currentWindow = currentRoom.getWindowByName(selectedWindow);
+                        changeWindowButtonsColours();
+                    }
+                });
+                return cell;
             });
-            return cell ;
-        });
-        }else return;
+        } else
+            return;
     }
 
-    @FXML 
-    void lightON (MouseEvent event){
-        if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
+    @FXML
+    void lightON(MouseEvent event) {
+        if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
-        }
-        else{
-        System.out.println("lightON");
-        currentLight.setToOn();
-        changeLightButtonsColours();
+        } else {
+            System.out.println("lightON");
+            currentLight.setToOn();
+            changeLightButtonsColours();
         }
     }
+
     @FXML
-    void lightOff(MouseEvent event){
-        if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
+    void lightOff(MouseEvent event) {
+        if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
-        }
-        else{
-        System.out.println("lightOFF");
-        currentLight.setToOff();
-        changeLightButtonsColours();
+        } else {
+            System.out.println("lightOFF");
+            currentLight.setToOff();
+            changeLightButtonsColours();
         }
     }
+
     @FXML
-    void lightAutoOn(MouseEvent event){
-        if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
+    void lightAutoOn(MouseEvent event) {
+        if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
-        }
-        else{
-        System.out.println("lightAutoOn");
-        currentLight.setAutoOn();
-        changeLightAutoButtonsColours();
-        }
-        
-    }
-    @FXML
-    void lightAutoOff(MouseEvent event){
-        if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
-            return;
-        }
-        else{
-        System.out.println("lightAutoOFF");
-        currentLight.setAutoOff();
-        changeLightAutoButtonsColours();
+        } else {
+            System.out.println("lightAutoOn");
+            currentLight.setAutoOn();
+            changeLightAutoButtonsColours();
         }
 
     }
+
     @FXML
-    void doorUnlock(MouseEvent event){
-        if(currentDoor==null || SimulationParameters.getInstance().getSimulationStatus()==false){
+    void lightAutoOff(MouseEvent event) {
+        if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
-        }
-        else{
-        System.out.println("doorUnlock");
-        currentDoor.setUnlocked();
-        changeDoorButtonsColours();
-        }
-    }
-    @FXML
-    void doorLock(MouseEvent event){
-        if(currentDoor==null || SimulationParameters.getInstance().getSimulationStatus()==false){
-            return;
-        }
-        else{
-        System.out.println("doorLock");
-        currentDoor.setLocked();
-        changeDoorButtonsColours();
+        } else {
+            System.out.println("lightAutoOFF");
+            currentLight.setAutoOff();
+            changeLightAutoButtonsColours();
         }
 
     }
+
     @FXML
-    void windowOpen(MouseEvent event){
+    void doorUnlock(MouseEvent event) {
+        if (currentDoor == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
+            return;
+        } else {
+            System.out.println("doorUnlock");
+            currentDoor.setUnlocked();
+            changeDoorButtonsColours();
+        }
+    }
+
+    @FXML
+    void doorLock(MouseEvent event) {
+        if (currentDoor == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
+            return;
+        } else {
+            System.out.println("doorLock");
+            currentDoor.setLocked();
+            changeDoorButtonsColours();
+        }
+
+    }
+
+    @FXML
+    void windowOpen(MouseEvent event) {
+        if (currentWindow == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
+            return;
+        } else if (currentWindow.getBlockedBoolean()) {
+            // print to console that the window is block and that we cannot open it
+            return;
+        } else {
+            System.out.println("windowOpen");
+            // insert if statement here to check for obstructions
+            currentWindow.setOpen();
+            changeWindowButtonsColours();
+        }
+    }
+
+    @FXML
+    void windowClose(MouseEvent event) {
         if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
-        else{
-        System.out.println("windowOpen");
-        //insert if statement here to check for obstructions
-        currentWindow.setOpen();
-        changeWindowButtonsColours();
-        }
-    }
-    @FXML
-    void windowClose(MouseEvent event){
-        if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
+        else if(currentWindow.getBlockedBoolean()){
+            //print to console that the window is block and that we cannot open it
             return;
         }
         else{
-        System.out.println("windowClose");
-        //insert if statement here to check for obstructions
         currentWindow.setClosed();
         changeWindowButtonsColours();
+        Logger.getInstance().ouputToConsole(currentWindow.getName()+" is now set to Closed");
+        try{
+        Logger.getInstance().outputToLogFile(currentWindow.getName()+" is now set to Closed");
+        }
+        catch(Exception e){
+            System.out.println("Could not write to txt file");
+        }
         }
 
     }
