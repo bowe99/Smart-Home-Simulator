@@ -5,12 +5,14 @@ import java.util.List;
 
 public class Room {
     private String name;
+    private String id;
     private List<Door> doors;
     private List<Window> windows;
     private List<Light> lights;
     private MotionSensor motionSensors;
 
-    public Room(String newName){
+    public Room(String newName, String ID){
+        this.id =  ID;
         this.name = newName;
         this.doors = new ArrayList<>();
         this.windows = new ArrayList<>();
@@ -88,8 +90,12 @@ public class Room {
         return name;
     }
 
-    
-    /** 
+
+    public String getId() {
+        return id;
+    }
+
+  /** 
      * Get a door by providing the name of the door
      * @param targetName
      * @return Door
@@ -196,5 +202,4 @@ public class Room {
         }
         return windowsListString;
     }
-
 }

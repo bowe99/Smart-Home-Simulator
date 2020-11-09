@@ -20,6 +20,7 @@ public class SecurityModule extends Observer{
     private int lightOffTime;
     private int motionDetectedTime;
     private List<Profile> profiles;
+    Permission awayModePermission = new Permission(PERMISSION_TYPE.AWAY, PERMISSION_TYPE.AWAY, PERMISSION_TYPE.NONE, PERMISSION_TYPE.NONE);
 
 /**
  * Constructor initializing attributes
@@ -60,22 +61,25 @@ public class SecurityModule extends Observer{
      */
     public void toggleAwayMode(){
         if(this.isAwayMode == false){
-            for(Profile profile: profiles){
-                if(!profile.getUserType().equals(USER_TYPE.STRANGER) && !profile.getCurrentRoom().getName().equals("Away")){
-                    Logger.getInstance().ouputToConsole(String.format("Unable to enable away mode: %s is not Away", profile.getName()));
-                    this.awayToggle.setSelected(false);
-                    return;
+            if(awayModePermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), SimulationParameters.getInstance().getCurrentUser().getCurrentRoom())) {
+                for (Profile profile : profiles) {
+                    if (!profile.getUserType().equals(USER_TYPE.STRANGER) && !profile.getCurrentRoom().getName().equals("Away")) {
+                        Logger.getInstance().ouputToConsole(String.format("Unable to enable away mode: %s is not Away", profile.getName()));
+                        this.awayToggle.setSelected(false);
+                        return;
+                    }
                 }
+                this.isAwayMode = true;
+                this.awayToggle.setText("On");
+                Logger.getInstance().ouputToConsole("Away mode has been successfully enabled");
             }
-            this.isAwayMode = true;
-            this.awayToggle.setText("On");
-            Logger.getInstance().ouputToConsole("Away mode has been successfully enabled");
         }
         else{
-            this.isAwayMode = false;
-            this.awayToggle.setText("Off");
-            Logger.getInstance().ouputToConsole("Away mode has been successfully disabled");
-            
+            if(awayModePermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), SimulationParameters.getInstance().getCurrentUser().getCurrentRoom())) {
+                this.isAwayMode = false;
+                this.awayToggle.setText("Off");
+                Logger.getInstance().ouputToConsole("Away mode has been successfully disabled");
+            }
         }
     }
 

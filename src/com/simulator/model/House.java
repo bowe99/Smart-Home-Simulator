@@ -50,11 +50,15 @@ public class House {
      * a return value of 0 represents success
      * a return value of 1 represents failure
      */
-    public int addRoom(String newName) {
-        this.rooms.add(new Room(newName));
+    public int addRoom(String newName, String ID) {
+        this.rooms.add(new Room(newName, ID));
         return 0;
     }
 
+    public List<Room> getRooms()
+    {
+        return this.rooms;
+    }
     /**
      * Adds a door to a room in the house
      * @param newName the new uniquely identifying name for the door
@@ -224,6 +228,7 @@ public class House {
         System.out.println("This house has "+rooms.size()+" rooms:");
         for(int i=0; rooms.size()>i; ++i){
             System.out.println("Room "+i+": \n\tName: "+rooms.get(i).getName());
+            System.out.println("RoomID"+i+": \n\tName: "+rooms.get(i).getName());
             System.out.println("\tDoors: "+rooms.get(i).getDoorsAmount()+" doors, ");
             System.out.println("\tWindows: "+rooms.get(i).getWindowsAmount()+" windows, ");
             System.out.println("\tLights: "+rooms.get(i).getLightsAmount()+" lights, ");
@@ -240,9 +245,10 @@ public class House {
      */
     private static House loadFile(String fileName) throws Exception{
         House loadedHouse;
-        String[] elementStack = new String[4];
+        String[] elementStack = new String[5];
         int depth = -1;
         String attribute = "";
+        String attributeID = "";
         File layoutFile = new File(fileName);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(layoutFile))){
@@ -276,9 +282,14 @@ public class House {
                 }
                 else if (lowerCaseLine.contains("$room")) {
                     attribute = getAttribute(line);
-                    loadedHouse.addRoom(attribute);
                     elementStack[++depth] = attribute;
-                } else if (lowerCaseLine.contains("$window")) {
+                    line = reader.readLine();
+                    line = line.trim();
+                    attributeID = getAttribute(line);
+                    loadedHouse.addRoom(attribute, attributeID);
+                    elementStack[++depth] = attributeID;
+                }
+                else if (lowerCaseLine.contains("$window")) {
                     attribute = getAttribute(line);
                     loadedHouse.addWindow(attribute, elementStack[depth]);
                     elementStack[++depth] = attribute;
