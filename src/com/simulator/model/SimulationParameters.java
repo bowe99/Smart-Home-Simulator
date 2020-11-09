@@ -1,5 +1,7 @@
 package com.simulator.model;
 
+import com.simulator.gui.Logger;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -172,9 +174,10 @@ public class SimulationParameters
             writer.write(String.valueOf(time.getTime()));
             writer.write("\n");
             writer.write(String.valueOf(temperature));
+            Logger.getInstance().ouputToConsole("Simulation parameters have been saved");
         }
         catch(Exception e){
-            System.out.println("Something went writing the txt file " + simulationFile);
+            Logger.getInstance().ouputToConsole("Something went writing the txt file " + simulationFile);
             e.printStackTrace();
         }
 
@@ -189,9 +192,10 @@ public class SimulationParameters
                 writer.write("\n");
                 writer.write("\n");
             }
+            Logger.getInstance().ouputToConsole("User info has been saved");
         }
         catch (Exception e){
-            System.out.println("Something went writing the txt file " + usersFile);
+            Logger.getInstance().ouputToConsole("Something went writing the txt file " + usersFile);
             e.printStackTrace();
         }
     }
