@@ -10,6 +10,7 @@ import javafx.application.Platform;
   */
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -68,6 +69,7 @@ public class SmartHomeSimulatorController {
     @FXML private Hyperlink userProfile;
     @FXML private Label userLocation;
     @FXML private Hyperlink displayTime;
+    @FXML private Label layoutViewText;
 
     @FXML private TextArea area1;
     @FXML private TextArea area2;
@@ -262,10 +264,14 @@ public class SmartHomeSimulatorController {
     void changeSimulationStatus(MouseEvent event) {
         if(simulation.getSimulationStatus()){
             this.simulationToggle.setText("On");
+            System.out.println("turning off");
+            disableHouseView();
             simulation.setSimulationStatus(false);
             timer.cancel();
         } else {
             this.simulationToggle.setText("Off");
+            System.out.println("turning on");
+            setHouseView();
             simulation.setSimulationStatus(true);
             startTimer();
         }
@@ -308,113 +314,352 @@ public class SmartHomeSimulatorController {
     /**
      * Change status to away
      */
-    @FXML
-    private void setHouseView() {
+    private void disableHouseView() {
+        layoutViewText.setText("Turn On Simulator for House View");
+        layoutViewText.setTranslateX(-80);
+        layoutViewText.setOpacity(1);
         for (int Counter = 0; Counter < house.getRooms().size(); Counter++) {
-            System.out.println(house.getRooms().get(Counter).getId());
             if (house.getRooms().get(Counter).getId().equals("area1")) {
                 area1.setText(house.getRooms().get(Counter).getName());
+                area1.setOpacity(1);
+                area1.setVisible(false);
+                a1light.setVisible(false);
+                a1door.setVisible(false);
+                a1window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area2")) {
+                area2.setText(house.getRooms().get(Counter).getName());
+                area2.setOpacity(1);
+                area2.setVisible(false);
+                a2light.setVisible(false);
+                a2door.setVisible(false);
+                a2window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area3")) {
+                area3.setText(house.getRooms().get(Counter).getName());
+                area3.setOpacity(1);
+                area3.setVisible(false);
+                a3light.setVisible(false);
+                a3door.setVisible(false);
+                a3window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area4")) {
+                area4.setText(house.getRooms().get(Counter).getName());
+                area4.setOpacity(1);
+                area4.setVisible(false);
+                a4light.setVisible(false);
+                a4door.setVisible(false);
+                a4window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area5")) {
+                area5.setText(house.getRooms().get(Counter).getName());
+                area5.setOpacity(1);
+                area5.setVisible(false);
+                a5light.setVisible(false);
+                a5door.setVisible(false);
+                a5window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area6")) {
+                area6.setText(house.getRooms().get(Counter).getName());
+                area6.setOpacity(1);
+                area6.setVisible(false);
+                a6light.setVisible(false);
+                a6door.setVisible(false);
+                a6window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area7")) {
+                area7.setText(house.getRooms().get(Counter).getName());
+                area7.setOpacity(1);
+                area7.setVisible(false);
+                a7light.setVisible(false);
+                a7door.setVisible(false);
+                a7window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area8")) {
+                area8.setText(house.getRooms().get(Counter).getName());
+                area8.setOpacity(1);
+                area8.setVisible(false);
+                a8light.setVisible(false);
+                a8door.setVisible(false);
+                a8window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area9")) {
+                area9.setText(house.getRooms().get(Counter).getName());
+                area9.setOpacity(1);
+                area9.setVisible(false);
+                a9light.setVisible(false);
+                a9door.setVisible(false);
+                a9window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area10")) {
+                area10.setText(house.getRooms().get(Counter).getName());
+                area10.setOpacity(1);
+                area10.setVisible(false);
+                a10light.setVisible(false);
+                a10door.setVisible(false);
+                a10window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area11")) {
+                area11.setText(house.getRooms().get(Counter).getName());
+                area11.setOpacity(1);
+                area11.setVisible(false);
+                a11light.setVisible(false);
+                a11door.setVisible(false);
+                a11window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area12")) {
+                area12.setText(house.getRooms().get(Counter).getName());
+                area12.setOpacity(1);
+                area12.setVisible(false);
+                a12light.setVisible(false);
+                a12door.setVisible(false);
+                a12window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area13")) {
+                area13.setText(house.getRooms().get(Counter).getName());
+                area13.setOpacity(1);
+                area13.setVisible(false);
+                a13light.setVisible(false);
+                a13door.setVisible(false);
+                a13window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area14")) {
+                area14.setText(house.getRooms().get(Counter).getName());
+                area14.setOpacity(1);
+                area14.setVisible(false);
+                a14light.setVisible(false);
+                a14door.setVisible(false);
+                a14window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area15")) {
+                area15.setText(house.getRooms().get(Counter).getName());
+                area15.setOpacity(1);
+                area15.setVisible(false);
+                a15light.setVisible(false);
+                a15door.setVisible(false);
+                a15window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area16")) {
+                area16.setText(house.getRooms().get(Counter).getName());
+                area16.setOpacity(1);
+                area16.setVisible(false);
+                a16light.setVisible(false);
+                a16door.setVisible(false);
+                a16window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area17")) {
+                area17.setText(house.getRooms().get(Counter).getName());
+                area17.setOpacity(1);
+                area17.setVisible(false);
+                a17light.setVisible(false);
+                a17door.setVisible(false);
+                a17window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area18")) {
+                area18.setText(house.getRooms().get(Counter).getName());
+                area18.setOpacity(1);
+                area18.setVisible(false);
+                a18light.setVisible(false);
+                a18door.setVisible(false);
+                a18window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area19")) {
+                area19.setText(house.getRooms().get(Counter).getName());
+                area19.setOpacity(1);
+                area19.setVisible(false);
+                a19light.setVisible(false);
+                a19door.setVisible(false);
+                a19window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area20")) {
+                area20.setText(house.getRooms().get(Counter).getName());
+                area20.setOpacity(1);
+                area20.setVisible(false);
+                a20light.setVisible(false);
+                a20door.setVisible(false);
+                a20window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area21")) {
+                area21.setText(house.getRooms().get(Counter).getName());
+                area21.setOpacity(1);
+                area21.setVisible(false);
+                a21light.setVisible(false);
+                a21door.setVisible(false);
+                a21window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area22")) {
+                area22.setText(house.getRooms().get(Counter).getName());
+                area22.setOpacity(1);
+                area22.setVisible(false);
+                a22light.setVisible(false);
+                a22door.setVisible(false);
+                a22window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area23")) {
+                area23.setText(house.getRooms().get(Counter).getName());
+                area23.setOpacity(1);
+                area23.setVisible(false);
+                a23light.setVisible(false);
+                a23door.setVisible(false);
+                a23window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area24")) {
+                area24.setText(house.getRooms().get(Counter).getName());
+                area24.setOpacity(1);
+                area24.setVisible(false);
+                a24light.setVisible(false);
+                a24door.setVisible(false);
+                a24window.setVisible(false);
+            }
+            if (house.getRooms().get(Counter).getId().equals("area25")) {
+                area25.setText(house.getRooms().get(Counter).getName());
+                area25.setOpacity(1);
+                area25.setVisible(false);
+                a25light.setVisible(false);
+                a25door.setVisible(false);
+                a25window.setVisible(false);
+            }
+        }
+    }
+        
+    /**
+     * Change status to away
+     */
+    @FXML
+    private void setHouseView() {
+        layoutViewText.setText("House View");
+        layoutViewText.setTranslateX(20);       
+        layoutViewText.setOpacity(1);
+
+        for (int Counter = 0; Counter < house.getRooms().size(); Counter++) {
+            if (house.getRooms().get(Counter).getId().equals("area1")) {
+                area1.setText(house.getRooms().get(Counter).getName());
+                area1.setOpacity(1);
                 area1.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area2")) {
                 area2.setText(house.getRooms().get(Counter).getName());
+                area2.setOpacity(1);
                 area2.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area3")) {
                 area3.setText(house.getRooms().get(Counter).getName());
+                area3.setOpacity(1);
                 area3.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area4")) {
                 area4.setText(house.getRooms().get(Counter).getName());
+                area4.setOpacity(1);
                 area4.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area5")) {
                 area5.setText(house.getRooms().get(Counter).getName());
+                area5.setOpacity(1);
                 area5.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area6")) {
                 area6.setText(house.getRooms().get(Counter).getName());
+                area6.setOpacity(1);
                 area6.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area7")) {
                 area7.setText(house.getRooms().get(Counter).getName());
+                area7.setOpacity(1);
                 area7.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area8")) {
                 area8.setText(house.getRooms().get(Counter).getName());
+                area8.setOpacity(1);
                 area8.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area9")) {
                 area9.setText(house.getRooms().get(Counter).getName());
+                area9.setOpacity(1);
                 area9.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area10")) {
                 area10.setText(house.getRooms().get(Counter).getName());
+                area10.setOpacity(1);
                 area10.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area11")) {
                 area11.setText(house.getRooms().get(Counter).getName());
+                area11.setOpacity(1);
                 area11.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area12")) {
                 area12.setText(house.getRooms().get(Counter).getName());
+                area12.setOpacity(1);
                 area12.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area13")) {
                 area13.setText(house.getRooms().get(Counter).getName());
+                area13.setOpacity(1);
                 area13.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area14")) {
                 area14.setText(house.getRooms().get(Counter).getName());
+                area14.setOpacity(1);
                 area14.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area15")) {
                 area15.setText(house.getRooms().get(Counter).getName());
+                area15.setOpacity(1);
                 area15.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area16")) {
                 area16.setText(house.getRooms().get(Counter).getName());
+                area16.setOpacity(1);
                 area16.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area17")) {
                 area17.setText(house.getRooms().get(Counter).getName());
+                area17.setOpacity(1);
                 area17.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area18")) {
                 area18.setText(house.getRooms().get(Counter).getName());
+                area18.setOpacity(1);
                 area18.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area19")) {
                 area19.setText(house.getRooms().get(Counter).getName());
+                area19.setOpacity(1);
                 area19.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area20")) {
                 area20.setText(house.getRooms().get(Counter).getName());
+                area20.setOpacity(1);
                 area20.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area21")) {
                 area21.setText(house.getRooms().get(Counter).getName());
+                area21.setOpacity(1);
                 area21.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area22")) {
                 area22.setText(house.getRooms().get(Counter).getName());
+                area22.setOpacity(1);
                 area22.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area23")) {
                 area23.setText(house.getRooms().get(Counter).getName());
+                area23.setOpacity(1);
                 area23.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area24")) {
                 area24.setText(house.getRooms().get(Counter).getName());
+                area24.setOpacity(1);
                 area24.setVisible(true);
             }
             if (house.getRooms().get(Counter).getId().equals("area25")) {
                 area25.setText(house.getRooms().get(Counter).getName());
+                area25.setOpacity(1);
                 area25.setVisible(true);
-            }
+            
         }
     }
-
+}
     public void changeAwayStatus() {
         securityModule.toggleAwayMode();
     }
@@ -939,6 +1184,7 @@ public class SmartHomeSimulatorController {
         switch (currentRoom.getId()) 
         {
         case "area18": a18window.setImage(openWindowIcon);
+        a18window.setVisible(true);
         
             break;
             default: break;
@@ -958,8 +1204,8 @@ public class SmartHomeSimulatorController {
         switch (currentRoom.getId()) 
         {
         case "area18": a18window.setImage(closedWindowIcon);
-
-        break;
+                       a18window.setVisible(true);
+                       break;
         default: break;
         }
     }
