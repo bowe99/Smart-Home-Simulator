@@ -5,12 +5,14 @@ import java.util.List;
 
 public class Room {
     private String name;
+    private String id;
     private List<Door> doors;
     private List<Window> windows;
     private List<Light> lights;
     private MotionSensor motionSensors;
 
-    public Room(String newName){
+    public Room(String newName, String ID){
+        this.id =  ID;
         this.name = newName;
         this.doors = new ArrayList<>();
         this.windows = new ArrayList<>();
@@ -50,6 +52,10 @@ public class Room {
 
     public String getName() {
         return name;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Door getDoorByName(String targetName) {
@@ -115,5 +121,4 @@ public class Room {
         }
         return windowsListString;
     }
-
 }

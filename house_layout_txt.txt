@@ -1,5 +1,7 @@
 $House: "325 Lakeview, Pointe-Claire"{
     $Room: "BuildingEntrance"{
+        $roomID: "area18"{
+        }
         $Window: "FrontDoorWindow1"{
         }
         $Window: "FrontDoorWindow2"{
@@ -20,6 +22,8 @@ $House: "325 Lakeview, Pointe-Claire"{
         }
     }
     $Room: "Kitchen"{
+        $roomID: "area19"{
+        }
         $Window: "NorthWindow" {
         }
         $Window: "EastWindow"{
@@ -42,6 +46,8 @@ $House: "325 Lakeview, Pointe-Claire"{
         }
     }
     $Room: "LivingRoom"{
+        $roomID: "area17"{
+        }
         $Window: "NorthWindow1"{
         }
         $Window: "NorthWindow2"{
@@ -54,6 +60,8 @@ $House: "325 Lakeview, Pointe-Claire"{
         }
     }
     $Room: "FamilyRoom"{
+        $roomID: "area13"{
+        }
         $Window: "SouthWindow1"{
         }
         $Window: "SouthWindow2"{
@@ -92,6 +100,8 @@ $House: "325 Lakeview, Pointe-Claire"{
         }
     }
     $Room: "Office"{
+        $roomID: "area12"{
+        }
         $Window: "NorthWindow1"{
         }
         $Window: "NorthWindow2"{
@@ -110,6 +120,8 @@ $House: "325 Lakeview, Pointe-Claire"{
         }
     }
     $Room: "Garage"{
+        $roomID: "area14"{
+        }
         $Window: "EastWindow"{
         }
         $Window: "WestWindow"{
@@ -136,6 +148,8 @@ $House: "325 Lakeview, Pointe-Claire"{
         }
     }
     $Room: "Backyard"{
+        $roomID: "area8"{
+        }
         $Door: "DoorToKitchen1"{
             $EntryWaySensor: "DoorToKitchenSensor1"{
             }
@@ -154,5 +168,7 @@ $House: "325 Lakeview, Pointe-Claire"{
         }
     }
     $Room: "Away"{
+        $roomID: "NA"{
+        }
     }
 }
