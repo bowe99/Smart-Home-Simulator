@@ -105,13 +105,21 @@ public class SimulationParameters{
      */
     public void setTimeObject(Time time){
         this.time = time;
+    }  
+  
+    /**
+     *Get the time object
+     *
+     */
+    public Time getTimeObject(){
+        return this.time;
     }
-
     
     /** 
      * Get the current user
      * @return Profile
      */
+
     public Profile getCurrentUser() {
         return currentUser;
     }
