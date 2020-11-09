@@ -40,9 +40,6 @@ import java.util.TimerTask;
 
 import com.simulator.model.*;
 
-/**
- * This is the controller class for the RoomControls.fxml file
- */
 import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
 import javafx.scene.control.ChoiceBox;
@@ -345,8 +342,9 @@ public class SmartHomeSimulatorController {
             e.printStackTrace();
         }  
     }
+    
     /**
-     * Change status to away
+     * Removes house layout view from UI.
      */
     private void disableHouseView() {
         layoutViewText.setText("Turn On Simulator for House View");
@@ -585,7 +583,7 @@ public class SmartHomeSimulatorController {
     }
         
     /**
-     * Change status to away
+     * Sets house layout view in UI.
      */
     @FXML
     private void setHouseView() {
@@ -982,6 +980,9 @@ public class SmartHomeSimulatorController {
         }
     }
 }
+    /**
+     * Changes the away status of the simulator.
+     */
     public void changeAwayStatus() {
         securityModule.toggleAwayMode();
         if (securityModule.getAwayMode())
@@ -1127,7 +1128,7 @@ public class SmartHomeSimulatorController {
         }
     }
     /**
-     * Initializes the SmartHomeSimulator Dashboard
+     * Starts the timer
      */
     private void startTimer(){
         timer = new Timer();
@@ -1168,11 +1169,13 @@ public class SmartHomeSimulatorController {
 
     //*****************************************************************************************************//
     //                                                                                                     //
-    //                                            Room Controls Controller                                 //
+    //                                         Room Controls Controller                                    //
     //                                                                                                     //
     //*****************************************************************************************************//   
 
-
+    /**
+     * Allows room to be selected from combobox.
+     */
     @FXML
     void selectingRoom(MouseEvent event){
         if(SimulationParameters.getInstance().getSimulationStatus()==true){
@@ -1304,6 +1307,9 @@ public class SmartHomeSimulatorController {
         }else return;
     }
 
+    /**
+     * Turns on light.
+     */
     @FXML 
     void lightON (MouseEvent event){
         if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
@@ -1368,7 +1374,11 @@ public class SmartHomeSimulatorController {
             default: break;
         }
     }   
-    }
+    }   
+
+    /**
+     * Turns off light.
+     */
     @FXML
     void lightOff(MouseEvent event){
         if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
@@ -1434,6 +1444,10 @@ public class SmartHomeSimulatorController {
         }
         }
     }
+    
+    /**
+     * Turns auto light mode on.
+     */
     @FXML
     void lightAutoOn(MouseEvent event){
         if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
@@ -1446,6 +1460,10 @@ public class SmartHomeSimulatorController {
         }
         
     }
+
+    /**
+     * Turns auto light mode off.
+     */
     @FXML
     void lightAutoOff(MouseEvent event){
         if(currentLight==null || SimulationParameters.getInstance().getSimulationStatus()==false){
@@ -1458,6 +1476,10 @@ public class SmartHomeSimulatorController {
         }
 
     }
+
+    /**
+     * Unlocks door.
+     */
     @FXML
     void doorUnlock(MouseEvent event){
         if(currentDoor==null || SimulationParameters.getInstance().getSimulationStatus()==false){
@@ -1485,6 +1507,10 @@ public class SmartHomeSimulatorController {
         }
         }
     }
+
+    /**
+     * Locks door.
+     */
     @FXML
     void doorLock(MouseEvent event){
         if(currentDoor==null || SimulationParameters.getInstance().getSimulationStatus()==false){
@@ -1507,6 +1533,10 @@ public class SmartHomeSimulatorController {
         }
 
     }
+
+    /**
+     * Opens window.
+     */
     @FXML
     void windowOpen(MouseEvent event){
         if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
@@ -1527,6 +1557,10 @@ public class SmartHomeSimulatorController {
         }
     }
     }
+
+    /**
+     * Closes window.
+     */
     @FXML
     void windowClose(MouseEvent event){
         if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
@@ -1547,6 +1581,9 @@ public class SmartHomeSimulatorController {
     }
     }
 
+    /**
+     * Changes colour of light button.
+     */
     @FXML 
     void changeLightButtonsColours(){
         if(currentLight.getOnOff()==true){
@@ -1559,6 +1596,9 @@ public class SmartHomeSimulatorController {
         }
     }
 
+    /**
+     * Changes colour of auto light button.
+     */
     @FXML 
     void changeLightAutoButtonsColours(){
         if(currentLight.getAuto()==true){
@@ -1571,6 +1611,9 @@ public class SmartHomeSimulatorController {
         }
     }
 
+    /**
+     * Changes colour of door button.
+     */
     @FXML 
     void changeDoorButtonsColours(){
         if(currentDoor.getLockedStatus()==false){
@@ -1583,6 +1626,9 @@ public class SmartHomeSimulatorController {
         }
     }
 
+    /**
+     * Changes colour of window button.
+     */
     @FXML 
     void changeWindowButtonsColours(){
         if(currentWindow.getOpenOrClosed()==true){
@@ -1595,6 +1641,9 @@ public class SmartHomeSimulatorController {
         }
     }
 
+    /**
+     * Resets all button colours.
+     */
     @FXML 
     void resetAllButtonColours(){
         lightOn.setStyle("-fx-all: initial");
@@ -1621,11 +1670,6 @@ public class SmartHomeSimulatorController {
         e.printStackTrace();
         }
     }
-
-    @FXML
-    private void setLightIcon() {
-        System.out.println("Lights switched");
-    }
-    
+   
 }
 
