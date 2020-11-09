@@ -5,9 +5,6 @@ import com.simulator.model.Room;
 import com.simulator.model.SecurityModule;
 
 import javafx.application.Platform;
-/**
-  * This is the controller class for the Dashboard.fxml file
-  */
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -39,7 +36,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.simulator.model.*;
-
 import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
 import javafx.scene.control.ChoiceBox;
@@ -53,6 +49,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * This is the controller class for the RoomControls.fxml file AND the Dashboard.fxml file
+ */
 public class SmartHomeSimulatorController {
 
     @FXML private ToggleButton simulationToggle;
