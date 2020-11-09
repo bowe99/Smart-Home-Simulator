@@ -53,6 +53,10 @@ public class RoomControlsController implements Initializable {
     private String selectedDoor;
     private String selectedWindow;
 
+    private Permission doorPermission = new Permission(PERMISSION_TYPE.ALL, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.NONE);
+    private Permission windowPermission = new Permission(PERMISSION_TYPE.ALL, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.NONE);
+    private Permission lightPermission = new Permission(PERMISSION_TYPE.ALL, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.NONE);
+
     @FXML
     void selectingRoom(MouseEvent event) {
         if (SimulationParameters.getInstance().getSimulationStatus() == true) {
@@ -193,9 +197,18 @@ public class RoomControlsController implements Initializable {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("lightON");
-            currentLight.setToOn();
-            changeLightButtonsColours();
+            if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+                System.out.println("lightON");
+                currentLight.setToOn();
+                changeLightButtonsColours();
+                Logger.getInstance().ouputToConsole(currentLight.getName() + " is now set to ON");
+            }
+            try{
+                Logger.getInstance().outputToLogFile(currentLight.getName()+" is now set to ON");
+            }
+            catch(Exception e){
+                System.out.println("Could not write to txt file");
+            }
         }
 
     }
@@ -205,9 +218,18 @@ public class RoomControlsController implements Initializable {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("lightOFF");
-            currentLight.setToOff();
-            changeLightButtonsColours();
+            if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+                System.out.println("lightOFF");
+                currentLight.setToOff();
+                changeLightButtonsColours();
+                Logger.getInstance().ouputToConsole(currentLight.getName() + " is now set to OFF");
+            }
+            try{
+                Logger.getInstance().outputToLogFile(currentLight.getName()+" is now set to OFF");
+            }
+            catch(Exception e){
+                System.out.println("Could not write to txt file");
+            }
         }
     }
 
@@ -216,9 +238,18 @@ public class RoomControlsController implements Initializable {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("lightAutoOn");
-            currentLight.setAutoOn();
-            changeLightAutoButtonsColours();
+            if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+                System.out.println("lightAutoOn");
+                currentLight.setAutoOn();
+                changeLightAutoButtonsColours();
+                Logger.getInstance().ouputToConsole(currentLight.getName() + " is now set to AUTO");
+            }
+            try{
+                Logger.getInstance().outputToLogFile(currentLight.getName()+" is now set to AUTO");
+            }
+            catch(Exception e){
+                System.out.println("Could not write to txt file");
+            }
         }
 
     }
@@ -228,9 +259,18 @@ public class RoomControlsController implements Initializable {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("lightAutoOFF");
-            currentLight.setAutoOff();
-            changeLightAutoButtonsColours();
+            if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+                System.out.println("lightAutoOFF");
+                currentLight.setAutoOff();
+                changeLightAutoButtonsColours();
+                Logger.getInstance().ouputToConsole(currentLight.getName() + " is no longer set to AUTO");
+            }
+            try{
+                Logger.getInstance().outputToLogFile(currentLight.getName() + " is no longer set to AUTO");
+            }
+            catch(Exception e){
+                System.out.println("Could not write to txt file");
+            }
         }
 
     }
@@ -240,9 +280,18 @@ public class RoomControlsController implements Initializable {
         if (currentDoor == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("doorUnlock");
-            currentDoor.setUnlocked();
-            changeDoorButtonsColours();
+            if(doorPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+                System.out.println("doorUnlock");
+                currentDoor.setUnlocked();
+                changeDoorButtonsColours();
+                Logger.getInstance().ouputToConsole(currentDoor.getName() + " is now set to Unlocked");
+            }
+            try{
+                Logger.getInstance().outputToLogFile(currentDoor.getName()+" is now set to Unlocked");
+            }
+            catch(Exception e){
+                System.out.println("Could not write to txt file");
+            }
         }
     }
 
@@ -251,9 +300,18 @@ public class RoomControlsController implements Initializable {
         if (currentDoor == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
             return;
         } else {
-            System.out.println("doorLock");
-            currentDoor.setLocked();
-            changeDoorButtonsColours();
+            if(doorPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+                System.out.println("doorLock");
+                currentDoor.setLocked();
+                changeDoorButtonsColours();
+                Logger.getInstance().ouputToConsole(currentDoor.getName() + " is now set to Locked");
+            }
+            try{
+                Logger.getInstance().outputToLogFile(currentDoor.getName()+" is now set to Locked");
+            }
+            catch(Exception e){
+                System.out.println("Could not write to txt file");
+            }
         }
 
     }
@@ -266,10 +324,19 @@ public class RoomControlsController implements Initializable {
             // print to console that the window is block and that we cannot open it
             return;
         } else {
-            System.out.println("windowOpen");
-            // insert if statement here to check for obstructions
-            currentWindow.setOpen();
-            changeWindowButtonsColours();
+            if(windowPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+                System.out.println("windowOpen");
+                // insert if statement here to check for obstructions
+                currentWindow.setOpen();
+                changeWindowButtonsColours();
+                Logger.getInstance().ouputToConsole(currentWindow.getName() + " is now set to Open");
+            }
+            try{
+                Logger.getInstance().outputToLogFile(currentWindow.getName()+" is now set to Open");
+            }
+            catch(Exception e){
+                System.out.println("Could not write to txt file");
+            }
         }
     }
 
@@ -283,15 +350,17 @@ public class RoomControlsController implements Initializable {
             return;
         }
         else{
-        currentWindow.setClosed();
-        changeWindowButtonsColours();
-        Logger.getInstance().ouputToConsole(currentWindow.getName()+" is now set to Closed");
-        try{
-        Logger.getInstance().outputToLogFile(currentWindow.getName()+" is now set to Closed");
-        }
-        catch(Exception e){
-            System.out.println("Could not write to txt file");
-        }
+            if(windowPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+                currentWindow.setClosed();
+                changeWindowButtonsColours();
+                Logger.getInstance().ouputToConsole(currentWindow.getName() + " is now set to Closed");
+            }
+            try{
+            Logger.getInstance().outputToLogFile(currentWindow.getName()+" is now set to Closed");
+            }
+            catch(Exception e){
+                System.out.println("Could not write to txt file");
+            }
         }
 
     }

@@ -10,3 +10,6 @@ Stranger
 STRANGER
 Away
 
+Fred
+GUEST
+Kitchen

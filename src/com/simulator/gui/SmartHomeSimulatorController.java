@@ -1,16 +1,11 @@
 package com.simulator.gui;
 
-import com.simulator.model.Profile;
-import com.simulator.model.Room;
-import com.simulator.model.SecurityModule;
+import com.simulator.model.*;
 
 import javafx.application.Platform;
 /**
   * This is the controller class for the Dashboard.fxml file
   */
-import com.simulator.model.House;
-import com.simulator.model.Light;
-import com.simulator.model.SimulationParameters;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -67,18 +62,13 @@ public class SmartHomeSimulatorController {
     private SimulationParameters simulation;
     private SecurityModule securityModule;
     private Timer timer = new Timer();
+    Permission securityPermission;
 
     public SmartHomeSimulatorController()
     {
         this.house = House.getInstance();
         this.simulation = SimulationParameters.getInstance();
-        //load permissions?
-        try {
-
-        }
-        catch(Exception e){
-            System.out.println("Error parsing permissions");
-        }
+        securityPermission = new Permission(PERMISSION_TYPE.ALL, PERMISSION_TYPE.ALL, PERMISSION_TYPE.NONE, PERMISSION_TYPE.NONE);
     }
 
     @FXML
@@ -158,7 +148,6 @@ public class SmartHomeSimulatorController {
 
     @FXML
     void addSecurityLight(){
-
         Object selectedItem = this.allLightsListView.getSelectionModel().getSelectedItem();
         this.selectedLightsListView.getItems().add((String) selectedItem);
         this.allLightsListView.getItems().remove(selectedItem);
@@ -212,25 +201,28 @@ public class SmartHomeSimulatorController {
 
     @FXML
     private void saveSecuritySettings(){
-        String startTimeInput = this.startTimeSecurity.getText();
-        String endTimeInput = this.endTimeSecurity.getText();
-        String motionDetectedTimeInput = this.motionDetectedTimeSecurity.getText();
-        try {
-            int startTime = Integer.parseInt(startTimeInput);
-            int endTime = Integer.parseInt(endTimeInput);
-            int motionDetectedTime = Integer.parseInt(motionDetectedTimeInput);
+        if(securityPermission.checkPermission(simulation.getCurrentUser(), simulation.getCurrentUser().getCurrentRoom())) {
+            String startTimeInput = this.startTimeSecurity.getText();
+            String endTimeInput = this.endTimeSecurity.getText();
+            String motionDetectedTimeInput = this.motionDetectedTimeSecurity.getText();
+            try {
+                int startTime = Integer.parseInt(startTimeInput);
+                int endTime = Integer.parseInt(endTimeInput);
+                int motionDetectedTime = Integer.parseInt(motionDetectedTimeInput);
 
-            if (startTime > 1440 || startTime < 0 || endTime < 0 || endTime > 1440){
-                throw new Exception("Time is not in the correct range");
+                if (startTime > 1440 || startTime < 0 || endTime < 0 || endTime > 1440) {
+                    throw new Exception("Time is not in the correct range");
+                }
+
+                this.securityModule.saveSettings(startTime, endTime, motionDetectedTime);
+                Logger.getInstance().ouputToConsole("Security settings were successfully updated");
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid input");
+                alert.setContentText("No information was saved! Please try again.");
+                alert.showAndWait();
             }
-
-            this.securityModule.saveSettings(startTime, endTime, motionDetectedTime);
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setHeaderText("Invalid input");
-            alert.setContentText("No information was saved! Please try again.");
-            alert.showAndWait();
         }
     }
 
