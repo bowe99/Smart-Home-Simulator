@@ -991,11 +991,11 @@ public class SmartHomeSimulatorController {
 
     @FXML 
     void changeDoorButtonsColours(){
-        if(currentDoor.getUnlockedOrLocked()==false){
+        if(currentDoor.getLockedStatus()==false){
             doorUnlock.setStyle("-fx-background-color: #7FFF00");
             doorLock.setStyle("-fx-all: initial");
         }
-        if(currentDoor.getUnlockedOrLocked()==true){
+        if(currentDoor.getLockedStatus()==true){
             doorUnlock.setStyle("-fx-all: initial");
             doorLock.setStyle("-fx-background-color: #FF0000");
         }
