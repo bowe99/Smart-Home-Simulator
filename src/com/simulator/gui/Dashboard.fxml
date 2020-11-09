@@ -24,9 +24,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="583.0" prefWidth="1234.0"
-   xmlns="http://javafx.com/javafx/11.0.1"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.SmartHomeSimulatorController">
+<VBox prefHeight="583.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.gui.SmartHomeSimulatorController">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="615.0" prefWidth="1266.0" VBox.vgrow="ALWAYS">
          <children>
@@ -354,12 +352,12 @@
                         <Image url="@avatar_placeholder.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="a18window" fitHeight="47.0" fitWidth="36.0" layoutX="339.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" visible="true">
+                  <ImageView fx:id="a18window" fitHeight="47.0" fitWidth="36.0" layoutX="339.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@closedwindow.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="a18door" fitHeight="47.0" fitWidth="36.0" layoutX="303.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" visible="true">
+                  <ImageView fx:id="a18door" fitHeight="47.0" fitWidth="36.0" layoutX="303.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@locked.png" />
                      </image>
@@ -627,6 +625,141 @@
                   <ImageView fx:id="a19door" fitHeight="47.0" fitWidth="36.0" layoutX="414.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@avatar_placeholder.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a18person" fitHeight="47.0" fitWidth="36.0" layoutX="340.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a23person" fitHeight="47.0" fitWidth="36.0" layoutX="340.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a13person" fitHeight="47.0" fitWidth="36.0" layoutX="340.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a15person" fitHeight="47.0" fitWidth="36.0" layoutX="557.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a14person" fitHeight="47.0" fitWidth="36.0" layoutX="450.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a17person" fitHeight="47.0" fitWidth="36.0" layoutX="230.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a16person" fitHeight="47.0" fitWidth="36.0" layoutX="122.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a19person" fitHeight="47.0" fitWidth="36.0" layoutX="449.0" layoutY="384.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a20person" fitHeight="47.0" fitWidth="36.0" layoutX="558.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a25person" fitHeight="47.0" fitWidth="36.0" layoutX="559.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a24person" fitHeight="47.0" fitWidth="36.0" layoutX="450.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a21person" fitHeight="47.0" fitWidth="36.0" layoutX="122.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a18door112" fitHeight="47.0" fitWidth="36.0" layoutX="231.0" layoutY="484.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a18door113" fitHeight="47.0" fitWidth="36.0" layoutX="237.0" layoutY="484.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a22person" fitHeight="47.0" fitWidth="36.0" layoutX="237.0" layoutY="478.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a12person" fitHeight="47.0" fitWidth="36.0" layoutX="230.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a1person" fitHeight="47.0" fitWidth="36.0" layoutX="123.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a2person" fitHeight="47.0" fitWidth="36.0" layoutX="230.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a3person" fitHeight="47.0" fitWidth="36.0" layoutX="340.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a4person" fitHeight="47.0" fitWidth="36.0" layoutX="450.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a5person" fitHeight="47.0" fitWidth="36.0" layoutX="557.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a10person" fitHeight="47.0" fitWidth="36.0" layoutX="557.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a9person" fitHeight="47.0" fitWidth="36.0" layoutX="450.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a8person" fitHeight="47.0" fitWidth="36.0" layoutX="339.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a7person" fitHeight="47.0" fitWidth="36.0" layoutX="231.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a6person" fitHeight="47.0" fitWidth="36.0" layoutX="123.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="a11person" fitHeight="47.0" fitWidth="36.0" layoutX="122.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@locked.png" />
                      </image>
                   </ImageView>
                </children>
