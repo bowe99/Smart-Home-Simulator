@@ -200,6 +200,10 @@ public class SmartHomeSimulatorController {
     @FXML private ImageView a23person;
     @FXML private ImageView a24person;
     @FXML private ImageView a25person;
+
+    @FXML private ImageView awayIcon1;
+    @FXML private ImageView awayIcon2;
+
     @FXML private TextArea outputConsole;
 
     @FXML private ListView allLightsListView;
@@ -249,6 +253,7 @@ public class SmartHomeSimulatorController {
     private javafx.scene.image.Image closedWindowIcon = new javafx.scene.image.Image(getClass().getResource("closedwindow.png").toExternalForm());
     private javafx.scene.image.Image personIcon = new javafx.scene.image.Image(getClass().getResource("person.png").toExternalForm());
     private javafx.scene.image.Image peopleIcon = new javafx.scene.image.Image(getClass().getResource("people.jpg").toExternalForm());
+
 
 
 
@@ -347,6 +352,9 @@ public class SmartHomeSimulatorController {
         layoutViewText.setText("Turn On Simulator for House View");
         layoutViewText.setTranslateX(-80);
         layoutViewText.setOpacity(1);
+        awayIcon1.setVisible(false);
+        awayIcon2.setVisible(false);
+
         for (int Counter = 0; Counter < house.getRooms().size(); Counter++) {
             if (house.getRooms().get(Counter).getId().equals("area1")) {
                 area1.setText(house.getRooms().get(Counter).getName());
@@ -976,6 +984,20 @@ public class SmartHomeSimulatorController {
 }
     public void changeAwayStatus() {
         securityModule.toggleAwayMode();
+        if (securityModule.getAwayMode())
+        {
+            awayIcon1.setVisible(true);
+            awayIcon2.setVisible(true);
+            layoutViewText.setTranslateX(-88);       
+            layoutViewText.setText("House View - Away Mode Activated");
+        }
+        else 
+        {
+            awayIcon1.setVisible(false);
+            awayIcon2.setVisible(false);
+            layoutViewText.setTranslateX(20); 
+            layoutViewText.setText("House View");      
+        }
     }
     /**
      * Add security Light

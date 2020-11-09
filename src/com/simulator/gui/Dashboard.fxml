@@ -762,6 +762,16 @@
                         <Image url="@locked.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="awayIcon1" fitHeight="47.0" fitWidth="36.0" layoutX="105.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@away.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="awayIcon2" fitHeight="47.0" fitWidth="36.0" layoutX="478.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@away.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <TextArea fx:id="outputConsole" layoutX="160.0" layoutY="430.0" prefHeight="151.0" prefWidth="542.0" promptText="This is the console" />
