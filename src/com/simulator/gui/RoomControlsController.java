@@ -53,6 +53,11 @@ public class RoomControlsController implements Initializable {
     private String selectedDoor;
     private String selectedWindow;
 
+    
+    /** 
+     * Populates the drop down menu with a list of rooms, then populates the Lights, Doors and Windows ComboBox based on room selection
+     * @param event
+     */
     @FXML
     void selectingRoom(MouseEvent event) {
         if (SimulationParameters.getInstance().getSimulationStatus() == true) {
@@ -96,6 +101,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
+    
+    /** 
+     * Waits to see selected light and then refreshes colours of the buttons to show whether they are on or off
+     * @param event
+     */
     @FXML
     void modifyLight(MouseEvent event) {
         if (SimulationParameters.getInstance().getSimulationStatus() == true) {
@@ -128,6 +138,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
+    
+    /** 
+     * Waits to see selected door and then refreshes colours of the buttons to show whether they are on or off
+     * @param event
+     */
     @FXML
     void modifyDoor(MouseEvent event) {
         if (SimulationParameters.getInstance().getSimulationStatus() == true) {
@@ -158,6 +173,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
+    
+    /** 
+     * Waits to see selected window and then refreshes colours of the buttons to show whether they are on or off
+     * @param event
+     */
     @FXML
     void modifyWindow(MouseEvent event) {
         if (SimulationParameters.getInstance().getSimulationStatus() == true) {
@@ -188,6 +208,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
+    
+    /** 
+     * turns the selected light on and then refreshes the light buttons colours to reflect whether they are on or off
+     * @param event
+     */
     @FXML
     void lightON(MouseEvent event) {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
@@ -211,6 +236,11 @@ public class RoomControlsController implements Initializable {
 
     }
 
+    
+    /** 
+     * turns the selected light off and then refreshes the light buttons colours to reflect whether they are on or off
+     * @param event
+     */
     @FXML
     void lightOff(MouseEvent event) {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
@@ -233,6 +263,11 @@ public class RoomControlsController implements Initializable {
         }
     }
 
+    
+    /** 
+     * turns the selected light Auto on and then refreshes the light buttons colours to reflect whether they are on or off
+     * @param event
+     */
     @FXML
     void lightAutoOn(MouseEvent event) {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
@@ -255,6 +290,11 @@ public class RoomControlsController implements Initializable {
         }
     }
 
+    
+    /** 
+     * turns the selected light Auto off and then refreshes the light buttons colours to reflect whether they are on or off
+     * @param event
+     */
     @FXML
     void lightAutoOff(MouseEvent event) {
         if (currentLight == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
@@ -277,6 +317,10 @@ public class RoomControlsController implements Initializable {
         }
     }
 
+    
+    /** 
+     * Unlocks the selected door and then refreshes the door buttons colours to reflect whether they are unlocked or locked
+     */
     @FXML
     void doorUnlock(MouseEvent event) {
         if (currentDoor == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
@@ -299,6 +343,11 @@ public class RoomControlsController implements Initializable {
         }
     }
 
+    
+    /** 
+     * locks the selected door and then refreshes the door buttons colours to reflect whether they are unlocked or locked
+     * @param event
+     */
     @FXML
     void doorLock(MouseEvent event) {
         if (currentDoor == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
@@ -322,6 +371,11 @@ public class RoomControlsController implements Initializable {
 
     }
 
+    
+    /** 
+     * opens the selected window and then refreshes the window buttons colours to reflect whether they are opened or closed
+     * @param event
+     */
     @FXML
     void windowOpen(MouseEvent event) {
         if (currentWindow == null || SimulationParameters.getInstance().getSimulationStatus() == false) {
@@ -355,6 +409,11 @@ public class RoomControlsController implements Initializable {
             }
     }
 
+    
+     /** 
+     * closes the selected window and then refreshes the window buttons colours to reflect whether they are opened or closed
+     * @param event
+     */
     @FXML
     void windowClose(MouseEvent event) {
         if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
@@ -388,6 +447,9 @@ public class RoomControlsController implements Initializable {
         }
     }
 
+    /** 
+     * changes the background colour of button based on the status of their boolean
+     */
     @FXML 
     void changeLightButtonsColours(){
         if(currentLight.getOnOff()==true){
@@ -399,7 +461,9 @@ public class RoomControlsController implements Initializable {
             lightOff.setStyle("-fx-background-color: #FF0000");
         }
     }
-
+    /** 
+     * changes the background colour of button based on the status of their boolean
+     */
     @FXML 
     void changeLightAutoButtonsColours(){
         if(currentLight.getAuto()==true){
@@ -411,7 +475,9 @@ public class RoomControlsController implements Initializable {
             lightAutoOff.setStyle("-fx-background-color: #FF0000");
         }
     }
-
+    /** 
+     * changes the background colour of button based on the status of their boolean
+     */
     @FXML 
     void changeDoorButtonsColours(){
         if(currentDoor.getLockedStatus()==false){
@@ -423,7 +489,9 @@ public class RoomControlsController implements Initializable {
             doorLock.setStyle("-fx-background-color: #FF0000");
         }
     }
-
+    /** 
+     * changes the background colour of button based on the status of their boolean
+     */
     @FXML 
     void changeWindowButtonsColours(){
         if(currentWindow.getOpenOrClosed()==true){
@@ -435,7 +503,9 @@ public class RoomControlsController implements Initializable {
             windowClose.setStyle("-fx-background-color: #FF0000");
         }
     }
-
+    /** 
+     * resets the colours of all buttons to their initial state
+     */
     @FXML 
     void resetAllButtonColours(){
         lightOn.setStyle("-fx-all: initial");
@@ -446,28 +516,14 @@ public class RoomControlsController implements Initializable {
         doorLock.setStyle("-fx-all: initial");
         windowOpen.setStyle("-fx-all: initial");
         windowClose.setStyle("-fx-all: initial");
-    }
-    
-    /**
-     * Closes the Room Control Panel window pop-up.
-     * @param event Referring to a mouse activity by the user
+    } 
+    /** 
+     * @param location
+     * @param resources
      */
-    @FXML
-    void closeWindow (MouseEvent event){
-        try{
-            Stage stage = (Stage) finished.getScene().getWindow();
-            stage.close();
-           }
-        catch (Exception e){
-        e.printStackTrace();
-        }
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Initializing !!!!!!");
-        
-
+        System.out.println("Initializing RoomControls");
     }
 
 }

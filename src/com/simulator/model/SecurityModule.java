@@ -8,10 +8,9 @@ import java.util.Map;
 import com.simulator.gui.Logger;
 
 import javafx.scene.control.ToggleButton;
-
-/*
-    Security module is the
-*/
+/**
+ * Security module used to monitor presence of individuals in different rooms as well as invoke away mode
+ */
 public class SecurityModule extends Observer{
     private ToggleButton awayToggle;
     private boolean isAwayMode;
@@ -22,7 +21,9 @@ public class SecurityModule extends Observer{
     private int motionDetectedTime;
     private List<Profile> profiles;
 
-
+/**
+ * Constructor initializing attributes
+ */
     public SecurityModule(List<Profile> profiles, ToggleButton awayToggle){
         this.awayToggle = awayToggle;
         this.profiles = profiles;
@@ -37,14 +38,26 @@ public class SecurityModule extends Observer{
         this.lightOffTime = 360;
     }
 
+    
+    /** 
+     * Add a light
+     * @param light
+     */
     public void addLight(Light light){
         this.lightsOnWhenAway.add(light);
     }
     
+    
+    /** 
+     * Remove a light
+     * @param light
+     */
     public void removeLight(Light light){
         this.lightsOnWhenAway.remove(light);
     }
-
+    /**
+     * Turn away mode on
+     */
     public void toggleAwayMode(){
         if(this.isAwayMode == false){
             for(Profile profile: profiles){
@@ -66,17 +79,34 @@ public class SecurityModule extends Observer{
         }
     }
 
+    
+    /** 
+     * Get the status of away mode
+     * @return boolean
+     */
     public boolean getAwayMode(){
         return this.isAwayMode;
     }
 
 
+    
+    /** 
+     * Save the settings that were input
+     * @param startTime
+     * @param endTime
+     * @param detectionTime
+     */
     public void saveSettings(int startTime, int endTime, int detectionTime){
         this.motionDetectedTime = detectionTime;
         this.lightOnTime = startTime;
         this.lightOffTime = endTime;
     }
 
+    
+    /** 
+     * Update the location of the profile
+     * @param profile
+     */
     @Override
     public void updateLocation(Profile profile) {
         // Checks if current room is in the House
@@ -94,6 +124,11 @@ public class SecurityModule extends Observer{
         }
     }
 
+    
+    /** 
+     * Update the time 
+     * @param time
+     */
     @Override
     public void updateTime(int time) {
         if(this.isAwayMode){

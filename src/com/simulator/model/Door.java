@@ -15,14 +15,23 @@ public class Door extends Entryway{
         this.locked = false;
     }
 
+    /**
+     * set the locked boolean to true
+     */
     public void setLocked(){
         this.locked = true;
     }
     
+    /**
+     * set the locked boolean to false
+     */
     public void setUnlocked(){
         this.locked = false;
     }
-
+    
+    /** 
+     * @return boolean
+     */
     public boolean getLockedStatus(){
         return locked;
     }
