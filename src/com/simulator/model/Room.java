@@ -3,7 +3,7 @@ package com.simulator.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room {
+public class Room{
     private String name;
     private String id;
     private List<Door> doors;
@@ -201,5 +201,19 @@ public class Room {
             windowsListString.add(windows.get(i).getName());
         }
         return windowsListString;
+    }
+
+    public void turnOnAutoLights(){
+        for (Light l : lights) {
+            if(l.getAuto())
+                l.setToOn();
+        }
+    }
+
+    public void turnOffAutoLights(){
+        for (Light l : lights) {
+            if(l.getAuto())
+                l.setToOff();
+        }
     }
 }

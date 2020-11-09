@@ -201,8 +201,19 @@ public class SimulationParameters{
      */
     public void setUserLocation(String userName, Room destination){
         for (Profile p : allUsers) {
-            if(p.getName().equals(userName))
+            if(p.getName().equals(userName)) {
+                boolean otherUsersInRoom = false;
+                for (Profile otherUser : allUsers) {
+                    if(otherUser.getCurrentRoom() == p.getCurrentRoom() && otherUser != p) {
+                        otherUsersInRoom = true;
+                        break;
+                    }
+                }
+                if(!otherUsersInRoom)
+                    p.getCurrentRoom().turnOffAutoLights();
                 p.setCurrentRoom(destination);
+                p.getCurrentRoom().turnOnAutoLights();
+            }
         }
     }
 

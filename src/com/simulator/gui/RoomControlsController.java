@@ -232,17 +232,10 @@ public class RoomControlsController implements Initializable {
                 return;
             }
             else {
-                    if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
-                System.out.println("lightON");
-                currentLight.setToOn();
-                changeLightButtonsColours();
-                Logger.getInstance().ouputToConsole(currentLight.getName() + " is now set to ON");
-            }
-            try{
-                Logger.getInstance().outputToLogFile(currentLight.getName()+" is now set to ON");
-            }
-            catch(Exception e){
-                System.out.println("Could not write to txt file");
+                if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+                    System.out.println("lightON");
+                    currentLight.setToOn();
+                    changeLightButtonsColours();
             }
              }
         }
@@ -262,17 +255,10 @@ public class RoomControlsController implements Initializable {
                 return;
             }
             else {
-                    if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
-                System.out.println("lightOFF");
-                currentLight.setToOff();
-                changeLightButtonsColours();
-                Logger.getInstance().ouputToConsole(currentLight.getName() + " is now set to OFF");
-            }
-            try{
-                Logger.getInstance().outputToLogFile(currentLight.getName()+" is now set to OFF");
-            }
-            catch(Exception e){
-                System.out.println("Could not write to txt file");
+                if(lightPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
+                    System.out.println("lightOFF");
+                    currentLight.setToOff();
+                    changeLightButtonsColours();
             }
              }
         }
@@ -296,14 +282,8 @@ public class RoomControlsController implements Initializable {
                 System.out.println("lightAutoOn");
                 currentLight.setAutoOn();
                 changeLightAutoButtonsColours();
-                Logger.getInstance().ouputToConsole(currentLight.getName() + " is now set to AUTO");
             }
-            try{
-                Logger.getInstance().outputToLogFile(currentLight.getName()+" is now set to AUTO");
-            }
-            catch(Exception e){
-                System.out.println("Could not write to txt file");
-            }
+
              }
         }
     }
@@ -326,13 +306,6 @@ public class RoomControlsController implements Initializable {
                 System.out.println("lightAutoOFF");
                 currentLight.setAutoOff();
                 changeLightAutoButtonsColours();
-                Logger.getInstance().ouputToConsole(currentLight.getName() + " is no longer set to AUTO");
-            }
-            try{
-                Logger.getInstance().outputToLogFile(currentLight.getName() + " is no longer set to AUTO");
-            }
-            catch(Exception e){
-                System.out.println("Could not write to txt file");
             }
              }
         }
