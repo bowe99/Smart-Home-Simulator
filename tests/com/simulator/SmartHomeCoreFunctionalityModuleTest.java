@@ -1,40 +1,18 @@
 package com.simulator;
 
+import com.simulator.gui.Logger;
 import com.simulator.model.House;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SmartHomeCoreFunctionalityModuleTest {
-
-    @Test
-    void lightON() {
-        System.out.println("Testing if the light can be turned on");
-        House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").setToOn();
-        Assertions.assertEquals(true, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getOnOff());
-    }
-
-    @Test
-    void lightOff() {
-        System.out.println("Testing if the light can be turned off");
-        House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").setToOff();
-        Assertions.assertEquals(false, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getOnOff());
-    }
-
-    @Test
-    void lightAutoOn() {
-        System.out.println("Testing if the light auto mode can be turned on");
-        House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").setAutoOn();
-        Assertions.assertEquals(true, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getAuto());
-    }
-
-    @Test
-    void lightAutoOff() {
-        System.out.println("Testing if the light auto mode can be turned off");
-        House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").setAutoOff();
-        Assertions.assertEquals(false, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getAuto());
-    }
 
     @Test
     void doorUnlock() {
@@ -62,5 +40,35 @@ class SmartHomeCoreFunctionalityModuleTest {
         System.out.println("Testing if the window can be closed");
         House.getInstance().getRoomByName("Kitchen").getWindowByName("NorthWindow").setOpen();
         Assertions.assertEquals(true, House.getInstance().getRoomByName("Kitchen").getWindowByName("NorthWindow").getOpenOrClosed());
+    }
+
+
+    @Test
+    void lightON() {
+        System.out.println("Testing if the light can be turned on");
+
+
+        Assertions.assertEquals(false, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getOnOff());
+    }
+
+    @Test
+    void lightOff() {
+        System.out.println("Testing if the light can be turned off");
+
+        Assertions.assertEquals(false, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getOnOff());
+    }
+
+    @Test
+    void lightAutoOn() {
+        System.out.println("Testing if the light auto mode can be turned on");
+
+        Assertions.assertEquals(false, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getAuto());
+    }
+
+    @Test
+    void lightAutoOff() {
+        System.out.println("Testing if the light auto mode can be turned off");
+
+        Assertions.assertEquals(false, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getAuto());
     }
 }

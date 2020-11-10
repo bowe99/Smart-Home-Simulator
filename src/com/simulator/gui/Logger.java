@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.format.TextStyle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -14,14 +15,13 @@ import javafx.scene.control.TextArea;
 public class Logger {
 
     @FXML
-    private static TextArea outputConsole;
+    private static TextArea outputConsole = new TextArea();
 
     private static Logger instance = null;
 
     private Logger() {
     }
 
-    
     /** 
      * creates a new instance of the Logger object to be contained within the instance Logger object
      * @param outputConsole2
