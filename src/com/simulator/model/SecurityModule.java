@@ -143,13 +143,11 @@ public class SecurityModule extends Observer{
             if(time == lightOnTime){
                 for(Light light : lightsOnWhenAway){
                     light.setToOn();
-                    Logger.getInstance().ouputToConsole(String.format("%s was turned on", light.getName()));
                 }
             }
             else if(time == lightOffTime){
                 for(Light light : lightsOnWhenAway){
                     light.setToOff();
-                    Logger.getInstance().ouputToConsole(String.format("%s was turned off", light.getName()));
 
                 }
             }
