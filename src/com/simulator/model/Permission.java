@@ -2,6 +2,9 @@ package com.simulator.model;
 
 import com.simulator.gui.Logger;
 
+/**
+ * Class type permission, used to regulate what individuals have permission for what
+ */
 public class Permission
 {
     private PERMISSION_TYPE parentPermission;
@@ -24,6 +27,12 @@ public class Permission
         this.strangerPermission = strangerPermission;
     }
 
+    
+    /** 
+     * Set the permission type for each type of user
+     * @param userType
+     * @param permissionType
+     */
     public void setPermissionForUserType(USER_TYPE userType, PERMISSION_TYPE permissionType)
     {
         switch(userType) {
@@ -42,6 +51,12 @@ public class Permission
         }
     }
 
+    
+    /** 
+     * Get the permission type based on the user given
+     * @param userType
+     * @return PERMISSION_TYPE
+     */
     public PERMISSION_TYPE getPermissionType(USER_TYPE userType)
     {
         switch(userType) {
@@ -57,6 +72,13 @@ public class Permission
         return PERMISSION_TYPE.NONE;
     }
 
+    
+    /** 
+     * Check if an individual has permission based on the profile provided and the room provided
+     * @param requestingUser
+     * @param operationLocation
+     * @return boolean
+     */
     public boolean checkPermission(Profile requestingUser, Room operationLocation)
     {
         PERMISSION_TYPE permissionType = null;

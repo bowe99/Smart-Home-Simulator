@@ -8,6 +8,9 @@ import java.nio.file.StandardOpenOption;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
+/**
+ * This is a singleton class used to hold the outputConsole so it can be written to by all that need it
+ */
 public class Logger {
 
     @FXML

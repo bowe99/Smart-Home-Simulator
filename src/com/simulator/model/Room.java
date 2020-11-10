@@ -3,7 +3,10 @@ package com.simulator.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room{
+/**
+ * class type Room used to create Room objects which have doors, windows, a room motionsensor, a name and an ID
+ */
+public class Room {
     private String name;
     private String id;
     private List<Door> doors;

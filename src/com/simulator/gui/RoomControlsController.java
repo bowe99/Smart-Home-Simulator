@@ -3,9 +3,6 @@ package com.simulator.gui;
 import com.simulator.model.*;
 
 import javafx.application.Platform;
-/**
- * This is the controller class for the RoomControls.fxml file
- */
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,6 +28,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * This is the controller class for the RoomControls.fxml file
+ */
 public class RoomControlsController implements Initializable {
 
     @FXML private ComboBox<String> roomList = new ComboBox<String>();

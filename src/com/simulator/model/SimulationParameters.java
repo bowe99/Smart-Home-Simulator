@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * A simulationParameters class using the singleton pattern to create one instance that can be accessed anywhere
+ */
 public class SimulationParameters{
     private static SimulationParameters instance = null;
     private Time time; //represents minutes of the day (0-1440)
