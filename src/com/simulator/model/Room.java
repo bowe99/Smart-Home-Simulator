@@ -203,6 +203,9 @@ public class Room{
         return windowsListString;
     }
 
+    /**
+     * Turn on all lights in the room that are set to auto
+     */
     public void turnOnAutoLights(){
         for (Light l : lights) {
             if(l.getAuto())
@@ -210,6 +213,9 @@ public class Room{
         }
     }
 
+    /**
+     * turn off all lights in room that are set to auto
+     */
     public void turnOffAutoLights(){
         for (Light l : lights) {
             if(l.getAuto())

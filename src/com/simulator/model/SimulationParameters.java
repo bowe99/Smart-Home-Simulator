@@ -196,6 +196,7 @@ public class SimulationParameters{
     
     /** 
      * Set the User Location
+     * Check if auto lights need to be turned on
      * @param userName
      * @param destination
      */
