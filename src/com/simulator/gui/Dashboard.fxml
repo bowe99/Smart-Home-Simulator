@@ -80,11 +80,6 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="SHS">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
                   <Tab fx:id="shcTab" text="SHC">
                      <content>
 
