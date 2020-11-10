@@ -199,13 +199,25 @@ public class SimulationParameters{
     
     /** 
      * Set the User Location
+     * Check if auto lights need to be turned on
      * @param userName
      * @param destination
      */
     public void setUserLocation(String userName, Room destination){
         for (Profile p : allUsers) {
-            if(p.getName().equals(userName))
+            if(p.getName().equals(userName)) {
+                boolean otherUsersInRoom = false;
+                for (Profile otherUser : allUsers) {
+                    if(otherUser.getCurrentRoom() == p.getCurrentRoom() && otherUser != p) {
+                        otherUsersInRoom = true;
+                        break;
+                    }
+                }
+                if(!otherUsersInRoom)
+                    p.getCurrentRoom().turnOffAutoLights();
                 p.setCurrentRoom(destination);
+                p.getCurrentRoom().turnOnAutoLights();
+            }
         }
     }
 
