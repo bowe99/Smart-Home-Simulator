@@ -1,4 +1,0 @@
-FrontDoorLight1 is now set to ON
-IslandLight1 is now set to ON
-FrontDoorLight1 is now set to OFF
-IslandLight1 is now set to OFF
