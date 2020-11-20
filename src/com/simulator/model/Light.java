@@ -1,6 +1,6 @@
 package com.simulator.model;
 
-import com.simulator.gui.Logger;
+import com.simulator.controller.Logger;
 
 /**
  * Represents a light (or group of lights operated by a common switch) within the simulation

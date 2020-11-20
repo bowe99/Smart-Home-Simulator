@@ -1,4 +1,4 @@
-package com.simulator.gui;
+package com.simulator.controller;
 
 import com.simulator.model.Profile;
 import com.simulator.model.Room;
@@ -7,7 +7,6 @@ import com.simulator.model.SecurityModule;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -18,12 +17,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -37,17 +31,8 @@ import java.util.TimerTask;
 
 import com.simulator.model.*;
 import javafx.collections.FXCollections;
-import javafx.scene.image.Image;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
-import javafx.stage.Stage;
-
-import java.io.File;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * This is the controller class for the RoomControls.fxml file AND the Dashboard.fxml file

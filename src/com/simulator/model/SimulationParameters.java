@@ -1,6 +1,6 @@
 package com.simulator.model;
 
-import com.simulator.gui.Logger;
+import com.simulator.controller.Logger;
 
 import java.io.*;
 import java.text.SimpleDateFormat;

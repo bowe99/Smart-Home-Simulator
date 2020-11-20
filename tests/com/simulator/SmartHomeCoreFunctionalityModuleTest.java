@@ -1,12 +1,6 @@
 package com.simulator;
 
-import com.simulator.gui.Logger;
 import com.simulator.model.House;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
