@@ -227,13 +227,14 @@ public class SmartHomeSimulatorController {
     private String selectedDoor;
     private String selectedWindow;
 
-    private javafx.scene.image.Image lightIcon = new javafx.scene.image.Image(getClass().getResource("lightOn.jpg").toExternalForm());
-    private javafx.scene.image.Image unlockedIcon = new javafx.scene.image.Image(getClass().getResource("unlocked.png").toExternalForm());
-    private javafx.scene.image.Image lockedIcon = new javafx.scene.image.Image(getClass().getResource("locked.png").toExternalForm());
-    private javafx.scene.image.Image openWindowIcon = new javafx.scene.image.Image(getClass().getResource("openwindow.png").toExternalForm());
-    private javafx.scene.image.Image closedWindowIcon = new javafx.scene.image.Image(getClass().getResource("closedwindow.png").toExternalForm());
-    private javafx.scene.image.Image personIcon = new javafx.scene.image.Image(getClass().getResource("person.png").toExternalForm());
-    private javafx.scene.image.Image peopleIcon = new javafx.scene.image.Image(getClass().getResource("people.jpg").toExternalForm());
+    private static final String RESOURCE_PATH = "/com/simulator/view/";
+    private javafx.scene.image.Image lightIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "lightOn.jpg").toExternalForm());
+    private javafx.scene.image.Image unlockedIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "unlocked.png").toExternalForm());
+    private javafx.scene.image.Image lockedIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "locked.png").toExternalForm());
+    private javafx.scene.image.Image openWindowIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "openwindow.png").toExternalForm());
+    private javafx.scene.image.Image closedWindowIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "closedwindow.png").toExternalForm());
+    private javafx.scene.image.Image personIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "person.png").toExternalForm());
+    private javafx.scene.image.Image peopleIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "people.jpg").toExternalForm());
 
 
 
@@ -299,7 +300,7 @@ public class SmartHomeSimulatorController {
     @FXML
     void openEditor(MouseEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ParameterEditor.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(RESOURCE_PATH + "ParameterEditor.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initOwner(simulationToggle.getScene().getWindow());

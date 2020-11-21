@@ -21,7 +21,7 @@ public class SmartHomeSimulator extends Application{
 	@Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/simulator/view/Dashboard.fxml"));
         Scene rootScene = new Scene(root);
         primaryStage.setScene(rootScene);
         primaryStage.setTitle("Smart Home Simulator");
