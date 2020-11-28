@@ -234,7 +234,7 @@ public class SmartHomeSimulatorController {
         awayIcon1.setVisible(false);
         awayIcon2.setVisible(false);
 
-        for (int counter = 0; counter <= NUMBER_OF_GRID_ELEMENTS; counter++) {
+        for (int counter = 1; counter <= NUMBER_OF_GRID_ELEMENTS; counter++) {
             areas[counter].setOpacity(1);//necessary?
             areas[counter].setVisible(false);
             lightImages[counter].setVisible(false);
