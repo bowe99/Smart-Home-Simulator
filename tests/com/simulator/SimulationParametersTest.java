@@ -1,12 +1,9 @@
 package com.simulator;
 
-import com.simulator.gui.Logger;
 import com.simulator.model.SimulationParameters;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import org.junit.jupiter.api.Test;
-
-import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

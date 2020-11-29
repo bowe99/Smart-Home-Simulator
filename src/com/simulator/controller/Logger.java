@@ -1,10 +1,9 @@
-package com.simulator.gui;
+package com.simulator.controller;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.format.TextStyle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;

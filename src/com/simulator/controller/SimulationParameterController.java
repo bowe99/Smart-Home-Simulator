@@ -1,4 +1,4 @@
-package com.simulator.gui;
+package com.simulator.controller;
 
 import com.simulator.model.House;
 import com.simulator.model.Profile;
