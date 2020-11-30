@@ -104,22 +104,22 @@ public class Permission
                 if(requestingUser.getCurrentRoom() != null && !requestingUser.getCurrentRoom().equals("Away"))
                     return true;
                 else
-                    Logger.getInstance().ouputToConsole("User must be in the house to perform the requested action");
+                    Logger.getInstance().outputToConsole("User must be in the house to perform the requested action");
                 return false;
             case IN_ROOM:
                 if(requestingUser.getCurrentRoom().equals(operationLocation))
                     return true;
                 else
-                    Logger.getInstance().ouputToConsole("User must be in the room to perform the requested action");
+                    Logger.getInstance().outputToConsole("User must be in the room to perform the requested action");
                 return false;
             case AWAY:
                 if(requestingUser.getCurrentRoom().getName().equals("Away"))
                     return true;
                 else
-                    Logger.getInstance().ouputToConsole("User must be away to perform the requested action");
+                    Logger.getInstance().outputToConsole("User must be away to perform the requested action");
                 return false;
         }
-        Logger.getInstance().ouputToConsole("User is not allowed to perform the requested action");
+        Logger.getInstance().outputToConsole("User is not allowed to perform the requested action");
         return false;
     }
 }

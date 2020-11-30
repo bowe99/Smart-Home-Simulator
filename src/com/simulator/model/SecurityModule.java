@@ -9,7 +9,7 @@ import javafx.scene.control.ToggleButton;
 /**
  * Security module used to monitor presence of individuals in different rooms as well as invoke away mode
  */
-public class SecurityModule extends Observer{
+public class SecurityModule extends SecurityObserver{
     private ToggleButton awayToggle;
     private boolean isAwayMode;
     private boolean detectionMonitored;
@@ -66,21 +66,21 @@ public class SecurityModule extends Observer{
             if(awayModePermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), SimulationParameters.getInstance().getCurrentUser().getCurrentRoom())) {
                 for (Profile profile : profiles) {
                     if (!profile.getUserType().equals(USER_TYPE.STRANGER) && !profile.getCurrentRoom().getName().equals("Away")) {
-                        Logger.getInstance().ouputToConsole(String.format("Unable to enable away mode: %s is not Away", profile.getName()));
+                        Logger.getInstance().outputToConsole(String.format("Unable to enable away mode: %s is not Away", profile.getName()));
                         this.awayToggle.setSelected(false);
                         return;
                     }
                 }
                 this.isAwayMode = true;
                 this.awayToggle.setText("On");
-                Logger.getInstance().ouputToConsole("Away mode has been successfully enabled");
+                Logger.getInstance().outputToConsole("Away mode has been successfully enabled");
             }
         }
         else{
             if(awayModePermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), SimulationParameters.getInstance().getCurrentUser().getCurrentRoom())) {
                 this.isAwayMode = false;
                 this.awayToggle.setText("Off");
-                Logger.getInstance().ouputToConsole("Away mode has been successfully disabled");
+                Logger.getInstance().outputToConsole("Away mode has been successfully disabled");
             }
         }
     }
@@ -121,10 +121,10 @@ public class SecurityModule extends Observer{
                 this.isAwayMode = false;
                 this.awayToggle.setSelected(false);
                 this.awayToggle.setText("Off");
-                Logger.getInstance().ouputToConsole(String.format("Away mode has been automatically disabled. The following recognized user has entered: %s", profile.getName()));
+                Logger.getInstance().outputToConsole(String.format("Away mode has been automatically disabled. The following recognized user has entered: %s", profile.getName()));
             }
             else if(!profile.getCurrentRoom().getName().equals("Away") && profile.getUserType() == USER_TYPE.STRANGER){
-                Logger.getInstance().ouputToConsole("WARNING: Unrecognized user has entered the house while in away mode");
+                Logger.getInstance().outputToConsole("WARNING: Unrecognized user has entered the house while in away mode");
                 this.detectionMonitored = true;
             }
         }
@@ -154,7 +154,7 @@ public class SecurityModule extends Observer{
                     this.timeOfDetection = time + motionDetectedTime;
                 }
                 else if(time == this.timeOfDetection){
-                    Logger.getInstance().ouputToConsole("ALERT: Authorities have been notified due to unrecognized individual while in away mode");
+                    Logger.getInstance().outputToConsole("ALERT: Authorities have been notified due to unrecognized individual while in away mode");
                     this.timeOfDetection = -1;
                 }
             }

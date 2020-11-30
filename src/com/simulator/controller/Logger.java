@@ -54,7 +54,7 @@ public class Logger {
      * outputs a given string to the Output Console on the Smart home dashboard
      * @param output
      */
-    public void ouputToConsole(String output) {
+    public void outputToConsole(String output) {
         outputConsole.appendText("\n" + output);
     }
 
