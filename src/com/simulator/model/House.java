@@ -197,8 +197,8 @@ public class House {
      * return a list of all the names of the rooms
      * @return List<String>
      */
-    public List<String> getRoomsNameList(){
-        List<String> roomsListString = new ArrayList<String>();
+    public ArrayList<String> getRoomsNameList(){
+        ArrayList<String> roomsListString = new ArrayList<String>();
         for(int i=0; i<rooms.size(); ++i){
             roomsListString.add(rooms.get(i).getName());
         }
