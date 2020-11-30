@@ -1,6 +1,6 @@
 package com.simulator.model;
 
-import com.simulator.gui.Logger;
+import com.simulator.controller.Logger;
 
 /**
  * Class type permission, used to regulate what individuals have permission for what
