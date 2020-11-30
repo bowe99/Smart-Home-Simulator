@@ -73,6 +73,10 @@ public class SmartHomeSimulatorController {
     @FXML private TextField endTimeSecurity;
     @FXML private TextField motionDetectedTimeSecurity;
 
+    @FXML private ListView allRoomsDisplayTemp;
+    @FXML private ListView allRoomsCreateGroups;
+    @FXML private Button displayRoomTempButton;
+
     @FXML private Label lastSaved;
     @FXML private TabPane tabPane;
     @FXML private Tab SHCTab;
@@ -121,6 +125,7 @@ public class SmartHomeSimulatorController {
 
 
     private SecurityModule securityModule;
+    private HeatingModule heatingModule;
     private Timer timer = new Timer();
     Permission securityPermission;
 
@@ -142,7 +147,11 @@ public class SmartHomeSimulatorController {
         setTime(simulation.getTime());
         initializeHouseView();
         setHouseView();
+
+        // Initialize lists in fxml with values from house template
         setLights(house);
+        setRoomsInHeatingModule(house);
+        
         Date currentDateTime = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastSaved.setText(format.format(currentDateTime));
@@ -151,6 +160,7 @@ public class SmartHomeSimulatorController {
         Logger.newInstance(outputConsole);
         Logger.getInstance().resetLogFile();
         this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
+        this.heatingModule = new HeatingModule();
     }
 
     /**
@@ -404,7 +414,7 @@ public class SmartHomeSimulatorController {
                 }
 
                 this.securityModule.saveSettings(startTime, endTime, motionDetectedTime);
-                Logger.getInstance().ouputToConsole("Security settings were successfully updated");
+                Logger.getInstance().outputToConsole("Security settings were successfully updated");
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
@@ -430,6 +440,39 @@ public class SmartHomeSimulatorController {
             allLightsListView.getItems().add(light);
         }
     }
+    
+    
+    /** 
+     * Set the rooms for the lists in the heating module
+     * @param house
+     */
+    @FXML
+    private void setRoomsInHeatingModule(House house){
+        ArrayList<String> roomNameList = new ArrayList<String>();
+
+        roomNameList = this.house.getRoomsNameList();
+
+        for (String room: roomNameList){
+            //Do not want to include Away as a room for the setting of the temperature
+            if(!room.equals("Away")){
+                allRoomsCreateGroups.getItems().add(room);
+                allRoomsDisplayTemp.getItems().add(room);
+            }
+        }
+    }
+
+
+    /** 
+     * Displays the temperature of a room in the console
+     */
+    @FXML
+    private void printRoomTemperature(){
+        String roomName = (String) this.allRoomsDisplayTemp.getSelectionModel().getSelectedItem();
+
+        this.heatingModule.displayTemperatureForRoom(roomName, simulation.getCurrentUser());
+    }
+
+    
     /**
      * Starts the timer
      */
