@@ -8,7 +8,7 @@ import java.util.List;
  * The time class used to keep time and update the time
  */
 public class Time {
-    private List<Observer> observers = new ArrayList<Observer>();
+    private List<SecurityObserver> observers = new ArrayList<SecurityObserver>();
     private int time; //represents minutes of the day (0-1440) 
     private int interval = 60000; //in milliseconds
     private Date date = new Date(); //current date
@@ -91,12 +91,12 @@ public class Time {
     }
 
     public void notifyAllObservers(){
-        for (Observer observer : observers) {
+        for (SecurityObserver observer : observers) {
            observer.updateTime(this.time);
         }
     }
     
-    public void attach(Observer observer){
+    public void attach(SecurityObserver observer){
         observers.add(observer);		
      }
 }

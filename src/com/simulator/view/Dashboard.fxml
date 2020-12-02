@@ -186,15 +186,15 @@
                            <children>
                               <Pane prefHeight="200.0" prefWidth="316.0">
                                  <children>
-                                    <ListView layoutX="19.0" layoutY="8.0" prefHeight="100.0" prefWidth="279.0" />
+                                    <ListView fx:id="allRoomsDisplayTemp" layoutX="19.0" layoutY="8.0" prefHeight="100.0" prefWidth="279.0" />
                                     <TextField layoutX="22.0" layoutY="161.0" promptText="Temperature" />
                                     <Button layoutX="194.0" layoutY="161.0" mnemonicParsing="false" text="Set Temperature" />
-                                    <Button layoutX="96.0" layoutY="115.0" mnemonicParsing="false" text="Display Temperature" />
+                                    <Button fx:id="displayRoomTempButton" layoutX="96.0" layoutY="115.0" mnemonicParsing="false" onAction="#printRoomTemperature" text="Display Temperature" />
                                  </children>
                               </Pane>
                               <Pane layoutY="200.0" prefHeight="197.0" prefWidth="548.0">
                                  <children>
-                                    <ListView layoutX="14.0" layoutY="33.0" prefHeight="70.0" prefWidth="133.0" />
+                                    <ListView fx:id="allRoomsCreateGroups" layoutX="14.0" layoutY="33.0" prefHeight="70.0" prefWidth="133.0" />
                                     <ListView layoutX="168.0" layoutY="33.0" prefHeight="70.0" prefWidth="133.0" />
                                     <Label layoutX="31.0" layoutY="103.0" prefHeight="58.0" prefWidth="93.0" text="Select rooms to create group" textAlignment="CENTER" wrapText="true" />
                                     <TextField layoutX="191.0" layoutY="120.0" prefHeight="25.0" prefWidth="110.0" promptText="Group Name" />

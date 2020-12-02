@@ -66,38 +66,38 @@ public class SimulationParameterController {
         Logger log = Logger.getInstance();
         try{
             simulation.setTemperature(Integer.parseInt(temperatureValue.getText()));
-            log.ouputToConsole("Temperature was successfully updated");
+            log.outputToConsole("Temperature was successfully updated");
         }
         catch (NumberFormatException e){
-            log.ouputToConsole("Error updating temperature, please try again");
+            log.outputToConsole("Error updating temperature, please try again");
         }
 
         try{
             simulation.setDate(dateFormat.parse(dateValue.getEditor().getText()));
-            log.ouputToConsole("Date was successfully updated");
+            log.outputToConsole("Date was successfully updated");
         }
         catch (ParseException e){
-            log.ouputToConsole("Error updating date, please try again");
+            log.outputToConsole("Error updating date, please try again");
         }
 
         Profile user = simulation.getUserByName((String)(currentUserChoice.getValue()));
         if (user != null){
             simulation.setCurrentUser(user);
-            log.ouputToConsole("Current user is now: " + user.getName());
+            log.outputToConsole("Current user is now: " + user.getName());
         }
         else
-            log.ouputToConsole("selected user does not exist within the simulation");
+            log.outputToConsole("selected user does not exist within the simulation");
 
         user = simulation.getUserByName(userProfileChoice.getValue());
         Room room = house.getRoomByName((String)(userLocationChoice.getValue()));
         if (user != null && room != null) {
             simulation.setUserLocation(user.getName(), room);
-            log.ouputToConsole(user.getName() + " has been moved to " + room.getName());
+            log.outputToConsole(user.getName() + " has been moved to " + room.getName());
         }
         else if(user == null)
-            log.ouputToConsole("selected user does not exist within the simulation");
+            log.outputToConsole("selected user does not exist within the simulation");
         else if(room == null)
-            log.ouputToConsole("selected room does not exist within the simulation");
+            log.outputToConsole("selected room does not exist within the simulation");
 
         try{
             int hour = Integer.parseInt(hourValue.getText());
@@ -105,26 +105,26 @@ public class SimulationParameterController {
             if (hour >= 0 && hour < 24) {
                 if (min >= 0 && min < 60) {
                     simulation.setTime(hour * 60 + min);
-                    log.ouputToConsole("Time has been updated successfully");
+                    log.outputToConsole("Time has been updated successfully");
                 }
                 else{
-                   log.ouputToConsole("Minute entry does not fall within an acceptable range");
+                   log.outputToConsole("Minute entry does not fall within an acceptable range");
                 }
             }
             else{
-                log.ouputToConsole("Hour entry does not fall within an acceptable range");
+                log.outputToConsole("Hour entry does not fall within an acceptable range");
             }
         }
         catch (Exception e){
-            log.ouputToConsole("Error updating time, please try again");
+            log.outputToConsole("Error updating time, please try again");
         }
         try{
             int speedFactor = Integer.parseInt(timeSpeed.getText());
             simulation.setTimeInterval(speedFactor);
-            log.ouputToConsole("Time speed has been updated to run at " + speedFactor + "x real time");
+            log.outputToConsole("Time speed has been updated to run at " + speedFactor + "x real time");
         }
         catch (Exception e){
-            log.ouputToConsole("Error updating time speed, please try again");
+            log.outputToConsole("Error updating time speed, please try again");
         }
         closeWindow(event);
     }
