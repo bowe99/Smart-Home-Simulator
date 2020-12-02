@@ -13,6 +13,7 @@ public class Room {
     private List<Window> windows;
     private List<Light> lights;
     private MotionSensor motionSensors;
+    private int temperature;
 
     public Room(String newName, String ID){
         this.id =  ID;
@@ -20,6 +21,7 @@ public class Room {
         this.doors = new ArrayList<>();
         this.windows = new ArrayList<>();
         this.lights = new ArrayList<>();
+        this.temperature = 25;
     }
 
     
@@ -91,6 +93,22 @@ public class Room {
      */
     public String getName() {
         return name;
+    }
+    
+    
+    /** 
+     * Get the temperature of the room
+     * @return int 
+     */
+    public int getTemperature() {
+        return this.temperature;
+    }
+
+    /** 
+     * Set the temperature of the room
+     */
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
     }
 
 

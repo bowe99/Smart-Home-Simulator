@@ -186,10 +186,10 @@
                            <children>
                               <Pane prefHeight="200.0" prefWidth="316.0">
                                  <children>
-                                    <ListView layoutX="19.0" layoutY="8.0" prefHeight="100.0" prefWidth="279.0" />
-                                    <TextField layoutX="22.0" layoutY="161.0" promptText="Temperature" />
-                                    <Button layoutX="194.0" layoutY="161.0" mnemonicParsing="false" text="Set Temperature" />
-                                    <Button layoutX="96.0" layoutY="115.0" mnemonicParsing="false" text="Display Temperature" />
+                                    <ListView fx:id="allRoomsDisplayTemp" layoutX="19.0" layoutY="8.0" prefHeight="100.0" prefWidth="279.0" />
+                                    <TextField fx:id="setTemperatureSingleRoom" layoutX="22.0" layoutY="161.0" promptText="Temperature" />
+                                    <Button layoutX="194.0" layoutY="161.0" mnemonicParsing="false" onAction="#setRoomTemperature" text="Set Temperature" />
+                                    <Button fx:id="displayRoomTempButton" layoutX="96.0" layoutY="115.0" mnemonicParsing="false" onAction="#printRoomTemperature" text="Display Temperature" />
                                  </children>
                               </Pane>
                               <Pane layoutY="200.0" prefHeight="197.0" prefWidth="548.0">

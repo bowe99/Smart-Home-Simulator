@@ -50,7 +50,7 @@ public class Light {
      */
     public void setToOn(){
         this.on = true;
-        Logger.getInstance().ouputToConsole(this.getName() + " is now set to ON");
+        Logger.getInstance().outputToConsole(this.getName() + " is now set to ON");
         try{
             Logger.getInstance().outputToLogFile(this.getName()+" is now set to ON");
         }
@@ -63,7 +63,7 @@ public class Light {
      */
     public void setToOff(){
         this.on = false;
-        Logger.getInstance().ouputToConsole(this.getName() + " is now set to OFF");
+        Logger.getInstance().outputToConsole(this.getName() + " is now set to OFF");
         try{
             Logger.getInstance().outputToLogFile(this.getName()+" is now set to OFF");
         }
@@ -76,7 +76,7 @@ public class Light {
      */
     public void setAutoOn(){
         this.auto = true;
-        Logger.getInstance().ouputToConsole(this.getName() + " is now set to AUTO");
+        Logger.getInstance().outputToConsole(this.getName() + " is now set to AUTO");
         try{
             Logger.getInstance().outputToLogFile(this.getName()+" is now set to AUTO");
         }
@@ -89,7 +89,7 @@ public class Light {
      */
     public void setAutoOff(){
         this.auto = false;
-        Logger.getInstance().ouputToConsole(this.getName() + " is no longer set to AUTO");
+        Logger.getInstance().outputToConsole(this.getName() + " is no longer set to AUTO");
         try{
             Logger.getInstance().outputToLogFile(this.getName() + " is no longer set to AUTO");
         }

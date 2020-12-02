@@ -317,7 +317,7 @@ public class RoomControlsController implements Initializable {
                 System.out.println("doorUnlock");
                 currentDoor.setUnlocked();
                 changeDoorButtonsColours();
-                Logger.getInstance().ouputToConsole(currentDoor.getName() + " is now set to Unlocked");
+                Logger.getInstance().outputToConsole(currentDoor.getName() + " is now set to Unlocked");
             }
             try{
                 Logger.getInstance().outputToLogFile(currentDoor.getName()+" is now set to Unlocked");
@@ -347,7 +347,7 @@ public class RoomControlsController implements Initializable {
                 System.out.println("doorLock");
                 currentDoor.setLocked();
                 changeDoorButtonsColours();
-                Logger.getInstance().ouputToConsole(currentDoor.getName() + " is now set to Locked");
+                Logger.getInstance().outputToConsole(currentDoor.getName() + " is now set to Locked");
             }
             try{
                 Logger.getInstance().outputToLogFile(currentDoor.getName()+" is now set to Locked");
@@ -371,7 +371,7 @@ public class RoomControlsController implements Initializable {
             return;
         }
             else if(currentWindow.getBlockedBoolean()){
-                Logger.getInstance().ouputToConsole(currentWindow.getName()+" is blocked, could not open");
+                Logger.getInstance().outputToConsole(currentWindow.getName()+" is blocked, could not open");
                 try{
                     Logger.getInstance().outputToLogFile(currentWindow.getName()+" is blocked, could not open");
                 }
@@ -390,7 +390,7 @@ public class RoomControlsController implements Initializable {
                 // insert if statement here to check for obstructions
                 currentWindow.setOpen();
                 changeWindowButtonsColours();
-                Logger.getInstance().ouputToConsole(currentWindow.getName() + " is now set to Open");
+                Logger.getInstance().outputToConsole(currentWindow.getName() + " is now set to Open");
             }
             try{
                 Logger.getInstance().outputToLogFile(currentWindow.getName()+" is now set to Open");
@@ -413,7 +413,7 @@ public class RoomControlsController implements Initializable {
             return;
         }
         else if(currentWindow.getBlockedBoolean()){
-            Logger.getInstance().ouputToConsole(currentWindow.getName()+" is blocked, could not close");
+            Logger.getInstance().outputToConsole(currentWindow.getName()+" is blocked, could not close");
             try{
                 Logger.getInstance().outputToLogFile(currentWindow.getName()+" is blocked, could not close");
             }
@@ -430,7 +430,7 @@ public class RoomControlsController implements Initializable {
                     if(windowPermission.checkPermission(SimulationParameters.getInstance().getCurrentUser(), currentRoom)) {
                 currentWindow.setClosed();
                 changeWindowButtonsColours();
-                Logger.getInstance().ouputToConsole(currentWindow.getName() + " is now set to Closed");
+                Logger.getInstance().outputToConsole(currentWindow.getName() + " is now set to Closed");
             }
             try{
             Logger.getInstance().outputToLogFile(currentWindow.getName()+" is now set to Closed");
