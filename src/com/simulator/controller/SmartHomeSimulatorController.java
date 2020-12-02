@@ -471,6 +471,8 @@ public class SmartHomeSimulatorController {
         String selectedRoom = (String) selectedItem;
         int selectedIndex = allRoomsDisplayTemp.getItems().indexOf(selectedItem);
 
+        boolean success;
+
         // Checks if there is a room selected from the list
         if(selectedIndex < 0){
             Logger.getInstance().outputToConsole("No Room was selected unable to update temperature");
@@ -486,9 +488,7 @@ public class SmartHomeSimulatorController {
         try {
             int newTemperatureInt = Integer.parseInt(setTemperatureSingleRoom.getText());
 
-            //TODO add temperature to room here (Logan)
-
-            Logger.getInstance().outputToConsole(String.format("Temperature was Overwritten for room %s to %d degrees Celsius", selectedRoom, newTemperatureInt));
+            success = this.heatingModule.overrideRoomTemperature(selectedRoom, newTemperatureInt, this.simulation.getCurrentUser());
         } catch (Exception e) {
             Logger.getInstance().outputToConsole("Invalid String input for temperature");
             System.out.println(e);
@@ -497,11 +497,13 @@ public class SmartHomeSimulatorController {
         }
 
         // Update listview item with the Overwritten tag
-        if(!selectedRoom.contains(" (Overwritten)")){
-            selectedRoom = selectedRoom + " (Overwritten)";
+        if(success){
+            if(!selectedRoom.contains(" (Overwritten)")){
+                selectedRoom = selectedRoom + " (Overwritten)";
+            }
+            allRoomsDisplayTemp.getItems().remove(selectedIndex);
+            allRoomsDisplayTemp.getItems().add(selectedIndex, selectedRoom);
         }
-        allRoomsDisplayTemp.getItems().remove(selectedIndex);
-        allRoomsDisplayTemp.getItems().add(selectedIndex, selectedRoom);
     }
 
 
@@ -512,6 +514,9 @@ public class SmartHomeSimulatorController {
     private void printRoomTemperature(){
         String roomName = (String) this.allRoomsDisplayTemp.getSelectionModel().getSelectedItem();
 
+        if(roomName.contains(" (Overwritten)")){
+            roomName = roomName.substring(0, roomName.length() - 14);
+        }
         this.heatingModule.displayTemperatureForRoom(roomName, simulation.getCurrentUser());
     }
 
