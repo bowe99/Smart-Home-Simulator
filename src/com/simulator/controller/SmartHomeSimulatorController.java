@@ -462,21 +462,27 @@ public class SmartHomeSimulatorController {
         }
     }
 
-
+    /**
+     * Set the temperature for a specific room in the house
+     */
     @FXML
     private void setRoomTemperature(){
         Object selectedItem = allRoomsDisplayTemp.getSelectionModel().getSelectedItem();
         String selectedRoom = (String) selectedItem;
         int selectedIndex = allRoomsDisplayTemp.getItems().indexOf(selectedItem);
 
+        // Checks if there is a room selected from the list
         if(selectedIndex < 0){
             Logger.getInstance().outputToConsole("No Room was selected unable to update temperature");
         }
 
+        // If entry currently has 'Overwritten' in the name remove it to make it cleaner for the console
         if(selectedRoom.contains(" (Overwritten)")){
             selectedRoom = selectedRoom.substring(0, selectedRoom.length() - 14);
         }
 
+        //This try block will parse the string for an integer value if it fails it will not change the temperature and if
+        // it succeeds it will output to console the new change
         try {
             int newTemperatureInt = Integer.parseInt(setTemperatureSingleRoom.getText());
 
@@ -486,8 +492,11 @@ public class SmartHomeSimulatorController {
         } catch (Exception e) {
             Logger.getInstance().outputToConsole("Invalid String input for temperature");
             System.out.println(e);
+            // On fail we do not want to continue and change the selected listview cell
             return;
         }
+
+        // Update listview item with the Overwritten tag
         if(!selectedRoom.contains(" (Overwritten)")){
             selectedRoom = selectedRoom + " (Overwritten)";
         }
