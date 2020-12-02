@@ -76,6 +76,7 @@ public class SmartHomeSimulatorController {
     @FXML private ListView allRoomsDisplayTemp;
     @FXML private ListView allRoomsCreateGroups;
     @FXML private Button displayRoomTempButton;
+    @FXML private TextField setTemperatureSingleRoom;
 
     @FXML private Label lastSaved;
     @FXML private TabPane tabPane;
@@ -461,6 +462,50 @@ public class SmartHomeSimulatorController {
         }
     }
 
+    /**
+     * Set the temperature for a specific room in the house
+     */
+    @FXML
+    private void setRoomTemperature(){
+        Object selectedItem = allRoomsDisplayTemp.getSelectionModel().getSelectedItem();
+        String selectedRoom = (String) selectedItem;
+        int selectedIndex = allRoomsDisplayTemp.getItems().indexOf(selectedItem);
+
+        boolean success;
+
+        // Checks if there is a room selected from the list
+        if(selectedIndex < 0){
+            Logger.getInstance().outputToConsole("No Room was selected unable to update temperature");
+        }
+
+        // If entry currently has 'Overwritten' in the name remove it to make it cleaner for the console
+        if(selectedRoom.contains(" (Overwritten)")){
+            selectedRoom = selectedRoom.substring(0, selectedRoom.length() - 14);
+        }
+
+        //This try block will parse the string for an integer value if it fails it will not change the temperature and if
+        // it succeeds it will output to console the new change
+        try {
+            int newTemperatureInt = Integer.parseInt(setTemperatureSingleRoom.getText());
+
+            success = this.heatingModule.overrideRoomTemperature(selectedRoom, newTemperatureInt, this.simulation.getCurrentUser());
+        } catch (Exception e) {
+            Logger.getInstance().outputToConsole("Invalid String input for temperature");
+            System.out.println(e);
+            // On fail we do not want to continue and change the selected listview cell
+            return;
+        }
+
+        // Update listview item with the Overwritten tag
+        if(success){
+            if(!selectedRoom.contains(" (Overwritten)")){
+                selectedRoom = selectedRoom + " (Overwritten)";
+            }
+            allRoomsDisplayTemp.getItems().remove(selectedIndex);
+            allRoomsDisplayTemp.getItems().add(selectedIndex, selectedRoom);
+        }
+    }
+
 
     /** 
      * Displays the temperature of a room in the console
@@ -469,6 +514,9 @@ public class SmartHomeSimulatorController {
     private void printRoomTemperature(){
         String roomName = (String) this.allRoomsDisplayTemp.getSelectionModel().getSelectedItem();
 
+        if(roomName.contains(" (Overwritten)")){
+            roomName = roomName.substring(0, roomName.length() - 14);
+        }
         this.heatingModule.displayTemperatureForRoom(roomName, simulation.getCurrentUser());
     }
 
@@ -488,6 +536,12 @@ public class SmartHomeSimulatorController {
                 });
             }
         }, simulation.getTimeInterval() ,simulation.getTimeInterval());
+    }
+
+
+    protected void stopTimer(){
+        this.timer.cancel();
+        System.out.println("Timer has been stopped");
     }
 
     

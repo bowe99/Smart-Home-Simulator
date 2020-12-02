@@ -104,6 +104,13 @@ public class Room {
         return this.temperature;
     }
 
+    /** 
+     * Set the temperature of the room
+     */
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
+
 
     public String getId() {
         return id;
