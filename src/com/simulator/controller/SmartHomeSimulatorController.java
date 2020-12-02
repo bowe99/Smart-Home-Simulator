@@ -76,6 +76,7 @@ public class SmartHomeSimulatorController {
     @FXML private ListView allRoomsDisplayTemp;
     @FXML private ListView allRoomsCreateGroups;
     @FXML private Button displayRoomTempButton;
+    @FXML private TextField setTemperatureSingleRoom;
 
     @FXML private Label lastSaved;
     @FXML private TabPane tabPane;
@@ -462,6 +463,39 @@ public class SmartHomeSimulatorController {
     }
 
 
+    @FXML
+    private void setRoomTemperature(){
+        Object selectedItem = allRoomsDisplayTemp.getSelectionModel().getSelectedItem();
+        String selectedRoom = (String) selectedItem;
+        int selectedIndex = allRoomsDisplayTemp.getItems().indexOf(selectedItem);
+
+        if(selectedIndex < 0){
+            Logger.getInstance().outputToConsole("No Room was selected unable to update temperature");
+        }
+
+        if(selectedRoom.contains(" (Overwritten)")){
+            selectedRoom = selectedRoom.substring(0, selectedRoom.length() - 14);
+        }
+
+        try {
+            int newTemperatureInt = Integer.parseInt(setTemperatureSingleRoom.getText());
+
+            //TODO add temperature to room here (Logan)
+
+            Logger.getInstance().outputToConsole(String.format("Temperature was Overwritten for room %s to %d degrees Celsius", selectedRoom, newTemperatureInt));
+        } catch (Exception e) {
+            Logger.getInstance().outputToConsole("Invalid String input for temperature");
+            System.out.println(e);
+            return;
+        }
+        if(!selectedRoom.contains(" (Overwritten)")){
+            selectedRoom = selectedRoom + " (Overwritten)";
+        }
+        allRoomsDisplayTemp.getItems().remove(selectedIndex);
+        allRoomsDisplayTemp.getItems().add(selectedIndex, selectedRoom);
+    }
+
+
     /** 
      * Displays the temperature of a room in the console
      */
@@ -488,6 +522,12 @@ public class SmartHomeSimulatorController {
                 });
             }
         }, simulation.getTimeInterval() ,simulation.getTimeInterval());
+    }
+
+
+    protected void stopTimer(){
+        this.timer.cancel();
+        System.out.println("Timer has been stopped");
     }
 
     
