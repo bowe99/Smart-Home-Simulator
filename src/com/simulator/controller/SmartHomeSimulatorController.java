@@ -78,7 +78,9 @@ public class SmartHomeSimulatorController {
     @FXML private Tab SHCTab;
     @FXML private RoomControlsController sHCTabPageController;
     @FXML private Tab SHPTab;
-    
+
+    @FXML private ListView allRoomsListViewZone;
+    @FXML private ListView selectedRoomsListForZone;
 
     private House house;
     private SimulationParameters simulation;
@@ -143,6 +145,11 @@ public class SmartHomeSimulatorController {
         initializeHouseView();
         setHouseView();
         setLights(house);
+
+        //Initializing SHH
+
+        setRoomsZonePanel();
+
         Date currentDateTime = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastSaved.setText(format.format(currentDateTime));
@@ -282,6 +289,25 @@ public class SmartHomeSimulatorController {
             }
         }
     }
+
+        //Ended here
+    @FXML
+    private void addRoomToZoneFunction(){
+
+    }
+    @FXML
+    private void removeRoomFromZoneFunction(){
+
+    }
+    @FXML
+    private void setRoomsZonePanel(){
+        ArrayList<String> roomNameList = (ArrayList<String>) House.getInstance().getRoomsNameList();
+
+        for (String room: roomNameList){
+            allRoomsListViewZone.getItems().add(room);
+        }
+    }
+
 
     /**
      * Changes the away status of the simulator.

@@ -194,17 +194,33 @@
                               </Pane>
                               <Pane layoutY="200.0" prefHeight="197.0" prefWidth="548.0">
                                  <children>
-                                    <ListView layoutX="14.0" layoutY="33.0" prefHeight="70.0" prefWidth="133.0" />
-                                    <ListView layoutX="168.0" layoutY="33.0" prefHeight="70.0" prefWidth="133.0" />
-                                    <Label layoutX="31.0" layoutY="103.0" prefHeight="58.0" prefWidth="93.0" text="Select rooms to create group" textAlignment="CENTER" wrapText="true" />
-                                    <TextField layoutX="191.0" layoutY="120.0" prefHeight="25.0" prefWidth="110.0" promptText="Group Name" />
+                                    <ListView fx:id="allRoomsListViewZone" layoutX="14.0" layoutY="33.0" prefHeight="70.0" prefWidth="133.0">
+                                       <contextMenu>
+                                          <ContextMenu>
+                                             <items>
+                                                <MenuItem fx:id="addRoomToZone" mnemonicParsing="false" onAction="#addRoomToZoneFunction" text="Add" />
+                                             </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                    </ListView>
+                                    <ListView fx:id="selectedRoomsListForZone" layoutX="168.0" layoutY="33.0" prefHeight="70.0" prefWidth="133.0" >
+                                       <contextMenu>
+                                          <ContextMenu>
+                                             <items>
+                                                <MenuItem fx:id="removeRoomFromZone" mnemonicParsing="false" onAction="#removeRoomFromZoneFunction" text="Remove" />
+                                             </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                    </ListView>
+                                    <Label layoutX="31.0" layoutY="103.0" prefHeight="58.0" prefWidth="93.0" text="Select rooms to create zone" textAlignment="CENTER" wrapText="true" />
+                                    <TextField layoutX="191.0" layoutY="120.0" prefHeight="25.0" prefWidth="110.0" promptText="Zone Name" />
                                     <Button layoutX="248.0" layoutY="155.0" mnemonicParsing="false" text="Create" />
                                     <ListView layoutX="335.0" layoutY="33.0" prefHeight="66.0" prefWidth="199.0" />
                                     <Label layoutX="335.0" layoutY="14.0" text="Groups" />
                                     <TextField layoutX="335.0" layoutY="113.0" prefHeight="25.0" prefWidth="93.0" promptText="Temperature" />
                                     <ComboBox layoutX="449.0" layoutY="113.0" prefHeight="25.0" prefWidth="85.0" />
                                     <Button layoutX="460.0" layoutY="149.0" mnemonicParsing="false" text="Add Preset" />
-                                    <Label layoutX="17.0" layoutY="14.0" text="Room" />
+                                    <Label layoutX="17.0" layoutY="14.0" text="Rooms" />
                                     <Separator layoutY="-5.0" prefHeight="7.0" prefWidth="548.0" />
                                     <Separator layoutX="316.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="200.0" />
                                  </children></Pane>
