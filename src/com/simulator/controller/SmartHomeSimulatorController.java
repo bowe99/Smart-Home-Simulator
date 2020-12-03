@@ -481,7 +481,7 @@ public class SmartHomeSimulatorController {
         for (String room: roomNameList){
             //Do not want to include Away as a room for the setting of the temperature
             if(!room.equals("Away")){
-                allRoomsCreateGroups.getItems().add(room);
+                allRoomsListViewZone.getItems().add(room);
                 allRoomsDisplayTemp.getItems().add(room);
             }
         }
