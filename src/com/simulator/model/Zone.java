@@ -7,6 +7,7 @@ public class Zone {
     private List<Room> roomArrayList = new ArrayList<Room>();
     private String zoneName;
     private int temperature;
+    private boolean emptyZone;
 
     public Zone(ArrayList<Room> rl, String zN){
         this.roomArrayList = rl;
@@ -21,6 +22,16 @@ public class Zone {
             }
         }
     }
+
+    public boolean isEmptyZone(){
+        if(roomArrayList.size()==0){
+            emptyZone=true;
+        }
+        else emptyZone = false;
+
+        return emptyZone;
+    }
+
     public void setZoneName(String zN){
         this.zoneName = zN;
     }

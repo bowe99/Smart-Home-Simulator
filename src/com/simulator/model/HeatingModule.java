@@ -20,6 +20,10 @@ public class HeatingModule {
         for(int j=0; j<zoneList.size(); ++j){
             if (zoneList.get(j).containsRoom(r)){
                 zoneList.get(j).removeRoomInZoneByName(r);
+                //if the zone is empty, remove it from the heating module
+                if(zoneList.get(j).isEmptyZone()){
+                    zoneList.remove(j);
+                }
             }
         }
     }

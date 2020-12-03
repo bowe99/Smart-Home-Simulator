@@ -5,6 +5,7 @@ import com.simulator.model.Room;
 import com.simulator.model.SecurityModule;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -88,6 +89,9 @@ public class SmartHomeSimulatorController {
     @FXML private ListView allRoomsListViewZone;
     @FXML private ListView selectedRoomsListForZone;
     @FXML private ListView listZones;
+    @FXML private TextField temperatureTextField;
+    @FXML private ComboBox temperatureComboBox;
+    @FXML private Button addPreset;
     @FXML private TextField zoneName;
 
     private House house;
@@ -312,11 +316,21 @@ public class SmartHomeSimulatorController {
         this.selectedRoomsListForZone.getItems().remove((String) selectedItem);
         this.allRoomsListViewZone.getItems().add(selectedItem);
     }
+    @FXML
+    private void addPresetTemperatureToZone(){
+
+    }
 
     @FXML
     private void createZoneButton(){
+        //Check to see if the user selected some entries
+        if(selectedRoomsListForZone.getItems().size()==0){
+            Logger.getInstance().outputToConsole("Please select some entries for the zone");
+            return;
+        }
+
         //check to see if the string already exists or if an invalid length string was entered
-        if(zoneName.getText().length()<1||heatingModule.checkIfValidZoneName(zoneName.getText())){
+        if(zoneName.getText().length()<1||!heatingModule.checkIfValidZoneName(zoneName.getText())){
             Logger.getInstance().outputToConsole("Please enter a valid name");
             return;
         }
@@ -344,6 +358,18 @@ public class SmartHomeSimulatorController {
         newZone.printRoomsInZone();
 
 
+        //Check if there are any non-existant zones that are being displayed in the display Zone window
+        for(int k=0; k<listZones.getItems().size(); ++k){
+            if(heatingModule.checkIfValidZoneName((String) listZones.getItems().get(k))){
+                listZones.getItems().remove(listZones.getItems().get(k));
+            }
+        }
+
+
+
+        //Putting this new Zone into the Zone display window so that a temperature for the zone can be set
+        this.listZones.getItems().addAll(newZone.getZoneName());
+
         //Resetting both RoomList and the selectedRoomsList to their initial values
         this.allRoomsListViewZone.getItems().addAll(this.selectedRoomsListForZone.getItems());
         this.selectedRoomsListForZone.getItems().clear();
@@ -355,13 +381,6 @@ public class SmartHomeSimulatorController {
         for(int i=0; i<newRoomArrayList.size(); ++i){
             Logger.getInstance().outputToConsole(newRoomArrayList.get(i).getName()+" ");
         }
-
-        //Putting this new Zone into the Zone display window so that a temperature for the zone can be set
-
-
-
-
-
     }
 
     /**
