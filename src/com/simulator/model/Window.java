@@ -1,5 +1,7 @@
 package com.simulator.model;
 
+import com.simulator.controller.Logger;
+
 /**
  * Represents a window within the simulation
  */
@@ -15,25 +17,47 @@ public class Window extends Entryway{
         super(newName);
         this.open = false;
     }
+
     /**
      * Set the open boolean to true
+     *
+     * @return boolean representing successful completion of action
      */
-    public void setOpen(){
-        this.open = true;
+    public boolean setOpen(){
+        if(this.blocked && !this.open) {
+            Logger.getInstance().outputToConsole("Window " + this.getName() +
+                    " can not be opened because its path is blocked. \nWindow has remained closed.");
+            return false;
+        }
+        else
+            this.open = true;
+        return true;
     }
-    /** 
+
+    /**
      * Set the open boolean to false
+     *
+     * @return boolean representing successful completion of action
      */
-    public void setClosed(){
-        this.open = false;
+    public boolean setClosed(){
+        if(this.blocked && this.open) {
+            Logger.getInstance().outputToConsole("Window " + this.getName() +
+                    " can not be closed because its path is blocked. \nWindow has remained open.");
+            return false;
+        }
+        else
+            this.open = false;
+        return true;
     }
-    /** 
+
+    /**
      * Set the blocked boolean to true
      */
     public void setBlockedTrue(){
         this.blocked = true;
     }
-    /** 
+
+    /**
      * Set the blocked boolean to false
      */
     public void setBlockedFalse(){
