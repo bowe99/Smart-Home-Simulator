@@ -19,7 +19,7 @@ public class Window extends Entryway{
     }
 
     /**
-     * Set the open boolean to true
+     * Set the open boolean to true (if path is not blocked)
      *
      * @return boolean representing successful completion of action
      */
@@ -35,7 +35,7 @@ public class Window extends Entryway{
     }
 
     /**
-     * Set the open boolean to false
+     * Set the open boolean to false (if path is not blocked)
      *
      * @return boolean representing successful completion of action
      */
