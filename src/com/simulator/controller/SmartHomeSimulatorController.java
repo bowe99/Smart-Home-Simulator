@@ -5,6 +5,7 @@ import com.simulator.model.Room;
 import com.simulator.model.SecurityModule;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -86,6 +87,7 @@ public class SmartHomeSimulatorController {
 
     @FXML private ListView allRoomsListViewZone;
     @FXML private ListView selectedRoomsListForZone;
+    @FXML private TextField zoneName;
 
     private House house;
     private SimulationParameters simulation;
@@ -150,15 +152,9 @@ public class SmartHomeSimulatorController {
         setTime(simulation.getTime());
         initializeHouseView();
         setHouseView();
-
         // Initialize lists in fxml with values from house template
         setLights(house);
         setRoomsInHeatingModule(house);
-
-        //Initializing SHH
-
-        setRoomsZonePanel();
-
         Date currentDateTime = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastSaved.setText(format.format(currentDateTime));
@@ -168,6 +164,7 @@ public class SmartHomeSimulatorController {
         Logger.getInstance().resetLogFile();
         this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
         this.heatingModule = new HeatingModule();
+
     }
 
     /**
@@ -303,21 +300,32 @@ public class SmartHomeSimulatorController {
         //Ended here
     @FXML
     private void addRoomToZoneFunction(){
-
+        Object selectedItem = this.allRoomsListViewZone.getSelectionModel().getSelectedItem();
+        this.selectedRoomsListForZone.getItems().add((String) selectedItem);
+        this.allRoomsListViewZone.getItems().remove(selectedItem);
     }
     @FXML
     private void removeRoomFromZoneFunction(){
-
+        Object selectedItem = this.selectedRoomsListForZone.getSelectionModel().getSelectedItem();
+        this.selectedRoomsListForZone.getItems().remove((String) selectedItem);
+        this.allRoomsListViewZone.getItems().add(selectedItem);
     }
     @FXML
-    private void setRoomsZonePanel(){
-        ArrayList<String> roomNameList = (ArrayList<String>) House.getInstance().getRoomsNameList();
-
-        for (String room: roomNameList){
-            allRoomsListViewZone.getItems().add(room);
+    private void createZoneButton(){
+        String newZoneName = zoneName.getText();
+        ObservableList<String> newZoneObservableList = (ObservableList<String>) this.selectedRoomsListForZone.getItems();
+        ArrayList<Room> newZoneArrayList = new ArrayList<Room>();
+        for(int i=0; i<newZoneObservableList.size(); ++i){
+            newZoneArrayList.add(house.getRoomByName(newZoneObservableList.get(i)));
+        }
+        Zone newZone = new Zone(newZoneArrayList, newZoneName);
+        this.heatingModule.addZone(newZone);
+        //Log new creation
+        Logger.getInstance().outputToConsole("Created a new Zone named \""+newZone.getZoneName()+"\" with rooms: ");
+        for(int i=0; i<newZoneArrayList.size(); ++i){
+            Logger.getInstance().outputToConsole(newZoneArrayList.get(i).getName()+" ");
         }
     }
-
 
     /**
      * Changes the away status of the simulator.

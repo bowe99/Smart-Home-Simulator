@@ -1,13 +1,18 @@
 package com.simulator.model;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.simulator.controller.Logger;
 
 public class HeatingModule {
+    private ArrayList<Zone> zoneList = new ArrayList<Zone>();
 
     public HeatingModule(){
 
+    }
+    public void addZone(Zone z){
+        zoneList.add(z);
     }
 
 
