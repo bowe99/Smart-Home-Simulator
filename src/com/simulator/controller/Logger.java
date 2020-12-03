@@ -39,7 +39,6 @@ public class Logger {
             return null;
         }
     }
-
     
     /** 
      * returns the instance that is held
@@ -48,7 +47,6 @@ public class Logger {
     public static Logger getInstance() {
         return instance;
     }
-
     
     /** 
      * outputs a given string to the Output Console on the Smart home dashboard
