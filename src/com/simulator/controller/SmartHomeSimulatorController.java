@@ -348,7 +348,7 @@ public class SmartHomeSimulatorController {
         }
 
         //check to see if the string already exists or if an invalid length string was entered
-        if(zoneName.getText().length()<1||!heatingModule.checkIfValidZoneName(zoneName.getText())){
+        if(zoneName.getText().length() < 1 || !heatingModule.checkIfValidZoneName(zoneName.getText())){
             Logger.getInstance().outputToConsole("Please enter a valid name");
             return;
         }
@@ -1039,4 +1039,3 @@ public class SmartHomeSimulatorController {
     }
    
 }
-
