@@ -169,6 +169,7 @@ public class SmartHomeSimulatorController {
         Logger.getInstance().resetLogFile();
         this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
         this.heatingModule = new HeatingModule();
+        temperatureComboBox.getItems().addAll("Morning", "Day", "Night");
 
     }
 
@@ -318,7 +319,17 @@ public class SmartHomeSimulatorController {
     }
     @FXML
     private void addPresetTemperatureToZone(){
+        System.out.println("HERE!");
+        int tempPreset = Integer.valueOf(temperatureTextField.getText());
+        System.out.println(tempPreset);
+        String selectedZone = (String)listZones.getSelectionModel().getSelectedItem();
+        System.out.println(selectedZone);
+        String selectedPeriodOfTheDay = (String)temperatureComboBox.getSelectionModel().getSelectedItem();
+        System.out.println(selectedPeriodOfTheDay);
 
+        //Set the new temperature, unless one has already been overwritten for a specific room
+        heatingModule.setTempForZone(selectedZone, selectedPeriodOfTheDay, tempPreset);
+        System.out.println("Came out the other side brother");
     }
 
     @FXML

@@ -36,6 +36,15 @@ public class HeatingModule {
         return true;
     }
 
+    public void setTempForZone(String zoneName, String periodOfTheDay, int temp){
+        for(int i=0; i<zoneList.size(); ++i){
+            if(zoneList.get(i).getZoneName().equalsIgnoreCase(zoneName)){
+                zoneList.get(i).setZoneTemperature(temp, periodOfTheDay);
+                return;
+            }
+        }
+    }
+
     public void displayTemperatureForRoom(String roomName, Profile currentUser){
         if(currentUser.getUserType() == USER_TYPE.STRANGER){
             Logger.getInstance().outputToConsole("[WARNING] Unauthorized action! User does not have the required permissions");
