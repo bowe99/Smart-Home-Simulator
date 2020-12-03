@@ -303,7 +303,6 @@ public class SmartHomeSimulatorController {
         }
     }
 
-        //Ended here
     @FXML
     private void addRoomToSelectedRoomsPanel(){
         Object selectedItem = this.allRoomsListViewZone.getSelectionModel().getSelectedItem();
@@ -319,13 +318,21 @@ public class SmartHomeSimulatorController {
     }
     @FXML
     private void addPresetTemperatureToZone(){
-        System.out.println("HERE!");
+        if(temperatureTextField.getText() ==null || temperatureTextField.getText().trim().isEmpty()||!temperatureTextField.getText().matches("[0-9]+")){
+            Logger.getInstance().outputToConsole("Please make sure a valid temperature is entered");
+            return;
+        }
         int tempPreset = Integer.valueOf(temperatureTextField.getText());
-        System.out.println(tempPreset);
+        if(listZones.getSelectionModel().isEmpty()){
+            Logger.getInstance().outputToConsole("Please make sure you have selected a zone");
+            return;
+        }
         String selectedZone = (String)listZones.getSelectionModel().getSelectedItem();
-        System.out.println(selectedZone);
+        if(temperatureComboBox.getSelectionModel().isEmpty()){
+            Logger.getInstance().outputToConsole("Please make sure you have selected a period of time");
+            return;
+        }
         String selectedPeriodOfTheDay = (String)temperatureComboBox.getSelectionModel().getSelectedItem();
-        System.out.println(selectedPeriodOfTheDay);
 
         //Set the new temperature, unless one has already been overwritten for a specific room
         heatingModule.setTempForZone(selectedZone, selectedPeriodOfTheDay, tempPreset);
@@ -376,8 +383,6 @@ public class SmartHomeSimulatorController {
             }
         }
 
-
-
         //Putting this new Zone into the Zone display window so that a temperature for the zone can be set
         this.listZones.getItems().addAll(newZone.getZoneName());
 
@@ -385,7 +390,6 @@ public class SmartHomeSimulatorController {
         this.allRoomsListViewZone.getItems().addAll(this.selectedRoomsListForZone.getItems());
         this.selectedRoomsListForZone.getItems().clear();
         zoneName.setText("");
-
 
         //Log new creation
         Logger.getInstance().outputToConsole("Created a new Zone named \""+newZone.getZoneName()+"\" with rooms: ");
