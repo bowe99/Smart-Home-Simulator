@@ -635,6 +635,7 @@ public class SmartHomeSimulatorController {
                     lightList.setItems(FXCollections.observableList(currentRoom.getLightsNameList()));
                     doorList.setItems(FXCollections.observableList(currentRoom.getDoorsNameList()));
                     windowList.setItems(FXCollections.observableList(currentRoom.getWindowsNameList()));
+                    clearCurrentObjects();
                     resetAllButtonColours();
 
                 }
@@ -968,6 +969,15 @@ public class SmartHomeSimulatorController {
             windowBlock.setStyle("-fx-all: initial");
             windowUnblock.setStyle("-fx-background-color: #7FFF00");
         }
+    }
+
+    /**
+     * Sets instances of currentLight, currentDoor, and currentWindow to null
+     */
+    private void clearCurrentObjects() {
+        currentDoor = null;
+        currentLight = null;
+        currentWindow = null;
     }
 
     /**
