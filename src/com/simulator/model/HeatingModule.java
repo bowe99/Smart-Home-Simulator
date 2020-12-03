@@ -14,7 +14,23 @@ public class HeatingModule {
     public void addZone(Zone z){
         zoneList.add(z);
     }
+    public ArrayList<Zone> getZoneList(){ return zoneList; }
 
+    public void removeARoomFromTheirZone(String r){
+        for(int j=0; j<zoneList.size(); ++j){
+            if (zoneList.get(j).containsRoom(r)){
+                zoneList.get(j).removeRoomInZoneByName(r);
+            }
+        }
+    }
+
+    public boolean checkIfValidZoneName(String checkName){
+        for(int i =0; i<zoneList.size(); ++i){
+            if(zoneList.get(i).getZoneName().equalsIgnoreCase(checkName))
+                return false;
+        }
+        return true;
+    }
 
     public void displayTemperatureForRoom(String roomName, Profile currentUser){
         if(currentUser.getUserType() == USER_TYPE.STRANGER){

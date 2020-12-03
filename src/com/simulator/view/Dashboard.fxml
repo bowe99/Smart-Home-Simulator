@@ -197,7 +197,7 @@
                                        <contextMenu>
                                           <ContextMenu>
                                              <items>
-                                                <MenuItem fx:id="addRoomToZone" mnemonicParsing="false" onAction="#addRoomToZoneFunction" text="Add" />
+                                                <MenuItem fx:id="addRoomToZone" mnemonicParsing="false" onAction="#addRoomToSelectedRoomsPanel" text="Add" />
                                              </items>
                                           </ContextMenu>
                                        </contextMenu>
@@ -206,7 +206,7 @@
                                        <contextMenu>
                                           <ContextMenu>
                                              <items>
-                                                <MenuItem fx:id="removeRoomFromZone" mnemonicParsing="false" onAction="#removeRoomFromZoneFunction" text="Remove" />
+                                                <MenuItem fx:id="removeRoomFromZone" mnemonicParsing="false" onAction="#removeRoomFromSelectedRoomsPanel" text="Remove" />
                                              </items>
                                           </ContextMenu>
                                        </contextMenu>
@@ -214,8 +214,8 @@
                                     <Label layoutX="31.0" layoutY="103.0" prefHeight="58.0" prefWidth="93.0" text="Select rooms to create zone" textAlignment="CENTER" wrapText="true" />
                                     <TextField fx:id="zoneName" layoutX="191.0" layoutY="120.0" prefHeight="25.0" prefWidth="110.0" promptText="Zone Name" />
                                     <Button fx:id="createZone" layoutX="248.0" layoutY="155.0" mnemonicParsing="false" onAction="#createZoneButton" text="Create" />
-                                    <ListView layoutX="335.0" layoutY="33.0" prefHeight="66.0" prefWidth="199.0" />
-                                    <Label layoutX="335.0" layoutY="14.0" text="Groups" />
+                                    <ListView fx:id ="listZones" layoutX="335.0" layoutY="33.0" prefHeight="66.0" prefWidth="199.0" />
+                                    <Label layoutX="335.0" layoutY="14.0" text="Zones" />
                                     <TextField layoutX="335.0" layoutY="113.0" prefHeight="25.0" prefWidth="93.0" promptText="Temperature" />
                                     <ComboBox layoutX="449.0" layoutY="113.0" prefHeight="25.0" prefWidth="85.0" />
                                     <Button layoutX="460.0" layoutY="149.0" mnemonicParsing="false" text="Add Preset" />

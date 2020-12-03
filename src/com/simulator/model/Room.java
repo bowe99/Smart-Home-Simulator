@@ -14,6 +14,7 @@ public class Room {
     private List<Light> lights;
     private MotionSensor motionSensors;
     private int temperature;
+    private boolean belongsToZone = false;
 
     public Room(String newName, String ID){
         this.id =  ID;
@@ -57,6 +58,12 @@ public class Room {
         return 0;
     }
 
+    public void setBelongsToZone(boolean tf){
+        belongsToZone = tf;
+    }
+    public boolean getBelongsToZone(){
+        return belongsToZone;
+    }
     
     /** 
      * Add new motion sensors

@@ -25,6 +25,14 @@ public class Zone {
         this.zoneName = zN;
     }
 
+    public boolean containsRoom(String r){
+        for(int k =0; k<roomArrayList.size(); ++k){
+            if(roomArrayList.get(k).getName().contains(r))
+                return true;
+        }
+        return false;
+    }
+
     public void addNewRoomToZone(Room r){
         roomArrayList.add(r);
         //update temperature for the room
@@ -33,8 +41,22 @@ public class Zone {
         }
     }
 
+    public void printRoomsInZone(){
+        System.out.println(zoneName);
+        for(int i=0; i<roomArrayList.size(); ++i){
+            System.out.println(roomArrayList.get(i).getName());
+        }
+    }
     public void removeRoomInZone(Room r){
         roomArrayList.remove(r);
+    }
+
+    public void removeRoomInZoneByName(String r){
+        for(int j =0; j<roomArrayList.size(); ++j){
+            if(roomArrayList.get(j).getName().equalsIgnoreCase(r)){
+                roomArrayList.remove(roomArrayList.get(j));
+            }
+        }
     }
 
     public String getZoneName(){
