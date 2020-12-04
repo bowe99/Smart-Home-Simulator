@@ -102,6 +102,8 @@ public class SmartHomeSimulatorController {
     @FXML private Button doorLock;
     @FXML private Button windowOpen;
     @FXML private Button windowClose;
+    @FXML private Button windowBlock;
+    @FXML private Button windowUnblock;
     @FXML private Button finished;
     @FXML private SmartHomeSimulatorController SHSController;
 
@@ -633,6 +635,7 @@ public class SmartHomeSimulatorController {
                     lightList.setItems(FXCollections.observableList(currentRoom.getLightsNameList()));
                     doorList.setItems(FXCollections.observableList(currentRoom.getDoorsNameList()));
                     windowList.setItems(FXCollections.observableList(currentRoom.getWindowsNameList()));
+                    clearCurrentObjects();
                     resetAllButtonColours();
 
                 }
@@ -841,13 +844,13 @@ public class SmartHomeSimulatorController {
         if(currentWindow==null || SimulationParameters.getInstance().getSimulationStatus()==false){
             return;
         }
-        else{
+        else {
             System.out.println("windowOpen");
-            //insert if statement here to check for obstructions
-            currentWindow.setOpen();
-            changeWindowButtonsColours();
-            int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
-            windowImages[currentRoomID].setImage(openWindowIcon);
+            if (currentWindow.setOpen()) {
+                changeWindowButtonsColours();
+                int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
+                windowImages[currentRoomID].setImage(openWindowIcon);
+            }
         }
     }
 
@@ -861,11 +864,41 @@ public class SmartHomeSimulatorController {
         }
         else{
             System.out.println("windowClose");
-            //insert if statement here to check for obstructions
-            currentWindow.setClosed();
+            if(currentWindow.setClosed()) {
+                changeWindowButtonsColours();
+                int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
+                windowImages[currentRoomID].setImage(closedWindowIcon);
+            }
+        }
+    }
+
+    /**
+     * Blocks window.
+     */
+    @FXML
+    void windowBlock(MouseEvent event){
+        if(currentWindow==null || !SimulationParameters.getInstance().getSimulationStatus()){
+            return;
+        }
+        else{
+            System.out.println("windowBlock");
+            currentWindow.setBlockedTrue();
             changeWindowButtonsColours();
-            int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
-            windowImages[currentRoomID].setImage(closedWindowIcon);
+        }
+    }
+
+    /**
+     * Unblocks window.
+     */
+    @FXML
+    void windowUnblock(MouseEvent event){
+        if(currentWindow==null || !SimulationParameters.getInstance().getSimulationStatus()){
+            return;
+        }
+        else{
+            System.out.println("windowClose");
+            currentWindow.setBlockedFalse();
+            changeWindowButtonsColours();
         }
     }
 
@@ -927,6 +960,24 @@ public class SmartHomeSimulatorController {
             windowOpen.setStyle("-fx-all: initial");
             windowClose.setStyle("-fx-background-color: #FF0000");
         }
+
+        if(currentWindow.getBlockedBoolean()){
+            windowBlock.setStyle("-fx-background-color: #FF0000");
+            windowUnblock.setStyle("-fx-all: initial");
+        }
+        else{
+            windowBlock.setStyle("-fx-all: initial");
+            windowUnblock.setStyle("-fx-background-color: #7FFF00");
+        }
+    }
+
+    /**
+     * Sets instances of currentLight, currentDoor, and currentWindow to null
+     */
+    private void clearCurrentObjects() {
+        currentDoor = null;
+        currentLight = null;
+        currentWindow = null;
     }
 
     /**
@@ -942,6 +993,8 @@ public class SmartHomeSimulatorController {
         doorLock.setStyle("-fx-all: initial");
         windowOpen.setStyle("-fx-all: initial");
         windowClose.setStyle("-fx-all: initial");
+        windowBlock.setStyle("-fx-all: initial");
+        windowUnblock.setStyle("-fx-all: initial");
     }
     
     /**
