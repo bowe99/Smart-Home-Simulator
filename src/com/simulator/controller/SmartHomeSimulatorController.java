@@ -318,7 +318,7 @@ public class SmartHomeSimulatorController {
     }
     @FXML
     private void addPresetTemperatureToZone(){
-        if(temperatureTextField.getText() ==null || temperatureTextField.getText().trim().isEmpty()||!temperatureTextField.getText().matches("[0-9]+")){
+        if(temperatureTextField.getText() == null || temperatureTextField.getText().trim().isEmpty() || !temperatureTextField.getText().matches("[0-9]+")){
             Logger.getInstance().outputToConsole("Please make sure a valid temperature is entered");
             return;
         }
@@ -342,13 +342,13 @@ public class SmartHomeSimulatorController {
     @FXML
     private void createZoneButton(){
         //Check to see if the user selected some entries
-        if(selectedRoomsListForZone.getItems().size()==0){
+        if(selectedRoomsListForZone.getItems().size() == 0){
             Logger.getInstance().outputToConsole("Please select some entries for the zone");
             return;
         }
 
         //check to see if the string already exists or if an invalid length string was entered
-        if(zoneName.getText().length()<1||!heatingModule.checkIfValidZoneName(zoneName.getText())){
+        if(zoneName.getText().length()<1 || !heatingModule.checkIfValidZoneName(zoneName.getText())){
             Logger.getInstance().outputToConsole("Please enter a valid name");
             return;
         }
@@ -357,12 +357,12 @@ public class SmartHomeSimulatorController {
         String newZoneName = zoneName.getText();
         ObservableList<String> newZoneObservableList = (ObservableList<String>) this.selectedRoomsListForZone.getItems();
         ArrayList<Room> newRoomArrayList = new ArrayList<Room>();
-        for(int i=0; i<newZoneObservableList.size(); ++i){
+        for(int i = 0; i < newZoneObservableList.size(); ++i){
             newRoomArrayList.add(house.getRoomByName(newZoneObservableList.get(i)));
         }
 
         //check if there is a zone that already contains a specific room that is to be added to a zone
-        for (int i =0; i<newRoomArrayList.size(); ++i){
+        for (int i = 0; i < newRoomArrayList.size(); ++i){
             if(newRoomArrayList.get(i).getBelongsToZone()){
                 Logger.getInstance().outputToConsole("Room "+newRoomArrayList.get(i).getName()+" already belongs to a zone. \nIt's zone will be updated to "+newZoneName+".");
                 heatingModule.removeARoomFromTheirZone(newRoomArrayList.get(i).getName());
@@ -377,7 +377,7 @@ public class SmartHomeSimulatorController {
 
 
         //Check if there are any non-existant zones that are being displayed in the display Zone window
-        for(int k=0; k<listZones.getItems().size(); ++k){
+        for(int k = 0; k < listZones.getItems().size(); ++k){
             if(heatingModule.checkIfValidZoneName((String) listZones.getItems().get(k))){
                 listZones.getItems().remove(listZones.getItems().get(k));
             }
@@ -393,7 +393,7 @@ public class SmartHomeSimulatorController {
 
         //Log new creation
         Logger.getInstance().outputToConsole("Created a new Zone named \""+newZone.getZoneName()+"\" with rooms: ");
-        for(int i=0; i<newRoomArrayList.size(); ++i){
+        for(int i = 0; i < newRoomArrayList.size(); ++i){
             Logger.getInstance().outputToConsole(newRoomArrayList.get(i).getName()+" ");
         }
     }

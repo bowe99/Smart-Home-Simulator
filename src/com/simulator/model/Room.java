@@ -64,8 +64,8 @@ public class Room {
         return 0;
     }
 
-    public void setBelongsToZone(boolean tf){
-        belongsToZone = tf;
+    public void setBelongsToZone(boolean TrueOrFalse){
+        belongsToZone = TrueOrFalse;
     }
     public boolean getBelongsToZone(){
         return belongsToZone;

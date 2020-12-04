@@ -13,16 +13,16 @@ public class Zone {
     private int temperatureNight;
     private boolean emptyZone;
 
-    public Zone(ArrayList<Room> rl, String zN){
-        this.roomArrayList = rl;
-        this.zoneName = zN;
+    public Zone(ArrayList<Room> roomList, String zoneName1){
+        this.roomArrayList = roomList;
+        this.zoneName = zoneName1;
     }
     //if temperature has not been overwritten, update the temperature for the morning, daytime and nighttime
     public void setZoneTemperature(int temp, String timePeriod){
         if(timePeriod.contains("Morning")){
             //Set for the zone, then set for each of the rooms if they have not already been overwritten
             temperatureMorning = temp;
-            for(int i =0; i<roomArrayList.size(); ++i){
+            for(int i = 0; i < roomArrayList.size(); ++i){
                 if(!roomArrayList.get(i).getName().contains("Overwritten")){
                     roomArrayList.get(i).setTemperatureMorning(temp);
                 }
@@ -32,7 +32,7 @@ public class Zone {
         else if(timePeriod.contains("Day")){
             //Set for the zone, then set for each of the rooms if they have not already been overwritten
             temperatureDay = temp;
-            for(int i =0; i<roomArrayList.size(); ++i){
+            for(int i = 0; i < roomArrayList.size(); ++i){
                 if(!roomArrayList.get(i).getName().contains("Overwritten")){
                     roomArrayList.get(i).setTemperatureDay(temp);
                 }
@@ -42,7 +42,7 @@ public class Zone {
         else if(timePeriod.contains("Night")){
             //Set for the zone, then set for each of the rooms if they have not already been overwritten
             temperatureNight = temp;
-            for(int i =0; i<roomArrayList.size(); ++i){
+            for(int i = 0; i < roomArrayList.size(); ++i){
                 if(!roomArrayList.get(i).getName().contains("Overwritten")){
                     roomArrayList.get(i).setTemperatureNight(temp);
                 }
@@ -58,7 +58,7 @@ public class Zone {
 
 
     public boolean isEmptyZone(){
-        if(roomArrayList.size()==0){
+        if(roomArrayList.size() == 0){
             emptyZone=true;
         }
         else emptyZone = false;
@@ -66,31 +66,31 @@ public class Zone {
         return emptyZone;
     }
 
-    public void setZoneName(String zN){
-        this.zoneName = zN;
+    public void setZoneName(String zoneName1){
+        this.zoneName = zoneName1;
     }
 
-    public boolean containsRoom(String r){
-        for(int k =0; k<roomArrayList.size(); ++k){
-            if(roomArrayList.get(k).getName().contains(r))
+    public boolean containsRoom(String room1){
+        for(int k = 0; k < roomArrayList.size(); ++k){
+            if(roomArrayList.get(k).getName().contains(room1))
                 return true;
         }
         return false;
     }
 
-    public void addNewRoomToZone(Room r){
-        roomArrayList.add(r);
+    public void addNewRoomToZone(Room room1){
+        roomArrayList.add(room1);
         //update temperature for the room
-        if(!r.getName().contains("Overwritten")){
-            r.setTemperatureMorning(temperatureMorning);
-            r.setTemperatureDay(temperatureDay);
-            r.setTemperatureNight(temperatureNight);
+        if(!room1.getName().contains("Overwritten")){
+            room1.setTemperatureMorning(temperatureMorning);
+            room1.setTemperatureDay(temperatureDay);
+            room1.setTemperatureNight(temperatureNight);
         }
     }
 
     public void printRoomsInZone(){
         System.out.println(zoneName);
-        for(int i=0; i<roomArrayList.size(); ++i){
+        for(int i = 0; i < roomArrayList.size(); ++i){
             System.out.println(roomArrayList.get(i).getName());
         }
     }
@@ -98,9 +98,9 @@ public class Zone {
         roomArrayList.remove(r);
     }
 
-    public void removeRoomInZoneByName(String r){
-        for(int j =0; j<roomArrayList.size(); ++j){
-            if(roomArrayList.get(j).getName().equalsIgnoreCase(r)){
+    public void removeRoomInZoneByName(String room1){
+        for(int j = 0; j < roomArrayList.size(); ++j){
+            if(roomArrayList.get(j).getName().equalsIgnoreCase(room1)){
                 roomArrayList.remove(roomArrayList.get(j));
             }
         }
