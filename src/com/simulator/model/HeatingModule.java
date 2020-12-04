@@ -11,15 +11,15 @@ public class HeatingModule {
     public HeatingModule(){
 
     }
-    public void addZone(Zone z){
-        zoneList.add(z);
+    public void addZone(Zone zone1){
+        zoneList.add(zone1);
     }
     public ArrayList<Zone> getZoneList(){ return zoneList; }
 
-    public void removeARoomFromTheirZone(String r){
+    public void removeARoomFromTheirZone(String room1){
         for(int j=0; j<zoneList.size(); ++j){
-            if (zoneList.get(j).containsRoom(r)){
-                zoneList.get(j).removeRoomInZoneByName(r);
+            if (zoneList.get(j).containsRoom(room1)){
+                zoneList.get(j).removeRoomInZoneByName(room1);
                 //if the zone is empty, remove it from the heating module
                 if(zoneList.get(j).isEmptyZone()){
                     zoneList.remove(j);
