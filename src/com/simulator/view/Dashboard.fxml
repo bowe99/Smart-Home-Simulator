@@ -88,7 +88,6 @@
                   </Tab>
                   <Tab fx:id="shcTab" text="SHC">
                      <content>
-
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="383.0" prefWidth="358.0">
                            <children>
                               <GridPane layoutY="29.0" prefHeight="381.0" prefWidth="483.0">
@@ -206,7 +205,7 @@
                                        <contextMenu>
                                           <ContextMenu>
                                              <items>
-                                                <MenuItem fx:id="addRoomToZone" mnemonicParsing="false" onAction="#addRoomToZoneFunction" text="Add" />
+                                                <MenuItem fx:id="addRoomToZone" mnemonicParsing="false" onAction="#addRoomToSelectedRoomsPanel" text="Add" />
                                              </items>
                                           </ContextMenu>
                                        </contextMenu>
@@ -215,19 +214,19 @@
                                        <contextMenu>
                                           <ContextMenu>
                                              <items>
-                                                <MenuItem fx:id="removeRoomFromZone" mnemonicParsing="false" onAction="#removeRoomFromZoneFunction" text="Remove" />
+                                                <MenuItem fx:id="removeRoomFromZone" mnemonicParsing="false" onAction="#removeRoomFromSelectedRoomsPanel" text="Remove" />
                                              </items>
                                           </ContextMenu>
                                        </contextMenu>
                                     </ListView>
                                     <Label layoutX="31.0" layoutY="103.0" prefHeight="58.0" prefWidth="93.0" text="Select rooms to create zone" textAlignment="CENTER" wrapText="true" />
-                                    <TextField layoutX="191.0" layoutY="120.0" prefHeight="25.0" prefWidth="110.0" promptText="Zone Name" />
-                                    <Button layoutX="248.0" layoutY="155.0" mnemonicParsing="false" text="Create" />
-                                    <ListView layoutX="335.0" layoutY="33.0" prefHeight="66.0" prefWidth="199.0" />
-                                    <Label layoutX="335.0" layoutY="14.0" text="Groups" />
-                                    <TextField layoutX="335.0" layoutY="113.0" prefHeight="25.0" prefWidth="93.0" promptText="Temperature" />
-                                    <ComboBox layoutX="449.0" layoutY="113.0" prefHeight="25.0" prefWidth="85.0" />
-                                    <Button layoutX="460.0" layoutY="149.0" mnemonicParsing="false" text="Add Preset" />
+                                    <TextField fx:id="zoneName" layoutX="191.0" layoutY="120.0" prefHeight="25.0" prefWidth="110.0" promptText="Zone Name" />
+                                    <Button fx:id="createZone" layoutX="248.0" layoutY="155.0" mnemonicParsing="false" onAction="#createZoneButton" text="Create" />
+                                    <ListView fx:id ="listZones" layoutX="335.0" layoutY="33.0" prefHeight="66.0" prefWidth="199.0" />
+                                    <Label layoutX="335.0" layoutY="14.0" text="Zones" />
+                                    <TextField fx:id="temperatureTextField" layoutX="335.0" layoutY="113.0" prefHeight="25.0" prefWidth="93.0" promptText="Temperature" />
+                                    <ComboBox fx:id="temperatureComboBox" layoutX="449.0" layoutY="113.0" prefHeight="25.0" prefWidth="85.0" />
+                                    <Button fx:id = "addPreset" layoutX="460.0" layoutY="149.0" mnemonicParsing="false" onAction="#addPresetTemperatureToZone" text="Add Preset" />
                                     <Label layoutX="17.0" layoutY="14.0" text="Rooms" />
                                     <Separator layoutY="-5.0" prefHeight="7.0" prefWidth="548.0" />
                                     <Separator layoutX="316.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="200.0" />

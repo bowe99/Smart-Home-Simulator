@@ -14,6 +14,10 @@ public class Room {
     private List<Light> lights;
     private MotionSensor motionSensors;
     private int temperature;
+    private int temperatureMorning;
+    private int temperatureDay;
+    private int temperatureNight;
+    private boolean belongsToZone = false;
 
     public Room(String newName, String ID){
         this.id =  ID;
@@ -21,7 +25,10 @@ public class Room {
         this.doors = new ArrayList<>();
         this.windows = new ArrayList<>();
         this.lights = new ArrayList<>();
-        this.temperature = 25;
+        this.temperature = 20;
+        this.temperatureMorning = 20;
+        this.temperatureDay = 20;
+        this.temperatureNight = 20;
     }
 
     
@@ -57,6 +64,12 @@ public class Room {
         return 0;
     }
 
+    public void setBelongsToZone(boolean TrueOrFalse){
+        belongsToZone = TrueOrFalse;
+    }
+    public boolean getBelongsToZone(){
+        return belongsToZone;
+    }
     
     /** 
      * Add new motion sensors
@@ -103,6 +116,16 @@ public class Room {
     public int getTemperature() {
         return this.temperature;
     }
+    public int getTemperatureMorning() {
+        return this.temperatureMorning;
+    }
+    public int getTemperatureDay() {
+        return this.temperatureDay;
+    }
+    public int getTemperatureNight() {
+        return this.temperatureNight;
+    }
+
 
     /** 
      * Set the temperature of the room
@@ -110,6 +133,16 @@ public class Room {
     public void setTemperature(int temperature) {
         this.temperature = temperature;
     }
+    public void setTemperatureMorning(int temperature) {
+        this.temperatureMorning = temperature;
+    }
+    public void setTemperatureDay(int temperature) {
+        this.temperatureDay = temperature;
+    }
+    public void setTemperatureNight(int temperature) {
+        this.temperatureNight = temperature;
+    }
+
 
 
     public String getId() {

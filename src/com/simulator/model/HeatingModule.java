@@ -1,15 +1,49 @@
 package com.simulator.model;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.simulator.controller.Logger;
 
 public class HeatingModule {
+    private ArrayList<Zone> zoneList = new ArrayList<Zone>();
 
     public HeatingModule(){
 
     }
+    public void addZone(Zone zone1){
+        zoneList.add(zone1);
+    }
+    public ArrayList<Zone> getZoneList(){ return zoneList; }
 
+    public void removeARoomFromTheirZone(String room1){
+        for(int j=0; j<zoneList.size(); ++j){
+            if (zoneList.get(j).containsRoom(room1)){
+                zoneList.get(j).removeRoomInZoneByName(room1);
+                //if the zone is empty, remove it from the heating module
+                if(zoneList.get(j).isEmptyZone()){
+                    zoneList.remove(j);
+                }
+            }
+        }
+    }
+
+    public boolean checkIfValidZoneName(String checkName){
+        for(int i =0; i<zoneList.size(); ++i){
+            if(zoneList.get(i).getZoneName().equalsIgnoreCase(checkName))
+                return false;
+        }
+        return true;
+    }
+
+    public void setTempForZone(String zoneName, String periodOfTheDay, int temp){
+        for(int i=0; i<zoneList.size(); ++i){
+            if(zoneList.get(i).getZoneName().equalsIgnoreCase(zoneName)){
+                zoneList.get(i).setZoneTemperature(temp, periodOfTheDay);
+                return;
+            }
+        }
+    }
 
     public void displayTemperatureForRoom(String roomName, Profile currentUser){
         if(currentUser.getUserType() == USER_TYPE.STRANGER){

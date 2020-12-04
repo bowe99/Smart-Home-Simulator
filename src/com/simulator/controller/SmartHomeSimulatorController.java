@@ -5,6 +5,8 @@ import com.simulator.model.Room;
 import com.simulator.model.SecurityModule;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -86,6 +88,11 @@ public class SmartHomeSimulatorController {
 
     @FXML private ListView allRoomsListViewZone;
     @FXML private ListView selectedRoomsListForZone;
+    @FXML private ListView listZones;
+    @FXML private TextField temperatureTextField;
+    @FXML private ComboBox temperatureComboBox;
+    @FXML private Button addPreset;
+    @FXML private TextField zoneName;
 
     private House house;
     private SimulationParameters simulation;
@@ -152,15 +159,9 @@ public class SmartHomeSimulatorController {
         setTime(simulation.getTime());
         initializeHouseView();
         setHouseView();
-
         // Initialize lists in fxml with values from house template
         setLights(house);
         setRoomsInHeatingModule(house);
-
-        //Initializing SHH
-
-        setRoomsZonePanel();
-
         Date currentDateTime = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastSaved.setText(format.format(currentDateTime));
@@ -170,6 +171,8 @@ public class SmartHomeSimulatorController {
         Logger.getInstance().resetLogFile();
         this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
         this.heatingModule = new HeatingModule();
+        temperatureComboBox.getItems().addAll("Morning", "Day", "Night");
+
     }
 
     /**
@@ -302,24 +305,100 @@ public class SmartHomeSimulatorController {
         }
     }
 
-        //Ended here
     @FXML
-    private void addRoomToZoneFunction(){
+    private void addRoomToSelectedRoomsPanel(){
+        Object selectedItem = this.allRoomsListViewZone.getSelectionModel().getSelectedItem();
+        this.selectedRoomsListForZone.getItems().add((String) selectedItem);
+        this.allRoomsListViewZone.getItems().remove(selectedItem);
+    }
 
+    @FXML
+    private void removeRoomFromSelectedRoomsPanel(){
+        Object selectedItem = this.selectedRoomsListForZone.getSelectionModel().getSelectedItem();
+        this.selectedRoomsListForZone.getItems().remove((String) selectedItem);
+        this.allRoomsListViewZone.getItems().add(selectedItem);
     }
     @FXML
-    private void removeRoomFromZoneFunction(){
+    private void addPresetTemperatureToZone(){
+        if(temperatureTextField.getText() == null || temperatureTextField.getText().trim().isEmpty() || !temperatureTextField.getText().matches("[0-9]+")){
+            Logger.getInstance().outputToConsole("Please make sure a valid temperature is entered");
+            return;
+        }
+        int tempPreset = Integer.valueOf(temperatureTextField.getText());
+        if(listZones.getSelectionModel().isEmpty()){
+            Logger.getInstance().outputToConsole("Please make sure you have selected a zone");
+            return;
+        }
+        String selectedZone = (String)listZones.getSelectionModel().getSelectedItem();
+        if(temperatureComboBox.getSelectionModel().isEmpty()){
+            Logger.getInstance().outputToConsole("Please make sure you have selected a period of time");
+            return;
+        }
+        String selectedPeriodOfTheDay = (String)temperatureComboBox.getSelectionModel().getSelectedItem();
 
+        //Set the new temperature, unless one has already been overwritten for a specific room
+        heatingModule.setTempForZone(selectedZone, selectedPeriodOfTheDay, tempPreset);
+        System.out.println("Came out the other side brother");
     }
-    @FXML
-    private void setRoomsZonePanel(){
-        ArrayList<String> roomNameList = (ArrayList<String>) House.getInstance().getRoomsNameList();
 
-        for (String room: roomNameList){
-            allRoomsListViewZone.getItems().add(room);
+    @FXML
+    private void createZoneButton(){
+        //Check to see if the user selected some entries
+        if(selectedRoomsListForZone.getItems().size() == 0){
+            Logger.getInstance().outputToConsole("Please select some entries for the zone");
+            return;
+        }
+
+        //check to see if the string already exists or if an invalid length string was entered
+        if(zoneName.getText().length()<1 || !heatingModule.checkIfValidZoneName(zoneName.getText())){
+            Logger.getInstance().outputToConsole("Please enter a valid name");
+            return;
+        }
+
+        //Create a new ArrayList containing each of the selected rooms
+        String newZoneName = zoneName.getText();
+        ObservableList<String> newZoneObservableList = (ObservableList<String>) this.selectedRoomsListForZone.getItems();
+        ArrayList<Room> newRoomArrayList = new ArrayList<Room>();
+        for(int i = 0; i < newZoneObservableList.size(); ++i){
+            newRoomArrayList.add(house.getRoomByName(newZoneObservableList.get(i)));
+        }
+
+        //check if there is a zone that already contains a specific room that is to be added to a zone
+        for (int i = 0; i < newRoomArrayList.size(); ++i){
+            if(newRoomArrayList.get(i).getBelongsToZone()){
+                Logger.getInstance().outputToConsole("Room "+newRoomArrayList.get(i).getName()+" already belongs to a zone. \nIt's zone will be updated to "+newZoneName+".");
+                heatingModule.removeARoomFromTheirZone(newRoomArrayList.get(i).getName());
+            }
+            newRoomArrayList.get(i).setBelongsToZone(true);
+        }
+
+        //create a new zone and assign the rooms and a name
+        Zone newZone = new Zone(newRoomArrayList, newZoneName);
+        this.heatingModule.addZone(newZone);
+        newZone.printRoomsInZone();
+
+
+        //Check if there are any non-existant zones that are being displayed in the display Zone window
+        for(int k = 0; k < listZones.getItems().size(); ++k){
+            if(heatingModule.checkIfValidZoneName((String) listZones.getItems().get(k))){
+                listZones.getItems().remove(listZones.getItems().get(k));
+            }
+        }
+
+        //Putting this new Zone into the Zone display window so that a temperature for the zone can be set
+        this.listZones.getItems().addAll(newZone.getZoneName());
+
+        //Resetting both RoomList and the selectedRoomsList to their initial values
+        this.allRoomsListViewZone.getItems().addAll(this.selectedRoomsListForZone.getItems());
+        this.selectedRoomsListForZone.getItems().clear();
+        zoneName.setText("");
+
+        //Log new creation
+        Logger.getInstance().outputToConsole("Created a new Zone named \""+newZone.getZoneName()+"\" with rooms: ");
+        for(int i = 0; i < newRoomArrayList.size(); ++i){
+            Logger.getInstance().outputToConsole(newRoomArrayList.get(i).getName()+" ");
         }
     }
-
 
     /**
      * Changes the away status of the simulator.
