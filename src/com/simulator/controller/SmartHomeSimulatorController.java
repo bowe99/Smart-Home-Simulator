@@ -514,9 +514,9 @@ public class SmartHomeSimulatorController {
             String endTimeInput = this.endTimeSecurity.getText();
             String motionDetectedTimeInput = this.motionDetectedTimeSecurity.getText();
             try {
-                int startTime = Integer.parseInt(startTimeInput);
-                int endTime = Integer.parseInt(endTimeInput);
-                int motionDetectedTime = Integer.parseInt(motionDetectedTimeInput);
+                int startTime = Integer.parseInt(startTimeInput) * 60;
+                int endTime = Integer.parseInt(endTimeInput) * 60;
+                int motionDetectedTime = Integer.parseInt(motionDetectedTimeInput) * 60;
 
                 if (startTime > 1440 || startTime < 0 || endTime < 0 || endTime > 1440) {
                     throw new Exception("Time is not in the correct range");
