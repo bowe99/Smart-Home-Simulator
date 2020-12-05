@@ -106,6 +106,7 @@ public class Room {
     public String getName() {
         return name;
     }
+    public void setName(String newName){name=newName;}
 
     public void setOverridden(boolean isOvveride){
         this.overriddenTemperature = isOvveride;
@@ -114,8 +115,7 @@ public class Room {
     public boolean getOverridden(){
         return this.overriddenTemperature;
     }
-    
-    
+        
     /** 
      * Get the temperature of the room
      * @return int 

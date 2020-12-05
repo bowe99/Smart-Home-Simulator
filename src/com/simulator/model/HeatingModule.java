@@ -35,6 +35,7 @@ public class HeatingModule extends SimulationObserver{
                 if(zoneList.get(j).isEmptyZone()){
                     zoneList.remove(j);
                 }
+                return;
             }
         }
     }
@@ -45,6 +46,15 @@ public class HeatingModule extends SimulationObserver{
                 return false;
         }
         return true;
+    }
+
+    public ArrayList<String> getZonesRoomsByZoneName(String zoneNameInQuestion){
+        for(int i=0; i<zoneList.size(); i++){
+            if (zoneNameInQuestion==zoneList.get(i).getZoneName()){
+                return zoneList.get(i).getRoomListOfNames();
+            }
+        }
+        return null;
     }
 
     public void setTempForZone(String zoneName, String periodOfTheDay, int temp){
@@ -147,6 +157,7 @@ public class HeatingModule extends SimulationObserver{
             checkSummerCooling(room, currentMonth, outdoorTemperature, currentTempRoom);
 
             room.updateTemperature(outdoorTemperature);
+
         }
 
     }

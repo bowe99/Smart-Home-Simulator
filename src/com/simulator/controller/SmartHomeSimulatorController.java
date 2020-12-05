@@ -357,8 +357,24 @@ public class SmartHomeSimulatorController {
         }
         String selectedPeriodOfTheDay = (String)temperatureComboBox.getSelectionModel().getSelectedItem();
 
-        //Set the new temperature, unless one has already been overwritten for a specific room
         heatingModule.setTempForZone(selectedZone, selectedPeriodOfTheDay, tempPreset);
+
+        //Resetting fields to contain the proper room names
+        ArrayList<String> newRoomArrayList = heatingModule.getZonesRoomsByZoneName(selectedZone);
+        //resetting the rooms in the Display Temperature list to remove the word "overwritten"
+        for(int i=0; i<newRoomArrayList.size(); ++i) {
+            if (newRoomArrayList.get(i).contains("Overwritten")) {
+                house.getRoomByName(newRoomArrayList.get(i)).setName(newRoomArrayList.get(i).substring(0, newRoomArrayList.get(i).length() - 14));
+                allRoomsDisplayTemp.getItems().clear();
+                allRoomsDisplayTemp.getItems().addAll(house.getRoomsNameList());
+            }
+        }
+        selectedRoomsListForZone.getItems().clear();
+        allRoomsListViewZone.getItems().clear();
+        allRoomsListViewZone.getItems().addAll(allRoomsDisplayTemp.getItems());
+
+
+
         System.out.println("Came out the other side brother");
     }
 
@@ -380,10 +396,14 @@ public class SmartHomeSimulatorController {
         String newZoneName = zoneName.getText();
         ObservableList<String> newZoneObservableList = (ObservableList<String>) this.selectedRoomsListForZone.getItems();
         ArrayList<Room> newRoomArrayList = new ArrayList<Room>();
+
+
+
         for(int i = 0; i < newZoneObservableList.size(); ++i){
             newRoomArrayList.add(house.getRoomByName(newZoneObservableList.get(i)));
         }
 
+        //If there is a word that is overwritten
         //check if there is a zone that already contains a specific room that is to be added to a zone
         for (int i = 0; i < newRoomArrayList.size(); ++i){
             if(newRoomArrayList.get(i).getBelongsToZone()){
@@ -397,6 +417,7 @@ public class SmartHomeSimulatorController {
         Zone newZone = new Zone(newRoomArrayList, newZoneName);
         this.heatingModule.addZone(newZone);
         newZone.printRoomsInZone();
+
 
 
         //Check if there are any non-existant zones that are being displayed in the display Zone window
@@ -598,6 +619,7 @@ public class SmartHomeSimulatorController {
     private void setRoomTemperature(){
         Object selectedItem = allRoomsDisplayTemp.getSelectionModel().getSelectedItem();
         String selectedRoom = (String) selectedItem;
+        final String selectedRoomNoOverwrite = selectedRoom;
         int selectedIndex = allRoomsDisplayTemp.getItems().indexOf(selectedItem);
 
         boolean success;
@@ -632,6 +654,36 @@ public class SmartHomeSimulatorController {
             }
             allRoomsDisplayTemp.getItems().remove(selectedIndex);
             allRoomsDisplayTemp.getItems().add(selectedIndex, selectedRoom);
+        }
+
+        //update rooms in list of rooms
+        for(int i =0; i<allRoomsListViewZone.getItems().size(); ++i){
+            if(((String) allRoomsListViewZone.getItems().get(i)).contains(selectedRoomNoOverwrite)){
+                //remove the room that does not include "overwritten"
+                this.allRoomsListViewZone.getItems().remove(i);
+                //add the room that does contain the word "overwritten"
+                this.allRoomsListViewZone.getItems().add(selectedRoom);
+                break;
+            }
+        }
+
+        //update rooms in list of selected rooms
+        for(int i =0; i<selectedRoomsListForZone.getItems().size(); ++i){
+            if(((String) selectedRoomsListForZone.getItems().get(i)).contains(selectedRoomNoOverwrite)){
+                //remove the room that does not include "overwritten"
+                this.selectedRoomsListForZone.getItems().remove(i);
+                //add the room that does contain the word "overwritten"
+                this.selectedRoomsListForZone.getItems().add(selectedRoom);
+                break;
+            }
+        }
+
+        //rename the old room in the house with the name from the new room
+        for(int i=0; i<house.getRoomsNameList().size(); ++i){
+            if(selectedRoom.contains(house.getRoomsNameList().get(i))){
+                house.renameRoom(house.getRoomsNameList().get(i), selectedRoom);
+                break;
+            }
         }
     }
 
