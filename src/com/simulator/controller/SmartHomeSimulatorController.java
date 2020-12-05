@@ -505,9 +505,11 @@ public class SmartHomeSimulatorController {
      */
     @FXML
     private void setTime(int time){
-        String hours = String.format("%02d", time/60);
-        String mins = String.format("%02d", time%60);
-        this.displayTime.setText(hours + ":" + mins);
+        String hours = String.format("%02d", time/3600);
+        String minutes = String.format("%02d", (time%3600)/60);
+        String seconds = String.format("%02d", time % 60);
+
+        this.displayTime.setText(hours + ":" + minutes + ":" + seconds);
     }
     /**
      * Save Security Settings
@@ -519,9 +521,9 @@ public class SmartHomeSimulatorController {
             String endTimeInput = this.endTimeSecurity.getText();
             String motionDetectedTimeInput = this.motionDetectedTimeSecurity.getText();
             try {
-                int startTime = Integer.parseInt(startTimeInput);
-                int endTime = Integer.parseInt(endTimeInput);
-                int motionDetectedTime = Integer.parseInt(motionDetectedTimeInput);
+                int startTime = Integer.parseInt(startTimeInput) * 60;
+                int endTime = Integer.parseInt(endTimeInput) * 60;
+                int motionDetectedTime = Integer.parseInt(motionDetectedTimeInput) * 60;
 
                 if (startTime > 1440 || startTime < 0 || endTime < 0 || endTime > 1440) {
                     throw new Exception("Time is not in the correct range");

@@ -36,8 +36,8 @@ public class SecurityModule extends SimulationObserver{
         this.detectionMonitored = false;
         this.lightsOnWhenAway = new ArrayList<Light>();
         this.motionDetectedTime = 0;
-        this.lightOnTime = 1080;
-        this.lightOffTime = 360;
+        this.lightOnTime = 64800;
+        this.lightOffTime = 21600;
         this.timeOfDetection = -1;
     }
 

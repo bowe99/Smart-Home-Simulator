@@ -8,10 +8,10 @@ import java.util.List;
  * The time class used to keep time and update the time
  */
 public class Time {
-    private List<SimulationObserver> observers = new ArrayList<SimulationObserver>();
-    private int time; //represents minutes of the day (0-1440) 
-    private int interval = 60000; //in milliseconds
-    private Date date = new Date(); //current date
+    private List<SecurityObserver> observers = new ArrayList<SecurityObserver>();
+    private int time; //represents seconds of the day (0-86400)
+    private int interval = 1000; //in milliseconds
+    private Date date; //current date
     final private long MILLISECOND_IN_A_DAY = 86400000;
 
     public Time(Date date, int time){
@@ -29,7 +29,7 @@ public class Time {
      */
     public void update (){
         time++;
-        if (time == 1440){
+        if (time == 86400){
             time = 0;
             long currentTime = date.getTime();
             date = new Date(currentTime + MILLISECOND_IN_A_DAY ); 
@@ -42,7 +42,7 @@ public class Time {
      * @param factor
      */
     public void changeInterval(int factor){
-        interval = 60000/factor;
+        interval = 1000/factor;
     }
 
     
