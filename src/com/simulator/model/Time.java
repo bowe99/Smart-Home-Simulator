@@ -8,7 +8,7 @@ import java.util.List;
  * The time class used to keep time and update the time
  */
 public class Time {
-    private List<SecurityObserver> observers = new ArrayList<SecurityObserver>();
+    private List<SimulationObserver> observers = new ArrayList<SimulationObserver>();
     private int time; //represents minutes of the day (0-1440) 
     private int interval = 60000; //in milliseconds
     private Date date = new Date(); //current date
@@ -47,15 +47,28 @@ public class Time {
 
     
     /** 
-     * Get time
+     * Get time and update
      * @return int
      */
-    public int getTime(){
+    public int getTimeAndUpdate(){
         // notifyObservers in here instead of update since the update method is running on a separate thread and 
         // was not updating the lights when it was calling notifyObservers
         notifyAllObservers();
         return time;
     }
+    
+    
+    /** 
+     * Get time and update
+     * @return int
+     */
+    public int getTime(){
+        // notifyObservers in here instead of update since the update method is running on a separate thread and 
+        // was not updating the lights when it was calling notifyObservers
+        return time;
+    }
+
+
     
     /** 
      * Get interval
@@ -91,12 +104,12 @@ public class Time {
     }
 
     public void notifyAllObservers(){
-        for (SecurityObserver observer : observers) {
+        for (SimulationObserver observer : observers) {
            observer.updateTime(this.time);
         }
     }
     
-    public void attach(SecurityObserver observer){
+    public void attach(SimulationObserver observer){
         observers.add(observer);		
      }
 }

@@ -51,8 +51,8 @@ public class SimulationParameterController {
         userLocationChoice.setValue(simulation.getCurrentUser().getCurrentRoom().getName());
         temperatureValue.setText(String.valueOf(simulation.getTemperature()));
         dateValue.getEditor().setText(dateFormat.format(simulation.getDate()));
-        hourValue.setText(String.valueOf(simulation.getTime()/60));
-        minuteValue.setText(String.valueOf(simulation.getTime()%60));
+        hourValue.setText(String.valueOf(simulation.getTimeAndUpdate()/60));
+        minuteValue.setText(String.valueOf(simulation.getTimeAndUpdate()%60));
         timeSpeed.setText(String.valueOf(60000/simulation.getTimeInterval()));
     }
 
@@ -65,7 +65,7 @@ public class SimulationParameterController {
     void returnData (MouseEvent event){
         Logger log = Logger.getInstance();
         try{
-            simulation.setTemperature(Integer.parseInt(temperatureValue.getText()));
+            simulation.setTemperature(Double.parseDouble(temperatureValue.getText()));
             log.outputToConsole("Temperature was successfully updated");
         }
         catch (NumberFormatException e){

@@ -156,12 +156,13 @@ public class SmartHomeSimulatorController {
         setDate(simulation.getDate());
         setLocation(simulation.getCurrentUser().getCurrentRoom());
         setProfile(simulation.getCurrentUser());
-        setTime(simulation.getTime());
+        setTime(simulation.getTimeAndUpdate());
         initializeHouseView();
         setHouseView();
         // Initialize lists in fxml with values from house template
         setLights(house);
         setRoomsInHeatingModule(house);
+        setInitialRoomTemperatures();
         Date currentDateTime = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastSaved.setText(format.format(currentDateTime));
@@ -170,10 +171,16 @@ public class SmartHomeSimulatorController {
         Logger.newInstance(outputConsole);
         Logger.getInstance().resetLogFile();
         this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
-        this.heatingModule = new HeatingModule();
+        this.heatingModule = new HeatingModule(this.simulation.getTimeObject());
         temperatureComboBox.getItems().addAll("Morning", "Day", "Night");
-
     }
+
+    public void setInitialRoomTemperatures(){
+        for(Room room : this.house.getRooms()){
+            room.resetTemperature(this.simulation.getTemperature());
+        }
+    }
+
 
     /**
      * Changes the simulation status to on or off
@@ -222,7 +229,7 @@ public class SmartHomeSimulatorController {
             setDate(simulation.getDate());
             setLocation(simulation.getCurrentUser().getCurrentRoom());
             setProfile(simulation.getCurrentUser());
-            setTime(simulation.getTime());
+            setTime(simulation.getTimeAndUpdate());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -456,8 +463,8 @@ public class SmartHomeSimulatorController {
      * @param temperature
      */
     @FXML
-    private void setTemperature(int temperature) {
-        this.displayTemp.setText(Integer.toString(temperature) + "°C");
+    private void setTemperature(double temperature) {
+        this.displayTemp.setText(Double.toString(temperature) + "°C");
     }
 
     
@@ -592,7 +599,7 @@ public class SmartHomeSimulatorController {
         //This try block will parse the string for an integer value if it fails it will not change the temperature and if
         // it succeeds it will output to console the new change
         try {
-            int newTemperatureInt = Integer.parseInt(setTemperatureSingleRoom.getText());
+            double newTemperatureInt = Double.parseDouble(setTemperatureSingleRoom.getText());
 
             success = this.heatingModule.overrideRoomTemperature(selectedRoom, newTemperatureInt, this.simulation.getCurrentUser());
         } catch (Exception e) {
@@ -637,7 +644,7 @@ public class SmartHomeSimulatorController {
             public void run() {
                 Platform.runLater(() -> {
                     simulation.updateTime();
-                    setTime(simulation.getTime());
+                    setTime(simulation.getTimeAndUpdate());
                     setDate(simulation.getDate());
                 });
             }

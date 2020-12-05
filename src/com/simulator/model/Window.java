@@ -29,8 +29,12 @@ public class Window extends Entryway{
                     " can not be opened because its path is blocked. \nWindow has remained closed.");
             return false;
         }
-        else
+        else{
+            if(this.open){
+                Logger.getInstance().outputToConsole(String.format("Window: %s is now open", this.getName()));
+            }
             this.open = true;
+        }
         return true;
     }
 
