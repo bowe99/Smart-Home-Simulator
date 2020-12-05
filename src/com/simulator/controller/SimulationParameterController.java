@@ -51,9 +51,9 @@ public class SimulationParameterController {
         userLocationChoice.setValue(simulation.getCurrentUser().getCurrentRoom().getName());
         temperatureValue.setText(String.valueOf(simulation.getTemperature()));
         dateValue.getEditor().setText(dateFormat.format(simulation.getDate()));
-        hourValue.setText(String.valueOf(simulation.getTime()/60));
-        minuteValue.setText(String.valueOf(simulation.getTime()%60));
-        timeSpeed.setText(String.valueOf(60000/simulation.getTimeInterval()));
+        hourValue.setText(String.valueOf(simulation.getTime()/3600));
+        minuteValue.setText(String.valueOf((simulation.getTime()%3600)/60));
+        timeSpeed.setText(String.valueOf(1000/simulation.getTimeInterval()));
     }
 
     /**
@@ -104,7 +104,7 @@ public class SimulationParameterController {
             int min = Integer.parseInt(minuteValue.getText());
             if (hour >= 0 && hour < 24) {
                 if (min >= 0 && min < 60) {
-                    simulation.setTime(hour * 60 + min);
+                    simulation.setTime(hour * 3600 + min * 60);
                     log.outputToConsole("Time has been updated successfully");
                 }
                 else{
