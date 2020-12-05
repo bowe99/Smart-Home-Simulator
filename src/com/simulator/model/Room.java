@@ -28,7 +28,7 @@ public class Room {
         this.temperature = 20;
         this.temperatureMorning = 20;
         this.temperatureDay = 20;
-        this.temperatureNight = 20;
+        this.temperatureNight = 25;
     }
 
     
