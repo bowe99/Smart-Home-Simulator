@@ -37,6 +37,15 @@ public class HeatingModule {
         return true;
     }
 
+    public ArrayList<String> getZonesRoomsByZoneName(String zoneNameInQuestion){
+        for(int i=0; i<zoneList.size(); i++){
+            if (zoneNameInQuestion==zoneList.get(i).getZoneName()){
+                return zoneList.get(i).getRoomListOfNames();
+            }
+        }
+        return null;
+    }
+
     public void setTempForZone(String zoneName, String periodOfTheDay, int temp){
         for(int i=0; i<zoneList.size(); ++i){
             if(zoneList.get(i).getZoneName().equalsIgnoreCase(zoneName)){

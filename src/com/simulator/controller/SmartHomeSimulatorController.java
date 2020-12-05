@@ -337,6 +337,23 @@ public class SmartHomeSimulatorController {
         String selectedPeriodOfTheDay = (String)temperatureComboBox.getSelectionModel().getSelectedItem();
 
         heatingModule.setTempForZone(selectedZone, selectedPeriodOfTheDay, tempPreset);
+
+        //Resetting fields to contain the proper room names
+        ArrayList<String> newRoomArrayList = heatingModule.getZonesRoomsByZoneName(selectedZone);
+        //resetting the rooms in the Display Temperature list to remove the word "overwritten"
+        for(int i=0; i<newRoomArrayList.size(); ++i) {
+            if (newRoomArrayList.get(i).contains("Overwritten")) {
+                house.getRoomByName(newRoomArrayList.get(i)).setName(newRoomArrayList.get(i).substring(0, newRoomArrayList.get(i).length() - 14));
+                allRoomsDisplayTemp.getItems().clear();
+                allRoomsDisplayTemp.getItems().addAll(house.getRoomsNameList());
+            }
+        }
+        selectedRoomsListForZone.getItems().clear();
+        allRoomsListViewZone.getItems().clear();
+        allRoomsListViewZone.getItems().addAll(allRoomsDisplayTemp.getItems());
+
+
+
         System.out.println("Came out the other side brother");
     }
 
@@ -359,10 +376,13 @@ public class SmartHomeSimulatorController {
         ObservableList<String> newZoneObservableList = (ObservableList<String>) this.selectedRoomsListForZone.getItems();
         ArrayList<Room> newRoomArrayList = new ArrayList<Room>();
 
+
+
         for(int i = 0; i < newZoneObservableList.size(); ++i){
             newRoomArrayList.add(house.getRoomByName(newZoneObservableList.get(i)));
         }
 
+        //If there is a word that is overwritten
         //check if there is a zone that already contains a specific room that is to be added to a zone
         for (int i = 0; i < newRoomArrayList.size(); ++i){
             if(newRoomArrayList.get(i).getBelongsToZone()){
@@ -376,6 +396,7 @@ public class SmartHomeSimulatorController {
         Zone newZone = new Zone(newRoomArrayList, newZoneName);
         this.heatingModule.addZone(newZone);
         newZone.printRoomsInZone();
+
 
 
         //Check if there are any non-existant zones that are being displayed in the display Zone window

@@ -26,7 +26,10 @@ public class Zone {
                 if(!roomArrayList.get(i).getName().contains("Overwritten")){
                     roomArrayList.get(i).setTemperatureMorning(temp);
                 }
-                else Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten \nso it's morning temperature cannot be updated via setting the zone temperature.");
+                else {
+                    roomArrayList.get(i).setTemperatureNight(temp);
+                    Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten so it's morning temperature will be updated to the zone temperature.");
+                }
             }
         }
         else if(timePeriod.contains("Day")){
@@ -36,7 +39,10 @@ public class Zone {
                 if(!roomArrayList.get(i).getName().contains("Overwritten")){
                     roomArrayList.get(i).setTemperatureDay(temp);
                 }
-                else Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten \nso it's daytime temperature cannot be updated via setting the zone temperature.");
+                else {
+                    roomArrayList.get(i).setTemperatureNight(temp);
+                    Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten so it's daytime temperature will be updated to the zone temperature.");
+                }
             }
         }
         else if(timePeriod.contains("Night")){
@@ -46,7 +52,10 @@ public class Zone {
                 if(!roomArrayList.get(i).getName().contains("Overwritten")){
                     roomArrayList.get(i).setTemperatureNight(temp);
                 }
-                else Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten \nso it's nighttime temperature cannot be updated via setting the zone temperature.");
+                else {
+                    roomArrayList.get(i).setTemperatureNight(temp);
+                    Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten so it's nighttime temperature will be updated to the zone temperature.");
+                }
             }
         }
         Logger.getInstance().outputToConsole("The updated temperature values for Zone "+this.zoneName+" are now: \nMorning Temperature: "+getMorningTemperature()+"\nDay Temperature: "+getDayTemperature()+"\nNight Temperature: "+getNightTemperature());
@@ -55,6 +64,14 @@ public class Zone {
     public int getMorningTemperature(){return temperatureMorning;}
     public int getDayTemperature(){return temperatureDay;}
     public int getNightTemperature(){return temperatureNight;}
+
+    public ArrayList<String> getRoomListOfNames(){
+        ArrayList<String> roomListOfNames = new ArrayList<String>();
+        for(int i=0; i<roomArrayList.size(); ++i){
+            roomListOfNames.add(roomArrayList.get(i).getName());
+        }
+        return roomListOfNames;
+    }
 
 
     public boolean isEmptyZone(){
