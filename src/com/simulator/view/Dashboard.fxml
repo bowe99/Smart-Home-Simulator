@@ -227,12 +227,25 @@
                                  </children></Pane>
                               <Separator layoutX="545.0" layoutY="-27.0" orientation="VERTICAL" prefHeight="428.0" prefWidth="2.0" />
                               <Separator layoutX="315.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="223.0" prefWidth="7.0" />
-                              <Pane layoutX="315.0" layoutY="-1.0" prefHeight="199.0" prefWidth="234.0">
+                              <Pane layoutX="315.0" layoutY="1.0" prefHeight="199.0" prefWidth="234.0">
                                  <children>
-                                    <Label layoutX="63.0" layoutY="22.0" text="Away Mode Settings" />
-                                    <TextField layoutX="14.0" layoutY="54.0" prefHeight="25.0" prefWidth="198.0" promptText="Winter Temperature" />
-                                    <TextField layoutX="14.0" layoutY="100.0" prefHeight="25.0" prefWidth="198.0" promptText="Summer Temperature" />
-                                    <Button layoutX="97.0" layoutY="142.0" mnemonicParsing="false" text="Save" />
+                                    <Label layoutX="96.0" layoutY="6.0" text="Settings" />
+                                    <TextField layoutX="14.0" layoutY="38.0" prefHeight="25.0" prefWidth="93.0" promptText="Winter Temp" />
+                                    <Button layoutX="164.0" layoutY="166.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="63.0" text="Save" />
+                                    <TextField layoutX="117.0" layoutY="38.0" prefHeight="25.0" prefWidth="93.0" promptText="Summer Temp" />
+                                    <Label layoutX="14.0" layoutY="15.0" text="Away Mode" />
+                                    <TextField layoutX="163.0" layoutY="135.0" prefHeight="25.0" prefWidth="56.0" />
+                                    <TextField layoutX="70.0" layoutY="135.0" prefHeight="25.0" prefWidth="56.0" />
+                                    <Label layoutX="16.0" layoutY="139.0" text="Night" />
+                                    <Label layoutX="135.0" layoutY="139.0" text="to" />
+                                    <TextField layoutX="163.0" layoutY="104.0" prefHeight="25.0" prefWidth="56.0" />
+                                    <TextField layoutX="70.0" layoutY="104.0" prefHeight="25.0" prefWidth="56.0" />
+                                    <Label layoutX="16.0" layoutY="108.0" text="Day" />
+                                    <Label layoutX="135.0" layoutY="108.0" text="to" />
+                                    <TextField layoutX="163.0" layoutY="75.0" prefHeight="25.0" prefWidth="56.0" />
+                                    <TextField layoutX="70.0" layoutY="75.0" prefHeight="25.0" prefWidth="56.0" />
+                                    <Label layoutX="16.0" layoutY="79.0" text="Morning" />
+                                    <Label layoutX="135.0" layoutY="79.0" text="to" />
                                  </children>
                               </Pane>
                            </children></AnchorPane>

@@ -65,7 +65,7 @@ public class SimulationParameterController {
     void returnData (MouseEvent event){
         Logger log = Logger.getInstance();
         try{
-            simulation.setTemperature(Integer.parseInt(temperatureValue.getText()));
+            simulation.setTemperature(Double.parseDouble(temperatureValue.getText()));
             log.outputToConsole("Temperature was successfully updated");
         }
         catch (NumberFormatException e){
