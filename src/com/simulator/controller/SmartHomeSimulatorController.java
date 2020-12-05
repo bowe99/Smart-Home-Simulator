@@ -498,9 +498,11 @@ public class SmartHomeSimulatorController {
      */
     @FXML
     private void setTime(int time){
-        String hours = String.format("%02d", time/60);
-        String mins = String.format("%02d", time%60);
-        this.displayTime.setText(hours + ":" + mins);
+        String hours = String.format("%02d", time/3600);
+        String minutes = String.format("%02d", (time%3600)/60);
+        String seconds = String.format("%02d", time % 60);
+
+        this.displayTime.setText(hours + ":" + minutes + ":" + seconds);
     }
     /**
      * Save Security Settings
