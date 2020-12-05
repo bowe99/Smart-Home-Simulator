@@ -124,14 +124,13 @@ public class SmartHomeSimulatorController {
     private String selectedWindow;
 
     private static final String RESOURCE_PATH = "/com/simulator/view/";
-    private javafx.scene.image.Image lightIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "lightOn.jpg").toExternalForm());
+    private javafx.scene.image.Image lightOnIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "lightOn.jpg").toExternalForm());
+    private javafx.scene.image.Image lightOffIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "lightOff.png").toExternalForm());
     private javafx.scene.image.Image unlockedIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "unlocked.png").toExternalForm());
     private javafx.scene.image.Image lockedIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "locked.png").toExternalForm());
     private javafx.scene.image.Image openWindowIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "openwindow.png").toExternalForm());
     private javafx.scene.image.Image closedWindowIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "closedwindow.png").toExternalForm());
     private javafx.scene.image.Image personIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "person.png").toExternalForm());
-    private javafx.scene.image.Image peopleIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "people.jpg").toExternalForm());
-
 
 
 
@@ -244,6 +243,14 @@ public class SmartHomeSimulatorController {
             windowImages[i] = (ImageView) houseLayoutPane.lookup("#a"+ i +"window");
             personImages[i] = (ImageView) houseLayoutPane.lookup("#a"+ i +"person");
         }
+        
+        for (int i = 1; i <= NUMBER_OF_GRID_ELEMENTS; i++) {
+            areas[i].setVisible(false);
+            lightImages[i].setVisible(false);
+            doorImages[i].setVisible(false);
+            windowImages[i].setVisible(false);
+            personImages[i].setVisible(false);
+        }
     }
 
     /**
@@ -257,7 +264,6 @@ public class SmartHomeSimulatorController {
         awayIcon2.setVisible(false);
 
         for (int counter = 1; counter <= NUMBER_OF_GRID_ELEMENTS; counter++) {
-            areas[counter].setOpacity(1);//necessary?
             areas[counter].setVisible(false);
             lightImages[counter].setVisible(false);
             doorImages[counter].setVisible(false);
@@ -276,16 +282,12 @@ public class SmartHomeSimulatorController {
         layoutViewText.setOpacity(1);
         for (int loop=0; loop< simulation.getAllUsers().size(); loop++)
         {
-            //BUG: if there are 3 people in the room, the second hit will set the image to 'peopleIcon' and the third will set it back to 'personIcon'
-            //BUG: if there is only 1 person in the room, toggling the simulation on and off will cause the image to alternate between person and people icons
             String roomIDstring = simulation.getAllUsers().get(loop).getCurrentRoom().getId();
             if(roomIDstring.length() > 4) {
                 int currentRoomID = Integer.parseInt(roomIDstring.substring(4));
                 ImageView currentRoomPersonImage = personImages[currentRoomID];
-                if (currentRoomPersonImage.getImage() == personIcon)
-                    currentRoomPersonImage.setImage(peopleIcon);
-                else
-                    currentRoomPersonImage.setImage(personIcon);
+                currentRoomPersonImage.setImage(personIcon);
+                currentRoomPersonImage.setVisible(true);
             }
         }
 
@@ -300,7 +302,6 @@ public class SmartHomeSimulatorController {
                 lightImages[roomID].setVisible(true);
                 doorImages[roomID].setVisible(true);
                 windowImages[roomID].setVisible(true);
-                personImages[roomID].setVisible(true);
             }
         }
     }
@@ -827,7 +828,7 @@ public class SmartHomeSimulatorController {
             currentLight.setToOn();
             changeLightButtonsColours();
             int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
-            lightImages[currentRoomID].setVisible(true);
+            lightImages[currentRoomID].setImage(lightOnIcon);
         }
     }   
 
@@ -844,7 +845,7 @@ public class SmartHomeSimulatorController {
             currentLight.setToOff();
             changeLightButtonsColours();
             int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
-            lightImages[currentRoomID].setVisible(false);
+            lightImages[currentRoomID].setImage(lightOffIcon);
         }
     }
     
