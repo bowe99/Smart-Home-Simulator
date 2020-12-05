@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -842,10 +843,22 @@ public class SmartHomeSimulatorController {
         }
         else{
             System.out.println("lightOFF");
+            int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
+            List<String> roomLights = currentRoom.getLightsNameList();
+            int lightOnCount = 0;
+            for (int loop = 0; loop<currentRoom.getLightsAmount();loop++)
+            {
+                if(currentRoom.getLightByName(roomLights.get(loop)).getOnOff()== true)
+                {
+                    lightOnCount++;
+                }
+            }
+            if (lightOnCount == 1)
+            {
+                lightImages[currentRoomID].setImage(lightOffIcon);
+            }
             currentLight.setToOff();
             changeLightButtonsColours();
-            int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
-            lightImages[currentRoomID].setImage(lightOffIcon);
         }
     }
     
@@ -908,10 +921,22 @@ public class SmartHomeSimulatorController {
         }
         else{
             System.out.println("doorLock");
+            int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
+            List<String> doorsLocked = currentRoom.getDoorsNameList();
+            int doorsUnlockedCount = 0;
+            for (int loop = 0; loop<currentRoom.getDoorsAmount();loop++)
+            {
+                if(currentRoom.getDoorByName(doorsLocked.get(loop)).getLockedStatus()== false)
+                {
+                    doorsUnlockedCount++;
+                }
+            }
+            if (doorsUnlockedCount == 1)
+            {
+                doorImages[currentRoomID].setImage(lockedIcon);
+            }
             currentDoor.setLocked();
             changeDoorButtonsColours();
-            int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
-            doorImages[currentRoomID].setImage(lockedIcon);
         }
 
     }
@@ -945,9 +970,21 @@ public class SmartHomeSimulatorController {
         else{
             System.out.println("windowClose");
             if(currentWindow.setClosed()) {
-                changeWindowButtonsColours();
                 int currentRoomID = Integer.parseInt(currentRoom.getId().substring(4));
-                windowImages[currentRoomID].setImage(closedWindowIcon);
+                List<String> windows = currentRoom.getWindowsNameList();
+                int windowsOpenedCount = 0;
+                for (int loop = 0; loop<currentRoom.getWindowsAmount();loop++)
+                {
+                    if(currentRoom.getWindowByName(windows.get(loop)).getOpenOrClosed() == true)
+                    {
+                        windowsOpenedCount++;
+                    }
+                }
+                if (windowsOpenedCount == 0)
+                {
+                    windowImages[currentRoomID].setImage(closedWindowIcon);
+                }
+                changeWindowButtonsColours();
             }
         }
     }
