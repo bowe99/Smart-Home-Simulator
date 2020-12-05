@@ -223,6 +223,7 @@ public class SmartHomeSimulatorController {
             setLocation(simulation.getCurrentUser().getCurrentRoom());
             setProfile(simulation.getCurrentUser());
             setTime(simulation.getTime());
+            setUsersInLayout();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -281,17 +282,7 @@ public class SmartHomeSimulatorController {
         layoutViewText.setText("House View");
         layoutViewText.setTranslateX(20);       
         layoutViewText.setOpacity(1);
-        for (int loop=0; loop< simulation.getAllUsers().size(); loop++)
-        {
-            String roomIDstring = simulation.getAllUsers().get(loop).getCurrentRoom().getId();
-            if(roomIDstring.length() > 4) {
-                int currentRoomID = Integer.parseInt(roomIDstring.substring(4));
-                ImageView currentRoomPersonImage = personImages[currentRoomID];
-                currentRoomPersonImage.setImage(personIcon);
-                currentRoomPersonImage.setVisible(true);
-            }
-        }
-
+        setUsersInLayout();
         for (int counter = 0; counter < house.getRooms().size(); counter++) {
             String roomIDstring = house.getRooms().get(counter).getId();
             if(roomIDstring.length() > 4) {
@@ -303,6 +294,27 @@ public class SmartHomeSimulatorController {
                 lightImages[roomID].setVisible(true);
                 doorImages[roomID].setVisible(true);
                 windowImages[roomID].setVisible(true);
+            }
+        }
+    }
+
+    /**
+     * Sets users in the house layout view.
+     */
+    @FXML
+    public void setUsersInLayout(){
+        for (int loop=1; loop < (NUMBER_OF_GRID_ELEMENTS + 1); loop++)
+        {
+               personImages[loop].setVisible(false);       //reset all first
+        }
+        for (int loop=0; loop< simulation.getAllUsers().size(); loop++)
+        {
+            String roomIDstring = simulation.getAllUsers().get(loop).getCurrentRoom().getId();
+            if(roomIDstring.length() > 4) {
+                int currentRoomID = Integer.parseInt(roomIDstring.substring(4));
+                ImageView currentRoomPersonImage = personImages[currentRoomID];
+                currentRoomPersonImage.setImage(personIcon);
+                currentRoomPersonImage.setVisible(true);
             }
         }
     }
