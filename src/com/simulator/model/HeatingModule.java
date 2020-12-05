@@ -138,7 +138,7 @@ public class HeatingModule extends SimulationObserver{
     public void updateTime(int time) {
         SimulationParameters simulationInstance = SimulationParameters.getInstance();
         int currentMonth = simulationInstance.getDate().getMonth();
-        int currentHour = simulationInstance.getTime() / 60;
+        int currentHour = simulationInstance.getTime() / 3600;
         double outdoorTemperature = simulationInstance.getTemperature();
         for(Room room : roomList){
             double currentTempRoom = room.getTemperature().getCurrentTemperature();
@@ -147,10 +147,6 @@ public class HeatingModule extends SimulationObserver{
             checkSummerCooling(room, currentMonth, outdoorTemperature, currentTempRoom);
 
             room.updateTemperature(outdoorTemperature);
-
-            if(room.getName().equalsIgnoreCase("LivingRoom")){
-                Logger.getInstance().outputToConsole(String.format("Current Temp: %f, Room: %s", room.getTemperature().getCurrentTemperature(), room.getName()));
-            }
         }
 
     }
