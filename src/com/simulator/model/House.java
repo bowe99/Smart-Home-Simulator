@@ -21,17 +21,12 @@ public class House {
      * Get instance of the house object that is saved in this singleton class, creates new instance if one does not exist
      * @return House
      */
-    public static House getInstance() {
-        try {
+    public static House getInstance() throws HouseLoadException{
         if(instance == null){
             instance = loadFile("house_layout_txt.txt");
             System.out.println("ok, created a new instance");
         }
         return instance;
-        } catch(Exception e){
-            System.out.print("something went wrong");
-            return null;   
-        }
     }
 
     /**
@@ -243,7 +238,7 @@ public class House {
      * @return House
      * @throws Exception
      */
-    private static House loadFile(String fileName) throws Exception{
+    private static House loadFile(String fileName) throws HouseLoadException{
         House loadedHouse;
         String[] elementStack = new String[5];
         int depth = -1;
@@ -313,6 +308,9 @@ public class House {
                     attribute = getAttribute(line);
                     loadedHouse.addEntrywaySensor(attribute, elementStack[depth - 1], elementStack[depth]);
                     elementStack[++depth] = attribute;
+                }
+                else{
+                    throw new HouseLoadException("Unexpected identifier on line " + linenumber + " of the house layout file. ");
                 }
 
                 //moving onto the next line of information

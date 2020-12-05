@@ -12,12 +12,25 @@ import com.simulator.controller.Logger;
 
 public class HeatingModule extends SimulationObserver{
     private ArrayList<Zone> zoneList = new ArrayList<Zone>();
-    private List<Room> roomList = House.getInstance().getRooms();
+    private List<Room> roomList;
+    private House house;
 
     private double summerTemperatureAwayMode;
     private double winterTemperatureAwayMode;
 
+    public HeatingModule(){
+        try {
+            house = House.getInstance();
+            roomList = house.getRooms();
+        }
+        catch (HouseLoadException houseLoadException){
+            houseLoadException.printStackTrace();
+            System.out.println(houseLoadException.getMessage());
+        }
+    }
+
     public HeatingModule(Time time){
+        this();
         time.attach(this);
     }
 
@@ -61,7 +74,7 @@ public class HeatingModule extends SimulationObserver{
             Logger.getInstance().outputToConsole("[WARNING] Unauthorized action! User does not have the required permissions");
         }
         else{
-            Room currentRoom = House.getInstance().getRoomByName(roomName);
+            Room currentRoom = house.getRoomByName(roomName);
             Logger.getInstance().outputToConsole(String.format("Temperature in %s: %f", roomName, currentRoom.getTemperature().getCurrentTemperature()));
     
         }    
@@ -73,7 +86,7 @@ public class HeatingModule extends SimulationObserver{
             return false;
         }
         else{
-            Room currentRoom = House.getInstance().getRoomByName(roomName);
+            Room currentRoom = house.getRoomByName(roomName);
             currentRoom.getTemperature().setTemperatureOverridden(temperature);
             currentRoom.setOverridden(true);
             Logger.getInstance().outputToConsole(String.format("Temperature in %s is set to be at: %f currentTemperature: %f", roomName, temperature, currentRoom.getTemperature().getCurrentTemperature()));
