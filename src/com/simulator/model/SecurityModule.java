@@ -9,7 +9,7 @@ import javafx.scene.control.ToggleButton;
 /**
  * Security module used to monitor presence of individuals in different rooms as well as invoke away mode
  */
-public class SecurityModule extends SecurityObserver{
+public class SecurityModule extends SimulationObserver{
     private ToggleButton awayToggle;
     private boolean isAwayMode;
     private boolean detectionMonitored;
@@ -36,8 +36,8 @@ public class SecurityModule extends SecurityObserver{
         this.detectionMonitored = false;
         this.lightsOnWhenAway = new ArrayList<Light>();
         this.motionDetectedTime = 0;
-        this.lightOnTime = 1080;
-        this.lightOffTime = 360;
+        this.lightOnTime = 64800;
+        this.lightOffTime = 21600;
         this.timeOfDetection = -1;
     }
 

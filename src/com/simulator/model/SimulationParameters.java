@@ -15,7 +15,7 @@ import java.util.List;
 public class SimulationParameters{
     private static SimulationParameters instance = null;
     private Time time; //represents minutes of the day (0-1440)
-    private int temperature;
+    private double temperature;
     private Profile currentUser;
     private List<Profile> allUsers;
     private boolean simulationStatus = true;
@@ -53,7 +53,7 @@ public class SimulationParameters{
      * Get the temperature
      * @return int
      */
-    public int getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
@@ -62,7 +62,7 @@ public class SimulationParameters{
      * Set the temperature
      * @param temperature
      */
-    public void setTemperature(int temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 
@@ -84,6 +84,15 @@ public class SimulationParameters{
         this.time.setDate(date);
     }
 
+    
+    /** 
+     * Get the time
+     * @return int
+     */
+    public int getTimeAndUpdate() {
+        return time.getTimeAndUpdate();
+    }
+    
     
     /** 
      * Get the time
@@ -259,7 +268,7 @@ public class SimulationParameters{
             line = reader.readLine();
             loadedSimulation.setTime(Integer.parseInt(line));
             line = reader.readLine();
-            loadedSimulation.setTemperature(Integer.parseInt(line));
+            loadedSimulation.setTemperature(Double.parseDouble(line));
         }
         catch(Exception e){
             System.out.println("Something went wrong loading the txt file");
@@ -301,7 +310,7 @@ public class SimulationParameters{
             SimpleDateFormat initialFormat = new SimpleDateFormat("yyyy-MM-dd");
             writer.write(initialFormat.format(time.getDate()));
             writer.write("\n");
-            writer.write(String.valueOf(time.getTime()));
+            writer.write(String.valueOf(time.getTimeAndUpdate()));
             writer.write("\n");
             writer.write(String.valueOf(temperature));
             Logger.getInstance().outputToConsole("Simulation parameters have been saved");

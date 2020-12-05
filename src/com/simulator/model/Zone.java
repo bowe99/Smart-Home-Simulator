@@ -30,6 +30,8 @@ public class Zone {
                     roomArrayList.get(i).setTemperatureNight(temp);
                     Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten so it's morning temperature will be updated to the zone temperature.");
                 }
+                roomArrayList.get(i).setOverridden(false);
+                roomArrayList.get(i).getTemperature().setTemperatureMorning(temp);
             }
         }
         else if(timePeriod.contains("Day")){
@@ -43,6 +45,8 @@ public class Zone {
                     roomArrayList.get(i).setTemperatureNight(temp);
                     Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten so it's daytime temperature will be updated to the zone temperature.");
                 }
+                roomArrayList.get(i).setOverridden(false);
+                roomArrayList.get(i).getTemperature().setTemperatureDay(temp);
             }
         }
         else if(timePeriod.contains("Night")){
@@ -56,6 +60,8 @@ public class Zone {
                     roomArrayList.get(i).setTemperatureNight(temp);
                     Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten so it's nighttime temperature will be updated to the zone temperature.");
                 }
+                roomArrayList.get(i).setOverridden(false);
+                roomArrayList.get(i).getTemperature().setTemperatureNight(temp);
             }
         }
         Logger.getInstance().outputToConsole("The updated temperature values for Zone "+this.zoneName+" are now: \nMorning Temperature: "+getMorningTemperature()+"\nDay Temperature: "+getDayTemperature()+"\nNight Temperature: "+getNightTemperature());
@@ -99,10 +105,11 @@ public class Zone {
         roomArrayList.add(room1);
         //update temperature for the room
         if(!room1.getName().contains("Overwritten")){
-            room1.setTemperatureMorning(temperatureMorning);
-            room1.setTemperatureDay(temperatureDay);
-            room1.setTemperatureNight(temperatureNight);
+            room1.getTemperature().setTemperatureMorning(temperatureMorning);
+            room1.getTemperature().setTemperatureDay(temperatureDay);
+            room1.getTemperature().setTemperatureNight(temperatureNight);
         }
+        room1.setOverridden(false);
     }
 
     public void printRoomsInZone(){
