@@ -157,6 +157,10 @@ public class HeatingModule extends SimulationObserver{
             checkSummerCooling(room, currentMonth, outdoorTemperature, currentTempRoom);
 
             room.updateTemperature(outdoorTemperature);
+            if(room.getName().contains("BuildingEntrance")){
+                Logger.getInstance().outputToConsole(String.format("%f", room.getTemperature().getCurrentTemperature()));
+            }
+
         }
 
     }
