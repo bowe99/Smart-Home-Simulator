@@ -336,7 +336,6 @@ public class SmartHomeSimulatorController {
         }
         String selectedPeriodOfTheDay = (String)temperatureComboBox.getSelectionModel().getSelectedItem();
 
-        //Set the new temperature, unless one has already been overwritten for a specific room
         heatingModule.setTempForZone(selectedZone, selectedPeriodOfTheDay, tempPreset);
         System.out.println("Came out the other side brother");
     }
@@ -359,6 +358,7 @@ public class SmartHomeSimulatorController {
         String newZoneName = zoneName.getText();
         ObservableList<String> newZoneObservableList = (ObservableList<String>) this.selectedRoomsListForZone.getItems();
         ArrayList<Room> newRoomArrayList = new ArrayList<Room>();
+
         for(int i = 0; i < newZoneObservableList.size(); ++i){
             newRoomArrayList.add(house.getRoomByName(newZoneObservableList.get(i)));
         }
@@ -575,6 +575,7 @@ public class SmartHomeSimulatorController {
     private void setRoomTemperature(){
         Object selectedItem = allRoomsDisplayTemp.getSelectionModel().getSelectedItem();
         String selectedRoom = (String) selectedItem;
+        final String selectedRoomNoOverwrite = selectedRoom;
         int selectedIndex = allRoomsDisplayTemp.getItems().indexOf(selectedItem);
 
         boolean success;
@@ -609,6 +610,36 @@ public class SmartHomeSimulatorController {
             }
             allRoomsDisplayTemp.getItems().remove(selectedIndex);
             allRoomsDisplayTemp.getItems().add(selectedIndex, selectedRoom);
+        }
+
+        //update rooms in list of rooms
+        for(int i =0; i<allRoomsListViewZone.getItems().size(); ++i){
+            if(((String) allRoomsListViewZone.getItems().get(i)).contains(selectedRoomNoOverwrite)){
+                //remove the room that does not include "overwritten"
+                this.allRoomsListViewZone.getItems().remove(i);
+                //add the room that does contain the word "overwritten"
+                this.allRoomsListViewZone.getItems().add(selectedRoom);
+                break;
+            }
+        }
+
+        //update rooms in list of selected rooms
+        for(int i =0; i<selectedRoomsListForZone.getItems().size(); ++i){
+            if(((String) selectedRoomsListForZone.getItems().get(i)).contains(selectedRoomNoOverwrite)){
+                //remove the room that does not include "overwritten"
+                this.selectedRoomsListForZone.getItems().remove(i);
+                //add the room that does contain the word "overwritten"
+                this.selectedRoomsListForZone.getItems().add(selectedRoom);
+                break;
+            }
+        }
+
+        //rename the old room in the house with the name from the new room
+        for(int i=0; i<house.getRoomsNameList().size(); ++i){
+            if(selectedRoom.contains(house.getRoomsNameList().get(i))){
+                house.renameRoom(house.getRoomsNameList().get(i), selectedRoom);
+                break;
+            }
         }
     }
 

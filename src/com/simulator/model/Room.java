@@ -107,7 +107,7 @@ public class Room {
     public String getName() {
         return name;
     }
-    
+    public void setName(String newName){name=newName;}
     
     /** 
      * Get the temperature of the room

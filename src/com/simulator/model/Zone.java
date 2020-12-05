@@ -26,7 +26,7 @@ public class Zone {
                 if(!roomArrayList.get(i).getName().contains("Overwritten")){
                     roomArrayList.get(i).setTemperatureMorning(temp);
                 }
-                else Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+"was overwritten \nso it's morning temperature cannot be updated via setting the zone temperature.");
+                else Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten \nso it's morning temperature cannot be updated via setting the zone temperature.");
             }
         }
         else if(timePeriod.contains("Day")){
@@ -36,7 +36,7 @@ public class Zone {
                 if(!roomArrayList.get(i).getName().contains("Overwritten")){
                     roomArrayList.get(i).setTemperatureDay(temp);
                 }
-                else Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+"was overwritten \nso it's daytime temperature cannot be updated via setting the zone temperature.");
+                else Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten \nso it's daytime temperature cannot be updated via setting the zone temperature.");
             }
         }
         else if(timePeriod.contains("Night")){
@@ -46,7 +46,7 @@ public class Zone {
                 if(!roomArrayList.get(i).getName().contains("Overwritten")){
                     roomArrayList.get(i).setTemperatureNight(temp);
                 }
-                else Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+"was overwritten \nso it's nighttime temperature cannot be updated via setting the zone temperature.");
+                else Logger.getInstance().outputToConsole("Room "+roomArrayList.get(i).getName()+" was overwritten \nso it's nighttime temperature cannot be updated via setting the zone temperature.");
             }
         }
         Logger.getInstance().outputToConsole("The updated temperature values for Zone "+this.zoneName+" are now: \nMorning Temperature: "+getMorningTemperature()+"\nDay Temperature: "+getDayTemperature()+"\nNight Temperature: "+getNightTemperature());

@@ -24,6 +24,7 @@ public class HeatingModule {
                 if(zoneList.get(j).isEmptyZone()){
                     zoneList.remove(j);
                 }
+                return;
             }
         }
     }
