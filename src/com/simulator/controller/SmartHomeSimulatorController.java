@@ -338,18 +338,18 @@ public class SmartHomeSimulatorController {
     @FXML
     public void setTemperatureIconsInLayout(){
         List<Room> rooms = house.getRooms();
-        for (int loop=0; loop < rooms.size();  loop++)
+        for (Room room : rooms)
         {
-            String roomIDstring = rooms.get(loop).getId();
-            if(rooms.get(loop).getCurrentStateHVAC() == true) {
+            String roomIDstring = room.getId();
+            if(room.getCurrentStateHVAC() == true) {
                 int currentRoomID = Integer.parseInt(roomIDstring.substring(4));
 
-                if(rooms.get(loop).getTemperature().getTemperatureTarget() > rooms.get(loop).getTemperature().getCurrentTemperature()){
+                if(room.getTemperature().getTemperatureTarget() > room.getTemperature().getCurrentTemperature()){
                     ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
                     currentRoomTemperatureImage.setImage(heaterIcon);
                     currentRoomTemperatureImage.setVisible(true);
                 }
-                else if(rooms.get(loop).getTemperature().getTemperatureTarget() < rooms.get(loop).getTemperature().getCurrentTemperature()){ 
+                else if(room.getTemperature().getTemperatureTarget() < room.getTemperature().getCurrentTemperature()){ 
                     ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
                     currentRoomTemperatureImage.setImage(acIcon);
                     currentRoomTemperatureImage.setVisible(true);                
