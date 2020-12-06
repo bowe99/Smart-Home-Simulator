@@ -30,7 +30,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="583.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.controller.SmartHomeSimulatorController">
+<VBox prefHeight="583.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.controller.SmartHomeSimulatorController">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="615.0" prefWidth="1266.0" VBox.vgrow="ALWAYS">
          <children>
