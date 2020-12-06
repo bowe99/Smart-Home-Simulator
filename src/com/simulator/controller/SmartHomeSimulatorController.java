@@ -81,15 +81,12 @@ public class SmartHomeSimulatorController {
     @FXML private ListView allRoomsCreateGroups;
     @FXML private Button displayRoomTempButton;
     @FXML private TextField setTemperatureSingleRoom;
-<<<<<<< Updated upstream
     @FXML private TextField winterAwayModeTemperature;
     @FXML private TextField summerAwayModeTemperature;
-=======
     @FXML private TextField SummerStart;
     @FXML private TextField SummerEnd;
     @FXML private TextField WinterStart;
     @FXML private TextField WinterEnd;
->>>>>>> Stashed changes
 
     @FXML private Label lastSaved;
     @FXML private TabPane tabPane;
@@ -194,13 +191,8 @@ public class SmartHomeSimulatorController {
         Logger.newInstance(outputConsole);
         Logger.getInstance().resetLogFile();
         this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
-<<<<<<< Updated upstream
         this.heatingModule = new HeatingModule(this.simulation.getTimeObject(), this.securityModule);
-        temperatureComboBox.getItems().addAll("Morning", "Day", "Night");
-=======
-        this.heatingModule = new HeatingModule(this.simulation.getTimeObject());
-        //temperatureComboBox.getItems().addAll("Morning", "Day", "Night");
->>>>>>> Stashed changes
+        
     }
 
     /**
