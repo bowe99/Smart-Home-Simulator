@@ -18,3 +18,4 @@ public abstract class SimulationObserver{
      */
     public abstract void updateTime(int time);
  }
+ 
