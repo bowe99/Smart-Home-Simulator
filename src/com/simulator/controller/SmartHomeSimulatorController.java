@@ -81,6 +81,8 @@ public class SmartHomeSimulatorController {
     @FXML private ListView allRoomsCreateGroups;
     @FXML private Button displayRoomTempButton;
     @FXML private TextField setTemperatureSingleRoom;
+    @FXML private TextField winterAwayModeTemperature;
+    @FXML private TextField summerAwayModeTemperature;
 
     @FXML private Label lastSaved;
     @FXML private TabPane tabPane;
@@ -185,7 +187,7 @@ public class SmartHomeSimulatorController {
         Logger.newInstance(outputConsole);
         Logger.getInstance().resetLogFile();
         this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
-        this.heatingModule = new HeatingModule(this.simulation.getTimeObject());
+        this.heatingModule = new HeatingModule(this.simulation.getTimeObject(), this.securityModule);
         temperatureComboBox.getItems().addAll("Morning", "Day", "Night");
     }
 
@@ -428,6 +430,26 @@ public class SmartHomeSimulatorController {
 
 
         System.out.println("Came out the other side brother");
+    }
+
+    @FXML
+    private void saveSHHSettings(MouseEvent event){
+        try {
+            heatingModule.setSummerTemperatureAwayMode(Double.parseDouble(summerAwayModeTemperature.getText()));
+            Logger.getInstance().outputToConsole("Summer away mode temperature successfully updated");
+        }
+        catch (NumberFormatException e)
+        {
+            Logger.getInstance().outputToConsole("Could not parse entry for summer away mode temperature");
+        }
+        try {
+            heatingModule.setWinterTemperatureAwayMode(Double.parseDouble(winterAwayModeTemperature.getText()));
+            Logger.getInstance().outputToConsole("Winter away mode temperature successfully updated");
+        }
+        catch (NumberFormatException e)
+        {
+            Logger.getInstance().outputToConsole("Could not parse entry for winter away mode temperature");
+        }
     }
 
     @FXML

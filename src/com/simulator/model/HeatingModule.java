@@ -15,11 +15,13 @@ import com.simulator.controller.Logger;
  */
 public class HeatingModule extends SimulationObserver{
     private ArrayList<Zone> zoneList = new ArrayList<Zone>();
+    private SecurityModule securityModule;
     private List<Room> roomList;
     private House house;
 
     private double summerTemperatureAwayMode;
     private double winterTemperatureAwayMode;
+
 
     public HeatingModule(){
         try {
@@ -37,9 +39,10 @@ public class HeatingModule extends SimulationObserver{
      *
      * @param time the time
      */
-    public HeatingModule(Time time){
+    public HeatingModule(Time time, SecurityModule securityModule){
         this();
         time.attach(this);
+        this.securityModule = securityModule;
     }
 
     /**
@@ -172,8 +175,15 @@ public class HeatingModule extends SimulationObserver{
      * @param currentTempRoom the current temp room
      * @param currentHour     the current hour
      */
-    public void updateRoomTargetTemperature(Room room, double currentTempRoom, int currentHour){
-        if(room.getOverridden()){
+    public void updateRoomTargetTemperature(Room room, double currentTempRoom, int currentHour, int currentMonth){
+        if(securityModule.getAwayMode()){
+            //TODO allow user to define summer and winter months (issue #58)
+            if(currentMonth <= 9 && currentMonth >= 6)
+                room.getTemperature().setTemperatureTarget(summerTemperatureAwayMode);
+            else if (currentMonth <= 2 || currentMonth >= 11)
+                room.getTemperature().setTemperatureTarget(winterTemperatureAwayMode);
+        }
+        else if(room.getOverridden()){
             room.getTemperature().setTemperatureTarget(room.getTemperature().getTemperatureOverridden());
         }
         else{
@@ -217,6 +227,7 @@ public class HeatingModule extends SimulationObserver{
      */
     public void checkSummerCooling(Room room, int currentMonth, double outdoorTemperature, double currentTempRoom){
         // TODO check if in away mode before opening windows
+        // TODO allow user to define summer months (issue #58)
         if((currentMonth <= 9 && currentMonth >= 6) && currentTempRoom > outdoorTemperature + 0.25){
             if(room.getCurrentStateHVAC()){
                 Logger.getInstance().outputToConsole("Disabling Air Conditioning: It is summer and cooler outdoors. Open all windows");
@@ -239,11 +250,14 @@ public class HeatingModule extends SimulationObserver{
         return calendar.get(Calendar.HOUR_OF_DAY);
     }
 
-    /**
-     * Get current hour int.
-     *
-     * @param time integer for time
-     */
+    public void setSummerTemperatureAwayMode(double temp){
+        this.summerTemperatureAwayMode = temp;
+    }
+
+    public void setWinterTemperatureAwayMode(double temp){
+        this.winterTemperatureAwayMode = temp;
+    }
+
     @Override
     public void updateTime(int time) {
         SimulationParameters simulationInstance = SimulationParameters.getInstance();
@@ -252,7 +266,7 @@ public class HeatingModule extends SimulationObserver{
         double outdoorTemperature = simulationInstance.getTemperature();
         for(Room room : roomList){
             double currentTempRoom = room.getTemperature().getCurrentTemperature();
-            updateRoomTargetTemperature(room, currentTempRoom, currentHour);
+            updateRoomTargetTemperature(room, currentTempRoom, currentHour, currentMonth);
             checkToggleStatusHVAC(room, currentTempRoom);
             checkSummerCooling(room, currentMonth, outdoorTemperature, currentTempRoom);
 
