@@ -12,8 +12,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Display current temp.
+ */
 class DisplayCurrentTemp{
 
+    /**
+     * Display current temp.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void displayCurrentTemp() throws HouseLoadException {
         System.out.print(House.getInstance().getRoomByName("Garage").getTemperature().getTemperatureDay());

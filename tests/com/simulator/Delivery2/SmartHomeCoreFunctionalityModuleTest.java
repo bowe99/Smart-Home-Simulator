@@ -7,8 +7,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Smart home core functionality module test.
+ */
 class SmartHomeCoreFunctionalityModuleTest {
 
+    /**
+     * Door unlock.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void doorUnlock() throws HouseLoadException {
         System.out.println("Testing if the door can be unlocked");
@@ -16,6 +24,11 @@ class SmartHomeCoreFunctionalityModuleTest {
         Assertions.assertEquals(false, House.getInstance().getRoomByName("Kitchen").getDoorByName("OfficeDoor").getLockedStatus());
     }
 
+    /**
+     * Door lock.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void doorLock() throws HouseLoadException {
         System.out.println("Testing if the door can be locked");
@@ -23,6 +36,11 @@ class SmartHomeCoreFunctionalityModuleTest {
         Assertions.assertEquals(true, House.getInstance().getRoomByName("Kitchen").getDoorByName("OfficeDoor").getLockedStatus());
     }
 
+    /**
+     * Window open.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void windowOpen() throws HouseLoadException {
         System.out.println("Testing if the window can be opened");
@@ -30,6 +48,11 @@ class SmartHomeCoreFunctionalityModuleTest {
         Assertions.assertEquals(true, House.getInstance().getRoomByName("Kitchen").getWindowByName("NorthWindow").getOpenOrClosed());
     }
 
+    /**
+     * Window close.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void windowClose() throws HouseLoadException {
         System.out.println("Testing if the window can be closed");
@@ -37,6 +60,11 @@ class SmartHomeCoreFunctionalityModuleTest {
     }
 
 
+    /**
+     * Light on.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void lightON() throws HouseLoadException {
         System.out.println("Testing if the light can be turned on");
@@ -45,6 +73,11 @@ class SmartHomeCoreFunctionalityModuleTest {
         Assertions.assertEquals(false, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getOnOff());
     }
 
+    /**
+     * Light off.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void lightOff() throws HouseLoadException {
         System.out.println("Testing if the light can be turned off");
@@ -52,6 +85,11 @@ class SmartHomeCoreFunctionalityModuleTest {
         Assertions.assertEquals(false, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getOnOff());
     }
 
+    /**
+     * Light auto on.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void lightAutoOn() throws HouseLoadException {
         System.out.println("Testing if the light auto mode can be turned on");
@@ -59,6 +97,11 @@ class SmartHomeCoreFunctionalityModuleTest {
         Assertions.assertEquals(false, House.getInstance().getRoomByName("Kitchen").getLightByName("IslandLight1").getAuto());
     }
 
+    /**
+     * Light auto off.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void lightAutoOff() throws HouseLoadException {
         System.out.println("Testing if the light auto mode can be turned off");

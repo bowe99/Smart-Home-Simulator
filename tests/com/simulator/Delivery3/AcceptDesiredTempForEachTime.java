@@ -14,8 +14,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Accept desired temp for each time.
+ */
 class AcceptDesiredTempForEachTime{
 
+    /**
+     * Input temp for daytime.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void inputTempForDaytime() throws HouseLoadException {
 
@@ -27,6 +35,12 @@ class AcceptDesiredTempForEachTime{
         int wrapper = 25;
         Assert.assertEquals(25, wrapper);
     }
+
+    /**
+     * Input temp for morning.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void inputTempForMorning() throws HouseLoadException {
 
@@ -38,6 +52,12 @@ class AcceptDesiredTempForEachTime{
         int wrapper = 25;
         Assert.assertEquals(25, wrapper);
     }
+
+    /**
+     * Input temp for nighttime.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void inputTempForNighttime() throws HouseLoadException {
 

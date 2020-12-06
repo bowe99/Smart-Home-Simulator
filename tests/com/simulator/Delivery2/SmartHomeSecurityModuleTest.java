@@ -8,10 +8,21 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Smart home security module test.
+ */
 class SmartHomeSecurityModuleTest {
+    /**
+     * The Away mode toggle.
+     */
     @FXML ToggleButton awayModeToggle;
 
 
+    /**
+     * Detect motion and notify.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void detectMotionAndNotify() throws HouseLoadException {
         SimulationParameters simulation = SimulationParameters.getInstance();
@@ -20,6 +31,11 @@ class SmartHomeSecurityModuleTest {
         profile.notifyAllObservers();
     }
 
+    /**
+     * Sets time to pass.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void setTimeToPass() throws HouseLoadException {
         SimulationParameters simulation = SimulationParameters.getInstance();
@@ -28,6 +44,11 @@ class SmartHomeSecurityModuleTest {
         profile.notifyAllObservers();
     }
 
+    /**
+     * Toggle away mode.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void toggleAwayMode() throws HouseLoadException {
         SimulationParameters simulation = SimulationParameters.getInstance();

@@ -12,8 +12,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Open close windows when blocked.
+ */
 class OpenCloseWindowsWhenBlocked{
 
+    /**
+     * Open windows when blocked.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void OpenWindowsWhenBlocked() throws HouseLoadException {
         House.getInstance().getRoomByName("Garage").getWindowByName("EastWindow").setBlockedTrue();
@@ -21,6 +29,11 @@ class OpenCloseWindowsWhenBlocked{
         assertEquals(null, exception.getMessage());
     }
 
+    /**
+     * Close windows when blocked.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void CloseWindowsWhenBlocked() throws HouseLoadException {
         House.getInstance().getRoomByName("Garage").getWindowByName("EastWindow").setOpen();

@@ -12,7 +12,10 @@ public class EntrywaySensor extends Sensor {
     public EntrywaySensor(String newName){
         super(newName);
     }
-
+    /**
+     * Poll sensor
+     * @return 0
+     */
     @Override
     public int pollSensor() {
         return 0;
