@@ -33,6 +33,11 @@ public class SimulationParameterController {
     private SimulationParameters simulation;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+    /**
+     * Instantiates a new Simulation parameter controller.
+     *
+     * @throws Exception the exception
+     */
     public SimulationParameterController() throws Exception{
         house = House.getInstance();
         simulation = SimulationParameters.getInstance();
@@ -58,8 +63,8 @@ public class SimulationParameterController {
 
     /**
      * Populate data of the simulation parameters instance.
-     * @param event Referring to a mouse activity by the user
-     * Sets the system parameters to the demanded value.
+     *
+     * @param event Referring to a mouse activity by the user Sets the system parameters to the demanded value.
      */
     @FXML
     void returnData (MouseEvent event){
@@ -131,6 +136,7 @@ public class SimulationParameterController {
 
     /**
      * Closes the parameters edit window pop-up.
+     *
      * @param event Referring to a mouse activity by the user
      */
     @FXML

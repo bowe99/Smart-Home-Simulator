@@ -52,10 +52,11 @@ public class RoomControlsController implements Initializable {
     private Permission windowPermission = new Permission(PERMISSION_TYPE.ALL, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.NONE);
     private Permission lightPermission = new Permission(PERMISSION_TYPE.ALL, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.IN_ROOM, PERMISSION_TYPE.NONE);
 
-    
-    /** 
+
+    /**
      * Populates the drop down menu with a list of rooms, then populates the Lights, Doors and Windows ComboBox based on room selection
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void selectingRoom(MouseEvent event) {
@@ -100,10 +101,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
-    
-    /** 
+
+    /**
      * Waits to see selected light and then refreshes colours of the buttons to show whether they are on or off
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void modifyLight(MouseEvent event) {
@@ -137,10 +139,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
-    
-    /** 
+
+    /**
      * Waits to see selected door and then refreshes colours of the buttons to show whether they are on or off
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void modifyDoor(MouseEvent event) {
@@ -172,10 +175,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
-    
-    /** 
+
+    /**
      * Waits to see selected window and then refreshes colours of the buttons to show whether they are on or off
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void modifyWindow(MouseEvent event) {
@@ -207,10 +211,11 @@ public class RoomControlsController implements Initializable {
             return;
     }
 
-    
-    /** 
+
+    /**
      * turns the selected light on and then refreshes the light buttons colours to reflect whether they are on or off
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void lightON(MouseEvent event) {
@@ -230,10 +235,11 @@ public class RoomControlsController implements Initializable {
         }
     }
 
-    
-    /** 
+
+    /**
      * turns the selected light off and then refreshes the light buttons colours to reflect whether they are on or off
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void lightOff(MouseEvent event) {
@@ -253,10 +259,11 @@ public class RoomControlsController implements Initializable {
         }
     }
 
-    
-    /** 
+
+    /**
      * turns the selected light Auto on and then refreshes the light buttons colours to reflect whether they are on or off
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void lightAutoOn(MouseEvent event) {
@@ -277,10 +284,11 @@ public class RoomControlsController implements Initializable {
         }
     }
 
-    
-    /** 
+
+    /**
      * turns the selected light Auto off and then refreshes the light buttons colours to reflect whether they are on or off
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void lightAutoOff(MouseEvent event) {
@@ -300,9 +308,11 @@ public class RoomControlsController implements Initializable {
         }
     }
 
-    
-    /** 
+
+    /**
      * Unlocks the selected door and then refreshes the door buttons colours to reflect whether they are unlocked or locked
+     *
+     * @param event the event
      */
     @FXML
     void doorUnlock(MouseEvent event) {
@@ -329,10 +339,11 @@ public class RoomControlsController implements Initializable {
         }
     }
 
-    
-    /** 
+
+    /**
      * locks the selected door and then refreshes the door buttons colours to reflect whether they are unlocked or locked
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void doorLock(MouseEvent event) {
@@ -360,10 +371,11 @@ public class RoomControlsController implements Initializable {
 
     }
 
-    
-    /** 
+
+    /**
      * opens the selected window and then refreshes the window buttons colours to reflect whether they are opened or closed
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void windowOpen(MouseEvent event) {
@@ -402,10 +414,11 @@ public class RoomControlsController implements Initializable {
         }
     }
 
-    
-     /** 
+
+    /**
      * closes the selected window and then refreshes the window buttons colours to reflect whether they are opened or closed
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void windowClose(MouseEvent event) {
@@ -442,10 +455,10 @@ public class RoomControlsController implements Initializable {
         }
     }
 
-    /** 
+    /**
      * changes the background colour of button based on the status of their boolean
      */
-    @FXML 
+    @FXML
     void changeLightButtonsColours(){
         if(currentLight.getOnOff()==true){
             lightOn.setStyle("-fx-background-color: #7FFF00");
@@ -456,10 +469,11 @@ public class RoomControlsController implements Initializable {
             lightOff.setStyle("-fx-background-color: #FF0000");
         }
     }
-    /** 
+
+    /**
      * changes the background colour of button based on the status of their boolean
      */
-    @FXML 
+    @FXML
     void changeLightAutoButtonsColours(){
         if(currentLight.getAuto()==true){
             lightAutoOn.setStyle("-fx-background-color: #7FFF00");
@@ -470,10 +484,11 @@ public class RoomControlsController implements Initializable {
             lightAutoOff.setStyle("-fx-background-color: #FF0000");
         }
     }
-    /** 
+
+    /**
      * changes the background colour of button based on the status of their boolean
      */
-    @FXML 
+    @FXML
     void changeDoorButtonsColours(){
         if(currentDoor.getLockedStatus()==false){
             doorUnlock.setStyle("-fx-background-color: #7FFF00");
@@ -484,10 +499,11 @@ public class RoomControlsController implements Initializable {
             doorLock.setStyle("-fx-background-color: #FF0000");
         }
     }
-    /** 
+
+    /**
      * changes the background colour of button based on the status of their boolean
      */
-    @FXML 
+    @FXML
     void changeWindowButtonsColours(){
         if(currentWindow.getOpenOrClosed()==true){
             windowOpen.setStyle("-fx-background-color: #7FFF00");
@@ -498,10 +514,11 @@ public class RoomControlsController implements Initializable {
             windowClose.setStyle("-fx-background-color: #FF0000");
         }
     }
-    /** 
+
+    /**
      * resets the colours of all buttons to their initial state
      */
-    @FXML 
+    @FXML
     void resetAllButtonColours(){
         lightOn.setStyle("-fx-all: initial");
         lightOff.setStyle("-fx-all: initial");
@@ -520,6 +537,12 @@ public class RoomControlsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("Initializing RoomControls");
   }
+
+    /**
+     * Close window.
+     *
+     * @param event the event
+     */
     @FXML
     void closeWindow (MouseEvent event){
         try{
