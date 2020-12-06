@@ -11,6 +11,7 @@ public class Window extends Entryway{
 
     /**
      * Constructor for a new window object
+     *
      * @param newName the new uniquely identifying name for the window
      */
     public Window(String newName){
@@ -67,18 +68,20 @@ public class Window extends Entryway{
     public void setBlockedFalse(){
         this.blocked=false;
     }
-    
-    /** 
+
+    /**
      * Get the blocked boolean
-     * @return boolean
+     *
+     * @return boolean boolean
      */
     public boolean getBlockedBoolean(){
         return blocked;
     }
-    
-    /** 
+
+    /**
      * Get the open boolean
-     * @return boolean
+     *
+     * @return boolean boolean
      */
     public boolean getOpenOrClosed(){
         return open;

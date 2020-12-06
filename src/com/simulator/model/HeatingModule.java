@@ -10,6 +10,9 @@ import java.util.Map;
 
 import com.simulator.controller.Logger;
 
+/**
+ * The type Heating module.
+ */
 public class HeatingModule extends SimulationObserver{
     private ArrayList<Zone> zoneList = new ArrayList<Zone>();
     private List<Room> roomList;
@@ -29,17 +32,37 @@ public class HeatingModule extends SimulationObserver{
         }
     }
 
+    /**
+     * Instantiates a new Heating module.
+     *
+     * @param time the time
+     */
     public HeatingModule(Time time){
         this();
         time.attach(this);
     }
 
+    /**
+     * Add zone.
+     *
+     * @param zone1 the zone 1
+     */
     public void addZone(Zone zone1){
         zoneList.add(zone1);
     }
 
+    /**
+     * Get zone list array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Zone> getZoneList(){ return zoneList; }
 
+    /**
+     * Remove a room from their zone.
+     *
+     * @param room1 the room 1
+     */
     public void removeARoomFromTheirZone(String room1){
         for(int j=0; j<zoneList.size(); ++j){
             if (zoneList.get(j).containsRoom(room1)){
@@ -48,10 +71,17 @@ public class HeatingModule extends SimulationObserver{
                 if(zoneList.get(j).isEmptyZone()){
                     zoneList.remove(j);
                 }
+                return;
             }
         }
     }
 
+    /**
+     * Check if valid zone name boolean.
+     *
+     * @param checkName the check name
+     * @return the boolean
+     */
     public boolean checkIfValidZoneName(String checkName){
         for(int i =0; i<zoneList.size(); ++i){
             if(zoneList.get(i).getZoneName().equalsIgnoreCase(checkName))
@@ -60,6 +90,28 @@ public class HeatingModule extends SimulationObserver{
         return true;
     }
 
+    /**
+     * Get zones rooms by zone name array list.
+     *
+     * @param zoneNameInQuestion the zone name in question
+     * @return the array list
+     */
+    public ArrayList<String> getZonesRoomsByZoneName(String zoneNameInQuestion){
+        for(int i=0; i<zoneList.size(); i++){
+            if (zoneNameInQuestion==zoneList.get(i).getZoneName()){
+                return zoneList.get(i).getRoomListOfNames();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Set temp for zone.
+     *
+     * @param zoneName       the zone name
+     * @param periodOfTheDay the period of the day
+     * @param temp           the temp
+     */
     public void setTempForZone(String zoneName, String periodOfTheDay, int temp){
         for(int i=0; i<zoneList.size(); ++i){
             if(zoneList.get(i).getZoneName().equalsIgnoreCase(zoneName)){
@@ -69,6 +121,12 @@ public class HeatingModule extends SimulationObserver{
         }
     }
 
+    /**
+     * Display temperature for room.
+     *
+     * @param roomName    the room name
+     * @param currentUser the current user
+     */
     public void displayTemperatureForRoom(String roomName, Profile currentUser){
         if(currentUser.getUserType() == USER_TYPE.STRANGER){
             Logger.getInstance().outputToConsole("[WARNING] Unauthorized action! User does not have the required permissions");
@@ -80,6 +138,14 @@ public class HeatingModule extends SimulationObserver{
         }    
     }
 
+    /**
+     * Override room temperature boolean.
+     *
+     * @param roomName    the room name
+     * @param temperature the temperature
+     * @param currentUser the current user
+     * @return the boolean
+     */
     public boolean overrideRoomTemperature(String roomName, double temperature, Profile currentUser){
         if(currentUser.getUserType() == USER_TYPE.STRANGER){
             Logger.getInstance().outputToConsole("[WARNING] Unauthorized action! User does not have the required permissions");
@@ -99,6 +165,13 @@ public class HeatingModule extends SimulationObserver{
         return;
     }
 
+    /**
+     * Update room target temperature.
+     *
+     * @param room            the room
+     * @param currentTempRoom the current temp room
+     * @param currentHour     the current hour
+     */
     public void updateRoomTargetTemperature(Room room, double currentTempRoom, int currentHour){
         if(room.getOverridden()){
             room.getTemperature().setTemperatureTarget(room.getTemperature().getTemperatureOverridden());
@@ -116,6 +189,12 @@ public class HeatingModule extends SimulationObserver{
         }
     }
 
+    /**
+     * Check toggle status hvac.
+     *
+     * @param room            the room
+     * @param currentTempRoom the current temp room
+     */
     public void checkToggleStatusHVAC(Room room, double currentTempRoom){
         double targetTemperature = room.getTemperature().getTemperatureTarget();
 
@@ -128,6 +207,14 @@ public class HeatingModule extends SimulationObserver{
         }
     }
 
+    /**
+     * Check summer cooling.
+     *
+     * @param room               the room
+     * @param currentMonth       the current month
+     * @param outdoorTemperature the outdoor temperature
+     * @param currentTempRoom    the current temp room
+     */
     public void checkSummerCooling(Room room, int currentMonth, double outdoorTemperature, double currentTempRoom){
         // TODO check if in away mode before opening windows
         if((currentMonth <= 9 && currentMonth >= 6) && currentTempRoom > outdoorTemperature + 0.25){
@@ -139,6 +226,12 @@ public class HeatingModule extends SimulationObserver{
         }
     }
 
+    /**
+     * Get current hour int.
+     *
+     * @param date the date
+     * @return the int
+     */
     public int getCurrentHour(Date date){
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(date);
@@ -146,7 +239,11 @@ public class HeatingModule extends SimulationObserver{
         return calendar.get(Calendar.HOUR_OF_DAY);
     }
 
-
+    /**
+     * Get current hour int.
+     *
+     * @param time integer for time
+     */
     @Override
     public void updateTime(int time) {
         SimulationParameters simulationInstance = SimulationParameters.getInstance();
@@ -160,6 +257,7 @@ public class HeatingModule extends SimulationObserver{
             checkSummerCooling(room, currentMonth, outdoorTemperature, currentTempRoom);
 
             room.updateTemperature(outdoorTemperature);
+
         }
 
     }
