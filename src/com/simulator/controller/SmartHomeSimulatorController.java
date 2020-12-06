@@ -341,52 +341,21 @@ public class SmartHomeSimulatorController {
         for (int loop=0; loop < rooms.size();  loop++)
         {
             String roomIDstring = rooms.get(loop).getId();
-            if(roomIDstring.length() > 4) {
+            if(rooms.get(loop).getCurrentStateHVAC() == true) {
                 int currentRoomID = Integer.parseInt(roomIDstring.substring(4));
-                System.out.println(simulation.getTime());
-                if (simulation.getTime()%1440<=480){ //morning
-                    System.out.println("Morning "+rooms.get(loop).getTemperatureMorning());
-                    if (rooms.get(loop).getTemperatureMorning()>21){
-                        ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
-                        currentRoomTemperatureImage.setImage(heaterIcon);
-                        currentRoomTemperatureImage.setVisible(true);
-                    }
-                    else 
-                    {
-                        ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
-                        currentRoomTemperatureImage.setImage(acIcon);
-                        currentRoomTemperatureImage.setVisible(true);
-                    }
-                }
-                else if (simulation.getTime()%1440>480 && simulation.getTime()%1440<=960){ //day
-                    System.out.println("Day "+rooms.get(loop).getTemperatureMorning());
-                    if (rooms.get(loop).getTemperatureDay()>21){
-                        ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
-                        currentRoomTemperatureImage.setImage(heaterIcon);
-                        currentRoomTemperatureImage.setVisible(true);
-                    }
-                    else 
-                    {
-                        ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
-                        currentRoomTemperatureImage.setImage(acIcon);
-                        currentRoomTemperatureImage.setVisible(true);
-                    }
-                }
-                else if (simulation.getTime()%1440>960){ //night
-                    System.out.println("Night "+rooms.get(loop).getTemperatureMorning());
+                System.out.println(rooms.get(loop).getTemperature().getTemperatureTarget());
+                System.out.println(rooms.get(loop).getTemperature().getCurrentTemperature());
 
-                    if (rooms.get(loop).getTemperatureNight()>21){
-                        ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
-                        currentRoomTemperatureImage.setImage(heaterIcon);
-                        currentRoomTemperatureImage.setVisible(true);
-                    }
-                    else 
-                    {
-                        ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
-                        currentRoomTemperatureImage.setImage(acIcon);
-                        currentRoomTemperatureImage.setVisible(true);
-                    }
+                if(rooms.get(loop).getTemperature().getTemperatureTarget() > rooms.get(loop).getTemperature().getCurrentTemperature()){
+                    ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
+                    currentRoomTemperatureImage.setImage(heaterIcon);
+                    currentRoomTemperatureImage.setVisible(true);
                 }
+                else if(rooms.get(loop).getTemperature().getTemperatureTarget() < rooms.get(loop).getTemperature().getCurrentTemperature()){ 
+                    ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
+                    currentRoomTemperatureImage.setImage(acIcon);
+                    currentRoomTemperatureImage.setVisible(true);                
+                }         
             }
         }
     }
