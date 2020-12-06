@@ -264,6 +264,10 @@ public class HeatingModule extends SimulationObserver{
             Logger.getInstance().outputToConsole(String.format("Something abnormal is happening to temperature in room %s, resetting all temperature settings to 21.0 Celsius", room.getName()));
             Logger.getInstance().outputToConsole("If problem persists contact Smart Home providers for technical help!");
 
+            if (currentTemperature < 0){
+                Logger.getInstance().outputToConsole(String.format("Pipes may have potentially burst in room %s since temperature is below 0 degrees Celsius", room.getName()));
+            }
+
             double defaultTemperature = 21.0;
 
             room.getTemperature().setTemperatureOverridden(defaultTemperature);
