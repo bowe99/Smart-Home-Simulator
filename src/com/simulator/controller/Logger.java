@@ -21,10 +21,11 @@ public class Logger {
     private Logger() {
     }
 
-    /** 
+    /**
      * creates a new instance of the Logger object to be contained within the instance Logger object
-     * @param outputConsole2
-     * @return Logger
+     *
+     * @param outputConsole2 the output console 2
+     * @return Logger logger
      */
     public static Logger newInstance(TextArea outputConsole2) {
         try {
@@ -40,25 +41,27 @@ public class Logger {
         }
     }
 
-    
-    /** 
+
+    /**
      * returns the instance that is held
-     * @return Logger
+     *
+     * @return Logger instance
      */
     public static Logger getInstance() {
         return instance;
     }
 
-    
-    /** 
+
+    /**
      * outputs a given string to the Output Console on the Smart home dashboard
-     * @param output
+     *
+     * @param output the output
      */
     public void outputToConsole(String output) {
         outputConsole.appendText("\n" + output);
     }
 
-    /** 
+    /**
      * resets the contents of the log.txt file
      */
     public void resetLogFile(){
@@ -70,11 +73,12 @@ public class Logger {
         }
     }
 
-    
-    /** 
+
+    /**
      * Outputs to log.txt file
-     * @param outputToLog
-     * @throws IOException
+     *
+     * @param outputToLog the output to log
+     * @throws IOException the io exception
      */
     public void outputToLogFile(String outputToLog) throws IOException {
         outputToLog = outputToLog+"\n";

@@ -1,4 +1,4 @@
-package com.simulator;
+package com.simulator.Delivery2;
 
 import com.simulator.model.*;
 import javafx.fxml.FXML;

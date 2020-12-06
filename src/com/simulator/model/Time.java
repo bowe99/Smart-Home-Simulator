@@ -14,16 +14,25 @@ public class Time {
     private Date date; //current date
     final private long MILLISECOND_IN_A_DAY = 86400000;
 
+    /**
+     * Instantiates a new Time.
+     *
+     * @param date the date
+     * @param time the time
+     */
     public Time(Date date, int time){
        this.date = date;
        this.time = time;
     }
 
+    /**
+     * Instantiates a new Time.
+     */
     public Time (){
         this.date = new Date();
         this.time = 0;
     }
-    
+
     /**
      * Update the time
      */
@@ -36,19 +45,21 @@ public class Time {
         }     
     }
 
-    
-    /** 
+
+    /**
      * Change the interval by a factor that is provided
-     * @param factor
+     *
+     * @param factor the factor
      */
     public void changeInterval(int factor){
         interval = 1000/factor;
     }
 
-    
-    /** 
+
+    /**
      * Get time and update
-     * @return int
+     *
+     * @return int int
      */
     public int getTimeAndUpdate(){
         // notifyObservers in here instead of update since the update method is running on a separate thread and 
@@ -56,11 +67,12 @@ public class Time {
         notifyAllObservers();
         return time;
     }
-    
-    
-    /** 
+
+
+    /**
      * Get time and update
-     * @return int
+     *
+     * @return int int
      */
     public int getTime(){
         // notifyObservers in here instead of update since the update method is running on a separate thread and 
@@ -69,46 +81,57 @@ public class Time {
     }
 
 
-    
-    /** 
+    /**
      * Get interval
-     * @return int
+     *
+     * @return int int
      */
     public int getInterval(){
         return interval;
     }
-    
-    /** 
+
+    /**
      * Set the time
-     * @param time
+     *
+     * @param time the time
      */
     public void setTime(int time){
 
         this.time = time;
     }
-    
-    /** 
+
+    /**
      * Get the date
-     * @return Date
+     *
+     * @return Date date
      */
     public Date getDate(){
         return date;
     }
-    
-    /** 
+
+    /**
      * Set the date
-     * @param date
+     *
+     * @param date the date
      */
     public void setDate(Date date){
         this.date = date;
     }
 
+    /**
+     * Notify all observers.
+     */
     public void notifyAllObservers(){
         for (SimulationObserver observer : observers) {
            observer.updateTime(this.time);
         }
     }
-    
+
+    /**
+     * Attach.
+     *
+     * @param observer the observer
+     */
     public void attach(SimulationObserver observer){
         observers.add(observer);		
      }

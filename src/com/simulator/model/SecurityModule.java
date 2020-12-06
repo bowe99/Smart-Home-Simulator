@@ -6,6 +6,7 @@ import java.util.List;
 import com.simulator.controller.Logger;
 
 import javafx.scene.control.ToggleButton;
+
 /**
  * Security module used to monitor presence of individuals in different rooms as well as invoke away mode
  */
@@ -19,12 +20,19 @@ public class SecurityModule extends SimulationObserver{
     private int motionDetectedTime;
     private int timeOfDetection;
     private List<Profile> profiles;
+    /**
+     * The Away mode permission.
+     */
     Permission awayModePermission = new Permission(PERMISSION_TYPE.AWAY, PERMISSION_TYPE.AWAY, PERMISSION_TYPE.NONE, PERMISSION_TYPE.NONE);
 
 
-/**
- * Constructor initializing attributes
- */
+    /**
+     * Constructor initializing attributes
+     *
+     * @param profiles   the profiles
+     * @param awayToggle the away toggle
+     * @param time       the time
+     */
     public SecurityModule(List<Profile> profiles, ToggleButton awayToggle, Time time){
         this.awayToggle = awayToggle;
         this.profiles = profiles;
@@ -41,23 +49,26 @@ public class SecurityModule extends SimulationObserver{
         this.timeOfDetection = -1;
     }
 
-    
-    /** 
+
+    /**
      * Add a light
-     * @param light
+     *
+     * @param light the light
      */
     public void addLight(Light light){
         this.lightsOnWhenAway.add(light);
     }
-    
-    
-    /** 
+
+
+    /**
      * Remove a light
-     * @param light
+     *
+     * @param light the light
      */
     public void removeLight(Light light){
         this.lightsOnWhenAway.remove(light);
     }
+
     /**
      * Turn away mode on
      */
@@ -85,22 +96,23 @@ public class SecurityModule extends SimulationObserver{
         }
     }
 
-    
-    /** 
+
+    /**
      * Get the status of away mode
-     * @return boolean
+     *
+     * @return boolean boolean
      */
     public boolean getAwayMode(){
         return this.isAwayMode;
     }
 
 
-    
-    /** 
+    /**
      * Save the settings that were input
-     * @param startTime
-     * @param endTime
-     * @param detectionTime
+     *
+     * @param startTime     the start time
+     * @param endTime       the end time
+     * @param detectionTime the detection time
      */
     public void saveSettings(int startTime, int endTime, int detectionTime){
         this.motionDetectedTime = detectionTime;
