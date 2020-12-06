@@ -343,8 +343,6 @@ public class SmartHomeSimulatorController {
             String roomIDstring = rooms.get(loop).getId();
             if(rooms.get(loop).getCurrentStateHVAC() == true) {
                 int currentRoomID = Integer.parseInt(roomIDstring.substring(4));
-                System.out.println(rooms.get(loop).getTemperature().getTemperatureTarget());
-                System.out.println(rooms.get(loop).getTemperature().getCurrentTemperature());
 
                 if(rooms.get(loop).getTemperature().getTemperatureTarget() > rooms.get(loop).getTemperature().getCurrentTemperature()){
                     ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
