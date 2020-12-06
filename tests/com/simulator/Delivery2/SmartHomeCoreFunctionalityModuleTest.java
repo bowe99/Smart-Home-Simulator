@@ -1,4 +1,4 @@
-package com.simulator;
+package com.simulator.Delivery2;
 
 import com.simulator.model.House;
 import org.junit.jupiter.api.Assertions;
@@ -32,7 +32,6 @@ class SmartHomeCoreFunctionalityModuleTest {
     @Test
     void windowClose() {
         System.out.println("Testing if the window can be closed");
-        House.getInstance().getRoomByName("Kitchen").getWindowByName("NorthWindow").setOpen();
         Assertions.assertEquals(true, House.getInstance().getRoomByName("Kitchen").getWindowByName("NorthWindow").getOpenOrClosed());
     }
 
