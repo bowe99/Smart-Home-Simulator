@@ -454,6 +454,39 @@ public class SmartHomeSimulatorController {
         {
             Logger.getInstance().outputToConsole("Could not parse entry for winter away mode temperature");
         }
+        try {
+            heatingModule.setSummerStartDate(Integer.parseInt(SummerStart.getText()));
+            Logger.getInstance().outputToConsole("Summer Start Month successfully parsed");
+        }
+        catch (NumberFormatException e)
+        {
+            Logger.getInstance().outputToConsole("Could not parse entry for summer start month");
+        }
+        try {
+            heatingModule.setSummerEndDate(Integer.parseInt(SummerEnd.getText()));
+            Logger.getInstance().outputToConsole("Summer End Month successfully parsed");
+        }
+        catch (NumberFormatException e)
+        {
+            Logger.getInstance().outputToConsole("Could not parse entry for summer end month");
+        }
+        try {
+            heatingModule.setWinterStartDate(Integer.parseInt(WinterStart.getText()));
+            Logger.getInstance().outputToConsole("Winter Start Month successfully parsed");
+        }
+        catch (NumberFormatException e)
+        {
+            Logger.getInstance().outputToConsole("Could not parse entry for winter start month");
+        }
+        try {
+            heatingModule.setWinterEndDate(Integer.parseInt(WinterEnd.getText()));
+            Logger.getInstance().outputToConsole("Winter End Month successfully parsed");
+        }
+        catch (NumberFormatException e)
+        {
+            Logger.getInstance().outputToConsole("Could not parse entry for winter end month");
+        }
+
     }
 
     @FXML
