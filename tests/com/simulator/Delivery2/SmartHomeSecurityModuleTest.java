@@ -1,4 +1,4 @@
-package com.simulator;
+package com.simulator.Delivery2;
 
 import com.simulator.model.*;
 import javafx.fxml.FXML;
@@ -13,7 +13,7 @@ class SmartHomeSecurityModuleTest {
 
 
     @Test
-    void detectMotionAndNotify() {
+    void detectMotionAndNotify() throws HouseLoadException {
         SimulationParameters simulation = SimulationParameters.getInstance();
         SecurityModule securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, simulation.getTimeObject());
         Profile profile = new Profile("Timmy", USER_TYPE.CHILD, House.getInstance().getRoomByName("Kitchen"));
@@ -21,7 +21,7 @@ class SmartHomeSecurityModuleTest {
     }
 
     @Test
-    void setTimeToPass() {
+    void setTimeToPass() throws HouseLoadException {
         SimulationParameters simulation = SimulationParameters.getInstance();
         SecurityModule securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, simulation.getTimeObject());
         Profile profile = new Profile("Timmy", USER_TYPE.CHILD, House.getInstance().getRoomByName("Kitchen"));
@@ -29,7 +29,7 @@ class SmartHomeSecurityModuleTest {
     }
 
     @Test
-    void toggleAwayMode() {
+    void toggleAwayMode() throws HouseLoadException {
         SimulationParameters simulation = SimulationParameters.getInstance();
         SecurityModule securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, simulation.getTimeObject());
         System.out.print(securityModule.getAwayMode());
