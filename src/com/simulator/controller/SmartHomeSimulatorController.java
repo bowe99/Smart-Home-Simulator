@@ -85,7 +85,6 @@ public class SmartHomeSimulatorController {
     @FXML private Label lastSaved;
     @FXML private TabPane tabPane;
     @FXML private Tab SHCTab;
-    @FXML private RoomControlsController sHCTabPageController;
     @FXML private Tab SHPTab;
 
     @FXML private ListView allRoomsListViewZone;
@@ -150,7 +149,14 @@ public class SmartHomeSimulatorController {
      */
     public SmartHomeSimulatorController()
     {
-        this.house = House.getInstance();
+        try {
+            this.house = House.getInstance();
+        }
+        catch (HouseLoadException houseLoadException)
+        {
+            houseLoadException.printStackTrace();
+            System.out.println(houseLoadException.getMessage());
+        }
         this.simulation = SimulationParameters.getInstance();
         securityPermission = new Permission(PERMISSION_TYPE.ALL, PERMISSION_TYPE.ALL, PERMISSION_TYPE.NONE, PERMISSION_TYPE.NONE);
     }
@@ -816,7 +822,7 @@ public class SmartHomeSimulatorController {
     void selectingRoom(MouseEvent event){
         if(SimulationParameters.getInstance().getSimulationStatus()==true){
         System.out.println("arrived displayRoomList");
-        roomList.setItems(FXCollections.observableList(House.getInstance().getRoomsNameList()));
+        roomList.setItems(FXCollections.observableList(house.getRoomsNameList()));
         selectedRoom = roomList.getValue();
 
         //Detecting when the option is selected
@@ -837,7 +843,13 @@ public class SmartHomeSimulatorController {
                     selectedRoom = cell.getItem();
 
                     //Selected room now as an object in currentRoom
-                    currentRoom = House.getInstance().getRoomByName(selectedRoom);
+                    try {
+                        currentRoom = House.getInstance().getRoomByName(selectedRoom);
+                    }
+                    catch (HouseLoadException houseLoadException){
+                        houseLoadException.printStackTrace();
+                        System.out.println(houseLoadException.getMessage());
+                    }
                     System.out.println(currentRoom+" HERE HERE HERE");
 
                     //Populate the Selecting Lights, doors and windows field from the corresponding room

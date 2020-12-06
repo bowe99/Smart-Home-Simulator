@@ -1,9 +1,6 @@
 package com.simulator.controller;
 
-import com.simulator.model.House;
-import com.simulator.model.Profile;
-import com.simulator.model.Room;
-import com.simulator.model.SimulationParameters;
+import com.simulator.model.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -33,14 +30,21 @@ public class SimulationParameterController {
     private SimulationParameters simulation;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+
     /**
      * Instantiates a new Simulation parameter controller.
      *
      * @throws Exception the exception
      */
-    public SimulationParameterController() throws Exception{
-        house = House.getInstance();
-        simulation = SimulationParameters.getInstance();
+    public SimulationParameterController() {
+        try{
+            house = House.getInstance();
+            simulation = SimulationParameters.getInstance();
+        }
+        catch (HouseLoadException houseLoadException){
+            houseLoadException.printStackTrace();
+            System.out.println(houseLoadException.getMessage());
+        }
     }
 
     /**
@@ -49,7 +53,7 @@ public class SimulationParameterController {
     @FXML
     public void initialize(){
         currentUserChoice.setItems(FXCollections.observableList(SimulationParameters.getInstance().getAllUserNames()));
-        userLocationChoice.setItems(FXCollections.observableList(House.getInstance().getRoomsNameList()));
+        userLocationChoice.setItems(FXCollections.observableList(house.getRoomsNameList()));
         userProfileChoice.setItems(FXCollections.observableList(SimulationParameters.getInstance().getAllUserNames()));
         currentUserChoice.setValue(simulation.getCurrentUser().getName());
         userProfileChoice.setValue(simulation.getCurrentUser().getName());
