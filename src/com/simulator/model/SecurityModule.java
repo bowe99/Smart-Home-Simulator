@@ -85,6 +85,7 @@ public class SecurityModule extends SimulationObserver{
                 this.isAwayMode = true;
                 this.awayToggle.setText("On");
                 Logger.getInstance().outputToConsole("Away mode has been successfully enabled");
+                Logger.getInstance().outputToConsole("Windows will not open for security reasons");
             }
         }
         else{
@@ -92,6 +93,7 @@ public class SecurityModule extends SimulationObserver{
                 this.isAwayMode = false;
                 this.awayToggle.setText("Off");
                 Logger.getInstance().outputToConsole("Away mode has been successfully disabled");
+                Logger.getInstance().outputToConsole("Windows permitted to open");
             }
         }
     }

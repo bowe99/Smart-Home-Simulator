@@ -226,15 +226,17 @@ public class HeatingModule extends SimulationObserver{
      * @param currentTempRoom    the current temp room
      */
     public void checkSummerCooling(Room room, int currentMonth, double outdoorTemperature, double currentTempRoom){
-        // TODO check if in away mode before opening windows
         // TODO allow user to define summer months (issue #58)
-        if((currentMonth <= 9 && currentMonth >= 6) && currentTempRoom > outdoorTemperature + 0.25){
-            if(room.getCurrentStateHVAC()){
-                Logger.getInstance().outputToConsole("Disabling Air Conditioning: It is summer and cooler outdoors. Open all windows");
+        if (securityModule.getAwayMode() == false)
+        {
+            if((currentMonth <= 9 && currentMonth >= 6) && currentTempRoom > outdoorTemperature + 0.25){
+                if(room.getCurrentStateHVAC()){
+                    Logger.getInstance().outputToConsole("Disabling Air Conditioning: It is summer and cooler outdoors. Open all windows");
+                }
+                room.setCurrentStateHVAC(false);
+                room.openAllWindows();
             }
-            room.setCurrentStateHVAC(false);
-            room.openAllWindows();
-        }
+       }
     }
 
     /**
