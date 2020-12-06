@@ -39,6 +39,7 @@ public class SimulationParameterController {
     public SimulationParameterController() {
         try{
             house = House.getInstance();
+            simulation = SimulationParameters.getInstance();
         }
         catch (HouseLoadException houseLoadException){
             houseLoadException.printStackTrace();
