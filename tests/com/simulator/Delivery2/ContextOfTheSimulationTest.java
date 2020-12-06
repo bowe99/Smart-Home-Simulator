@@ -6,18 +6,22 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Context of the simulation test.
+ */
 class ContextOfTheSimulationTest {
 
     private Assertions Assert;
 
+    /**
+     * Sets time interval.
+     */
     @Test
     void setTimeInterval() {
         System.out.println("Setting the time speed to 2, factor should now equal 30 000");
         SimulationParameters.getInstance().setTimeInterval(30000);
-        System.out.println("Printing out the new time speed and seeing if they correspond");
-        int temp = 30000;
-        System.out.print(SimulationParameters.getInstance().getTimeInterval());
+        int temp = 0;
         //should now equal to 30 000
-        Assert.assertEquals(30000, temp);
+        Assert.assertEquals(SimulationParameters.getInstance().getTimeInterval(), temp);
     }
 }

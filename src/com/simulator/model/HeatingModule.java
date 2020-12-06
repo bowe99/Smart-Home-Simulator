@@ -22,7 +22,9 @@ public class HeatingModule extends SimulationObserver{
     private double summerTemperatureAwayMode;
     private double winterTemperatureAwayMode;
 
-
+    /**
+     * Heating Module Constructor
+     */
     public HeatingModule(){
         try {
             house = House.getInstance();
@@ -37,7 +39,8 @@ public class HeatingModule extends SimulationObserver{
     /**
      * Instantiates a new Heating module.
      *
-     * @param time the time
+     * @param time           the time
+     * @param securityModule the security module
      */
     public HeatingModule(Time time, SecurityModule securityModule){
         this();
@@ -174,6 +177,7 @@ public class HeatingModule extends SimulationObserver{
      * @param room            the room
      * @param currentTempRoom the current temp room
      * @param currentHour     the current hour
+     * @param currentMonth    the current month
      */
     public void updateRoomTargetTemperature(Room room, double currentTempRoom, int currentHour, int currentMonth){
         if(securityModule.getAwayMode()){
@@ -252,10 +256,20 @@ public class HeatingModule extends SimulationObserver{
         return calendar.get(Calendar.HOUR_OF_DAY);
     }
 
+    /**
+     * Set summer temperature away mode.
+     *
+     * @param temp the temp
+     */
     public void setSummerTemperatureAwayMode(double temp){
         this.summerTemperatureAwayMode = temp;
     }
 
+    /**
+     * Set winter temperature away mode.
+     *
+     * @param temp the temp
+     */
     public void setWinterTemperatureAwayMode(double temp){
         this.winterTemperatureAwayMode = temp;
     }

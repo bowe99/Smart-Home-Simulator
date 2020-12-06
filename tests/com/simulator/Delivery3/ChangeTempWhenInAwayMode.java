@@ -12,8 +12,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Change temp when in away mode.
+ */
 class ChangeTempWhenInAwayMode{
 
+    /**
+     * Change temp according to user preference.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void ChangeTempAccordingToUserPreference() throws HouseLoadException {
         ArrayList<Room> newRoomList = new ArrayList<Room>();

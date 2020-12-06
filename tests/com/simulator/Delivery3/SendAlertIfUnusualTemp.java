@@ -12,8 +12,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Send alert if unusual temp.
+ */
 class SendAlertIfUnusualTemp{
 
+    /**
+     * Unusual temp alert.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void UnusualTempAlert() throws HouseLoadException {
         ArrayList<Room> newRoomList = new ArrayList<Room>();

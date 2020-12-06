@@ -7,9 +7,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Smart home dashboard test.
+ */
 class SmartHomeDashboardTest {
+    /**
+     * The New area.
+     */
     @FXML TextArea newArea = null;
 
+    /**
+     * Update house view.
+     */
     @Test
     void updateHouseView(){
         System.out.println("Updating the house view test");

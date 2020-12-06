@@ -12,8 +12,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Create zones.
+ */
 class CreateZones{
 
+    /**
+     * Create zone with multiple rooms.
+     *
+     * @throws HouseLoadException the house load exception
+     */
     @Test
     void createZoneWithMultipleRooms() throws HouseLoadException {
         ArrayList<Room> newRoomList = new ArrayList<Room>();

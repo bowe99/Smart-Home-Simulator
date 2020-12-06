@@ -39,7 +39,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 
 /**
- * This is the controller class for the RoomControls.fxml file AND the Dashboard.fxml file
+ * This is the controller class the Dashboard.fxml file
  */
 public class SmartHomeSimulatorController {
 
@@ -200,7 +200,6 @@ public class SmartHomeSimulatorController {
         }
     }
 
-
     /**
      * Changes the simulation status to on or off
      *
@@ -260,6 +259,10 @@ public class SmartHomeSimulatorController {
         }  
     }
 
+    /**
+     * Initializes the house view
+     *
+     */
     private void initializeHouseView(){
         areas = new TextArea[NUMBER_OF_GRID_ELEMENTS + 1];
         lightImages = new ImageView[NUMBER_OF_GRID_ELEMENTS + 1];
@@ -379,20 +382,27 @@ public class SmartHomeSimulatorController {
             }
         }
     }
-
+    /**
+     * Adds room to the selected rooms panel
+     */
     @FXML
     private void addRoomToSelectedRoomsPanel(){
         Object selectedItem = this.allRoomsListViewZone.getSelectionModel().getSelectedItem();
         this.selectedRoomsListForZone.getItems().add((String) selectedItem);
         this.allRoomsListViewZone.getItems().remove(selectedItem);
     }
-
+    /**
+     * Removes room to the selected rooms panel
+     */
     @FXML
     private void removeRoomFromSelectedRoomsPanel(){
         Object selectedItem = this.selectedRoomsListForZone.getSelectionModel().getSelectedItem();
         this.selectedRoomsListForZone.getItems().remove((String) selectedItem);
         this.allRoomsListViewZone.getItems().add(selectedItem);
     }
+    /**
+     * Adds preset temperature to zone
+     */
     @FXML
     private void addPresetTemperatureToZone(){
         if(temperatureTextField.getText() == null || temperatureTextField.getText().trim().isEmpty() || !temperatureTextField.getText().matches("[0-9]+")){
@@ -431,7 +441,9 @@ public class SmartHomeSimulatorController {
 
         System.out.println("Came out the other side brother");
     }
-
+    /**
+     * Saves the SHH settings
+     */
     @FXML
     private void saveSHHSettings(MouseEvent event){
         try {
@@ -451,7 +463,9 @@ public class SmartHomeSimulatorController {
             Logger.getInstance().outputToConsole("Could not parse entry for winter away mode temperature");
         }
     }
-
+    /**
+     * Creates a new Zone with the input information
+     */
     @FXML
     private void createZoneButton(){
         //Check to see if the user selected some entries
@@ -491,8 +505,6 @@ public class SmartHomeSimulatorController {
         Zone newZone = new Zone(newRoomArrayList, newZoneName);
         this.heatingModule.addZone(newZone);
         newZone.printRoomsInZone();
-
-
 
         //Check if there are any non-existant zones that are being displayed in the display Zone window
         for(int k = 0; k < listZones.getItems().size(); ++k){
