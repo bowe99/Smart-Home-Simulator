@@ -227,6 +227,10 @@ public class SmartHomeSimulatorController {
             stage.initOwner(simulationToggle.getScene().getWindow());
             stage.setTitle("Edit Parameters");
             stage.setScene(new Scene(root1));  
+            stage.focusedProperty().addListener((ov, onHidden, onShown) -> {
+                if(!stage.isFocused())
+                    Platform.runLater(() -> stage.close());
+            });
 
             if(simulation.getSimulationStatus())
                 timer.cancel();
