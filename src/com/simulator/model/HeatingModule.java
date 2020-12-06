@@ -258,6 +258,21 @@ public class HeatingModule extends SimulationObserver{
         this.winterTemperatureAwayMode = temp;
     }
 
+
+    public void checkTemperatureAnomaly(double currentTemperature, Room room){
+        if(currentTemperature < 0 || currentTemperature > 40){
+            Logger.getInstance().outputToConsole(String.format("Something abnormal is happening to temperature in room %s, resetting all temperature settings to 21.0 Celsius", room.getName()));
+            Logger.getInstance().outputToConsole("If problem persists contact Smart Home providers for technical help!");
+
+            double defaultTemperature = 21.0;
+
+            room.getTemperature().setTemperatureOverridden(defaultTemperature);
+            room.getTemperature().setTemperatureDay(defaultTemperature);
+            room.getTemperature().setTemperatureMorning(defaultTemperature);
+            room.getTemperature().setTemperatureNight(defaultTemperature);
+        }
+    }
+
     @Override
     public void updateTime(int time) {
         SimulationParameters simulationInstance = SimulationParameters.getInstance();
@@ -266,12 +281,16 @@ public class HeatingModule extends SimulationObserver{
         double outdoorTemperature = simulationInstance.getTemperature();
         for(Room room : roomList){
             double currentTempRoom = room.getTemperature().getCurrentTemperature();
+            checkTemperatureAnomaly(currentTempRoom, room);
             updateRoomTargetTemperature(room, currentTempRoom, currentHour, currentMonth);
             checkToggleStatusHVAC(room, currentTempRoom);
             checkSummerCooling(room, currentMonth, outdoorTemperature, currentTempRoom);
 
             room.updateTemperature(outdoorTemperature);
 
+            if(room.getName().contains("LivingRoom")){
+                System.out.println(String.format("Current temp: %f", room.getTemperature().getCurrentTemperature()));
+            }
         }
 
     }
