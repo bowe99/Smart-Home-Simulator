@@ -63,6 +63,7 @@ public class SmartHomeSimulatorController {
     @FXML private ImageView[] doorImages;
     @FXML private ImageView[] windowImages;
     @FXML private ImageView[] personImages;
+    @FXML private ImageView[] temperatureImages;
 
 
     @FXML private ImageView awayIcon1;
@@ -132,8 +133,8 @@ public class SmartHomeSimulatorController {
     private javafx.scene.image.Image openWindowIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "openwindow.png").toExternalForm());
     private javafx.scene.image.Image closedWindowIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "closedwindow.png").toExternalForm());
     private javafx.scene.image.Image personIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "person.png").toExternalForm());
-
-
+    private javafx.scene.image.Image heaterIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "heater.png").toExternalForm());
+    private javafx.scene.image.Image acIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "ac.png").toExternalForm());
 
 
     private SecurityModule securityModule;
@@ -253,6 +254,7 @@ public class SmartHomeSimulatorController {
         doorImages = new ImageView[NUMBER_OF_GRID_ELEMENTS + 1];
         windowImages = new ImageView[NUMBER_OF_GRID_ELEMENTS + 1];
         personImages = new ImageView[NUMBER_OF_GRID_ELEMENTS + 1];
+        temperatureImages = new ImageView[NUMBER_OF_GRID_ELEMENTS + 1];
 
         for (int i = 1; i <= NUMBER_OF_GRID_ELEMENTS ; i++)
         {
@@ -261,6 +263,7 @@ public class SmartHomeSimulatorController {
             doorImages[i] = (ImageView) houseLayoutPane.lookup("#a"+ i +"door");
             windowImages[i] = (ImageView) houseLayoutPane.lookup("#a"+ i +"window");
             personImages[i] = (ImageView) houseLayoutPane.lookup("#a"+ i +"person");
+            temperatureImages[i] = (ImageView) houseLayoutPane.lookup("#a"+ i +"temperature");
         }
         
         for (int i = 1; i <= NUMBER_OF_GRID_ELEMENTS; i++) {
@@ -269,6 +272,7 @@ public class SmartHomeSimulatorController {
             doorImages[i].setVisible(false);
             windowImages[i].setVisible(false);
             personImages[i].setVisible(false);
+            temperatureImages[i].setVisible(false);
         }
     }
 
@@ -288,6 +292,7 @@ public class SmartHomeSimulatorController {
             doorImages[counter].setVisible(false);
             windowImages[counter].setVisible(false);
             personImages[counter].setVisible(false);
+            temperatureImages[counter].setVisible(false);
         }
     }
         
@@ -300,6 +305,7 @@ public class SmartHomeSimulatorController {
         layoutViewText.setTranslateX(20);       
         layoutViewText.setOpacity(1);
         setUsersInLayout();
+        setTemperatureIconsInLayout();
         for (int counter = 0; counter < house.getRooms().size(); counter++) {
             String roomIDstring = house.getRooms().get(counter).getId();
             if(roomIDstring.length() > 4) {
@@ -332,6 +338,32 @@ public class SmartHomeSimulatorController {
                 ImageView currentRoomPersonImage = personImages[currentRoomID];
                 currentRoomPersonImage.setImage(personIcon);
                 currentRoomPersonImage.setVisible(true);
+            }
+        }
+    }
+
+     /**
+     * Sets AC/Heating Icons in the house layout view.
+     */
+    @FXML
+    public void setTemperatureIconsInLayout(){
+        List<Room> rooms = house.getRooms();
+        for (Room room : rooms)
+        {
+            String roomIDstring = room.getId();
+            if(room.getCurrentStateHVAC() == true) {
+                int currentRoomID = Integer.parseInt(roomIDstring.substring(4));
+
+                if(room.getTemperature().getTemperatureTarget() > room.getTemperature().getCurrentTemperature()){
+                    ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
+                    currentRoomTemperatureImage.setImage(heaterIcon);
+                    currentRoomTemperatureImage.setVisible(true);
+                }
+                else if(room.getTemperature().getTemperatureTarget() < room.getTemperature().getCurrentTemperature()){ 
+                    ImageView currentRoomTemperatureImage = temperatureImages[currentRoomID];
+                    currentRoomTemperatureImage.setImage(acIcon);
+                    currentRoomTemperatureImage.setVisible(true);                
+                }         
             }
         }
     }
@@ -726,6 +758,7 @@ public class SmartHomeSimulatorController {
                     simulation.updateTime();
                     setTime(simulation.getTimeAndUpdate());
                     setDate(simulation.getDate());
+                    setTemperatureIconsInLayout();
                 });
             }
         }, simulation.getTimeInterval() ,simulation.getTimeInterval());
