@@ -157,12 +157,13 @@ public class SmartHomeSimulatorController {
         setDate(simulation.getDate());
         setLocation(simulation.getCurrentUser().getCurrentRoom());
         setProfile(simulation.getCurrentUser());
-        setTime(simulation.getTime());
+        setTime(simulation.getTimeAndUpdate());
         initializeHouseView();
         setHouseView();
         // Initialize lists in fxml with values from house template
         setLights(house);
         setRoomsInHeatingModule(house);
+        setInitialRoomTemperatures();
         Date currentDateTime = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastSaved.setText(format.format(currentDateTime));
@@ -171,10 +172,16 @@ public class SmartHomeSimulatorController {
         Logger.newInstance(outputConsole);
         Logger.getInstance().resetLogFile();
         this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
-        this.heatingModule = new HeatingModule();
+        this.heatingModule = new HeatingModule(this.simulation.getTimeObject());
         temperatureComboBox.getItems().addAll("Morning", "Day", "Night");
-
     }
+
+    public void setInitialRoomTemperatures(){
+        for(Room room : this.house.getRooms()){
+            room.resetTemperature(this.simulation.getTemperature());
+        }
+    }
+
 
     /**
      * Changes the simulation status to on or off
@@ -223,7 +230,7 @@ public class SmartHomeSimulatorController {
             setDate(simulation.getDate());
             setLocation(simulation.getCurrentUser().getCurrentRoom());
             setProfile(simulation.getCurrentUser());
-            setTime(simulation.getTime());
+            setTime(simulation.getTimeAndUpdate());
             setUsersInLayout();
         }
         catch (Exception e){
@@ -415,8 +422,24 @@ public class SmartHomeSimulatorController {
         }
         String selectedPeriodOfTheDay = (String)temperatureComboBox.getSelectionModel().getSelectedItem();
 
-        //Set the new temperature, unless one has already been overwritten for a specific room
         heatingModule.setTempForZone(selectedZone, selectedPeriodOfTheDay, tempPreset);
+
+        //Resetting fields to contain the proper room names
+        ArrayList<String> newRoomArrayList = heatingModule.getZonesRoomsByZoneName(selectedZone);
+        //resetting the rooms in the Display Temperature list to remove the word "overwritten"
+        for(int i=0; i<newRoomArrayList.size(); ++i) {
+            if (newRoomArrayList.get(i).contains("Overwritten")) {
+                house.getRoomByName(newRoomArrayList.get(i)).setName(newRoomArrayList.get(i).substring(0, newRoomArrayList.get(i).length() - 14));
+                allRoomsDisplayTemp.getItems().clear();
+                allRoomsDisplayTemp.getItems().addAll(house.getRoomsNameList());
+            }
+        }
+        selectedRoomsListForZone.getItems().clear();
+        allRoomsListViewZone.getItems().clear();
+        allRoomsListViewZone.getItems().addAll(allRoomsDisplayTemp.getItems());
+
+
+
         System.out.println("Came out the other side brother");
     }
 
@@ -438,10 +461,14 @@ public class SmartHomeSimulatorController {
         String newZoneName = zoneName.getText();
         ObservableList<String> newZoneObservableList = (ObservableList<String>) this.selectedRoomsListForZone.getItems();
         ArrayList<Room> newRoomArrayList = new ArrayList<Room>();
+
+
+
         for(int i = 0; i < newZoneObservableList.size(); ++i){
             newRoomArrayList.add(house.getRoomByName(newZoneObservableList.get(i)));
         }
 
+        //If there is a word that is overwritten
         //check if there is a zone that already contains a specific room that is to be added to a zone
         for (int i = 0; i < newRoomArrayList.size(); ++i){
             if(newRoomArrayList.get(i).getBelongsToZone()){
@@ -455,6 +482,7 @@ public class SmartHomeSimulatorController {
         Zone newZone = new Zone(newRoomArrayList, newZoneName);
         this.heatingModule.addZone(newZone);
         newZone.printRoomsInZone();
+
 
 
         //Check if there are any non-existant zones that are being displayed in the display Zone window
@@ -535,8 +563,8 @@ public class SmartHomeSimulatorController {
      * @param temperature
      */
     @FXML
-    private void setTemperature(int temperature) {
-        this.displayTemp.setText(Integer.toString(temperature) + "°C");
+    private void setTemperature(double temperature) {
+        this.displayTemp.setText(Double.toString(temperature) + "°C");
     }
 
     
@@ -656,6 +684,7 @@ public class SmartHomeSimulatorController {
     private void setRoomTemperature(){
         Object selectedItem = allRoomsDisplayTemp.getSelectionModel().getSelectedItem();
         String selectedRoom = (String) selectedItem;
+        final String selectedRoomNoOverwrite = selectedRoom;
         int selectedIndex = allRoomsDisplayTemp.getItems().indexOf(selectedItem);
 
         boolean success;
@@ -673,7 +702,7 @@ public class SmartHomeSimulatorController {
         //This try block will parse the string for an integer value if it fails it will not change the temperature and if
         // it succeeds it will output to console the new change
         try {
-            int newTemperatureInt = Integer.parseInt(setTemperatureSingleRoom.getText());
+            double newTemperatureInt = Double.parseDouble(setTemperatureSingleRoom.getText());
 
             success = this.heatingModule.overrideRoomTemperature(selectedRoom, newTemperatureInt, this.simulation.getCurrentUser());
         } catch (Exception e) {
@@ -690,6 +719,36 @@ public class SmartHomeSimulatorController {
             }
             allRoomsDisplayTemp.getItems().remove(selectedIndex);
             allRoomsDisplayTemp.getItems().add(selectedIndex, selectedRoom);
+        }
+
+        //update rooms in list of rooms
+        for(int i =0; i<allRoomsListViewZone.getItems().size(); ++i){
+            if(((String) allRoomsListViewZone.getItems().get(i)).contains(selectedRoomNoOverwrite)){
+                //remove the room that does not include "overwritten"
+                this.allRoomsListViewZone.getItems().remove(i);
+                //add the room that does contain the word "overwritten"
+                this.allRoomsListViewZone.getItems().add(selectedRoom);
+                break;
+            }
+        }
+
+        //update rooms in list of selected rooms
+        for(int i =0; i<selectedRoomsListForZone.getItems().size(); ++i){
+            if(((String) selectedRoomsListForZone.getItems().get(i)).contains(selectedRoomNoOverwrite)){
+                //remove the room that does not include "overwritten"
+                this.selectedRoomsListForZone.getItems().remove(i);
+                //add the room that does contain the word "overwritten"
+                this.selectedRoomsListForZone.getItems().add(selectedRoom);
+                break;
+            }
+        }
+
+        //rename the old room in the house with the name from the new room
+        for(int i=0; i<house.getRoomsNameList().size(); ++i){
+            if(selectedRoom.contains(house.getRoomsNameList().get(i))){
+                house.renameRoom(house.getRoomsNameList().get(i), selectedRoom);
+                break;
+            }
         }
     }
 
@@ -718,7 +777,7 @@ public class SmartHomeSimulatorController {
             public void run() {
                 Platform.runLater(() -> {
                     simulation.updateTime();
-                    setTime(simulation.getTime());
+                    setTime(simulation.getTimeAndUpdate());
                     setDate(simulation.getDate());
                     setTemperatureIconsInLayout();
                 });
