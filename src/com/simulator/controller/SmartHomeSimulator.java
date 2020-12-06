@@ -1,5 +1,7 @@
 package com.simulator.controller;
 
+import com.simulator.model.House;
+import com.simulator.model.HouseLoadException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +13,7 @@ import javafx.scene.Parent;
   */
 public class SmartHomeSimulator extends Application{
     public static void main(String[] args) {
-            launch(args);
+        launch(args);
 	}
 	/**
      * Launch the dashboard of the simulator.
@@ -20,12 +22,23 @@ public class SmartHomeSimulator extends Application{
      */
 	@Override
     public void start(Stage primaryStage) throws Exception {
+	    try {
+            House.getInstance();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/simulator/view/Dashboard.fxml"));
+            Parent root = loader.load();
+            Scene rootScene = new Scene(root);
+            primaryStage.setScene(rootScene);
+            primaryStage.setTitle("Smart Home Simulator");
+            primaryStage.show();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/com/simulator/view/Dashboard.fxml"));
-        Scene rootScene = new Scene(root);
-        primaryStage.setScene(rootScene);
-        primaryStage.setTitle("Smart Home Simulator");
-        primaryStage.show();
-    
+            SmartHomeSimulatorController controller = loader.getController();
+            primaryStage.setOnCloseRequest(e -> controller.stopTimer());
+        }
+	    catch (HouseLoadException houseLoadException){
+	        houseLoadException.printStackTrace();
+            System.out.println(houseLoadException.getMessage());
+            System.out.println("Simulation could not start because of the above exception");
+            System.exit(-1);
+	    }
     }
 }

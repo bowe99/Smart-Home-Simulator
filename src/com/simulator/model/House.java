@@ -16,22 +16,18 @@ public class House {
     private String address;
     private List<Room> rooms;
 
-    
-    /** 
+
+    /**
      * Get instance of the house object that is saved in this singleton class, creates new instance if one does not exist
-     * @return House
+     *
+     * @return House instance
      */
-    public static House getInstance() {
-        try {
+    public static House getInstance() throws HouseLoadException{
         if(instance == null){
             instance = loadFile("house_layout_txt.txt");
             System.out.println("ok, created a new instance");
         }
         return instance;
-        } catch(Exception e){
-            System.out.print("something went wrong");
-            return null;   
-        }
     }
 
     /**
@@ -45,27 +41,42 @@ public class House {
 
     /**
      * Adds a room to the house
+     *
      * @param newName the new uniquely identifying name for the room
-     * @return an integer representing the success or failure of the request
-     * a return value of 0 represents success
-     * a return value of 1 represents failure
+     * @param ID      the id
+     * @return an integer representing the success or failure of the request a return value of 0 represents success a return value of 1 represents failure
      */
     public int addRoom(String newName, String ID) {
         this.rooms.add(new Room(newName, ID));
         return 0;
     }
 
+    /**
+     * Rename room.
+     *
+     * @param roomToBeRenamedString the room to be renamed string
+     * @param newNameString         the new name string
+     */
+    public void renameRoom(String roomToBeRenamedString, String newNameString){
+        getRoomByName(roomToBeRenamedString).setName(newNameString);
+    }
+
+    /**
+     * Gets rooms.
+     *
+     * @return the rooms
+     */
     public List<Room> getRooms()
     {
         return this.rooms;
     }
+
     /**
      * Adds a door to a room in the house
-     * @param newName the new uniquely identifying name for the door
+     *
+     * @param newName    the new uniquely identifying name for the door
      * @param targetName the name of the room the door is a part of
-     * @return an integer representing the success or failure of the request
-     * a return value of 0 represents success
-     * a return value of 1 represents failure
+     * @return an integer representing the success or failure of the request a return value of 0 represents success a return value of 1 represents failure
      */
     public int addDoor(String newName, String targetName) {
         Room targetRoom = getRoomByName(targetName);
@@ -78,11 +89,10 @@ public class House {
 
     /**
      * Adds a window to a room in the house
-     * @param newName the new uniquely identifying name for the window
+     *
+     * @param newName    the new uniquely identifying name for the window
      * @param targetName the name of the room the window is a part of
-     * @return an integer representing the success or failure of the request
-     * a return value of 0 represents success
-     * a return value of 1 represents failure
+     * @return an integer representing the success or failure of the request a return value of 0 represents success a return value of 1 represents failure
      */
     public int addWindow(String newName, String targetName) {
         Room targetRoom = getRoomByName(targetName);
@@ -95,11 +105,10 @@ public class House {
 
     /**
      * Adds a light to a room in the house
-     * @param newName the new uniquely identifying name for the light
+     *
+     * @param newName    the new uniquely identifying name for the light
      * @param targetName the name of the room the light is a part of
-     * @return an integer representing the success or failure of the request
-     * a return value of 0 represents success
-     * a return value of 1 represents failure
+     * @return an integer representing the success or failure of the request a return value of 0 represents success a return value of 1 represents failure
      */
     public int addLight(String newName, String targetName) {
         Room targetRoom = getRoomByName(targetName);
@@ -112,11 +121,10 @@ public class House {
 
     /**
      * Adds a motion sensor to a room in the house
-     * @param newName the new uniquely identifying name for the motion sensor
+     *
+     * @param newName    the new uniquely identifying name for the motion sensor
      * @param targetName the name of the room the motion sensor is a part of
-     * @return an integer representing the success or failure of the request
-     * a return value of 0 represents success
-     * a return value of 1 represents failure
+     * @return an integer representing the success or failure of the request a return value of 0 represents success a return value of 1 represents failure
      */
     public int addMotionSensor(String newName, String targetName) {
         Room targetRoom = getRoomByName(targetName);
@@ -129,12 +137,11 @@ public class House {
 
     /**
      * Adds an entryway sensor to an entryway of the house
-     * @param newName the new uniquely identifying name for the motion sensor
-     * @param roomName the name of the room the entryway is a part of
+     *
+     * @param newName    the new uniquely identifying name for the motion sensor
+     * @param roomName   the name of the room the entryway is a part of
      * @param targetName the name of the entry way the sensor is to be placed on
-     * @return an integer representing the success or failure of the request
-     * a return value of 0 represents success
-     * a return value of 1 represents failure
+     * @return an integer representing the success or failure of the request a return value of 0 represents success a return value of 1 represents failure
      */
     public int addEntrywaySensor(String newName, String roomName, String targetName) {
         Room targetRoom = getRoomByName(roomName);
@@ -147,6 +154,7 @@ public class House {
 
     /**
      * Get the address of the house
+     *
      * @return the address of the house
      */
     public String getAddress() {
@@ -155,6 +163,7 @@ public class House {
 
     /**
      * Set the address of the house
+     *
      * @param address the new address of the house
      */
     public void setAddress(String address) {
@@ -163,24 +172,25 @@ public class House {
 
     /**
      * Find room object within house with a given name
+     *
      * @param targetName the name of the room
-     * @return object of type Room with the given name
-     * returns null if there is no room matching the requested name
+     * @return object of type Room with the given name returns null if there is no room matching the requested name
      */
     public Room getRoomByName(String targetName) {
         for (Room r : rooms) {
-            if (r.getName().equals(targetName)) {
+            if (r.getName().contains(targetName)) {
                 return r;
             }
         }
         return null;
     }
 
-    
-    /** 
+
+    /**
      * Get the Light instance that is refered to from the string that is passed in
-     * @param target
-     * @return Light
+     *
+     * @param target the target
+     * @return Light light
      */
     public Light getLightByName(String target){
         for (Room r : this.rooms) {
@@ -191,24 +201,26 @@ public class House {
         }
         return null;
     }
-   
-    
-    /** 
+
+
+    /**
      * return a list of all the names of the rooms
-     * @return List<String>
+     *
+     * @return List<String> array list
      */
-    public List<String> getRoomsNameList(){
-        List<String> roomsListString = new ArrayList<String>();
+    public ArrayList<String> getRoomsNameList(){
+        ArrayList<String> roomsListString = new ArrayList<String>();
         for(int i=0; i<rooms.size(); ++i){
             roomsListString.add(rooms.get(i).getName());
         }
         return roomsListString;
     }
 
-    
-    /** 
+
+    /**
      * return a list of the names of all of the lights
-     * @return ArrayList<String>
+     *
+     * @return ArrayList<String> array list
      */
     public ArrayList<String> getLightsNameList(){
         ArrayList<String> lightsListString = new ArrayList<String>();
@@ -243,7 +255,7 @@ public class House {
      * @return House
      * @throws Exception
      */
-    private static House loadFile(String fileName) throws Exception{
+    private static House loadFile(String fileName) throws HouseLoadException{
         House loadedHouse;
         String[] elementStack = new String[5];
         int depth = -1;
@@ -313,6 +325,9 @@ public class House {
                     attribute = getAttribute(line);
                     loadedHouse.addEntrywaySensor(attribute, elementStack[depth - 1], elementStack[depth]);
                     elementStack[++depth] = attribute;
+                }
+                else{
+                    throw new HouseLoadException("Unexpected identifier on line " + linenumber + " of the house layout file. ");
                 }
 
                 //moving onto the next line of information

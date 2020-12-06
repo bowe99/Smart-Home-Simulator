@@ -15,7 +15,7 @@ import java.util.List;
 public class SimulationParameters{
     private static SimulationParameters instance = null;
     private Time time; //represents minutes of the day (0-1440)
-    private int temperature;
+    private double temperature;
     private Profile currentUser;
     private List<Profile> allUsers;
     private boolean simulationStatus = true;
@@ -23,10 +23,11 @@ public class SimulationParameters{
     private final static String simulationFile = "simulation_parameters.txt";
     private final static String usersFile = "users.txt";
 
-    
-    /** 
+
+    /**
      * Get the singleton instance and if no instance exists, create a new one
-     * @return SimulationParameters
+     *
+     * @return SimulationParameters simulation parameters
      */
     public static SimulationParameters getInstance(){
         try {
@@ -48,136 +49,160 @@ public class SimulationParameters{
         allUsers = new LinkedList<>();
     }
 
-    
-    /** 
+
+    /**
      * Get the temperature
-     * @return int
+     *
+     * @return int temperature
      */
-    public int getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    
-    /** 
+
+    /**
      * Set the temperature
-     * @param temperature
+     *
+     * @param temperature the temperature
      */
-    public void setTemperature(int temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 
-    
-    /** 
+
+    /**
      * Get the date
-     * @return Date
+     *
+     * @return Date date
      */
     public Date getDate() {
         return time.getDate();
     }
 
-    
-    /** 
+
+    /**
      * Set the date
-     * @param date
+     *
+     * @param date the date
      */
     public void setDate(Date date) {
         this.time.setDate(date);
     }
 
-    
-    /** 
+
+    /**
      * Get the time
-     * @return int
+     *
+     * @return int time and update
+     */
+    public int getTimeAndUpdate() {
+        return time.getTimeAndUpdate();
+    }
+
+
+    /**
+     * Get the time
+     *
+     * @return int time
      */
     public int getTime() {
         return time.getTime();
     }
 
-    
-    /** 
+
+    /**
      * Set the time
-     * @param time
+     *
+     * @param time the time
      */
     public void setTime(int time) {
         this.time.setTime(time);
     }
-    
-    /** 
+
+    /**
      * Set the time object
-     * @param time
+     *
+     * @param time the time
      */
     public void setTimeObject(Time time){
         this.time = time;
-    }  
-  
+    }
+
     /**
-     *Get the time object
+     * Get the time object
      *
+     * @return the time
      */
     public Time getTimeObject(){
         return this.time;
     }
-    
-    /** 
-     * Get the current user
-     * @return Profile
-     */
 
+    /**
+     * Get the current user
+     *
+     * @return Profile current user
+     */
     public Profile getCurrentUser() {
         return currentUser;
     }
 
-    
-    /** 
+
+    /**
      * Set the current user
-     * @param currentUser
+     *
+     * @param currentUser the current user
      */
     public void setCurrentUser(Profile currentUser) {
         this.currentUser = currentUser;
     }
 
-    
-    /** 
+
+    /**
      * Get the simulation status
-     * @return boolean
+     *
+     * @return boolean simulation status
      */
     public boolean getSimulationStatus() {
         return simulationStatus;
     }
 
-    
-    /** 
+
+    /**
      * Set the simulation status
-     * @param simulationStatus
+     *
+     * @param simulationStatus the simulation status
      */
     public void setSimulationStatus(boolean simulationStatus) {
         this.simulationStatus = simulationStatus;
     }
 
-    
-    /** 
+
+    /**
      * Set the time interval
-     * @param speed
+     *
+     * @param speed the speed
      */
     public void setTimeInterval (int speed)
     {
         this.time.changeInterval(speed);
     }
 
-    
-    /** 
+
+    /**
      * Add a new user to allUsers
-     * @param newUser
+     *
+     * @param newUser the new user
      */
     public void addUser(Profile newUser){
         allUsers.add(newUser);
     }
 
-    
-    /** 
+
+    /**
      * Get the user by a name provided
-     * @param name
-     * @return Profile
+     *
+     * @param name the name
+     * @return Profile profile
      */
     public Profile getUserByName(String name){
         for (Profile p : allUsers) {
@@ -187,21 +212,23 @@ public class SimulationParameters{
         return null;
     }
 
-    
-    /** 
+
+    /**
      * Set the current user location
-     * @param destination
+     *
+     * @param destination the destination
      */
     public void setCurrentUserLocation(Room destination){
         currentUser.setCurrentRoom(destination);
     }
 
-    
-    /** 
+
+    /**
      * Set the User Location
      * Check if auto lights need to be turned on
-     * @param userName
-     * @param destination
+     *
+     * @param userName    the user name
+     * @param destination the destination
      */
     public void setUserLocation(String userName, Room destination){
         for (Profile p : allUsers) {
@@ -221,10 +248,11 @@ public class SimulationParameters{
         }
     }
 
-    
-    /** 
+
+    /**
      * Get all user names in a List<String>
-     * @return List<String>
+     *
+     * @return List<String> list
      */
     public List<String> getAllUserNames(){
         List<String> userNames = new ArrayList<>();
@@ -233,11 +261,12 @@ public class SimulationParameters{
         }
         return userNames;
     }
-    
-    
-    /** 
+
+
+    /**
      * Get all users List
-     * @return List<Profile>
+     *
+     * @return List<Profile> list
      */
     public List<Profile> getAllUsers(){
         return allUsers;
@@ -259,7 +288,7 @@ public class SimulationParameters{
             line = reader.readLine();
             loadedSimulation.setTime(Integer.parseInt(line));
             line = reader.readLine();
-            loadedSimulation.setTemperature(Integer.parseInt(line));
+            loadedSimulation.setTemperature(Double.parseDouble(line));
         }
         catch(Exception e){
             System.out.println("Something went wrong loading the txt file");
@@ -301,13 +330,13 @@ public class SimulationParameters{
             SimpleDateFormat initialFormat = new SimpleDateFormat("yyyy-MM-dd");
             writer.write(initialFormat.format(time.getDate()));
             writer.write("\n");
-            writer.write(String.valueOf(time.getTime()));
+            writer.write(String.valueOf(time.getTimeAndUpdate()));
             writer.write("\n");
             writer.write(String.valueOf(temperature));
-            Logger.getInstance().ouputToConsole("Simulation parameters have been saved");
+            Logger.getInstance().outputToConsole("Simulation parameters have been saved");
         }
         catch(Exception e){
-            Logger.getInstance().ouputToConsole("Something went writing the txt file " + simulationFile);
+            Logger.getInstance().outputToConsole("Something went writing the txt file " + simulationFile);
             e.printStackTrace();
         }
 
@@ -322,10 +351,10 @@ public class SimulationParameters{
                 writer.write("\n");
                 writer.write("\n");
             }
-            Logger.getInstance().ouputToConsole("User info has been saved");
+            Logger.getInstance().outputToConsole("User info has been saved");
         }
         catch (Exception e){
-            Logger.getInstance().ouputToConsole("Something went writing the txt file " + usersFile);
+            Logger.getInstance().outputToConsole("Something went writing the txt file " + usersFile);
             e.printStackTrace();
         }
     }
@@ -337,9 +366,10 @@ public class SimulationParameters{
         time.update();
     }
 
-    /** 
+    /**
      * Get the time interval
-     * @return int
+     *
+     * @return int int
      */
     public int getTimeInterval(){
        return  time.getInterval();

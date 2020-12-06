@@ -1,9 +1,6 @@
 package com.simulator.controller;
 
-import com.simulator.model.House;
-import com.simulator.model.Profile;
-import com.simulator.model.Room;
-import com.simulator.model.SimulationParameters;
+import com.simulator.model.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -33,9 +30,21 @@ public class SimulationParameterController {
     private SimulationParameters simulation;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    public SimulationParameterController() throws Exception{
-        house = House.getInstance();
-        simulation = SimulationParameters.getInstance();
+
+    /**
+     * Instantiates a new Simulation parameter controller.
+     *
+     * @throws Exception the exception
+     */
+    public SimulationParameterController() {
+        try{
+            house = House.getInstance();
+            simulation = SimulationParameters.getInstance();
+        }
+        catch (HouseLoadException houseLoadException){
+            houseLoadException.printStackTrace();
+            System.out.println(houseLoadException.getMessage());
+        }
     }
 
     /**
@@ -44,93 +53,94 @@ public class SimulationParameterController {
     @FXML
     public void initialize(){
         currentUserChoice.setItems(FXCollections.observableList(SimulationParameters.getInstance().getAllUserNames()));
-        userLocationChoice.setItems(FXCollections.observableList(House.getInstance().getRoomsNameList()));
+        userLocationChoice.setItems(FXCollections.observableList(house.getRoomsNameList()));
         userProfileChoice.setItems(FXCollections.observableList(SimulationParameters.getInstance().getAllUserNames()));
         currentUserChoice.setValue(simulation.getCurrentUser().getName());
         userProfileChoice.setValue(simulation.getCurrentUser().getName());
         userLocationChoice.setValue(simulation.getCurrentUser().getCurrentRoom().getName());
         temperatureValue.setText(String.valueOf(simulation.getTemperature()));
         dateValue.getEditor().setText(dateFormat.format(simulation.getDate()));
-        hourValue.setText(String.valueOf(simulation.getTime()/60));
-        minuteValue.setText(String.valueOf(simulation.getTime()%60));
-        timeSpeed.setText(String.valueOf(60000/simulation.getTimeInterval()));
+        hourValue.setText(String.valueOf(simulation.getTime()/3600));
+        minuteValue.setText(String.valueOf((simulation.getTime()%3600)/60));
+        timeSpeed.setText(String.valueOf(1000/simulation.getTimeInterval()));
     }
 
     /**
      * Populate data of the simulation parameters instance.
-     * @param event Referring to a mouse activity by the user
-     * Sets the system parameters to the demanded value.
+     *
+     * @param event Referring to a mouse activity by the user Sets the system parameters to the demanded value.
      */
     @FXML
     void returnData (MouseEvent event){
         Logger log = Logger.getInstance();
         try{
-            simulation.setTemperature(Integer.parseInt(temperatureValue.getText()));
-            log.ouputToConsole("Temperature was successfully updated");
+            simulation.setTemperature(Double.parseDouble(temperatureValue.getText()));
+            log.outputToConsole("Temperature was successfully updated");
         }
         catch (NumberFormatException e){
-            log.ouputToConsole("Error updating temperature, please try again");
+            log.outputToConsole("Error updating temperature, please try again");
         }
 
         try{
             simulation.setDate(dateFormat.parse(dateValue.getEditor().getText()));
-            log.ouputToConsole("Date was successfully updated");
+            log.outputToConsole("Date was successfully updated");
         }
         catch (ParseException e){
-            log.ouputToConsole("Error updating date, please try again");
+            log.outputToConsole("Error updating date, please try again");
         }
 
         Profile user = simulation.getUserByName((String)(currentUserChoice.getValue()));
         if (user != null){
             simulation.setCurrentUser(user);
-            log.ouputToConsole("Current user is now: " + user.getName());
+            log.outputToConsole("Current user is now: " + user.getName());
         }
         else
-            log.ouputToConsole("selected user does not exist within the simulation");
+            log.outputToConsole("selected user does not exist within the simulation");
 
         user = simulation.getUserByName(userProfileChoice.getValue());
         Room room = house.getRoomByName((String)(userLocationChoice.getValue()));
         if (user != null && room != null) {
             simulation.setUserLocation(user.getName(), room);
-            log.ouputToConsole(user.getName() + " has been moved to " + room.getName());
+            log.outputToConsole(user.getName() + " has been moved to " + room.getName());
         }
         else if(user == null)
-            log.ouputToConsole("selected user does not exist within the simulation");
+            log.outputToConsole("selected user does not exist within the simulation");
         else if(room == null)
-            log.ouputToConsole("selected room does not exist within the simulation");
+            log.outputToConsole("selected room does not exist within the simulation");
 
         try{
             int hour = Integer.parseInt(hourValue.getText());
             int min = Integer.parseInt(minuteValue.getText());
             if (hour >= 0 && hour < 24) {
                 if (min >= 0 && min < 60) {
-                    simulation.setTime(hour * 60 + min);
-                    log.ouputToConsole("Time has been updated successfully");
+                    simulation.setTime(hour * 3600 + min * 60);
+                    log.outputToConsole("Time has been updated successfully");
                 }
                 else{
-                   log.ouputToConsole("Minute entry does not fall within an acceptable range");
+                   log.outputToConsole("Minute entry does not fall within an acceptable range");
                 }
             }
             else{
-                log.ouputToConsole("Hour entry does not fall within an acceptable range");
+                log.outputToConsole("Hour entry does not fall within an acceptable range");
             }
         }
         catch (Exception e){
-            log.ouputToConsole("Error updating time, please try again");
+            log.outputToConsole("Error updating time, please try again");
         }
         try{
             int speedFactor = Integer.parseInt(timeSpeed.getText());
             simulation.setTimeInterval(speedFactor);
-            log.ouputToConsole("Time speed has been updated to run at " + speedFactor + "x real time");
+            log.outputToConsole("Time speed has been updated to run at " + speedFactor + "x real time");
         }
         catch (Exception e){
-            log.ouputToConsole("Error updating time speed, please try again");
+            log.outputToConsole("Error updating time speed, please try again");
         }
         closeWindow(event);
     }
 
     /**
      * Closes the parameters edit window pop-up.
+     *
      * @param event Referring to a mouse activity by the user
      */
     @FXML

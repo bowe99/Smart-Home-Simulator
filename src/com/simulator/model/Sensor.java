@@ -9,6 +9,7 @@ public abstract class Sensor {
 
     /**
      * Constructor for a new sensor object
+     *
      * @param newName the new uniquely identifying name for the sensor
      */
     public Sensor(String newName){
@@ -17,16 +18,14 @@ public abstract class Sensor {
 
     /**
      * Have sensor test the entryway for obstructions
-     * @param getName(
-     * @return int 
-     * an integer representing the triggering of the sensor
-     * a return value of 0 means the sensor is not triggered
-     * a return value of 1 means the sensor is triggered
+     *
+     * @return int  an integer representing the triggering of the sensor a return value of 0 means the sensor is not triggered a return value of 1 means the sensor is triggered
      */
     public abstract int pollSensor();
 
     /**
      * Get the name of the sensor object
+     *
      * @return the name of the sensor object
      */
     public String getName() {
