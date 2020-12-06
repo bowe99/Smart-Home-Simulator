@@ -55,8 +55,6 @@
             <Label alignment="CENTER" text="Who to move" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <TextField fx:id="timeSpeed" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="132.0" text="Time Speed" GridPane.rowIndex="15" />
-            <fx:id="timeSpeed" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="132.0" text="Summer Months" GridPane.rowIndex="20" />
          </children>
       </GridPane>
       <Button fx:id="confirmValue" layoutX="216.0" layoutY="324.0" mnemonicParsing="false" onMouseClicked="#returnData" text="OK" />
