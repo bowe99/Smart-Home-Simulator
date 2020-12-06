@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SendAlertIfUnusualTemp{
 
     @Test
-    void UnusualTempAlert() {
+    void UnusualTempAlert() throws HouseLoadException {
         ArrayList<Room> newRoomList = new ArrayList<Room>();
         newRoomList.add(House.getInstance().getRoomByName("Garage"));
         newRoomList.add(House.getInstance().getRoomByName("Kitchen"));

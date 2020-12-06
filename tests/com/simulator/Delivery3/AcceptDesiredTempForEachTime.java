@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AcceptDesiredTempForEachTime{
 
     @Test
-    void inputTempForDaytime() {
+    void inputTempForDaytime() throws HouseLoadException {
 
         ArrayList<Room> newRoomList = new ArrayList<Room>();
         newRoomList.add(House.getInstance().getRoomByName("Garage"));
@@ -28,7 +28,7 @@ class AcceptDesiredTempForEachTime{
         Assert.assertEquals(25, wrapper);
     }
     @Test
-    void inputTempForMorning() {
+    void inputTempForMorning() throws HouseLoadException {
 
         ArrayList<Room> newRoomList = new ArrayList<Room>();
         newRoomList.add(House.getInstance().getRoomByName("Garage"));
@@ -39,7 +39,7 @@ class AcceptDesiredTempForEachTime{
         Assert.assertEquals(25, wrapper);
     }
     @Test
-    void inputTempForNighttime() {
+    void inputTempForNighttime() throws HouseLoadException {
 
         ArrayList<Room> newRoomList = new ArrayList<Room>();
         newRoomList.add(House.getInstance().getRoomByName("Garage"));

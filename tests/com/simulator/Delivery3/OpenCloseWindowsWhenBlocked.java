@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class OpenCloseWindowsWhenBlocked{
 
     @Test
-    void OpenWindowsWhenBlocked() {
+    void OpenWindowsWhenBlocked() throws HouseLoadException {
         House.getInstance().getRoomByName("Garage").getWindowByName("EastWindow").setBlockedTrue();
         Throwable exception = assertThrows(ExceptionInInitializerError.class, () -> House.getInstance().getRoomByName("Garage").openAllWindows());
         assertEquals(null, exception.getMessage());
     }
 
     @Test
-    void CloseWindowsWhenBlocked() {
+    void CloseWindowsWhenBlocked() throws HouseLoadException {
         House.getInstance().getRoomByName("Garage").getWindowByName("EastWindow").setOpen();
         House.getInstance().getRoomByName("Garage").getWindowByName("EastWindow").setBlockedTrue();
         Throwable exception = assertThrows(ExceptionInInitializerError.class, () -> House.getInstance().getRoomByName("Garage").getWindowByName("EastWindow").setClosed());

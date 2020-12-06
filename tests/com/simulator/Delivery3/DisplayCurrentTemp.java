@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DisplayCurrentTemp{
 
     @Test
-    void displayCurrentTemp() {
+    void displayCurrentTemp() throws HouseLoadException {
         System.out.print(House.getInstance().getRoomByName("Garage").getTemperature().getTemperatureDay());
         Assert.assertTrue((House.getInstance().getRoomByName("Garage").getTemperature().getTemperatureDay())==0);
     }

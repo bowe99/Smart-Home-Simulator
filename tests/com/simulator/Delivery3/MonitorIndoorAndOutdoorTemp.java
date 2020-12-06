@@ -15,11 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class MonitorIndoorAndOutdoorTemp{
 
     @Test
-    void monitorIndoorTemp() {
+    void monitorIndoorTemp() throws HouseLoadException {
         Assert.assertTrue((House.getInstance().getRoomByName("Garage").getTemperature().getTemperatureDay())==0);
     }
     @Test
-    void monitorOutdoorTemp() {
+    void monitorOutdoorTemp() throws HouseLoadException {
         Assert.assertTrue((House.getInstance().getRoomByName("Garage").getTemperature().getTemperatureDay())==0);
     }
 }

@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShutDownACOpenWindows{
 
     @Test
-    void ShutDownACAuto() {
+    void ShutDownACAuto() throws HouseLoadException {
         House.getInstance().getRoomByName("Garage").setCurrentStateHVAC(true);
         Assert.assertTrue(House.getInstance().getRoomByName("Garage").getCurrentStateHVAC());
         House.getInstance().getRoomByName("Garage").resetTemperature(0);
@@ -23,7 +23,7 @@ class ShutDownACOpenWindows{
     }
 
     @Test
-    void OpenWindowsAuto() {
+    void OpenWindowsAuto() throws HouseLoadException {
         House.getInstance().getRoomByName("Garage").openAllWindows();
         Assert.assertTrue(House.getInstance().getRoomByName("Garage").getWindowsAmount()==2);
     }
