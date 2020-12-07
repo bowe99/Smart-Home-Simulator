@@ -367,7 +367,7 @@ public class SmartHomeSimulatorController {
         for (Room room : rooms)
         {
             String roomIDstring = room.getId();
-            if(room.getCurrentStateHVAC() == true) {
+            if(room.getCurrentStateHVAC() && roomIDstring.length()>=4) {
                 int currentRoomID = Integer.parseInt(roomIDstring.substring(4));
 
                 if(room.getTemperature().getTemperatureTarget() > room.getTemperature().getCurrentTemperature()){
