@@ -38,7 +38,6 @@ public class Permission
         this.strangerPermission = strangerPermission;
     }
 
-
     /**
      * Set the permission type for each type of user
      *
@@ -63,7 +62,6 @@ public class Permission
         }
     }
 
-
     /**
      * Get the permission type based on the user given
      *
@@ -84,7 +82,6 @@ public class Permission
         }
         return PERMISSION_TYPE.NONE;
     }
-
 
     /**
      * Check if an individual has permission based on the profile provided and the room provided

@@ -65,7 +65,6 @@ public class SmartHomeSimulatorController {
     @FXML private ImageView[] personImages;
     @FXML private ImageView[] temperatureImages;
 
-
     @FXML private ImageView awayIcon1;
     @FXML private ImageView awayIcon2;
 
@@ -78,23 +77,17 @@ public class SmartHomeSimulatorController {
     @FXML private TextField motionDetectedTimeSecurity;
 
     @FXML private ListView allRoomsDisplayTemp;
-    @FXML private ListView allRoomsCreateGroups;
-    @FXML private Button displayRoomTempButton;
     @FXML private TextField setTemperatureSingleRoom;
     @FXML private TextField winterAwayModeTemperature;
     @FXML private TextField summerAwayModeTemperature;
 
     @FXML private Label lastSaved;
-    @FXML private TabPane tabPane;
-    @FXML private Tab SHCTab;
-    @FXML private Tab SHPTab;
 
     @FXML private ListView allRoomsListViewZone;
     @FXML private ListView selectedRoomsListForZone;
     @FXML private ListView listZones;
     @FXML private TextField temperatureTextField;
     @FXML private ComboBox temperatureComboBox;
-    @FXML private Button addPreset;
     @FXML private TextField zoneName;
 
     private House house;
@@ -115,7 +108,6 @@ public class SmartHomeSimulatorController {
     @FXML private Button windowBlock;
     @FXML private Button windowUnblock;
     @FXML private Button finished;
-    @FXML private SmartHomeSimulatorController SHSController;
 
     private Room currentRoom=null;
     private Light currentLight=null;
@@ -137,10 +129,10 @@ public class SmartHomeSimulatorController {
     private javafx.scene.image.Image heaterIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "heater.png").toExternalForm());
     private javafx.scene.image.Image acIcon = new javafx.scene.image.Image(getClass().getResource(RESOURCE_PATH + "ac.png").toExternalForm());
 
-
     private SecurityModule securityModule;
     private HeatingModule heatingModule;
     private Timer timer = new Timer();
+
     /**
      * The Security permission.
      */
@@ -341,10 +333,13 @@ public class SmartHomeSimulatorController {
      */
     @FXML
     public void setUsersInLayout(){
+        //reset all user icons first
         for (int loop=1; loop < (NUMBER_OF_GRID_ELEMENTS + 1); loop++)
         {
-               personImages[loop].setVisible(false);       //reset all first
+               personImages[loop].setVisible(false);
         }
+
+        //add user icons to any room that contains at least one user
         for (int loop=0; loop< simulation.getAllUsers().size(); loop++)
         {
             String roomIDstring = simulation.getAllUsers().get(loop).getCurrentRoom().getId();
@@ -382,6 +377,7 @@ public class SmartHomeSimulatorController {
             }
         }
     }
+
     /**
      * Adds room to the selected rooms panel
      */
@@ -391,6 +387,7 @@ public class SmartHomeSimulatorController {
         this.selectedRoomsListForZone.getItems().add((String) selectedItem);
         this.allRoomsListViewZone.getItems().remove(selectedItem);
     }
+
     /**
      * Removes room to the selected rooms panel
      */
@@ -400,6 +397,7 @@ public class SmartHomeSimulatorController {
         this.selectedRoomsListForZone.getItems().remove((String) selectedItem);
         this.allRoomsListViewZone.getItems().add(selectedItem);
     }
+
     /**
      * Adds preset temperature to zone
      */
@@ -436,11 +434,8 @@ public class SmartHomeSimulatorController {
         selectedRoomsListForZone.getItems().clear();
         allRoomsListViewZone.getItems().clear();
         allRoomsListViewZone.getItems().addAll(allRoomsDisplayTemp.getItems());
-
-
-
-        System.out.println("Came out the other side brother");
     }
+
     /**
      * Saves the SHH settings
      */
@@ -463,6 +458,7 @@ public class SmartHomeSimulatorController {
             Logger.getInstance().outputToConsole("Could not parse entry for winter away mode temperature");
         }
     }
+
     /**
      * Creates a new Zone with the input information
      */
@@ -484,8 +480,6 @@ public class SmartHomeSimulatorController {
         String newZoneName = zoneName.getText();
         ObservableList<String> newZoneObservableList = (ObservableList<String>) this.selectedRoomsListForZone.getItems();
         ArrayList<Room> newRoomArrayList = new ArrayList<Room>();
-
-
 
         for(int i = 0; i < newZoneObservableList.size(); ++i){
             newRoomArrayList.add(house.getRoomByName(newZoneObservableList.get(i)));
@@ -569,7 +563,6 @@ public class SmartHomeSimulatorController {
      */
     @FXML
     void removeSecurityLight(){
-
         Object selectedItem = this.selectedLightsListView.getSelectionModel().getSelectedItem();
         this.allLightsListView.getItems().add((String) selectedItem);
         this.selectedLightsListView.getItems().remove(selectedItem);
@@ -580,7 +573,6 @@ public class SmartHomeSimulatorController {
         this.securityModule.removeLight(selectedLight);
     }
 
-    
     /** 
      * set temperature
      * @param temperature
@@ -590,7 +582,6 @@ public class SmartHomeSimulatorController {
         this.displayTemp.setText(Double.toString(temperature) + "°C");
     }
 
-    
     /** 
      * set date
      * @param date
@@ -601,7 +592,6 @@ public class SmartHomeSimulatorController {
         this.displayDate.setText(format.format(date));
     }
 
-    
     /** 
      * set location
      * @param location
@@ -611,7 +601,6 @@ public class SmartHomeSimulatorController {
         this.userLocation.setText(location.getName());
     }
 
-    
     /** 
      * Set profile
      * @param profile
@@ -620,8 +609,7 @@ public class SmartHomeSimulatorController {
     private void setProfile(Profile profile) {
         this.userProfile.setText(profile.getName());
     }
-    
-    
+
     /** 
      * set time
      * @param time
@@ -634,6 +622,7 @@ public class SmartHomeSimulatorController {
 
         this.displayTime.setText(hours + ":" + minutes + ":" + seconds);
     }
+
     /**
      * Save Security Settings
      */
@@ -664,7 +653,6 @@ public class SmartHomeSimulatorController {
         }
     }
 
-    
     /** 
      * set the lights
      * @param house
@@ -679,8 +667,7 @@ public class SmartHomeSimulatorController {
             allLightsListView.getItems().add(light);
         }
     }
-    
-    
+
     /** 
      * Set the rooms for the lists in the heating module
      * @param house
@@ -775,7 +762,6 @@ public class SmartHomeSimulatorController {
         }
     }
 
-
     /** 
      * Displays the temperature of a room in the console
      */
@@ -789,7 +775,6 @@ public class SmartHomeSimulatorController {
         this.heatingModule.displayTemperatureForRoom(roomName, simulation.getCurrentUser());
     }
 
-    
     /**
      * Starts the timer
      */
@@ -808,7 +793,6 @@ public class SmartHomeSimulatorController {
         }, simulation.getTimeInterval() ,simulation.getTimeInterval());
     }
 
-
     /**
      * Stop timer.
      */
@@ -817,7 +801,6 @@ public class SmartHomeSimulatorController {
         System.out.println("Timer has been stopped");
     }
 
-    
     /** 
      * save contents that were entered
      * @param event
@@ -830,7 +813,6 @@ public class SmartHomeSimulatorController {
         lastSaved.setText(format.format(currentDateTime));
     }
 
-
     /**
      * return the toggle button
      *
@@ -840,12 +822,6 @@ public class SmartHomeSimulatorController {
     protected ToggleButton getSimToggle(){
         return simulationToggle;
     }
-
-    //*****************************************************************************************************//
-    //                                                                                                     //
-    //                                         Room Controls Controller                                    //
-    //                                                                                                     //
-    //*****************************************************************************************************//   
 
     /**
      * Allows room to be selected from combobox.

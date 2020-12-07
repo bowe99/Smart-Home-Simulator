@@ -71,7 +71,6 @@ public class Logger {
         }
     }
 
-
     /**
      * Outputs to log.txt file
      *

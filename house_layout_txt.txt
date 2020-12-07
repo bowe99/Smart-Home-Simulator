@@ -7,18 +7,12 @@ $House: "325 Lakeview, Pointe-Claire"{
         $Window: "FrontDoorWindow2"{
         }
         $Door: "FrontDoor1"{
-            $EntryWaySensor: "FrontDoor1Sensor"{
-            }
         }
         $Door: "FrontDoor2"{
-            $EntryWaySensor: "FrontDoor2Sensor"{
-            }
         }
         $Light: "FrontDoorLight1"{
         }
         $Light: "FrontDoorLight2"{
-        }
-        $MotionSensor: "EntranceMotionSensor"{
         }
     }
     $Room: "Kitchen"{
@@ -29,20 +23,14 @@ $House: "325 Lakeview, Pointe-Claire"{
         $Window: "EastWindow"{
         }
         $Door: "DoorToBackyard"{
-            $EntryWaySensor: "BackyardDoorSensor"{
-            }
         }
         $Door: "OfficeDoor"{
-            $EntryWaySensor: "OfficeDoorSensor"{
-            }
         }
         $Light: "IslandLight1"{
         }
         $Light: "IslandLight2"{
         }
         $Light: "IslandLight3"{
-        }
-        $MotionSensor: "KitchenMotionSensor"{
         }
     }
     $Room: "LivingRoom"{
@@ -55,8 +43,6 @@ $House: "325 Lakeview, Pointe-Claire"{
         $Light: "TVLight1"{
         }
         $Light: "TVLight2"{
-        }
-        $MotionSensor: "LivingRoomMotionSensor"{
         }
     }
     $Room: "FamilyRoom"{
@@ -71,16 +57,10 @@ $House: "325 Lakeview, Pointe-Claire"{
         $Window: "EastWindow2"{
         }
         $Door: "SideDoor"{
-            $EntryWaySensor: "SideDoorSensor"{
-            }
         }
         $Door: "DoorToFrontEntrance"{
-            $EntryWaySensor: "DoorToFrontEntranceSensor"{
-            }
         }
         $Door: "DoorToGarage"{
-            $EntryWaySensor: "DoorToGarageSensor"{
-            }
         }
         $Light: "SouthWindow1Light"{
         }
@@ -96,8 +76,6 @@ $House: "325 Lakeview, Pointe-Claire"{
         }
         $Light: "DoorToGarageLight2"{
         }
-        $MotionSensor: "FamilyRoomMotionSensor"{
-        }
     }
     $Room: "Office"{
         $roomID: "area12"{
@@ -107,16 +85,12 @@ $House: "325 Lakeview, Pointe-Claire"{
         $Window: "NorthWindow2"{
         }
         $Door: "DoorToKitchen"{
-            $EntryWaySensor: "DoorToKitchenSensor1"{
-            }
         }
         $Light: "DeskLight1"{
         }
         $Light: "CeilingLight1"{
         }
         $Light: "CeilingLight2"{
-        }
-        $MotionSensor: "OfficeMotionSensor"{
         }
     }
     $Room: "Garage"{
@@ -127,16 +101,10 @@ $House: "325 Lakeview, Pointe-Claire"{
         $Window: "WestWindow"{
         }
         $Door: "GarageDoor1"{
-            $EntryWaySensor: "GarageDoor1Sensor"{
-            }
         }
         $Door: "GarageDoor2"{
-            $EntryWaySensor: "GarageDoor2Sensor"{
-            }
         }
         $Door: "DoorToFamilyRoom"{
-            $EntryWaySensor: "DoorToFamilyRoomSensor"{
-            }
         }
         $Light: "OverheadLight1"{
         }
@@ -144,27 +112,19 @@ $House: "325 Lakeview, Pointe-Claire"{
         }
         $Light: "DoorToFamilyRoomLight"{
         }
-        $MotionSensor: "GarageMotionSensor"{
-        }
     }
     $Room: "Backyard"{
         $roomID: "area8"{
         }
         $Door: "DoorToKitchen1"{
-            $EntryWaySensor: "DoorToKitchenSensor1"{
-            }
         }
         $Door: "DoorToKitchen2"{
-            $EntryWaySensor: "DoorToKitchenSensor2"{
-            }
         }
         $Light: "BackyardLight1"{
         }
         $Light: "BackyardLight2"{
         }
         $Light: "BackyardLight3"{
-        }
-        $MotionSensor: "BackyardMotionSensor"{
         }
     }
     $Room: "Away"{

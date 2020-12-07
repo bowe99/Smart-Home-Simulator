@@ -30,11 +30,9 @@ public class SimulationParameterController {
     private SimulationParameters simulation;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-
     /**
      * Instantiates a new Simulation parameter controller.
      *
-     * @throws Exception the exception
      */
     public SimulationParameterController() {
         try{

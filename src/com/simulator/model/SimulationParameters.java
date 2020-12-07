@@ -23,7 +23,6 @@ public class SimulationParameters{
     private final static String simulationFile = "simulation_parameters.txt";
     private final static String usersFile = "users.txt";
 
-
     /**
      * Get the singleton instance and if no instance exists, create a new one
      *
@@ -41,6 +40,7 @@ public class SimulationParameters{
             return null;
         }
     }
+
     /** 
      * Private constructor that can only be used by this class
      * @return SimulationParameters
@@ -48,7 +48,6 @@ public class SimulationParameters{
     private SimulationParameters(){
         allUsers = new LinkedList<>();
     }
-
 
     /**
      * Get the temperature
@@ -59,7 +58,6 @@ public class SimulationParameters{
         return temperature;
     }
 
-
     /**
      * Set the temperature
      *
@@ -68,7 +66,6 @@ public class SimulationParameters{
     public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
-
 
     /**
      * Get the date
@@ -79,7 +76,6 @@ public class SimulationParameters{
         return time.getDate();
     }
 
-
     /**
      * Set the date
      *
@@ -88,7 +84,6 @@ public class SimulationParameters{
     public void setDate(Date date) {
         this.time.setDate(date);
     }
-
 
     /**
      * Get the time
@@ -99,7 +94,6 @@ public class SimulationParameters{
         return time.getTimeAndUpdate();
     }
 
-
     /**
      * Get the time
      *
@@ -108,7 +102,6 @@ public class SimulationParameters{
     public int getTime() {
         return time.getTime();
     }
-
 
     /**
      * Set the time
@@ -146,7 +139,6 @@ public class SimulationParameters{
         return currentUser;
     }
 
-
     /**
      * Set the current user
      *
@@ -155,7 +147,6 @@ public class SimulationParameters{
     public void setCurrentUser(Profile currentUser) {
         this.currentUser = currentUser;
     }
-
 
     /**
      * Get the simulation status
@@ -166,7 +157,6 @@ public class SimulationParameters{
         return simulationStatus;
     }
 
-
     /**
      * Set the simulation status
      *
@@ -175,7 +165,6 @@ public class SimulationParameters{
     public void setSimulationStatus(boolean simulationStatus) {
         this.simulationStatus = simulationStatus;
     }
-
 
     /**
      * Set the time interval
@@ -187,7 +176,6 @@ public class SimulationParameters{
         this.time.changeInterval(speed);
     }
 
-
     /**
      * Add a new user to allUsers
      *
@@ -196,7 +184,6 @@ public class SimulationParameters{
     public void addUser(Profile newUser){
         allUsers.add(newUser);
     }
-
 
     /**
      * Get the user by a name provided
@@ -212,7 +199,6 @@ public class SimulationParameters{
         return null;
     }
 
-
     /**
      * Set the current user location
      *
@@ -221,7 +207,6 @@ public class SimulationParameters{
     public void setCurrentUserLocation(Room destination){
         currentUser.setCurrentRoom(destination);
     }
-
 
     /**
      * Set the User Location
@@ -248,7 +233,6 @@ public class SimulationParameters{
         }
     }
 
-
     /**
      * Get all user names in a List<String>
      *
@@ -262,7 +246,6 @@ public class SimulationParameters{
         return userNames;
     }
 
-
     /**
      * Get all users List
      *
@@ -271,7 +254,6 @@ public class SimulationParameters{
     public List<Profile> getAllUsers(){
         return allUsers;
     }
-
     
     /** 
      * Load simulation paramaters from the simulation_parameters.txt file

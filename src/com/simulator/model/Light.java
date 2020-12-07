@@ -28,7 +28,6 @@ public class Light {
         return name;
     }
 
-    
     /** 
      * return the on boolean
      * @return boolean
@@ -37,7 +36,6 @@ public class Light {
         return on;
     }
 
-    
     /** 
      * return the auto boolean
      * @return boolean
@@ -45,6 +43,7 @@ public class Light {
     public boolean getAuto(){
         return auto;
     }
+
     /** 
      * set on boolean to true
      */
@@ -58,6 +57,7 @@ public class Light {
             System.out.println("Could not write to txt file");
         }
     }
+
     /** 
      * set on boolean to false
      */
@@ -71,6 +71,7 @@ public class Light {
             System.out.println("Could not write to txt file");
         }
     }
+
     /** 
      * set auto boolean to false
      */
@@ -84,6 +85,7 @@ public class Light {
             System.out.println("Could not write to txt file");
         }
     }
+
     /** 
      * set auto boolean to false
      */
@@ -97,6 +99,4 @@ public class Light {
             System.out.println("Could not write to txt file");
         }
     }
-
-
 }

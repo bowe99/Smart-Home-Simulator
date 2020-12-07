@@ -86,5 +86,4 @@ public class Window extends Entryway{
     public boolean getOpenOrClosed(){
         return open;
     }
-
 }
