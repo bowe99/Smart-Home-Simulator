@@ -184,7 +184,8 @@ public class SmartHomeSimulatorController {
         Logger.getInstance().resetLogFile();
         this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
         this.heatingModule = new HeatingModule(this.simulation.getTimeObject(), this.securityModule);
-        
+        temperatureComboBox.getItems().addAll("Morning", "Day", "Night");
+
     }
 
     /**
