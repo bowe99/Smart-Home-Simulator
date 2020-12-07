@@ -30,7 +30,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="583.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.controller.SmartHomeSimulatorController">
+<VBox prefHeight="583.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simulator.controller.SmartHomeSimulatorController">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="615.0" prefWidth="1266.0" VBox.vgrow="ALWAYS">
          <children>
@@ -240,17 +240,13 @@
                                     <Button fx:id="saveSHHSettingsButton" layoutX="164.0" layoutY="166.0" mnemonicParsing="false" onMouseClicked="#saveSHHSettings" prefHeight="5.0" prefWidth="63.0" text="Save" />
                                     <TextField fx:id="summerAwayModeTemperature" layoutX="117.0" layoutY="38.0" prefHeight="25.0" prefWidth="93.0" promptText="Summer Temp" />
                                     <Label layoutX="14.0" layoutY="15.0" text="Away Mode" />
-                                    <TextField layoutX="163.0" layoutY="135.0" prefHeight="25.0" prefWidth="56.0" />
-                                    <TextField layoutX="70.0" layoutY="135.0" prefHeight="25.0" prefWidth="56.0" />
-                                    <Label layoutX="16.0" layoutY="139.0" text="Night" />
-                                    <Label layoutX="135.0" layoutY="139.0" text="to" />
-                                    <TextField layoutX="163.0" layoutY="104.0" prefHeight="25.0" prefWidth="56.0" />
-                                    <TextField layoutX="70.0" layoutY="104.0" prefHeight="25.0" prefWidth="56.0" />
-                                    <Label layoutX="16.0" layoutY="108.0" text="Day" />
-                                    <Label layoutX="135.0" layoutY="108.0" text="to" />
-                                    <TextField layoutX="163.0" layoutY="75.0" prefHeight="25.0" prefWidth="56.0" />
-                                    <TextField layoutX="70.0" layoutY="75.0" prefHeight="25.0" prefWidth="56.0" />
-                                    <Label layoutX="16.0" layoutY="79.0" text="Morning" />
+                                    <TextField fx:id="WinterEnd" layoutX="163.0" layoutY="120.0" prefHeight="25.0" prefWidth="56.0" />
+                                    <TextField fx:id="WinterStart" layoutX="70.0" layoutY="120.0" prefHeight="25.0" prefWidth="56.0" />
+                                    <Label layoutX="15.0" layoutY="125.0" text="Winter" />
+                                    <Label layoutX="135.0" layoutY="125.0" text="to" />
+                                    <TextField fx:id="SummerEnd" layoutX="163.0" layoutY="75.0" prefHeight="25.0" prefWidth="56.0" />
+                                    <TextField fx:id="SummerStart" layoutX="70.0" layoutY="75.0" prefHeight="25.0" prefWidth="56.0" />
+                                    <Label layoutX="10.0" layoutY="79.0" text="Summer" />
                                     <Label layoutX="135.0" layoutY="79.0" text="to" />
                                  </children>
                               </Pane>

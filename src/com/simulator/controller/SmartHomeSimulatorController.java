@@ -83,6 +83,10 @@ public class SmartHomeSimulatorController {
     @FXML private TextField setTemperatureSingleRoom;
     @FXML private TextField winterAwayModeTemperature;
     @FXML private TextField summerAwayModeTemperature;
+    @FXML private TextField SummerStart;
+    @FXML private TextField SummerEnd;
+    @FXML private TextField WinterStart;
+    @FXML private TextField WinterEnd;
 
     @FXML private Label lastSaved;
     @FXML private TabPane tabPane;
@@ -188,7 +192,7 @@ public class SmartHomeSimulatorController {
         Logger.getInstance().resetLogFile();
         this.securityModule = new SecurityModule(simulation.getAllUsers(), awayModeToggle, this.simulation.getTimeObject());
         this.heatingModule = new HeatingModule(this.simulation.getTimeObject(), this.securityModule);
-        temperatureComboBox.getItems().addAll("Morning", "Day", "Night");
+        
     }
 
     /**
@@ -366,7 +370,7 @@ public class SmartHomeSimulatorController {
         for (Room room : rooms)
         {
             String roomIDstring = room.getId();
-            if(room.getCurrentStateHVAC() == true) {
+            if(room.getCurrentStateHVAC() && roomIDstring.length()>=4) {
                 int currentRoomID = Integer.parseInt(roomIDstring.substring(4));
 
                 if(room.getTemperature().getTemperatureTarget() > room.getTemperature().getCurrentTemperature()){
@@ -462,6 +466,39 @@ public class SmartHomeSimulatorController {
         {
             Logger.getInstance().outputToConsole("Could not parse entry for winter away mode temperature");
         }
+        try {
+            heatingModule.setSummerStartDate(Integer.parseInt(SummerStart.getText()));
+            Logger.getInstance().outputToConsole("Summer Start Month successfully parsed");
+        }
+        catch (NumberFormatException e)
+        {
+            Logger.getInstance().outputToConsole("Could not parse entry for summer start month");
+        }
+        try {
+            heatingModule.setSummerEndDate(Integer.parseInt(SummerEnd.getText()));
+            Logger.getInstance().outputToConsole("Summer End Month successfully parsed");
+        }
+        catch (NumberFormatException e)
+        {
+            Logger.getInstance().outputToConsole("Could not parse entry for summer end month");
+        }
+        try {
+            heatingModule.setWinterStartDate(Integer.parseInt(WinterStart.getText()));
+            Logger.getInstance().outputToConsole("Winter Start Month successfully parsed");
+        }
+        catch (NumberFormatException e)
+        {
+            Logger.getInstance().outputToConsole("Could not parse entry for winter start month");
+        }
+        try {
+            heatingModule.setWinterEndDate(Integer.parseInt(WinterEnd.getText()));
+            Logger.getInstance().outputToConsole("Winter End Month successfully parsed");
+        }
+        catch (NumberFormatException e)
+        {
+            Logger.getInstance().outputToConsole("Could not parse entry for winter end month");
+        }
+
     }
     /**
      * Creates a new Zone with the input information
