@@ -13,13 +13,6 @@ public class Temperature {
     private double targetTemperature;
 
     /**
-     * Instantiates a new Temperature.
-     */
-    Temperature(){
-
-    }
-
-    /**
      * Set all temperature.
      *
      * @param temperature the temperature

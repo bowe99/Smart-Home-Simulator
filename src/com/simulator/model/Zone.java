@@ -29,11 +29,11 @@ public class Zone {
 
     /**
      * Set zone temperature.
+     * if temperature has not been overwritten, update the temperature for the morning, daytime and nighttime
      *
      * @param temp       the temp
      * @param timePeriod the time period
      */
-//if temperature has not been overwritten, update the temperature for the morning, daytime and nighttime
     public void setZoneTemperature(int temp, String timePeriod){
         if(timePeriod.contains("Morning")){
             //Set for the zone, then set for each of the rooms if they have not already been overwritten
@@ -209,7 +209,4 @@ public class Zone {
     public String getZoneName(){
         return zoneName;
     }
-
-
-
 }

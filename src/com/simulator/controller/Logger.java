@@ -41,7 +41,6 @@ public class Logger {
         }
     }
 
-
     /**
      * returns the instance that is held
      *
@@ -50,7 +49,6 @@ public class Logger {
     public static Logger getInstance() {
         return instance;
     }
-
 
     /**
      * outputs a given string to the Output Console on the Smart home dashboard
@@ -72,7 +70,6 @@ public class Logger {
             System.out.print("could not erase log file");
         }
     }
-
 
     /**
      * Outputs to log.txt file

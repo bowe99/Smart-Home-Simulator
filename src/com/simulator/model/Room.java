@@ -12,7 +12,6 @@ public class Room {
     private List<Door> doors;
     private List<Window> windows;
     private List<Light> lights;
-    private MotionSensor motionSensors;
     private Temperature temperatureSettings;
     private boolean belongsToZone = false;
     private boolean overriddenTemperature = false;
@@ -53,7 +52,6 @@ public class Room {
         return 0;
     }
 
-
     /**
      * Add a new window with the name of the window included
      *
@@ -64,7 +62,6 @@ public class Room {
         this.windows.add(new Window(newName));
         return 0;
     }
-
 
     /**
      * Add a new light with the name of the light included
@@ -94,37 +91,6 @@ public class Room {
     public boolean getBelongsToZone(){
         return this.belongsToZone;
     }
-
-    /**
-     * Add new motion sensors
-     *
-     * @param newName the new name
-     * @return int int
-     */
-    public int addMotionSensor(String newName){
-        this.motionSensors = new MotionSensor(newName);
-        return 0;
-    }
-
-    /**
-     * Add new entryway sensors
-     *
-     * @param newName    the new name
-     * @param targetName the target name
-     * @return int int
-     */
-    public int addEntrywaySensor(String newName, String targetName){
-        List<Entryway> doorsAndWindows = new ArrayList<Entryway>(doors);
-        doorsAndWindows.addAll(windows);
-        for (Entryway e: doorsAndWindows) {
-            if(e.getName().equals(targetName)) {
-                e.addEntrywaySensor(newName);
-                return 0;
-            }
-        }
-        return 1;
-    }
-
 
     /**
      * Get the name of the room
@@ -194,7 +160,6 @@ public class Room {
         return null;
     }
 
-
     /**
      * Get a light by providing the name of the door
      *
@@ -210,7 +175,6 @@ public class Room {
         return null;
     }
 
-
     /**
      * Get a window by providing the name of the window
      *
@@ -225,7 +189,6 @@ public class Room {
         }
         return null;
     }
-
 
     /**
      * Get the number of doors in the room
@@ -253,7 +216,6 @@ public class Room {
     public int getLightsAmount(){
         return lights.size();
     }
-
 
     /**
      * Get a list of the names of the doors
@@ -293,7 +255,6 @@ public class Room {
         }
         return windowsListString;
     }
-
 
     /**
      * Get a list of the windows

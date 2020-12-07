@@ -25,7 +25,6 @@ public class SecurityModule extends SimulationObserver{
      */
     Permission awayModePermission = new Permission(PERMISSION_TYPE.AWAY, PERMISSION_TYPE.AWAY, PERMISSION_TYPE.NONE, PERMISSION_TYPE.NONE);
 
-
     /**
      * Constructor initializing attributes
      *
@@ -49,7 +48,6 @@ public class SecurityModule extends SimulationObserver{
         this.timeOfDetection = -1;
     }
 
-
     /**
      * Add a light
      *
@@ -58,7 +56,6 @@ public class SecurityModule extends SimulationObserver{
     public void addLight(Light light){
         this.lightsOnWhenAway.add(light);
     }
-
 
     /**
      * Remove a light
@@ -98,7 +95,6 @@ public class SecurityModule extends SimulationObserver{
         }
     }
 
-
     /**
      * Get the status of away mode
      *
@@ -107,7 +103,6 @@ public class SecurityModule extends SimulationObserver{
     public boolean getAwayMode(){
         return this.isAwayMode;
     }
-
 
     /**
      * Save the settings that were input
@@ -122,7 +117,6 @@ public class SecurityModule extends SimulationObserver{
         this.lightOffTime = endTime;
     }
 
-    
     /** 
      * Update the location of the profile
      * @param profile
@@ -143,7 +137,6 @@ public class SecurityModule extends SimulationObserver{
             }
         }
     }
-
     
     /** 
      * Update the time 
@@ -174,5 +167,4 @@ public class SecurityModule extends SimulationObserver{
             }
         }
     }
-    
 }

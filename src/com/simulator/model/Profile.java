@@ -27,7 +27,6 @@ public class Profile
         this.currentRoom = newCurrentRoom;
     }
 
-
     /**
      * return name
      *
@@ -36,7 +35,6 @@ public class Profile
     public String getName() {
         return name;
     }
-
 
     /**
      * set the name
@@ -47,7 +45,6 @@ public class Profile
         this.name = name;
     }
 
-
     /**
      * return the user type
      *
@@ -56,7 +53,6 @@ public class Profile
     public USER_TYPE getUserType() {
         return user_type;
     }
-
 
     /**
      * Set the user type
@@ -67,7 +63,6 @@ public class Profile
         this.user_type = user_type;
     }
 
-
     /**
      * Get the current room
      *
@@ -76,7 +71,6 @@ public class Profile
     public Room getCurrentRoom() {
         return currentRoom;
     }
-
 
     /**
      * Set the current room
@@ -88,7 +82,6 @@ public class Profile
         notifyAllObservers();
     }
 
-
     /**
      * Add an observer to the list of observers
      *
@@ -98,7 +91,6 @@ public class Profile
         observers.add(observer);		
      }
 
-    
     /** 
      * Print the profiles specifications
      * @return String

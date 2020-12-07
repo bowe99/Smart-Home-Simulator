@@ -144,7 +144,6 @@ public class HeatingModule extends SimulationObserver{
         else{
             Room currentRoom = house.getRoomByName(roomName);
             Logger.getInstance().outputToConsole(String.format("Temperature in %s: %f", roomName, currentRoom.getTemperature().getCurrentTemperature()));
-    
         }    
     }
 
@@ -171,9 +170,7 @@ public class HeatingModule extends SimulationObserver{
     }
 
     @Override
-    public void updateLocation(Profile profile) {
-        return;
-    }
+    public void updateLocation(Profile profile) { }
 
     public boolean checkMonths(int start, int end, int currentMonth)
     {
@@ -339,10 +336,6 @@ public class HeatingModule extends SimulationObserver{
             checkSummerCooling(room, currentMonth, outdoorTemperature, currentTempRoom);
 
             room.updateTemperature(outdoorTemperature);
-
-            if(room.getName().contains("LivingRoom")){
-                System.out.println(String.format("Current temp: %f", room.getTemperature().getCurrentTemperature()));
-            }
         }
 
     }

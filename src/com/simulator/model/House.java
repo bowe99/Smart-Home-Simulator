@@ -16,7 +16,6 @@ public class House {
     private String address;
     private List<Room> rooms;
 
-
     /**
      * Get instance of the house object that is saved in this singleton class, creates new instance if one does not exist
      *
@@ -120,39 +119,6 @@ public class House {
     }
 
     /**
-     * Adds a motion sensor to a room in the house
-     *
-     * @param newName    the new uniquely identifying name for the motion sensor
-     * @param targetName the name of the room the motion sensor is a part of
-     * @return an integer representing the success or failure of the request a return value of 0 represents success a return value of 1 represents failure
-     */
-    public int addMotionSensor(String newName, String targetName) {
-        Room targetRoom = getRoomByName(targetName);
-        if (targetRoom != null) {
-            targetRoom.addMotionSensor(newName);
-            return 0;
-        }
-        return 1;
-    }
-
-    /**
-     * Adds an entryway sensor to an entryway of the house
-     *
-     * @param newName    the new uniquely identifying name for the motion sensor
-     * @param roomName   the name of the room the entryway is a part of
-     * @param targetName the name of the entry way the sensor is to be placed on
-     * @return an integer representing the success or failure of the request a return value of 0 represents success a return value of 1 represents failure
-     */
-    public int addEntrywaySensor(String newName, String roomName, String targetName) {
-        Room targetRoom = getRoomByName(roomName);
-        if (targetRoom != null) {
-            targetRoom.addEntrywaySensor(newName, targetName);
-            return 0;
-        }
-        return 1;
-    }
-
-    /**
      * Get the address of the house
      *
      * @return the address of the house
@@ -185,9 +151,8 @@ public class House {
         return null;
     }
 
-
     /**
-     * Get the Light instance that is refered to from the string that is passed in
+     * Get the Light instance that is referred to from the string that is passed in
      *
      * @param target the target
      * @return Light light
@@ -202,7 +167,6 @@ public class House {
         return null;
     }
 
-
     /**
      * return a list of all the names of the rooms
      *
@@ -215,7 +179,6 @@ public class House {
         }
         return roomsListString;
     }
-
 
     /**
      * return a list of the names of all of the lights
@@ -248,12 +211,11 @@ public class House {
         return "";
     }
 
-    
     /** 
      * Reads the house_layout_txt.txt file containing the specifications of the house layout and converts it to objects
      * @param fileName
      * @return House
-     * @throws Exception
+     * @throws HouseLoadException
      */
     private static House loadFile(String fileName) throws HouseLoadException{
         House loadedHouse;
@@ -316,16 +278,6 @@ public class House {
                     loadedHouse.addLight(attribute, elementStack[depth]);
                     elementStack[++depth] = attribute;
                 }
-                else if (lowerCaseLine.contains("$motionsensor")) {
-                    attribute = getAttribute(line);
-                    loadedHouse.addMotionSensor(attribute, elementStack[depth]);
-                    elementStack[++depth] = attribute;
-                }
-                else if (lowerCaseLine.contains("$entrywaysensor")) {
-                    attribute = getAttribute(line);
-                    loadedHouse.addEntrywaySensor(attribute, elementStack[depth - 1], elementStack[depth]);
-                    elementStack[++depth] = attribute;
-                }
                 else{
                     throw new HouseLoadException("Unexpected identifier on line " + linenumber + " of the house layout file. ");
                 }
@@ -343,7 +295,6 @@ public class House {
         }
     }
 
-    
     /** 
      * get the attribute
      * @param line
