@@ -156,7 +156,7 @@ public class HeatingModule extends SimulationObserver{
      * @return the boolean
      */
     public boolean overrideRoomTemperature(String roomName, double temperature, Profile currentUser){
-        if(currentUser.getUserType() == USER_TYPE.STRANGER){
+        if(currentUser.getUserType() == USER_TYPE.STRANGER || currentUser.getUserType() == USER_TYPE.GUEST || currentUser.getUserType() == USER_TYPE.CHILD){
             Logger.getInstance().outputToConsole("[WARNING] Unauthorized action! User does not have the required permissions");
             return false;
         }
